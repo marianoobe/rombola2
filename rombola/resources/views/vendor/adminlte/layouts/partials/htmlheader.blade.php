@@ -28,4 +28,5 @@
             echo json_encode($trans);
         @endphp
     </script>
+
 </head>
