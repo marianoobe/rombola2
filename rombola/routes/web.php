@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PageController@inicio');
 
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
@@ -24,11 +22,7 @@ Route::group(['middleware' => 'auth'], function () {
     #adminlte_routes
 });
 
-Route::get('clientes', function () {
-    return view('clientes');
-})->name('clientes');
+Route::get('clientes', 'PageController@cliente')->name('clientes');
 
-Route::get('pre-venta', function () {
-    return view('pre-venta');
-})->name('pre-venta');
+Route::get('pre-venta', 'PageController@preventa')->name('pre-venta');
 
