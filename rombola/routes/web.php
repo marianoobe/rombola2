@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'PageController@inicio');
+Route::get('/', 'ClienteController@inicio');
 
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
@@ -22,7 +22,7 @@ Route::group(['middleware' => 'auth'], function () {
     #adminlte_routes
 });
 
-Route::get('clientes', 'PageController@cliente')->name('clientes');
+Route::get('clientes', 'ClienteController@cliente')->name('clientes');
 
-Route::get('pre-venta', 'PageController@preventa')->name('pre-venta');
+Route::get('pre-venta', 'PreventaController@preventa')->name('pre-venta');
 
