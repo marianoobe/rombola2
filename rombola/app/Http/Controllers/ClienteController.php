@@ -22,5 +22,13 @@ class ClienteController extends Controller
         return view('clientes',compact('client'));
     }
 
-    //function cliente_store(ClienteFormRequest $request){}
+    function cliente_store(ClienteFormRequest $request){
+        $client=new Clientes;
+        $clie->$item='6';
+        $clie->$item="kaka";
+        $clie->$item="divorciado";
+        $client->save();
+        return Redirect::to('clientes');
+
+    }
 }
