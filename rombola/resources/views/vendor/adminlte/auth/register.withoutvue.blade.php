@@ -10,7 +10,10 @@
     <div id="app" v-cloak>
         <div class="register-box">
             <div class="register-logo">
-                <a href="{{ url('/home') }}"><b>Admin</b>LTE</a>
+                <a href="{{ url('/home') }}">
+                <div class="login-logo">
+                    <img class="img-rounded" src="img/logo.png"/>
+                </div></a>
             </div>
 
             @if (count($errors) > 0)

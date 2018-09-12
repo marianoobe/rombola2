@@ -44,8 +44,8 @@
             </li>
             <li class="treeview"><a href="{{ url('home') }}"><i class='fa fa-car'></i> <span>{{ trans('adminlte_lang::message.vehicles') }}</span></a>
                 <ul class="treeview-menu">
-                    <li><a href="#">{{ trans('adminlte_lang::message.okm') }}</a></li>
-                    <li><a href="#">{{ trans('adminlte_lang::message.used') }}</a></li>                 
+                    <li><a href="#">{{ trans('adminlte_lang::message.list-0km') }}</a></li>
+                    <li><a href="#">{{ trans('adminlte_lang::message.list-used') }}</a></li>                 
                 </ul>
             </li>
             <li class="active"><a href="{{ url('pre-venta') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.presales') }}</span></a></li>

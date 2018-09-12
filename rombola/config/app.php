@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'locale' => 'es',
+     'locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -91,7 +91,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -180,7 +180,8 @@ return [
         * Acacha AdminLTE template provider
         */
         Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
-
+         // ...
+         Laraveles\Spanish\SpanishServiceProvider::class,            
 
     ],
 

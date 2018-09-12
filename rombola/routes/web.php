@@ -11,9 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/',function () {
+    return redirect ('login');
 });
+
+Route::get('login',['as' => 'login',function () {
+    return view('adminlte::auth.login');
+}]);
 
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
