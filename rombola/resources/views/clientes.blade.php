@@ -22,7 +22,7 @@
 				</div>
 				<div class="box-body">
 					<table class="table table-striped">
-						<div class="row">
+						<!--<div class="row">
 							<div class="col-sm-6">
 								<div class="dt-buttons btn-group">
 									<a class="btn btn-default buttons-excel buttons-html5" tabindex="0" aria-controls="example" href="#" title="Excel"><span><i
@@ -38,36 +38,36 @@
 									<label>Buscar:<input type="search" class="form-control input-sm" placeholder="" aria-controls="example"></label>
 								</div>
 							</div>
-						</div>
+						</div>-->
 						<thead>
 							<tr>
 								<th scope="col">DNI</th>
 								<th scope="col">Nombre y Apellido</th>
 								<th scope="col">Email</th>
+								<th scope="col">Domicilio</th>
 								<th scope="col">Teléfono</th>
+								<th scope="col"></th>
 							</tr>
 						</thead>
 						<tbody>
+						@foreach($client as $item)
 							<tr>
-								<th scope="row">1</th>
-								<td>Mark</td>
-								<td>Otto</td>
-								<td>@mdo</td>
+								<td>{{$item->dni}}</td>
+								<td>{{$item->nombre}}{{$item->apellido}}</td>
+								<td>{{$item->email}}</td>
+								<td>{{$item->domicilio}}</td>
+								<td>{{$item->id_tel}}</td>
+								<td style="cursor: default;">
+									<button type="button" onclick="irACliente(5);" class="btn btn-info btn-xs">
+										<span class="glyphicon glyphicon-search" aria-hidden="true">
+										</span>
+									</button>
+								</td>
 							</tr>
-							<tr>
-								<th scope="row">2</th>
-								<td>Jacob</td>
-								<td>Thornton</td>
-								<td>@fat</td>
-							</tr>
-							<tr>
-								<th scope="row">3</th>
-								<td>Larry</td>
-								<td>the Bird</td>
-								<td>@twitter</td>
-							</tr>
+							@endforeach()
 						</tbody>
 					</table>
+					{{$client->render()}}
 
 					<!-- Modal -->
 					<div class="modal fade" id="modal-newclient" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -128,9 +128,7 @@
 						</div>
 					</div>
 
-
-
-						<div class="modal fade" id="modal-clienteNuevo" tabindex="-1" role="dialog" aria-labelledby="modal-clienteNuevo"
+					<div class="modal fade" id="modal-clienteNuevo" tabindex="-1" role="dialog" aria-labelledby="modal-clienteNuevo"
 					    aria-hidden="true">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
@@ -210,5 +208,13 @@
 										Guardar
 									</button>
 								</div>
-
+<script>
+function guardarCliente(){
+	DB::table('clientes')->insert(
+    ['idpersona' => '3'],
+	['domicilio' => 'Pepecircunvalacion'],
+	['estado_civil' => 'Casado']
+);
+}
+</script>
 								@endsection
