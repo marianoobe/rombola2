@@ -11,14 +11,11 @@
 |
 */
 
-Route::get('/',function () {
-    return redirect ('login');});
+Route::get('/',function () {return redirect ('login');});
 
-Route::get('/', 'ClienteController@inicio');
+//Route::get('/', 'ClienteController@inicio');
 
-Route::get('login',['as' => 'login',function () {
-    return view('adminlte::auth.login');
-}]);
+Route::get('login',['as' => 'login',function () { return view('adminlte::auth.login');}]);
 
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
@@ -29,8 +26,6 @@ Route::group(['middleware' => 'auth'], function () {
     #adminlte_routes
 });
 
-Route::get('clientes', 'ClienteController@cliente')->name('clientes');
-
-Route::get('pre-venta', 'PreventaController@preventa')->name('pre-venta');
+Route::resource('clientes','ClienteController');
 
 ?>
