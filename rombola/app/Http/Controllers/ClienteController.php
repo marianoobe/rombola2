@@ -18,16 +18,10 @@ class ClienteController extends Controller
      */
     public function index()
     {
-       /* $client_pers=DB::table('clientes')
-        ->join('personas','personas.idpersona','clientes.idpersona')->paginate(3);
-        $pers_tel=DB::table('personas')
-        ->join('telefonos','telefonos.idpersona','personas.idpersona')->paginate(3);
-        */
-
         $client_pers = DB::table('clientes')
         ->join('personas','personas.idpersona','clientes.idpersona')
         ->join('telefonos', 'telefonos.idpersona', 'personas.idpersona')
-        ->get();
+        ->paginate(3);
 
 
         return view('clientes',compact('client_pers'));
@@ -52,7 +46,6 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
          /*$request->validate([
-            'idpersona'=>'required',
             'domicilio'=> 'required|text',
             'estado_civil' => 'required|text'
           ]);*/
@@ -128,24 +121,43 @@ class ClienteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $dni
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($dni)
     {
-        //
-    }
+      $dnipers = Persona::where("dni","=",$dni)->select("idpersona")->get();
+      foreach ($dnipers as $item) {
+        //echo "$item->idpersona";
+      }
+      $idpers=$item->idpersona;
 
+      $client = DB::table('clientes')
+        ->join('personas', 'personas.idpersona' ,'clientes.idpersona')
+        ->join('telefonos','telefonos.idpersona','personas.idpersona')
+        ->where('personas.idpersona','=', $idpers)
+        ->get();
+
+      return view('shares.edit', compact('client'));
+    }
+    
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $dni
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $dni)
     {
-        //
+      //$pers = Persona::where("dni","=",$dni)->select("idpersona")->get();
+      $share = Cliente::select($dni);
+      $share->dni = $request->get('dni');
+      $share->nombre = $request->get('nombre');
+      $share->apellido = $request->get('apellido');
+      $share->save();
+      return redirect('/clientes')->with('success', 'Stock has been updated');
+    
     }
 
     /**

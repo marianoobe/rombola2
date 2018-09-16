@@ -57,15 +57,15 @@
 								<td>{{$item->domicilio}}</td>
 								<td>{{$item->num_tel}}</td>
 								<td style="cursor: default;">
-									<button type="button" onclick="irACliente(5);" class="btn btn-info btn-xs">
-										<span class="glyphicon glyphicon-search" aria-hidden="true">
-										</span>
-									</button>
+									<a href="{{ route('clientes.edit',$item->dni)}}" class="btn btn-info btn-lg">
+                                     <span class="glyphicon glyphicon-log-in"></span></a>
+									
 								</td>
 							</tr>
 							@endforeach()
 						</tbody>
 					</table>
+					{{$client_pers->render()}}
 					
 
 					<!--Modal -->
