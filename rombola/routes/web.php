@@ -14,7 +14,7 @@
 Route::get('/',function () {
     return redirect ('login');});
 
-Route::get('/', 'ClienteController@inicio');
+//Route::get('/', 'ClienteController@inicio');
 
 Route::get('login',['as' => 'login',function () {
     return view('adminlte::auth.login');
@@ -32,5 +32,9 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('clientes', 'ClienteController@cliente')->name('clientes');
 
 Route::get('pre-venta', 'PreventaController@preventa')->name('pre-venta');
+
+Route::get('autos.index','AutomovileController@autos')->name('autos');
+
+Route::resource('autos', 'AutomovileController');
 
 ?>

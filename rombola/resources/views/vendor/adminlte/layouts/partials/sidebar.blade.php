@@ -48,10 +48,11 @@ id="empresa-logo" src="/img/logo.png" class="img-circle" width="50" height="50">
                 </ul>
             </li>
             <li class="treeview"><a href="{{ url('home') }}"><i class='fa fa-car'></i> <span>{{
-                        trans('adminlte_lang::message.vehicles') }}</span></a>
+                        trans('adminlte_lang::message.car') }}</span></a>
                 <ul class="treeview-menu">
-                    <li><a href="#">{{ trans('adminlte_lang::message.list-0km') }}</a></li>
-                    <li><a href="#">{{ trans('adminlte_lang::message.list-used') }}</a></li>                 
+                    
+                <li><a href="{{url('autos')}}">{{ trans('adminlte_lang::message.list-0km') }}</a></li>
+                    <li><a href="{{url('autos')}}">{{ trans('adminlte_lang::message.list-used') }}</a></li>                 
                 </ul>
             </li>
             <li class="active"><a href="{{ url('pre-venta') }}"><i class='fa fa-link'></i> <span>{{
