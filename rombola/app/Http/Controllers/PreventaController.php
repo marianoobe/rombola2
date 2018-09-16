@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class PreventaController extends Controller
 {
-    function preventa(){
+    function index(){
         return view('pre-venta');
     }
 }

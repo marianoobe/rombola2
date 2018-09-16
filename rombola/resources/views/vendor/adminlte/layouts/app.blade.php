@@ -48,6 +48,7 @@ desired effect
            <!-- @yield('main-content')-->
             @yield('seccion')
             @yield('seccion1')
+            @yield('seccion2')
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
 

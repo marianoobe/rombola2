@@ -20,8 +20,7 @@ class CreatePersonasTable extends Migration
             $table->text('nombre', 20);
             $table->text('apellido', 20);
             $table->text('email');
-            $table->integer('id_tel');
-            $table->text('act-empresa', 25);
+            $table->text('act_empresa', 25);
             $table->timestamps();
         });
     }
