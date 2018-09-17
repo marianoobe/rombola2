@@ -17,6 +17,7 @@ class CreateTelefonosTable extends Migration
             $table->increments('id_tel');
             $table->integer('idpersona');
             $table->integer('num_tel');
+            $table->integer('tipo');
             $table->timestamps();
         });
     }

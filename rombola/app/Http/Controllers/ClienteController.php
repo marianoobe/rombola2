@@ -21,6 +21,7 @@ class ClienteController extends Controller
         $client_pers = DB::table('clientes')
         ->join('personas','personas.idpersona','clientes.idpersona')
         ->join('telefonos', 'telefonos.idpersona', 'personas.idpersona')
+        ->where('telefonos.tipo','=', 1)
         ->paginate(3);
 
 
@@ -78,11 +79,12 @@ class ClienteController extends Controller
           $cel_1=$request->get('cel_1');
           $cel_2=$request->get('cel_2');
 
-          if($cel_1 != null)
+          if($telef != null)
           {
           $tel = new Telefono([
             'idpersona' => $idpers,
-            'num_tel' => $request->get('tel_fijo')
+            'num_tel' => $request->get('tel_fijo'),
+            'tipo' => '1'
           ]);
           $tel->save();
         }
@@ -90,7 +92,8 @@ class ClienteController extends Controller
           {
           $tel = new Telefono([
             'idpersona' => $idpers,
-            'num_tel' => $request->get('cel_1')
+            'num_tel' => $request->get('cel_1'),
+            'tipo' => '2'
           ]);
           $tel->save();
         }
@@ -98,7 +101,8 @@ class ClienteController extends Controller
           {
           $tel = new Telefono([
             'idpersona' => $idpers,
-            'num_tel' => $request->get('cel_2')
+            'num_tel' => $request->get('cel_2'),
+            'tipo' => '3'
           ]);
           $tel->save();
         }
@@ -150,7 +154,9 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-      DB::table('personas')
+      DB::table('clientes')
+        ->join('personas', 'personas.idpersona' ,'clientes.idpersona')
+        ->join('telefonos','telefonos.idpersona','personas.idpersona')
             ->where('idpersona',"=",$id)
             ->update([
                 "dni" => $request->get('dni'),

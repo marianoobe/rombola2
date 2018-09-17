@@ -1,6 +1,5 @@
 @extends('adminlte::layouts.app')
 
-
 @section('seccion')
 <div class="container-fluid spark-screen">
 	<div class="row">

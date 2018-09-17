@@ -57,8 +57,8 @@
 								<td>{{$item->domicilio}}</td>
 								<td>{{$item->num_tel}}</td>
 								<td style="cursor: default;">
-									<a href="{{ route('clientes.edit',$item->dni)}}" class="btn btn-info btn-lg">
-                                     <span class="glyphicon glyphicon-log-in"></span></a>
+									<a href="{{ route('clientes.edit',$item->dni)}}" class="btn btn-info btn-sm">
+                                     <span class="glyphicon glyphicon-search"></span></a>
 									
 								</td>
 							</tr>

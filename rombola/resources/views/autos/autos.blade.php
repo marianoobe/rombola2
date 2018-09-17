@@ -1,6 +1,5 @@
 @extends('adminlte::layouts.app')
 
-
 @section('content')
 <style>
   .uper {
