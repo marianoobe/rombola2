@@ -49,6 +49,7 @@ desired effect
             @yield('seccion')
             @yield('seccion1')
             @yield('seccionedit')
+            @yield('seccion_index_preventa')
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
 

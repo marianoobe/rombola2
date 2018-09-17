@@ -1,16 +1,23 @@
 @extends('adminlte::layouts.app')
 
 @section('seccion_index_preventa')
+
 <div class="container-fluid spark-screen">
 	<div class="row">
 		<div class="col-md-14 col-md-offset-0">
 			<!-- Default box -->
 			<div class="box">
 				<div class="box-header with-border">
-					<h3 class="box-title">PreVentas</h3>
+					<h3 class="box-title">Clientes</h3>
 					<div class="col-sm-offset-10">
 						<button type="button" class="btn btn-success btn-block" id="btn-nuevaFicha" data-toggle="modal" data-target="#modal-clienteNuevo"
-						 style="margin-bottom:10%;">NUEVA PREVENTA</button>
+						 style="margin-bottom:10%;">NUEVO CLIENTE</button>
+					</div>
+					<div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+							<i class="fa fa-minus"></i></button>
+						<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+							<i class="fa fa-times"></i></button>
 					</div>
 				</div>
 				<div class="box-body">
@@ -34,34 +41,31 @@
 						</div>-->
 						<thead>
 							<tr>
-								<th scope="col">Fecha</th>
-								<th scope="col">Auto Buscado</th>
-								<th scope="col">Auto Ofrecido</th>
-								<th scope="col">Dinero que dispone</th>
-								<th scope="col">Formas de Pago</th>
-								<th scope="col">Estado</th>
+								<th scope="col">DNI</th>
+								<th scope="col">Nombre y Apellido</th>
+								<th scope="col">Email</th>
+								<th scope="col">Domicilio</th>
+								<th scope="col">Teléfono</th>
 								<th scope="col"></th>
 							</tr>
 						</thead>
 						<tbody>
-						</table>
-					
-					<script>
-						function realizaProceso(valorCaja1) {
-							var parametros = {
-								"valorCaja1": valorCaja1
-							};
-							$.ajax({
-								data: parametros, //datos que se envian a traves de ajax
-								url: 'clientes.store', //archivo que recibe la peticion
-								type: 'post', //método de envio
-								beforeSend: function () {
-									$("#resultado").html("Procesando, espere por favor...");
-								},
-								success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-									$("#resultado").html(response);
-								}
-							});
-						}
-					</script>
-					@endsection
+							@foreach($client_pers as $item)
+							<tr>
+								<td>{{$item->dni}}</td>
+								<td>{{$item->nombre}} {{$item->apellido}}</td>
+								<td>{{$item->email}}</td>
+								<td>{{$item->domicilio}}</td>
+								<td>{{$item->num_tel}}</td>
+								<td style="cursor: default;">
+									<a href="{{ route('clientes.edit',$item->dni)}}" class="btn btn-info btn-sm">
+                                     <span class="glyphicon glyphicon-search"></span></a>
+									
+								</td>
+							</tr>
+							@endforeach()
+						</tbody>
+					</table>
+					{{$client_pers->render()}}
+
+@endsection
