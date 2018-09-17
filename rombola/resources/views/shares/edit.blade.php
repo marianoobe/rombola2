@@ -7,6 +7,7 @@
      @foreach($client as $item)
 		 @endforeach()
      <form method="POST" action="{{ route('clientes.update', $item->idpersona) }}">
+     <input type="hidden" name="_method" value="PATCH">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <div class="form-group">
           <label for="dni">Dni:</label>

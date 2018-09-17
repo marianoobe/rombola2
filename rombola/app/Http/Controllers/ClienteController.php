@@ -148,16 +148,24 @@ class ClienteController extends Controller
      * @param  int  $dni
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $dni)
+    public function update(Request $request, $id)
     {
-      //$pers = Persona::where("dni","=",$dni)->select("idpersona")->get();
-      $share = Cliente::select($dni);
-      $share->dni = $request->get('dni');
-      $share->nombre = $request->get('nombre');
-      $share->apellido = $request->get('apellido');
-      $share->save();
-      return redirect('/clientes')->with('success', 'Stock has been updated');
-    
+      DB::table('personas')
+            ->where('idpersona',"=",$id)
+            ->update([
+                "dni" => $request->get('dni'),
+                "nombre" => $request->get('nombre'),
+                "apellido" => $request->get('apellido'),
+                "email" => $request->get('email'),
+                "domicilio" => $request->get('domicilio'),
+                "act_empresa" => $request->get('act_empresa'),
+                "num_tel" => $request->get('num_tel'),
+                "fecha_nacimiento" => $request->get('fecha_nacimiento'),
+                "estado_civil" => $request->get('estado_civil'),
+
+        ]);
+      //$p->save();
+      return redirect('/clientes')->with('success', 'Stock has been updated');   
     }
 
     /**
