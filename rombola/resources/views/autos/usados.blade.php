@@ -82,4 +82,4 @@
 
 							{{ $autos->render() }}
 
-							@endsection
+@endsection

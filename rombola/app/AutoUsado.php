@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AutoUsado extends Model
+class Autosusado extends Model
 {
    protected $fillable=[
         'id_autoUsado',

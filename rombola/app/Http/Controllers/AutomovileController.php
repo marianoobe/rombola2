@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use DB;
 use App\Automovile;
 
-use App\AutoNuevo;
-use App\AutoUsado;
+use App\Autosnuevo;
+use App\Autosusado;
 
 class AutomovileController extends Controller
 {
@@ -83,7 +83,7 @@ public function usados(Request $request)
             //echo "$item->idpersona";
           }
           $idauto=$item->id_auto;
-          $nuevo = new AutoNuevo([
+          $nuevo = new Autosnuevo([
             'id_auto' => $idauto,
             'vin' => $request->get('vin'),
            

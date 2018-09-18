@@ -13,10 +13,10 @@ class CreateAutosNuevosTable extends Migration
      */
     public function up()
     {
-        Schema::create('autosNuevos', function (Blueprint $table) {
+        Schema::create('autosnuevos', function (Blueprint $table) {
             $table->increments('idautoNuevo');             
-             $table->integer('id_auto')->unsigned();
-           $table->string('vin');
+            $table->integer('id_auto')->unsigned();
+            $table->string('vin');
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@ class CreateAutosUsadosTable extends Migration
      */
     public function up()
     {
-        Schema::create('autosUsados', function (Blueprint $table) {
+        Schema::create('autosusados', function (Blueprint $table) {
             $table->increments('id_autoUsado');
            $table->integer('id_auto');
             $table->string('dominio');
