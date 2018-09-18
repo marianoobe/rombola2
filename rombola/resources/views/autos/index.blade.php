@@ -66,7 +66,7 @@
 										<td>{{$item->color}}</td>
 										<td>{{$item->estado}}</td>
 										<td style="cursor: default;">
-											<button type="button" onclick="irAFicha(5);" class="btn btn-info btn-xs">
+											<button type="button" class="btn btn-info btn-xs">
 												<span class="glyphicon glyphicon-search" aria-hidden="true">
 												</span>
 											</button>
