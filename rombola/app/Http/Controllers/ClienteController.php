@@ -107,7 +107,7 @@ class ClienteController extends Controller
           $tel->save();
         }
          //return redirect('/clientes');
-          return redirect('/clientes')->with('success', 'Stock has been added');
+          return redirect('/clientes')->with('success', 'Cliente Guardado');
 
     }
 

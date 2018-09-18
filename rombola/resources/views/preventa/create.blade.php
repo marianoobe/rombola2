@@ -10,21 +10,28 @@
 			<!-- Default box -->
 			<div class="box">
 				<div class="box-header with-border">
-					<!-- 	<h3 class="box-title"></h3>
-				     	<div class="box-tools pull-right">
+				<h3 class="box-title">Inicio de Negociación</h3>
+				     	<!--<div class="box-tools pull-right">
 							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
 								<i class="fa fa-minus"></i></button>
 							<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
 								<i class="fa fa-times"></i></button>
 						</div>-->
+						<div class="box-tools pull-right">
+            <a class="btn btn-xs btn-primary" onclick="history.back(1);">
+		        <i class="fa fa-chevron-left"></i> VOLVER</a>
+	        <button type="button" onclick="$('#modal-estado').modal('show');" class="btn btn-xs btn-warning">Cambiar Estado</button>
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+          </div>
 				</div>
 
 				<div class="box-body">
 					<div class="row margenBoot-25">
 						<div class="col-xs-12 col-lg-offset-3 col-lg-3">
 							<div class="form-group">
-								<div class='input-group date' id='datetimepicker1'>
-									<input type='text' class="form-control" />
+								<div class='input-group date' id='fecha_preventa'>
+									<input type='date' class="form-control" />
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -33,7 +40,7 @@
 						</div>
 						<div class="col-xs-12 col-lg-3">
 							<div class="form-group">
-								<input type="text" maxlength="125" class="form-control" id="inp-vendedor" placeholder="">
+								<input type="text" maxlength="125" class="form-control" id="nom_vendedor" placeholder="">
 							</div>
 						</div>
 					</div>
@@ -46,6 +53,32 @@
 		<!-- /.box -->
 
 	</div>
+
+<div id="modal-estado" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="display: none;">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">Cambio de Estado</h4>
+      </div>
+      <div class="modal-body">
+        <label for="inp-estado">Estado de la Negociación:</label>
+             <select class="form-control" id="sel-estadonegociacion">
+              <option value="INTERESADO">INTERESADO</option>
+              <option value="CLIENTE">CLIENTE</option>
+              <option value="CLIENTE ACTIVO">CLIENTE ACTIVO</option>
+              <option value="NEGOCIANDO">NEGOCIANDO</option>
+              <option value="DESINTERESADO">DESINTERESADO</option>
+              <option value="COMPETENCIA">COMPETENCIA</option>
+            </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">CERRAR</button>
+        <button type="button" onclick="changeEstado();" class="btn btn-success">GUARDAR</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 	<div class="row">
 
@@ -149,8 +182,8 @@
 
 				<div class="box-body">
 					<div class="form-group">
-						<label for="exampleFormControlTextarea3">Información de documentación,cliente,etc...</label>
-						<textarea class="form-control" id="exampleFormControlTextarea3" rows="7"></textarea>
+						<label for="detalle">Información de documentación,cliente,etc...</label>
+						<textarea class="form-control" id="detalle" rows="7"></textarea>
 					</div>
 					<!-- /.row -->
 

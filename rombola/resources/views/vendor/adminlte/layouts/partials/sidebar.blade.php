@@ -38,7 +38,7 @@ id="empresa-logo" src="/img/logo.png" class="img-circle" width="50" height="50">
             <li class="header">Menú</li>
             <!--<li class="header">{{ trans('adminlte_lang::message.header') }}</li>-->
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="{{ url('home') }}"><i class='fa fa-link'></i> <span>{{
+            <li class="treeview"><a href="{{ url('home') }}"><i class='fa fa-link'></i> <span>{{
                         trans('adminlte_lang::message.home') }}</span></a></li>
             <li class="treeview">
                 <a href=""><i class='fa fa-user-circle-o '></i> <span>{{ trans('adminlte_lang::message.client') }}</span></a>
@@ -55,7 +55,7 @@ id="empresa-logo" src="/img/logo.png" class="img-circle" width="50" height="50">
                     <li><a href="{{url('autos')}}">{{ trans('adminlte_lang::message.list-used') }}</a></li>                 
                 </ul>
             </li>
-            <li class="active"><a href="{{ url('pre-venta') }}"><i class='fa fa-link'></i> <span>{{
+            <li class="treeview"><a href="{{ url('pre-venta') }}"><i class='fa fa-link'></i> <span>{{
                         trans('adminlte_lang::message.presales') }}</span></a></li>
             <li><a href=""><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.sales') }}</span></a></li>
 

@@ -9,8 +9,8 @@
 				<div class="box-header with-border">
 					<h3 class="box-title">PreVentas</h3>
 					<div class="col-sm-offset-10">
-						<button type="button" class="btn btn-success btn-block" id="btn-nuevaFicha" data-toggle="modal" data-target="#modal-clienteNuevo"
-						 style="margin-bottom:10%;">NUEVA PREVENTA</button>
+					<a style="margin-bottom:10%;" href="{{ route('pre-venta.create') }}" 
+					class="btn btn-success btn-block" role="button">NUEVA PREVENTA</a>
 					</div>
 				</div>
 				<div class="box-body">

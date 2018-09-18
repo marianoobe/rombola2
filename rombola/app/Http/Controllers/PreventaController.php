@@ -34,7 +34,72 @@ class PreventaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $share = new Persona([
+            'dni' => $request->get('dni'),
+            'nombre' => $request->get('nombre'),
+            'apellido'=> $request->get('apellido'),
+            'email'=> $request->get('email'),
+            'act_empresa'=> $request->get('act_empresa')
+          ]);
+          $share->save();
+
+          $dni=$request->get('dni');
+          
+          $pers = Persona::where("dni","=",$dni)->select("idpersona")->get();
+        
+          foreach ($pers as $item) {
+            //echo "$item->idpersona";
+          }
+          $idpers=$item->idpersona;
+          $cliente = new Cliente([
+            'idpersona' => $idpers,
+            'fecha_nacimiento' => $request->get('fecha_nac'),
+            'domicilio'=> "Completar",
+            'estado_civil'=> "Completar"
+          ]);
+          $cliente->save();
+
+          $telef= 0;
+          $cel_1=$request->get('cel_1');
+          $cel_2= 0;
+
+          if($telef != null)
+          {
+          $tel = new Telefono([
+            'idpersona' => $idpers,
+            'num_tel' => $request->get('tel_fijo'),
+            'tipo' => '1'
+          ]);
+          $tel->save();
+        }
+          if($cel_1 != null)
+          {
+          $tel = new Telefono([
+            'idpersona' => $idpers,
+            'num_tel' => $request->get('cel_1'),
+            'tipo' => '2'
+          ]);
+          $tel->save();
+        }
+        if($cel_2 != null)
+          {
+          $tel = new Telefono([
+            'idpersona' => $idpers,
+            'num_tel' => $request->get('cel_2'),
+            'tipo' => '3'
+          ]);
+          $tel->save();
+        }
+
+        $preventa = new Preventa([
+            'idpersona' => $idpers,
+            'fecha_nacimiento' => $request->get('fecha_nac'),
+            'domicilio'=> "Completar",
+            'estado_civil'=> "Completar"
+          ]);
+          $preventa->save();
+
+        return redirect('/pre-venta')->with('success', 'Preventa Guardada');
     }
 
     /**
