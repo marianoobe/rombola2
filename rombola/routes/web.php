@@ -32,7 +32,8 @@ Route::resource('pre-venta','PreventaController');
 
 Route::get('autos.index','AutomovileController@autos')->name('autos');
 Route::get('autos.create','AutomovileController@create')->name('create');
-
+Route::get('autos/{auto}/edit','AutomovileController@edit')->name('edit');
+Route::get('autos/usados','AutomovileController@usados')->name('usados');
 //Route::get('autos.indexUsados','AutomovileController@autos')->name('autos');
 
 //Route::get('autos.listar','AutomovileController@listar')->name('listar');

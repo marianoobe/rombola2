@@ -29,7 +29,18 @@ class AutomovileController extends Controller
 
        
     }
+public function usados(Request $request)
+    {
+        //$name  = $request->get('name');
+       
+       $autos=Automovile::Search($request->name)->orderBY('id_auto')->paginate(3);
+                   
+              
+  //  dd($request->name);
+        return view('autos.usados')->with('autos',$autos);
 
+       
+    }
     /**
      * Show the form for creating a new resource.
      *
