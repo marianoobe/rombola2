@@ -73,7 +73,7 @@
 										</td>
 									
 									
-									    <td><a href="{{ route('autos.edit',$item->id_auto)}}" class="btn btn-primary">Edit</a></td>
+									    <td><a href="" class="btn btn-primary">Edit</a></td>
 								</td>
 									</tr>
 									@endforeach()

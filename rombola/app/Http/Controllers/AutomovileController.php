@@ -34,8 +34,7 @@ public function usados(Request $request)
         //$name  = $request->get('name');
        
        $autos=Automovile::Search($request->name)->orderBY('id_auto')->paginate(3);
-                   
-              
+        
   //  dd($request->name);
         return view('autos.usados')->with('autos',$autos);
 
@@ -154,9 +153,12 @@ public function usados(Request $request)
      */
     public function edit($id)
     {
-        //
+        return view('autos.edit');
     }
-
+    public function editusado($id)
+    {
+        return view('autos.editusado');
+    }
     /**
      * Update the specified resource in storage.
      *

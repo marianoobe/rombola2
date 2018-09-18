@@ -12,7 +12,7 @@
 			<!-- Default box -->
 			<div class="box">
 				<div class="box-header with-border">
-					<h3 class="box-title">Editar AUTO</h3>
+					<h3 class="box-title">EDITAR AUTO USADO</h3>
                   
 					<div class="box-tools pull-right">
 						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -44,10 +44,13 @@
 					<input type="text" class="form-control" id="version" name="version">
 				</div>
 				<div class="form-group">
-					<label for="vin"><strong>Vin</strong></label>
-					<input type="text" class="form-control" id="domicilio" name="domicilio">
+					<label for="dominio"><strong>Dominio</strong></label>
+					<input type="text" class="form-control" id="dominio" name="dominio">
 				</div>
-
+	<div class="form-group">
+					<label for="titular"><strong>Titular</strong></label>
+					<input type="text" class="form-control" id="titular" name="titular">
+				</div>
 			</div>
 			<div class="col-xs-12 col-lg-6">
 				<div class="form-group">
@@ -57,8 +60,13 @@
 				<div class="form-group">
 					<label for="combustible"><strong>Combustible</strong></label>
 					<input type="text" class="form-control" id="combustible" name="combustible">
+                </div>
+                <div class="form-group">
+					<label for="kilometros"><strong>kilometros</strong></label>
+					<input type="text" class="form-control" id="kilometros" name="kilometros">
 				</div>
-			</div>
+            </div>
+            
 			<div class="col-xs-12 col-lg-6">
 
 				<div class="form-group">
@@ -83,7 +91,7 @@
 
 			</div>
 		</div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
+</div>
 <div class="modal-footer">
 	
 	<button type="submit" onclick="realizaProceso($('#estado').val())" class="btn btn-primary">Guardar</button>

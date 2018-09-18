@@ -23,7 +23,7 @@ class Automovile extends Model
      {
 
              
-            return $query->where('marca','LIKE','%'.$name.'%')
+        return $query->where('marca','LIKE','%'.$name.'%')
                     ->orWhere('version','LIKE', '%'.$name.'%')
                     ->orWhere('color','LIKE', '%'.$name.'%')
 					->orWhere('estado','LIKE', '%'.$name.'%');                                        
