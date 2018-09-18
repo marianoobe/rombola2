@@ -21,6 +21,7 @@ class ClienteController extends Controller
         $client_pers = DB::table('clientes')
         ->join('personas','personas.idpersona','clientes.idpersona')
         ->join('telefonos', 'telefonos.idpersona', 'personas.idpersona')
+        ->where('telefonos.tipo','=', 1)
         ->paginate(3);
 
 
@@ -78,11 +79,12 @@ class ClienteController extends Controller
           $cel_1=$request->get('cel_1');
           $cel_2=$request->get('cel_2');
 
-          if($cel_1 != null)
+          if($telef != null)
           {
           $tel = new Telefono([
             'idpersona' => $idpers,
-            'num_tel' => $request->get('tel_fijo')
+            'num_tel' => $request->get('tel_fijo'),
+            'tipo' => '1'
           ]);
           $tel->save();
         }
@@ -90,7 +92,8 @@ class ClienteController extends Controller
           {
           $tel = new Telefono([
             'idpersona' => $idpers,
-            'num_tel' => $request->get('cel_1')
+            'num_tel' => $request->get('cel_1'),
+            'tipo' => '2'
           ]);
           $tel->save();
         }
@@ -98,12 +101,13 @@ class ClienteController extends Controller
           {
           $tel = new Telefono([
             'idpersona' => $idpers,
-            'num_tel' => $request->get('cel_2')
+            'num_tel' => $request->get('cel_2'),
+            'tipo' => '3'
           ]);
           $tel->save();
         }
          //return redirect('/clientes');
-          return redirect('/clientes')->with('success', 'Stock has been added');
+          return redirect('/clientes')->with('success', 'Cliente Guardado');
 
     }
 
@@ -148,16 +152,26 @@ class ClienteController extends Controller
      * @param  int  $dni
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $dni)
+    public function update(Request $request, $id)
     {
-      //$pers = Persona::where("dni","=",$dni)->select("idpersona")->get();
-      $share = Cliente::select($dni);
-      $share->dni = $request->get('dni');
-      $share->nombre = $request->get('nombre');
-      $share->apellido = $request->get('apellido');
-      $share->save();
-      return redirect('/clientes')->with('success', 'Stock has been updated');
-    
+      DB::table('clientes')
+        ->join('personas', 'personas.idpersona' ,'clientes.idpersona')
+        ->join('telefonos','telefonos.idpersona','personas.idpersona')
+            ->where('idpersona',"=",$id)
+            ->update([
+                "dni" => $request->get('dni'),
+                "nombre" => $request->get('nombre'),
+                "apellido" => $request->get('apellido'),
+                "email" => $request->get('email'),
+                "domicilio" => $request->get('domicilio'),
+                "act_empresa" => $request->get('act_empresa'),
+                "num_tel" => $request->get('num_tel'),
+                "fecha_nacimiento" => $request->get('fecha_nacimiento'),
+                "estado_civil" => $request->get('estado_civil'),
+
+        ]);
+      //$p->save();
+      return redirect('/clientes')->with('success', 'Stock has been updated');   
     }
 
     /**

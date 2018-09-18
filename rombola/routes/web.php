@@ -28,7 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::resource('clientes','ClienteController');
-    Route::resource('pre-venta','PreventaController');
+Route::resource('pre-venta','PreventaController');
 
 Route::get('autos.index','AutomovileController@autos')->name('autos');
 Route::get('autos.create','AutomovileController@create')->name('create');
