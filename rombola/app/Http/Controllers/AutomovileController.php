@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use DB;
 use App\Automovile;
+
+use App\AutoNuevo;
+use App\AutoUsado;
+
 class AutomovileController extends Controller
 {
     /**
@@ -12,11 +17,17 @@ class AutomovileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-       $autos = Automovile::all();
+        //$name  = $request->get('name');
+       
+       $autos=Automovile::Search($request->name)->orderBY('id_auto')->paginate(3);
+                   
+              
+  //  dd($request->name);
+        return view('autos.index')->with('autos',$autos);
 
-        return view('autos.index', compact('autos'));
+       
     }
 
     /**
@@ -26,7 +37,7 @@ class AutomovileController extends Controller
      */
     public function create()
     {
-        //
+        return view('autos.create');
     }
 
     /**
@@ -37,7 +48,39 @@ class AutomovileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+          
+          $share = new Automovile([
+            'marca' => $request->get('marca'),
+            'modelo' => $request->get('modelo'),
+            'version'=> $request->get('version'),
+            'color'=> $request->get('color'),
+            'combustible'=> $request->get('combustible'),
+            'chasis_num'=> $request->get('chasis_num'),
+            'motor_num'=> $request->get('motor_num'),
+            'estado'=> $request->get('estado'),
+          ]);
+          $share->save();
+
+           $chasis=$request->get('chasis_num');
+          
+          $car = Automovile::where("chasis_num","=",$chasis)->select("id_auto")->get();
+          
+                  
+        foreach ($car as $item) {
+            //echo "$item->idpersona";
+          }
+          $idauto=$item->id_auto;
+          $nuevo = new AutoNuevo([
+            'id_auto' => $idauto,
+            'vin' => $request->get('vin'),
+           
+          ]);
+          $nuevo->save();        
+
+        
+         //return redirect('/clientes');
+          return redirect('autos')->with('success', 'Stock has been added');
+
     }
 
     /**
@@ -84,4 +127,7 @@ class AutomovileController extends Controller
     {
         //
     }
+
+    
+
 }

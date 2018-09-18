@@ -7,11 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 class Automovile extends Model
 {
     protected $fillable=[
-            'id_auto',
+           'id_auto',
            'marca',
            'modelo',
            'version',
+           'color',          
+           'combustible',
            'chasis_num',
            'motor_num',
+            'estado',
     ];
+
+
+    public function scopeSearch($query,$name)
+     {
+
+            
+            return $query->where('marca','LIKE','%'.$name.'%');                                            
+                                        
+        
+        
+     }
 }
+ 

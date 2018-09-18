@@ -17,9 +17,12 @@ class CreateAutomovilesTable extends Migration
            $table->increments('id_auto');
             $table->string('marca');
             $table->string('modelo');
-            $table->string('version');
-            $table->integer('chasis_num');
-            $table->integer('motor_num');
+            $table->text('version');
+            $table->string('color');            
+            $table->string('combustible');
+            $table->string('chasis_num');
+            $table->string('motor_num');     
+            $table->string('estado');      
             $table->timestamps();
         });
     }

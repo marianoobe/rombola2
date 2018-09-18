@@ -52,7 +52,9 @@ id="empresa-logo" src="/img/logo.png" class="img-circle" width="50" height="50">
                 <ul class="treeview-menu">
                     
                 <li><a href="{{url('autos')}}">{{ trans('adminlte_lang::message.list-0km') }}</a></li>
-                    <li><a href="{{url('autos')}}">{{ trans('adminlte_lang::message.list-used') }}</a></li>                 
+                <li><a href="{{url('autos')}}">{{ trans('adminlte_lang::message.list-used') }}</a></li>                 
+                <li><a href="{{url('autos/create')}}">{{ trans('adminlte_lang::message.new-car') }}</a></li>                 
+
                 </ul>
             </li>
             <li class="active"><a href="{{ url('pre-venta') }}"><i class='fa fa-link'></i> <span>{{
