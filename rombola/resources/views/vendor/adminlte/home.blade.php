@@ -13,8 +13,7 @@
 			<!-- Default box -->
 			<div class="box">
 				<div class="box-header with-border">
-					<h3 class="box-title">Home</h3>
-
+					<h3 class="box-title">Bienvenidos al Sistema de venta RA Group</h3>
 					<div class="box-tools pull-right">
 						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
 							<i class="fa fa-minus"></i></button>
@@ -22,8 +21,8 @@
 							<i class="fa fa-times"></i></button>
 					</div>
 				</div>
-				<div class="box-body">
-					{{ trans('adminlte_lang::message.logged') }}. Start creating your amazing application!
+				<div align="center" class="box-body">
+					<img align="center" id="empresa-logo" src="/img/logogrande.png" width="900" height="400">
 				</div>
 				<!-- /.box-body -->
 			</div>

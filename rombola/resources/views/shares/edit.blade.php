@@ -129,11 +129,11 @@
 					</div>
 					<!-- ./box-body -->
 					<div class="box-footer">
-							<div class="row margenBoot-25" style="margin-top:25px;">
-									<div id="actualizar" class="col-xs-12 col-lg-12"  style="display:none">
-											<button type="submit" class="btn btn-primary">Actualizar Información</button>
-										</div>
-								</div>	
+						<div class="row margenBoot-25" style="margin-top:25px;">
+							<div id="actualizar" class="col-xs-12 col-lg-12" style="display:none">
+								<button type="submit" class="btn btn-primary">Actualizar Información</button>
+							</div>
+						</div>
 					</div>
 					<!-- /.box-footer -->
 				</div>
@@ -144,34 +144,33 @@
 </section>
 
 <script>
-		function realizaProceso(valorCaja1) {
-      this.style.display='none';
-		  var parametros = {
+	function realizaProceso(valorCaja1) {
+		this.style.display = 'none';
+		var parametros = {
 			"valorCaja1": valorCaja1
-		  };
-		  $.ajax({
+		};
+		$.ajax({
 			data: parametros, //datos que se envian a traves de ajax
 			url: 'clientes.store', //archivo que recibe la peticion
 			type: 'post', //método de envio
 			beforeSend: function () {
-			  $("#resultado").html("Procesando, espere por favor...");
+				$("#resultado").html("Procesando, espere por favor...");
 			},
 			success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-			  $("#resultado").html(response);
+				$("#resultado").html(response);
 			}
-		  });
-		}
+		});
+	}
 
-		function habilitarEdicion(){
-      document.getElementById("actualizar").style.display = "block";
-      document.getElementById("actualizar").style.textAlign = "center";
-			$('input').prop('disabled', false);
-			$('select').prop('disabled', false);
-			$('#chk-condominio').bootstrapSwitch('toggleDisabled');
-      $('[type="button"]').removeClass('disabled');  
-       
-    }
-    
-	  </script>
+	function habilitarEdicion() {
+		document.getElementById("actualizar").style.display = "block";
+		document.getElementById("actualizar").style.textAlign = "center";
+		$('input').prop('disabled', false);
+		$('select').prop('disabled', false);
+		$('#chk-condominio').bootstrapSwitch('toggleDisabled');
+		$('[type="button"]').removeClass('disabled');
+
+	}
+</script>
 
 @endsection

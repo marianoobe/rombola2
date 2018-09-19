@@ -22,7 +22,7 @@ id="empresa-logo" src="/img/logo.png" class="img-circle" width="50" height="50">
 -->
         @endif
 
-        <!-- search form (Optional) -->
+        <!--  search form (Optional) 
         <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
                 <input type="text" name="q" class="form-control" placeholder="{{ trans('adminlte_lang::message.search') }}..." />
@@ -31,11 +31,11 @@ id="empresa-logo" src="/img/logo.png" class="img-circle" width="50" height="50">
                 </span>
             </div>
         </form>
-        <!-- /.search form -->
+         /.search form -->
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
-            <li class="header">Menú</li>
+            
             <!--<li class="header">{{ trans('adminlte_lang::message.header') }}</li>-->
             <!-- Optionally, you can add icons to the links -->
             <li class="treeview"><a href="{{ url('home') }}"><i class='fa fa-link'></i> <span>{{

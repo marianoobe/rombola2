@@ -3,7 +3,7 @@
 
 @section('seccion1')
 <div class="container-fluid spark-screen">
-
+<form method="POST" action="{{ route('pre-venta.store') }}">
 	<div class="row">
 
 		<div class="col-md-14 col-md-offset-0">
@@ -40,7 +40,7 @@
 						</div>
 						<div class="col-xs-12 col-lg-3">
 							<div class="form-group">
-								<input type="text" maxlength="125" class="form-control" id="nom_vendedor" placeholder="">
+								<input type="text" maxlength="125" class="form-control" id="nom_vendedor" disabled="disabled" value="{{ Auth::user()->name }}">
 							</div>
 						</div>
 					</div>
@@ -259,5 +259,5 @@
 			</div>
 		</div>
 	</div>
-
+</form>
 	@endsection
