@@ -19,7 +19,6 @@
         <!--<img style="padding-left:5px; padding-right:5px; -webkit-transform: scale(1.8);" 
 id="empresa-logo" src="/img/logo.png" class="img-circle" width="50" height="50"> 
 
--->
         @endif
 
         <!--  search form (Optional) 

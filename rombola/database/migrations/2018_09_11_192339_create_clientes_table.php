@@ -19,6 +19,7 @@ class CreateClientesTable extends Migration
             $table->string('fecha_nacimiento');
             $table->text('domicilio');
             $table->text('estado_civil');
+            $table->text('estado_ficha');
             $table->timestamps();
         });
     }
