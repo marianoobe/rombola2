@@ -2,6 +2,7 @@
 
 
 @section('seccion1')
+
 <div class="container-fluid spark-screen">
 <form method="POST" action="{{ route('pre-venta.store') }}">
 	<div class="row">
