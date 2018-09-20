@@ -3,7 +3,7 @@
 
 @section('seccion')
 <script>
-function habilita(){
+	function habilita(){
      if($(".inputText").disabled)
         $(".inputText").removeAttr("disabled");
     }
@@ -16,24 +16,19 @@ function habilita(){
 
 
 					<!-- Default box -->
-					<div class="box">
-						<div class="box-header with-border">
-							<h3 class="box-title">EDITAR AUTO</h3>
+					<div class="box-tools pull-right">
+						<button type="button" onclick="habilitarEdicion();" class="btn btn-xl btn-success">Modificar</button>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<div class="row margenBoot-25">
 
-							<div class="box-tools pull-right">
-								<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-									<i class="fa fa-minus"></i></button>
-								<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-									<i class="fa fa-times"></i></button>
-							</div>
-						</div>
-						<div class="box-header">
-
-
-						</div>
 
 						<div class="box-body">
-							<form method="POST" action="{{ route('autos.edit') }}" enctype="multipart/form-data">
+							@foreach($car as $item)
+							@endforeach()
+							<form method="POST" action="{{ route('autos.update',$item->id_auto) }}" enctype="multipart/form-data">
 
 								{{ csrf_field() }}
 								<input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -42,64 +37,67 @@ function habilita(){
 									<div class="col-xs-12 col-lg-6">
 										<div class="form-group">
 											<label for="marca"><strong>Marca</strong></label>
-											<input type="text" class="form-control" id="marca" name="marca">
+											<input type="text" class="form-control" id="marca" name="marca" value={{ $item->marca }} disabled="disabled">
 										</div>
 										<div class="form-group">
 											<label for="modelo"><strong>Modelo</strong></label>
-											<input type="text" class="form-control" id="modelo" name="modelo">
+											<input type="text" class="form-control" id="modelo" name="modelo" value={{ $item->modelo }} disabled="disabled">
 										</div>
 										<div class="form-group">
 											<label for="version"><strong>Version</strong></label>
-											<input type="text" class="form-control" id="version" name="version">
+											<input type="text" class="form-control" id="version" name="version" value={{ $item->version }} disabled="disabled">
 										</div>
 										<div class="form-group">
 											<label for="vin"><strong>Vin</strong></label>
-											<input type="text" class="form-control" id="vin" name="vin">
+											<input type="text" class="form-control" id="vin" name="vin" value={{ $item->vin }} disabled="disabled">
 										</div>
 
 									</div>
 									<div class="col-xs-12 col-lg-6">
 										<div class="form-group">
 											<label for="color"><strong>Color</strong></label>
-											<input type="text" class="form-control" id="color" name="color">
+											<input type="text" class="form-control" id="color" name="color" value={{ $item->color }} disabled="disabled">
 										</div>
 										<div class="form-group">
 											<label for="combustible"><strong>Combustible</strong></label>
-											<input type="text" class="form-control" id="combustible" name="combustible">
+											<input type="text" class="form-control" id="combustible" name="combustible" value={{ $item->combustible }}
+											 disabled="disabled">
 										</div>
 									</div>
 									<div class="col-xs-12 col-lg-6">
 
 										<div class="form-group">
 											<label for="chasis_num"><strong>Numero de Chasis</strong></label>
-											<input type="text" class="form-control" id="chasis_num" name="chasis_num">
+											<input type="text" class="form-control" id="chasis_num" name="chasis_num" value={{ $item->chasis_num }}
+											 disabled="disabled">
 										</div>
 
 										<div class="form-group">
 											<label for="motor_num"><strong>Numero de Motor</strong></label>
-											<input type="text" class="form-control" id="motor_num" name="motor_num">
+											<input type="text" class="form-control" id="motor_num" name="motor_num" value={{ $item->motor_num }}
+											 disabled="disabled">
 										</div>
 										<div class="form-group">
 											<label for="estado"><strong>Estado</strong></label>
-											<select id="estado" name="estado" class="form-control form-control-sm">
-												<option>Disponible</option>
-												<option>Stock Playa</option>
-												<option>Vendido</option>
-												<option>A designar</option>
+											<input type="text" id="estado" name="estado" class="form-control form-control-sm" value={{ $item->estado }}
+											 disabled="disabled">
 
-											</select>
+											</input>
 										</div>
 
 									</div>
 								</div>
 
-								<div class="success">
-
-									<button type="submit" onclick="realizaProceso($('#estado').val())" class="btn btn-primary">
-										Guardar</button>
+								<div class="box-footer">
+									<div class="row margenBoot-25" style="margin-top:25px;">
+										<div id="actualizar" class="col-xs-12 col-lg-12" style="display:none">
+											<button type="submit" class="btn btn-primary">Actualizar Información</button>
+										</div>
+									</div>
 								</div>
 							</form>
 						</div>
+
 					</div>
 				</div>
 			</div>
@@ -119,6 +117,16 @@ function habilita(){
 							$("#resultado").html(response);
 						}
 					});
+				}
+
+				function habilitarEdicion() {
+					document.getElementById("actualizar").style.display = "block";
+					document.getElementById("actualizar").style.textAlign = "center";
+					$('input').prop('disabled', false);
+					$('select').prop('disabled', false);
+					$('#chk-condominio').bootstrapSwitch('toggleDisabled');
+					$('[type="button"]').removeClass('disabled');
+
 				}
 			</script>
 
