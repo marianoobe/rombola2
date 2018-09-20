@@ -29,14 +29,14 @@ class AutomovileController extends Controller
 
        
     }
-public function usados(Request $request)
+      public function usados(Request $request)
     {
         //$name  = $request->get('name');
        
        $autos=Automovile::Search($request->name)->orderBY('id_auto')->paginate(3);
         
-  //  dd($request->name);
-        return view('autos.usados')->with('autos',$autos);
+   
+        return view('autos/usados')->with('autos',$autos);
 
        
     }
@@ -53,6 +53,7 @@ public function usados(Request $request)
     {
         return view('autos/createusados');
     }
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -61,8 +62,9 @@ public function usados(Request $request)
      */
     public function store(Request $request)
     {
-          
-          $share = new Automovile([
+        if($request->input("nuevo")=="nuevo"){
+
+      $share = new Automovile([
             'marca' => $request->get('marca'),
             'modelo' => $request->get('modelo'),
             'version'=> $request->get('version'),
@@ -94,11 +96,9 @@ public function usados(Request $request)
          //return redirect('/clientes');
           return redirect('autos')->with('success', 'Stock has been added');
 
-    }
-     public function store2(Request $request)
-    {
-          
-          $share = new Automovile([
+        }
+        elseif($request->input("usado")=="usado"){
+             $share = new Automovile([
             'marca' => $request->get('marca'),
             'modelo' => $request->get('modelo'),
             'version'=> $request->get('version'),
@@ -110,7 +110,7 @@ public function usados(Request $request)
           ]);
           $share->save();
 
-           $chasis=$request->get('chasis_num');
+          $chasis=$request->get('chasis_num');
           
           $car = Automovile::where("chasis_num","=",$chasis)->select("id_auto")->get();
           
@@ -119,7 +119,7 @@ public function usados(Request $request)
             //echo "$item->idpersona";
           }
           $idauto=$item->id_auto;
-          $nuevo = new AutoNuevo([
+          $nuevo = new Autosusado([
             'id_auto' => $idauto,
             'dominio' => $request->get('dominio'),
             'titular' => $request->get('titular'),
@@ -131,9 +131,12 @@ public function usados(Request $request)
 
         
          //return redirect('/clientes');
-          return redirect('autos')->with('success', 'Stock has been added');
+          return redirect('autos/usados')->with('success', 'Stock has been added');
+        }
+         
 
     }
+  
     /**
      * Display the specified resource.
      *

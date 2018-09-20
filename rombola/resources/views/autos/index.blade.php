@@ -30,6 +30,8 @@
 							<form method="GET" action="{{ route('autos.index') }}" class="navbar-form pull-right" role="search">
 								{{ csrf_field() }}
 								<div class="input-group">
+									<input type="hidden" id="nuevo" name="nuevo" value="1">
+
 									<input type="text" class="form-control" name="name" placeholder="Busqueda">
 									<span class="input-group-btn">
 										<button type="submit" class="btn btn-default">
@@ -46,6 +48,8 @@
 
 								<thead>
 									<tr>
+										<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label=" : activate to sort column ascending"
+										 style="width: 58px;" />
 										<th scope="col">ID</th>
 										<th scope="col">MARCA</th>
 										<th scope="col">MODELO</th>
@@ -53,12 +57,15 @@
 										<th scope="col">COLOR</th>
 										<th scope="col">ESTADO</th>
 										<th scope="col">VER</th>
-										<th scope="col">ACCION</th>
+
 									</tr>
 								</thead>
 								<tbody>
 									@foreach($autos as $item)
 									<tr>
+										<td align="center" style="cursor: default;">
+											<img src={{url('img/sinimagen.jpg')}} alt="..." class="img-circle" style="width: 80px; height: 80px;" />
+										</td>
 										<td>{{$item->id_auto}}</td>
 										<td>{{$item->marca}}</td>
 										<td>{{$item->modelo}}</td>
@@ -66,15 +73,14 @@
 										<td>{{$item->color}}</td>
 										<td>{{$item->estado}}</td>
 										<td style="cursor: default;">
-											<button type="button" class="btn btn-info btn-xs">
-												<span class="glyphicon glyphicon-search" aria-hidden="true">
-												</span>
-											</button>
+											<a href="{{ route('autos.edit',$item->id_auto)}}" class="btn btn-info btn-sm">
+												<span class="glyphicon glyphicon-search"></span></a>
+
 										</td>
-									
-									
-									    <td><a href="{{ route('autos.edit',$item->id_auto)}}" class="btn btn-primary">Edit</a></td>
-								</td>
+
+
+
+										</td>
 									</tr>
 									@endforeach()
 								</tbody>

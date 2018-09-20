@@ -35,6 +35,7 @@
 								<div class="row margenBoot-25">
 									<div class="col-xs-12 col-lg-6">
 										<div class="form-group">
+											<input type="hidden" id="nuevo" name="nuevo" value="nuevo">
 											<label for="marca"><strong>Marca</strong></label>
 											<input type="text" class="form-control" id="marca" name="marca">
 										</div>
@@ -57,11 +58,16 @@
 											<label for="color"><strong>Color</strong></label>
 											<input type="text" class="form-control" id="color" name="color">
 										</div>
-										<div class="form-group">
-											<label for="combustible"><strong>Combustible</strong></label>
-											<input type="text" class="form-control" id="combustible" name="combustible">
+									
+									<div class="form-group">
+											<label for="estado"><strong>Combustible</strong></label>
+											<select id="combustible" name="combustible" class="form-control form-control-sm">
+												<option>NAFTA</option>
+												<option>DIESEL</option>
+												<option>GNC</option>
+												
+											</select>
 										</div>
-									</div>
 									<div class="col-xs-12 col-lg-6">
 
 										<div class="form-group">

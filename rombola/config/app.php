@@ -181,7 +181,9 @@ return [
         */
         Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
          // ...
-         Laraveles\Spanish\SpanishServiceProvider::class,            
+         Laraveles\Spanish\SpanishServiceProvider::class,    
+         
+         'Intervention\Image\ImageServiceProvider',
 
     ],
 
@@ -236,7 +238,7 @@ return [
         */
         'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
 
-
+           'Image' => 'Intervention\Image\Facades\Image',
     ],
 
 ];

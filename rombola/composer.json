@@ -8,6 +8,8 @@
         "php": ">=7.0.0",
         "acacha/admin-lte-template-laravel": "4.*",
         "fideloper/proxy": "~3.3",
+        "intervention/image": "^2.4",
+        "intervention/imagecache": "^2.3",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "laraveles/spanish": "^1.0"

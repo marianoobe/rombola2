@@ -27,7 +27,8 @@
 				</div>
 
 <div class="box-body">
-	<form method="POST" action="{{ route('autos.store') }}" enctype="multipart/form-data">
+	<form method="POST" action="{{ route('autos.editusado') }}" enctype="multipart/form-data">
+		{{ csrf_field() }}
 		<input type="hidden" name="_token" value="{{csrf_token()}}">
 		<div class="row margenBoot-25">
 			<div class="col-xs-12 col-lg-6">
@@ -90,9 +91,9 @@
 				</div>
 
 			</div>
-		</div><!-- /.modal-content -->
+		</div>
 </div>
-<div class="modal-footer">
+<div class="modal">
 	
 	<button type="submit" onclick="realizaProceso($('#estado').val())" class="btn btn-primary">Guardar</button>
 </div>
