@@ -1,6 +1,6 @@
 @extends('adminlte::layouts.app')
 
-@section('seccion_index_preventa')
+@section('seccion1')
 <div class="container-fluid spark-screen">
 	<div class="row">
 		<div class="col-md-14 col-md-offset-0">
@@ -46,22 +46,4 @@
 						<tbody>
 						</table>
 					
-					<script>
-						function realizaProceso(valorCaja1) {
-							var parametros = {
-								"valorCaja1": valorCaja1
-							};
-							$.ajax({
-								data: parametros, //datos que se envian a traves de ajax
-								url: 'clientes.store', //archivo que recibe la peticion
-								type: 'post', //método de envio
-								beforeSend: function () {
-									$("#resultado").html("Procesando, espere por favor...");
-								},
-								success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-									$("#resultado").html(response);
-								}
-							});
-						}
-					</script>
 					@endsection

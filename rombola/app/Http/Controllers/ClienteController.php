@@ -71,7 +71,8 @@ class ClienteController extends Controller
             'idpersona' => $idpers,
             'fecha_nacimiento' => $request->get('fecha_nac'),
             'domicilio'=> $request->get('domicilio'),
-            'estado_civil'=> $request->get('estado_civil')
+            'estado_civil'=> $request->get('estado_civil'),
+            'estado_ficha'=> "Completa"
           ]);
           $cliente->save();
 

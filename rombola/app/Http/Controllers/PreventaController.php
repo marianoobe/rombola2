@@ -34,7 +34,8 @@ class PreventaController extends Controller
      */
     public function store(Request $request)
     {
-        $share = new Persona([
+          //insert Persona-Cliente
+          $share = new Persona([
             'dni' => $request->get('dni'),
             'nombre' => $request->get('nombre'),
             'apellido'=> $request->get('apellido'),
@@ -53,51 +54,46 @@ class PreventaController extends Controller
           $idpers=$item->idpersona;
           $cliente = new Cliente([
             'idpersona' => $idpers,
-            'fecha_nacimiento' => $request->get('fecha_nac'),
-            'domicilio'=> "Completar",
-            'estado_civil'=> "Completar"
+            'fecha_nacimiento' => "####",
+            'domicilio'=> "####",
+            'estado_civil'=> "####",
+            'estado_ficha'=> "Incompleta"
           ]);
           $cliente->save();
+          //--/insert Persona-Cliente
 
-          $telef= 0;
-          $cel_1=$request->get('cel_1');
-          $cel_2= 0;
+          //insert Operacion-Preventa
+        $operacion = new Operacion([
+          'idpersona' => $idpers,
+          'estado' => $request->get('estado'),
+          'fecha_oper'=> $request->get('fecha_oper'),
+          'aviso'=> $request->get('aviso')
+        ]);
+        $operacion->save();
 
-          if($telef != null)
-          {
-          $tel = new Telefono([
-            'idpersona' => $idpers,
-            'num_tel' => $request->get('tel_fijo'),
-            'tipo' => '1'
-          ]);
-          $tel->save();
+        $fecha_oper=$request->get('fecha_oper');
+        
+        $operacion = Operacion::where("fecha_oper","=",$fecha_oper)->select("idoperacion")->get();
+      
+        foreach ($operacion as $item) {
+          //echo "$item->idpersona";
         }
-          if($cel_1 != null)
-          {
-          $tel = new Telefono([
-            'idpersona' => $idpers,
-            'num_tel' => $request->get('cel_1'),
-            'tipo' => '2'
-          ]);
-          $tel->save();
-        }
-        if($cel_2 != null)
-          {
-          $tel = new Telefono([
-            'idpersona' => $idpers,
-            'num_tel' => $request->get('cel_2'),
-            'tipo' => '3'
-          ]);
-          $tel->save();
-        }
-
+        $idoperacion=$item->idoperacion;
         $preventa = new Preventa([
-            'idpersona' => $idpers,
-            'fecha_nacimiento' => $request->get('fecha_nac'),
-            'domicilio'=> "Completar",
-            'estado_civil'=> "Completar"
-          ]);
-          $preventa->save();
+          'id_operacion' => $idoperacion,
+          'auto_interesado' => $request->get('auto_interesado'),
+          'detalles' => $request->get('detalles'),
+          'usado' => $request->get('usado'),
+          'contado' => $request->get('contado'),
+          'cheques' => $request->get('cheques'),
+          'tipo_financiación'=> $request->get('tipo_financiación'),
+          'financieras' => $request->get('financieras'),
+          'cant_cuotas' => $request->get('cant_cuotas'),
+          'importe_finan' => $request->get('importe_finan'),
+          'cant_pormes' => $request->get('cant_pormes')
+        ]);
+        $preventa->save();
+        //---insert Operacion-Preventa
 
         return redirect('/pre-venta')->with('success', 'Preventa Guardada');
     }

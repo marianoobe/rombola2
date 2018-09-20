@@ -45,6 +45,7 @@
 								<th scope="col">Email</th>
 								<th scope="col">Domicilio</th>
 								<th scope="col">Teléfono</th>
+								<th scope="col">Estado de Ficha</th>
 								<th scope="col"></th>
 							</tr>
 						</thead>
@@ -56,6 +57,7 @@
 								<td>{{$item->email}}</td>
 								<td>{{$item->domicilio}}</td>
 								<td>{{$item->num_tel}}</td>
+								<td>{{$item->estado_ficha}}</td>
 								<td style="cursor: default;">
 									<a href="{{ route('clientes.edit',$item->dni)}}" class="btn btn-info btn-sm">
                                      <span class="glyphicon glyphicon-search"></span></a>

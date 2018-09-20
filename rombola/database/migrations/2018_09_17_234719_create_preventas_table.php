@@ -14,8 +14,19 @@ class CreatePreventasTable extends Migration
     public function up()
     {
         Schema::create('preventas', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('idpreventa');
+            $table->text('auto_interesado');
+            $table->text('detalles');
+            $table->text('usado');
+            $table->integer('contado');
+            $table->integer('cheques');
+            $table->text('tipo_financiación');
+            $table->text('financieras');
+            $table->integer('cant_cuotas');
+            $table->integer('importe_finan');
+            $table->integer('cant_pormes');
             $table->timestamps();
+
         });
     }
 
