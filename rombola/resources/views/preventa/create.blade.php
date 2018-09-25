@@ -211,8 +211,10 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label><strong>Cheques</strong></label>
-									<input type="text" class="form-control" id="cheques" name="cheques">
+										<div class="checkbox-inline">
+												<label><input type="checkbox" value="" onclick="javascript:validar(this);">Otra forma(cheque, tranferencia bancaria,etc)</label>
+											  </div>
+											  <textarea class="form-control rounded-0" id="otropago" rows="2" disabled="true"></textarea>
 								</div>
 								<div class="form-group">
 									<label><strong>Hasta cuánto puede pagar por mes</strong></label>
@@ -291,5 +293,13 @@
 		}
 		//cargar_financ();
 		//cargar_cant_cuotas();
+
+		function validar(obj){
+			if(obj.checked==true){
+				document.getElementById("otropago").disabled = false;
+			}else{
+				document.getElementById("otropago").disabled = true;
+			}
+		}
 	</script>
 	@endsection

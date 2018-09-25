@@ -21,7 +21,7 @@
 				</div>
 				<div class="box-body">
 					<table class="table table-striped">
-						<!--<div class="row">
+						<div class="row">
 							<div class="col-sm-6">
 								<div class="dt-buttons btn-group">
 									<a class="btn btn-default buttons-excel buttons-html5" tabindex="0" aria-controls="example" href="#" title="Excel"><span><i
@@ -34,14 +34,15 @@
 							</div>
 							<div class="col-sm-5">
 								<div id="example_filter" class="dataTables_filter">
-									<label>Buscar:<input type="search" class="form-control input-sm" placeholder="" aria-controls="example"></label>
+									<label>Buscar:<input id="myInput" type="text" class="form-control" placeholder="" aria-controls="example"></label>
 								</div>
 							</div>
-						</div>-->
+						</div>
+
 						<thead>
 							<tr>
 								<th scope="col">DNI</th>
-								<th scope="col">Nombre y Apellido</th>
+								<th scope="col">Nombres y Apellidos</th>
 								<th scope="col">Email</th>
 								<th scope="col">Domicilio</th>
 								<th scope="col">Teléfono</th>
@@ -49,7 +50,7 @@
 								<th scope="col"></th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="myTable">
 							@foreach($client_pers as $item)
 							<tr>
 								<td>{{$item->dni}}</td>
@@ -92,46 +93,46 @@
 										<div class="row margenBoot-25">
 											<div class="col-xs-12 col-lg-6">
 												<div class="form-group">
-													<label for="exampleInputEmail1"><strong>DNI</strong></label>
+													<label><strong>DNI</strong></label>
 													<input type="number" class="form-control" id="dni" name="dni">
 												</div>
 												<div class="form-group">
-													<label for="nombre"><strong>Nombres</strong></label>
+													<label><strong>Nombres</strong></label>
 													<input type="text" class="form-control" id="nombre" name="nombre">
 												</div>
 												<div class="form-group">
-													<label for="apellido"><strong>Apellidos</strong></label>
+													<label><strong>Apellidos</strong></label>
 													<input type="text" class="form-control" id="apellido" name="apellido">
 												</div>
 												<div class="form-group">
-													<label for="email"><strong>Correo Electrónico</strong></label>
+													<label><strong>Correo Electrónico</strong></label>
 													<input type="email" class="form-control" id="email" name="email">
 												</div>
 												<div class="form-group">
-													<label for="tel_fijo"><strong>Teléfono Fijo</strong></label>
+													<label><strong>Teléfono Fijo</strong></label>
 													<input type="number" class="form-control" id="tel_fijo" name="tel_fijo">
 												</div>
 												<div class="form-group">
-													<label for="cel_2"><strong>Celular 2</strong></label>
+													<label><strong>Celular 2</strong></label>
 													<input type="number" class="form-control" id="cel_2" name="cel_2">
 												</div>
 											</div>
 											<div class="col-xs-12 col-lg-6">
 												<div class="form-group">
-													<label for="act_empresa"><strong>Actividad/Empresa</strong></label>
+													<label><strong>Actividad/Empresa</strong></label>
 													<input type="text" class="form-control" id="act_empresa" name="act_empresa">
 												</div>
 												<div class="form-group">
-													<label for="fecha_nac"><strong>Fecha de Nacimiento</strong></label>
+													<label><strong>Fecha de Nacimiento</strong></label>
 													<input type="date" class="form-control" id="fecha_nac" name="fecha_nac">
 												</div>
 												<div class="form-group">
 													<div class="form-group">
-														<label for="domicilio"><strong>Domicilio</strong></label>
+														<label><strong>Domicilio</strong></label>
 														<input type="text" class="form-control" id="domicilio" name="domicilio">
 													</div>
 													<div class="form-group">
-														<label for="estado_civil"><strong>Estado Civil</strong></label>
+														<label><strong>Estado Civil</strong></label>
 														<select id="estado_civil" name="estado_civil" class="form-control form-control-sm">
 															<option>Soltero</option>
 															<option>Convive</option>
@@ -141,7 +142,7 @@
 														</select>
 													</div>
 													<div class="form-group">
-														<label for="usr"><strong>Celular 1</strong></label>
+														<label><strong>Celular 1</strong></label>
 														<input type="number" class="form-control" id="cel_1" name="cel_1">
 													</div>
 												</div>
@@ -174,5 +175,14 @@
 								}
 							});
 						}
+
+						$(document).ready(function(){
+							$("#myInput").on("keyup", function() {
+							  var value = $(this).val().toLowerCase();
+							  $("#myTable tr").filter(function() {
+								$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+							  });
+							});
+						  });
 					</script>
 					@endsection
