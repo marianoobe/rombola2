@@ -57,11 +57,10 @@
 								<td>{{$item->email}}</td>
 								<td>{{$item->domicilio}}</td>
 								<td>{{$item->num_tel}}</td>
-								<td>{{$item->estado_ficha}}</td>
+								<td> <span class="label label-info">{{$item->estado_ficha}}</span></td>
 								<td style="cursor: default;">
-									<a href="{{ route('clientes.edit',$item->dni)}}" class="btn btn-info btn-sm">
-                                     <span class="glyphicon glyphicon-search"></span></a>
-									
+									<a href="{{ route('clientes.edit',$item->dni)}}" class="btn btn-primary btn-sm">
+                                     <span class="glyphicon glyphicon-search"></span></a>							
 								</td>
 							</tr>
 							@endforeach()
@@ -97,11 +96,11 @@
 													<input type="number" class="form-control" id="dni" name="dni">
 												</div>
 												<div class="form-group">
-													<label for="nombre"><strong>Nombre</strong></label>
+													<label for="nombre"><strong>Nombres</strong></label>
 													<input type="text" class="form-control" id="nombre" name="nombre">
 												</div>
 												<div class="form-group">
-													<label for="apellido"><strong>Apellido</strong></label>
+													<label for="apellido"><strong>Apellidos</strong></label>
 													<input type="text" class="form-control" id="apellido" name="apellido">
 												</div>
 												<div class="form-group">

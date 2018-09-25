@@ -98,6 +98,7 @@ class PreventaController extends Controller
         return redirect('/pre-venta')->with('success', 'Preventa Guardada');
     }
 
+    
     /**
      * Display the specified resource.
      *

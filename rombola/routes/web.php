@@ -42,4 +42,5 @@ Route::get('autos/createusados','AutomovileController@createusados')->name('agre
 Route::resource('autos', 'AutomovileController');
 
 
+
 ?>

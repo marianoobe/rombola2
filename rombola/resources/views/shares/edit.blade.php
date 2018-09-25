@@ -2,62 +2,6 @@
 
 @section('seccion')
 
-<section class="content" id="contenedor-ajax" style="display: block;">
-
-
-	<!--
-		<link href="../css/bootstrap.min.css" rel="stylesheet">
-		<link href="../css/bootstrap-switch.css" rel="stylesheet">
-		-->
-	<meta charset="utf-8">
-	<style type="text/css">
-		.tag {
-			font-size: 14px;
-			padding: .3em .4em .4em;
-			margin: 3px;
-			display: inline-block;
-		}
-
-		.tag a {
-			color: #bbb;
-			cursor: pointer;
-			opacity: 0.6;
-		}
-
-		.tag a:hover {
-			opacity: 1.0
-		}
-
-		.tag .remove {
-			vertical-align: bottom;
-			top: 2px;
-		}
-
-		.tag a {
-			margin: 0 0 0 .3em;
-		}
-
-		.tag a .glyphicon-white {
-			color: #fff;
-			margin-bottom: 2px;
-		}
-
-		input {
-			text-transform: uppercase;
-		}
-
-		textarea {
-			text-transform: uppercase;
-		}
-
-		@media (min-width: 768px) {
-			.alturaPrimerImagenGalery {
-				height: 250px;
-			}
-		}
-	</style>
-
-
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="box box-primary">
@@ -81,11 +25,11 @@
 									<input id="dni" type="text" class="form-control" name="dni" value={{ $item->dni }} disabled="disabled" />
 								</div>
 								<div class="form-group">
-									<label for="nombre">Nombre:</label>
+									<label for="nombre">Nombres:</label>
 									<input type="text" class="form-control" name="nombre" value={{ $item->nombre }} disabled="disabled" />
 								</div>
 								<div class="form-group">
-									<label for="apellido">Apellido:</label>
+									<label for="apellido">Apellidos:</label>
 									<input type="text" class="form-control" name="apellido" value={{ $item->apellido }} disabled="disabled" />
 								</div>
 								<div class="form-group">
@@ -141,7 +85,6 @@
 			</div>
 			<!-- /.col -->
 		</div>
-</section>
 
 <script>
 	function realizaProceso(valorCaja1) {
