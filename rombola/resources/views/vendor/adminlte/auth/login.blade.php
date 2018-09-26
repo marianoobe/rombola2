@@ -31,24 +31,20 @@
             <div class="row">
               <div class="col-sm-6 col-sm-offset-3 myform-cont" >
                     <div class="myform-top">
-                        <div class="myform-top-left">
-                         <img  src="{{url('img/logo.png')}}" class="img-responsive logo" />
-                          <h3>Ingresa al sistema.</h3>
-                            <p>Digita tu email y contraseña:</p>
+                        <div align="center" class="myform-top-top">
+                         <img src="{{url('img/logo.png')}}" class="img-responsive logo" />
                         </div>
-                        <div class="myform-top-right">
-                          <i class="fa fa-key"></i>
-                        </div>
+                                                
                     </div>
                     <div class="myform-bottom">
                     <form role="form" action="{{url('/login')}}" method="post" class="">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="form-group">
                             <input type="text"  name="{{ config('auth.providers.users.field','email') }}"
-                        value="{{old('')}}" placeholder="Usuario..." class="form-control" id="form-username">
+                        value="{{old('')}}" placeholder="Correo Electrónico" class="form-control" id="form-username">
                         </div>
                         <div class="form-group">
-                            <input type="password" name="password" placeholder="Contraseña..." class="form-control" id="form-password">
+                            <input type="password" name="password" placeholder="Contraseña" class="form-control" id="form-password">
                         </div>
                         <button type="submit" class="mybtn">Entrar</button>
                       </form>

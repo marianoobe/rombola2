@@ -19,10 +19,10 @@ class CreatePreventasTable extends Migration
             $table->text('detalles');
             $table->text('usado');
             $table->integer('contado');
-            $table->integer('cheques');
-            $table->text('tipo_financiación');
-            $table->text('financieras');
-            $table->integer('cant_cuotas');
+            $table->integer('otropago');
+            $table->text('nombretipo');
+            $table->text('nomb_financ');
+            $table->integer('numcuotas');
             $table->integer('importe_finan');
             $table->integer('cant_pormes');
             $table->timestamps();

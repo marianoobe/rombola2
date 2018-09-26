@@ -14,7 +14,8 @@ class CreateTipoFinancierasTable extends Migration
     public function up()
     {
         Schema::create('tipo_financieras', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('idtipo');
+            $table->text('nombretipo');
             $table->timestamps();
         });
     }

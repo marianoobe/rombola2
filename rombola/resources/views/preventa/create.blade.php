@@ -104,7 +104,7 @@
 						<div class="tab-content" id="pills-tabContent">
 							<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 								<div aling="center" class="form-group">
-										<br> </br>
+									<br> </br>
 									<input type="number" class="form-control" id="buscar_cliente" name="buscar_cliente" placeholder="Ingrese DNI">
 								</div>
 							</div>
@@ -114,38 +114,38 @@
 										<!-- inicio panel filtros -->
 
 										<div class="box-body">
-												<input type="hidden" name="_token" value="{{csrf_token()}}">
-												<div class="row margenBoot-25">
-													<div class="col-xs-12 col-lg-6">
-														<div class="form-group">
-															<label><strong>DNI</strong></label>
-															<input type="number" class="form-control" id="dni" name="dni">
-														</div>
-														<div class="form-group">
-															<label><strong>Nombres</strong></label>
-															<input type="text" class="form-control" id="nombre" name="nombre">
-														</div>
-														<div class="form-group">
-															<label><strong>Apellidos</strong></label>
-															<input type="text" class="form-control" id="apellido" name="apellido">
-														</div>
+											<input type="hidden" name="_token" value="{{csrf_token()}}">
+											<div class="row margenBoot-25">
+												<div class="col-xs-12 col-lg-6">
+													<div class="form-group">
+														<label><strong>DNI</strong></label>
+														<input type="number" class="form-control" id="dni" name="dni">
+													</div>
+													<div class="form-group">
+														<label><strong>Nombres</strong></label>
+														<input type="text" class="form-control" id="nombre" name="nombre">
+													</div>
+													<div class="form-group">
+														<label><strong>Apellidos</strong></label>
+														<input type="text" class="form-control" id="apellido" name="apellido">
+													</div>
 
+												</div>
+												<div class="col-xs-12 col-lg-6">
+													<div class="form-group">
+														<label><strong>Correo Electrónico</strong></label>
+														<input type="email" class="form-control" id="email" name="email">
 													</div>
-													<div class="col-xs-12 col-lg-6">
-														<div class="form-group">
-															<label><strong>Correo Electrónico</strong></label>
-															<input type="email" class="form-control" id="email" name="email">
-														</div>
-														<div class="form-group">
-															<label><strong>Celular</strong></label>
-															<input type="number" class="form-control" id="cel_1" name="cel_1">
-														</div>
-														<div class="form-group">
-															<label><strong>Actividad/Empresa</strong></label>
-															<input type="text" class="form-control" id="act_empresa" name="act_empresa">
-														</div>
+													<div class="form-group">
+														<label><strong>Celular</strong></label>
+														<input type="number" class="form-control" id="cel_1" name="cel_1">
 													</div>
-												</div><!-- /.modal-content -->
+													<div class="form-group">
+														<label><strong>Actividad/Empresa</strong></label>
+														<input type="text" class="form-control" id="act_empresa" name="act_empresa">
+													</div>
+												</div>
+											</div><!-- /.modal-content -->
 
 										</div>
 
@@ -211,10 +211,11 @@
 									</div>
 								</div>
 								<div class="form-group">
-										<div class="checkbox-inline">
-												<label><input type="checkbox" value="" onclick="javascript:validar(this);">Otra forma(cheque, tranferencia bancaria,etc)</label>
-											  </div>
-											  <textarea class="form-control rounded-0" id="otropago" rows="2" disabled="true"></textarea>
+									<div class="checkbox-inline">
+										<label><input type="checkbox" value="" onclick="javascript:validar(this);">Otra forma(cheque, tranferencia
+											bancaria,etc)</label>
+									</div>
+									<textarea class="form-control rounded-0" id="otropago" rows="2" disabled="true"></textarea>
 								</div>
 								<div class="form-group">
 									<label><strong>Hasta cuánto puede pagar por mes</strong></label>
@@ -222,17 +223,24 @@
 								</div>
 							</div>
 							<div text-align="center" class="col-xs-12 col-lg-6">
+
 								<div class="form-group">
 									<label><strong>Tipo de Financiación</strong></label>
-									<select id="tipo_financiacion" name="tipo_financiacion" onchange="obtener(this);" class="form-control form-control-sm">
-										<option value="1">Sin Financiación</option>
-										<option value="2">Propia</option>
-										<option value="3">Externa</option>
+
+									<select id="tipo_financiacion" name="tipo_financiacion" onchange="obtener_valor_select($('#tipo_financiacion').val())" class="form-control form-control-sm">
+										@foreach($tipo_finan as $item)
+										<option value="{{$item->nombretipo}}">{{$item->nombretipo}}</option>
+										@endforeach()
 									</select>
+
 								</div>
+
 								<div class="form-group">
 									<label><strong>Financieras</strong></label>
-									<select style="display:none" id="nomb_financiera" name="nomb_financiera" class="form-control form-control-sm">
+									<select id="nomb_financiera" name="nomb_financiera" class="form-control form-control-sm">
+											@foreach($nombretipo as $item)
+											<option value="1">{{$item->nomb_finac}}</option>
+											@endforeach
 									</select>
 								</div>
 								<div class="form-group">
@@ -264,20 +272,25 @@
 	</form>
 
 	<script>
-		/*function cargar_financ() {
-			var financieras = ["Financiera 1", "Financiera 2", "Financiera 3", "Financiera 4"]; //Tu array de provincias
-			var select = document.getElementById("nomb_financiera"); //Seleccionamos el select
-
-			for (var i = 0; i < financieras.length; i++) {
-				var option = document.createElement("option"); //Creamos la opcion
-				option.innerHTML = financieras[i]; //Metemos el texto en la opción
-				select.appendChild(option); //Metemos la opción en el select
+			function obtener_valor_select(valorCaja1) {
+				var parametros = {
+					"valorCaja1": valorCaja1
+				};
+				$.ajax({
+					data: parametros, //datos que se envian a traves de ajax
+					url: 'pre-venta.respuesta', //archivo que recibe la peticion
+					type: 'get', //método de envio
+					beforeSend: function () {
+						$("#resultado").html("Procesando, espere por favor...");
+					},
+					success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+						$("#resultado").html(response);
+					}
+				});
 			}
-			
-		}*/
 
 		function obtener(opt) {
-			document.getElementById("nomb_financiera").style.display = "block";
+			//document.getElementById("nomb_financiera").style.display = "block";
 
 			var selected = opt.options[opt.selectedIndex].value;
 
@@ -291,13 +304,12 @@
 			}
 
 		}
-		//cargar_financ();
-		//cargar_cant_cuotas();
 
-		function validar(obj){
-			if(obj.checked==true){
+		function validar(obj) {
+			alert(obj.value);
+			if (obj.checked == true) {
 				document.getElementById("otropago").disabled = false;
-			}else{
+			} else {
 				document.getElementById("otropago").disabled = true;
 			}
 		}

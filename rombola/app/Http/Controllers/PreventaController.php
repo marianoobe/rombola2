@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\TipoFinanciera;
+use App\Financiera;
 
 class PreventaController extends Controller
 {
@@ -23,7 +25,21 @@ class PreventaController extends Controller
      */
     public function create()
     {
-        return view('preventa.create');
+        $tipo_finan = TipoFinanciera::select("nombretipo")->get();
+
+        return view('preventa.create',compact('tipo_finan'));
+    }
+
+    public function respuesta(Request $request){
+        
+        $nombretipo=$request->get('tipo_financiacion');
+        echo($nombretipo);
+        echo("CAC");
+        return ('nombretipo');
+        /*
+        $idtipo = TipoFinanciera::where("nombretipo","=",$nombretipo)->select("idtipo")->get();        
+        $nombretipo = Financiera::where("idtipo","=",$idtipo)->select("nomb_finac")->get();
+        return ('nombretipo');*/
     }
 
     /**

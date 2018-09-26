@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
     #adminlte_routes
     
 });
-
+Route::get('pre-venta/respuesta','PreventaController@respuesta');
 Route::resource('clientes','ClienteController');
 Route::resource('pre-venta','PreventaController');
 
