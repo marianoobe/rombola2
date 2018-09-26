@@ -32,7 +32,7 @@
               <div class="col-sm-6 col-sm-offset-3 myform-cont" >
                     <div class="myform-top">
                         <div align="center" class="myform-top-top">
-                         <img src="{{url('img/logo.png')}}" class="img-responsive logo" />
+                         <img src="{{url('img/logo.png')}}" width="240" height="120" />
                         </div>
                                                 
                     </div>
