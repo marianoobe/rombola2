@@ -15,8 +15,9 @@ class CreateFinancierasTable extends Migration
     {
         Schema::create('financieras', function (Blueprint $table) {
             $table->increments('idfinanciera');
-            $table->integer('idtipo');
             $table->text('nomb_financ');
+            $table->integer('idtipofinanciera')->unsigned();
+            $table->foreign('idtipofinanciera')->references('idtipo')->on('tipo_financieras');
             $table->timestamps();
         });
     }

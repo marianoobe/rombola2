@@ -3,6 +3,7 @@
 
 @section('seccion1')
 
+
 <div class="container-fluid spark-screen">
 	<form method="POST" action="{{ route('pre-venta.store') }}">
 		<div class="row">
@@ -223,25 +224,16 @@
 								</div>
 							</div>
 							<div text-align="center" class="col-xs-12 col-lg-6">
-
+									{!! Html::script('js/financiera.js') !!}
 								<div class="form-group">
 									<label><strong>Tipo de Financiación</strong></label>
-
-									<select id="tipo_financiacion" name="tipo_financiacion" onchange="obtener_valor_select($('#tipo_financiacion').val())" class="form-control form-control-sm">
-										@foreach($tipo_finan as $item)
-										<option value="{{$item->nombretipo}}">{{$item->nombretipo}}</option>
-										@endforeach()
-									</select>
-
+									{!! Form::select('tipofinanciera',$tipo_finan,null,['id'=>'tipofinanciera']) !!}									
 								</div>
 
 								<div class="form-group">
 									<label><strong>Financieras</strong></label>
-									<select id="nomb_financiera" name="nomb_financiera" class="form-control form-control-sm">
-											@foreach($nombretipo as $item)
-											<option value="1">{{$item->nomb_finac}}</option>
-											@endforeach
-									</select>
+									{!! Form::select('nombfinanciera',['placeholder'=>''],null,['id'=>'nombfinanciera']) !!}
+
 								</div>
 								<div class="form-group">
 									<label><strong>Cantidad de cuotas</strong></label>
@@ -270,8 +262,9 @@
 			</div>
 		</div>
 	</form>
+	
+	<script >
 
-	<script>
 			function obtener_valor_select(valorCaja1) {
 				var parametros = {
 					"valorCaja1": valorCaja1
@@ -313,5 +306,17 @@
 				document.getElementById("otropago").disabled = true;
 			}
 		}
+
+        $(document).ready(function(){
+		$('#tipofinanciera').change(function(event){
+			$.get(`financiera/${event.target.value}`, function(response,tipofinanciera){
+			for(i=0; i<response.length; i++){
+				$('#nombfinanciera').append("<option value='"+response[i].id+"'>"+response[i].nomb_financ+"</option>");
+			}
+		});
+		});
+	});
+
 	</script>
+
 	@endsection

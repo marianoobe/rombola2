@@ -25,21 +25,18 @@ class PreventaController extends Controller
      */
     public function create()
     {
-        $tipo_finan = TipoFinanciera::select("nombretipo")->get();
+        $tipo_finan = TipoFinanciera::pluck('nombretipo','idtipo');
 
         return view('preventa.create',compact('tipo_finan'));
     }
 
-    public function respuesta(Request $request){
+    public function getFinanciera(Request $request, $id){
         
-        $nombretipo=$request->get('tipo_financiacion');
-        echo($nombretipo);
-        echo("CAC");
-        return ('nombretipo');
-        /*
-        $idtipo = TipoFinanciera::where("nombretipo","=",$nombretipo)->select("idtipo")->get();        
-        $nombretipo = Financiera::where("idtipo","=",$idtipo)->select("nomb_finac")->get();
-        return ('nombretipo');*/
+        if($request->ajax()){
+            $financ= Financiera::financiera($id);
+            return response()->json($financ);
+          //  return response()->json($financ);
+        }
     }
 
     /**
