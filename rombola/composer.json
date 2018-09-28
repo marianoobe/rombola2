@@ -15,6 +15,7 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
         "laraveles/spanish": "^1.0"
+        
     },
     "require-dev": {
         "filp/whoops": "~2.0",
