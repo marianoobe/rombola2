@@ -158,7 +158,7 @@ class AutomovileController extends Controller
     {
           $auto = Automovile::where("id_auto","=",$id)->select("id_auto")->get();
          foreach ($auto as $item) {
-        //echo "$item->idpersona";
+        echo "$item->id_auto";
       }
       $idcar=$item->id_auto;
 
@@ -171,7 +171,7 @@ class AutomovileController extends Controller
     }
     public function editusado($id)
     {
-         $auto = Automovile::where("chasis_num","=",$chasis_num)->select("id_auto")->get();
+        $auto = Automovile::where("id_auto","=",$id)->select("id_auto")->get();
          foreach ($auto as $item) {
         //echo "$item->idpersona";
       }
@@ -182,7 +182,7 @@ class AutomovileController extends Controller
         ->where('automoviles.id_auto','=', $idcar)
         ->get();
 
-      return view('autos.edit', compact('car'));
+      return view('autos/editusado', compact('car'));
     }
     /**
      * Update the specified resource in storage.
@@ -193,7 +193,9 @@ class AutomovileController extends Controller
      */
     public function update(Request $request, $id)
     {
-         DB::table('autosnuevos')
+         //if($request->input("nuevo")=="nuevo"){
+
+             DB::table('autosnuevos')
         ->join('automoviles', 'automoviles.id_auto' ,'autosnuevos.id_auto')
              ->where('id_auto',"=",$id)
             ->update([
@@ -208,7 +210,30 @@ class AutomovileController extends Controller
 
         ]);
       //$p->save();
-      return redirect('autos')->with('success', 'Stock has been updated');   
+       return redirect('autos')->with('success', 'Stock has been updated');   
+         /*
+         elseif ($request->input("usado")=="usado") {
+             DB::table('autosusados')
+        ->join('automoviles', 'automoviles.id_auto' ,'autosusados.id_auto')
+             ->where('id_auto',"=",$id)
+            ->update([
+                "marca" => $request->get('marca'),
+                "modelo" => $request->get('modelo'),
+                "version" => $request->get('version'),
+                "color" => $request->get('color'),
+                "vin" => $request->get('vin'),
+                "chasis_num" => $request->get('chasis_num'),
+                "motor_num" => $request->get('motor_num'),
+                "estado" => $request->get('estado'),
+                 'dominio' => $request->get('dominio'),
+                'titular' => $request->get('titular'),
+                'anio' => $request->get('anio'),
+                'kilometros' => $request->get('kilometros'),
+
+        ]);
+         }*/
+
+        
     }
 
     /**
