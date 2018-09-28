@@ -28,7 +28,9 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::resource('pre-venta','PreventaController');
+Route::get('pre-venta/cuotas/{id}','PreventaController@getCuotas');
 Route::get('pre-venta/financiera/{id}','PreventaController@getFinanciera');
+
 
 Route::resource('clientes','ClienteController');
 

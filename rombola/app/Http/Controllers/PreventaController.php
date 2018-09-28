@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\TipoFinanciera;
 use App\Financiera;
+use App\CantidadCuotas;
 
 class PreventaController extends Controller
 {
@@ -31,11 +32,17 @@ class PreventaController extends Controller
     }
 
     public function getFinanciera(Request $request, $id){
-        
         if($request->ajax()){
             $financ= Financiera::financiera($id);
             return response()->json($financ);
           //  return response()->json($financ);
+        }
+    }
+
+    public function getCuotas(Request $request, $id){
+        if($request->ajax()){
+            $cuotas= CantidadCuotas::cantidad_cuotas($id);
+            return response()->json($cuotas);
         }
     }
 

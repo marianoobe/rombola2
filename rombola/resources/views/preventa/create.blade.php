@@ -213,7 +213,8 @@
 								</div>
 								<div class="form-group">
 									<div class="checkbox-inline">
-										<label><input type="checkbox" value="" onclick="javascript:validar(this);">Otra forma(cheque, tranferencia
+										<label><input type="checkbox" value="" onclick="javascript:validar_check(this);">Otra forma(cheque,
+											tranferencia
 											bancaria,etc)</label>
 									</div>
 									<textarea class="form-control rounded-0" id="otropago" rows="2" disabled="true"></textarea>
@@ -224,21 +225,24 @@
 								</div>
 							</div>
 							<div text-align="center" class="col-xs-12 col-lg-6">
-									{!! Html::script('js/financiera.js') !!}
+								{!! Html::script('js/financiera.js') !!}
 								<div class="form-group">
 									<label><strong>Tipo de Financiación</strong></label>
-									{!! Form::select('tipofinanciera',$tipo_finan,null,['id'=>'tipofinanciera']) !!}									
+									<div>
+										{!! Form::select('tipofinanciera',$tipo_finan,null,['id'=>'tipofinanciera']) !!}
+									</div>
 								</div>
 
 								<div class="form-group">
 									<label><strong>Financieras</strong></label>
-									{!! Form::select('nombfinanciera',['placeholder'=>''],null,['id'=>'nombfinanciera']) !!}
-
+									<div>
+										{!! Form::select('nombfinanciera',['placeholder'=>''],null,['id'=>'nombfinanciera']) !!}
+									</div>
 								</div>
 								<div class="form-group">
 									<label><strong>Cantidad de cuotas</strong></label>
-									<select style="display:none" id="cant_cuotas" name="cant_cuotas" class="form-control form-control-sm">
-									</select>
+									{!! Form::select('numcuotas',['placeholder'=>''],null,['id'=>'cantcuotas']) !!}
+
 								</div>
 								<div class="form-group">
 									<label><strong>Importe Financiación:</strong></label>
@@ -262,25 +266,24 @@
 			</div>
 		</div>
 	</form>
-	
-	<script >
 
-			function obtener_valor_select(valorCaja1) {
-				var parametros = {
-					"valorCaja1": valorCaja1
-				};
-				$.ajax({
-					data: parametros, //datos que se envian a traves de ajax
-					url: 'pre-venta.respuesta', //archivo que recibe la peticion
-					type: 'get', //método de envio
-					beforeSend: function () {
-						$("#resultado").html("Procesando, espere por favor...");
-					},
-					success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-						$("#resultado").html(response);
-					}
-				});
-			}
+	<script>
+		function obtener_valor_select(valorCaja1) {
+			var parametros = {
+				"valorCaja1": valorCaja1
+			};
+			$.ajax({
+				data: parametros, //datos que se envian a traves de ajax
+				url: 'pre-venta.respuesta', //archivo que recibe la peticion
+				type: 'get', //método de envio
+				beforeSend: function () {
+					$("#resultado").html("Procesando, espere por favor...");
+				},
+				success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+					$("#resultado").html(response);
+				}
+			});
+		}
 
 		function obtener(opt) {
 			//document.getElementById("nomb_financiera").style.display = "block";
@@ -298,8 +301,7 @@
 
 		}
 
-		function validar(obj) {
-			alert(obj.value);
+		function validar_check(obj) {
 			if (obj.checked == true) {
 				document.getElementById("otropago").disabled = false;
 			} else {
@@ -307,15 +309,28 @@
 			}
 		}
 
-        $(document).ready(function(){
-		$('#tipofinanciera').change(function(event){
-			$.get(`financiera/${event.target.value}`, function(response,tipofinanciera){
-			for(i=0; i<response.length; i++){
-				$('#nombfinanciera').append("<option value='"+response[i].id+"'>"+response[i].nomb_financ+"</option>");
-			}
+		$(document).ready(function () {
+			$('#tipofinanciera').change(function (event) {
+				$.get(`financiera/${event.target.value}`, function (response, tipofinanciera) {
+					$("#nombfinanciera").empty();
+					response.forEach(element => {
+						$("#nombfinanciera").append(`<option value=${element.idfinanciera}> ${element.nomb_financ} </option>`);
+					});
+
+				});
+			});
+
+			$('#nombfinanciera').change(function (event) {
+				$.get(`cuotas/${event.target.value}`, function (response, idfinanciera) {
+					$("#cantcuotas").empty();
+					response.forEach(element => {
+						$("#cantcuotas").append(`<option value=${element.id}> ${element.numcuotas} </option>`);
+					});
+
+				});
+			});
+
 		});
-		});
-	});
 
 	</script>
 
