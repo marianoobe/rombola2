@@ -15,9 +15,8 @@ class CreateCantidadCuotasTable extends Migration
     {
         Schema::create('cantidad_cuotas', function (Blueprint $table) {
             $table->increments('idcant');
+            $table->integer('idfinanciera');
             $table->integer('numcuotas');
-            $table->integer('idcant_financ')->unsigned();
-            $table->foreign('idcant_financ')->references('idfinanciera')->on('financieras');
             $table->timestamps();
         });
     }

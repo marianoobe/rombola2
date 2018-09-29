@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFinancierasTable extends Migration
+class UpdateUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class CreateFinancierasTable extends Migration
      */
     public function up()
     {
-        Schema::create('financieras', function (Blueprint $table) {
-            $table->increments('idfinanciera');
-            $table->integer('idtipo');
-            $table->text('nomb_financ');
-            $table->timestamps();
+         
+
+         Schema::table('users', function ($table) {
+             $table->string('nombres', 60);
+             $table->string('apellidos', 60);
+             $table->string('telefono', 60);
         });
+
+
     }
 
     /**
@@ -28,6 +31,6 @@ class CreateFinancierasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('financieras');
+        //
     }
 }

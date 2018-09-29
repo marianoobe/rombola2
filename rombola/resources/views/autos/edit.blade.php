@@ -32,7 +32,7 @@
 
 								{{ csrf_field() }}
 								<input type="hidden" name="_token" value="{{csrf_token()}}">
-								<input type="hidden" id="nuevo" name="nuevo" value="1">
+								<input type="hidden" id="nuevo" name="nuevo" value="nuevo">
 								<div class="row margenBoot-25">
 									<div class="col-xs-12 col-lg-6">
 										<div class="form-group">

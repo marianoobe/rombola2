@@ -34,7 +34,7 @@ id="empresa-logo" src="/img/logo.png" class="img-circle" width="50" height="50">
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
-            
+
             <!--<li class="header">{{ trans('adminlte_lang::message.header') }}</li>-->
             <!-- Optionally, you can add icons to the links -->
             <li class="treeview"><a href="{{ url('home') }}"><i class='glyphicon glyphicon-home'></i> <span>{{
@@ -48,20 +48,26 @@ id="empresa-logo" src="/img/logo.png" class="img-circle" width="50" height="50">
             <li class="treeview"><a href="{{ url('home') }}"><i class='fa fa-car'></i> <span>{{
                         trans('adminlte_lang::message.car') }}</span></a>
                 <ul class="treeview-menu">
-                    
-                <li><a href="{{url('autos')}}">{{ trans('adminlte_lang::message.list-0km') }}</a></li>
-                <li><a href="{{url('autos/usados')}}">{{ trans('adminlte_lang::message.list-used') }}</a></li>                 
-                <li><a href="{{url('autos/create')}}">{{ trans('adminlte_lang::message.new-car') }}</a></li>                 
-                <li><a href="{{url('autos/createusados')}}">{{ trans('adminlte_lang::message.agregate used') }}</a></li>                 
+
+                    <li><a href="{{url('autos')}}">{{ trans('adminlte_lang::message.list-0km') }}</a></li>
+                    <li><a href="{{url('autos/usados')}}">{{ trans('adminlte_lang::message.list-used') }}</a></li>
+                    <li><a href="{{url('autos/create')}}">{{ trans('adminlte_lang::message.new-car') }}</a></li>
+                    <li><a href="{{url('autos/createusados')}}">{{ trans('adminlte_lang::message.agregate used') }}</a></li>
 
                 </ul>
             </li>
             <li class="treeview"><a href="{{ url('pre-venta') }}"><i class='fa fa-bars'></i> <span>{{
                         trans('adminlte_lang::message.presales') }}</span></a></li>
             <li><a href=""><i class='fa fa-handshake-o'></i> <span>{{ trans('adminlte_lang::message.sales') }}</span></a></li>
-
+            
+            <li class="treeview">
+                <a href="#"><i class='fa fa-users'></i> <span>USUARIOS</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url('listado_usuarios') }}">Listado Usuarios</a></li>
+                    <li><a href="#"></a></li>
+                </ul>
+            </li>
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
 </aside>
-
