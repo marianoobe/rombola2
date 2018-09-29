@@ -6,9 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class TipoFinanciera extends Model
 {
+    protected $table = 'tipo_financieras';
+
     protected $fillable = ['idtipo','nombretipo'];
 
-    public static function cantidad_cuotas($id){
-        return TipoFinanciera::where('idcant_financ','=',$id)->get();
-    }
 }
