@@ -26,11 +26,11 @@
 
 
 						<div class="box-body">
-							@foreach($car as $item)
+							@foreach($autos as $item)
 							@endforeach()
-							<form method="POST" action="{{ route('autos.update',$item->id_auto) }}" enctype="multipart/form-data">
+							<form method="POST" action="{{ route('updateusado',$item->id_auto) }}">
 
-								{{ csrf_field() }}
+
 								<input type="hidden" name="_token" value="{{csrf_token()}}">
 								<input type="hidden" id="usado" name="usado" value="usado">
 								<div class="row margenBoot-25">
@@ -62,12 +62,13 @@
 
 									</div>
 									<div class="col-xs-12 col-lg-6">
-											
+
 										<div class="form-group">
 											<label for="kilometros"><strong>kilometros</strong></label>
-											<input type="text" class="form-control" id="kilometros" name="kilometros" value={{ $item->kilometros }} disabled="disabled">
+											<input type="text" class="form-control" id="kilometros" name="kilometros" value={{ $item->kilometros }}
+											 disabled="disabled">
 										</div>
-									</div>
+
 										<div class="form-group">
 											<label for="color"><strong>Color</strong></label>
 											<input type="text" class="form-control" id="color" name="color" value={{ $item->color }} disabled="disabled">

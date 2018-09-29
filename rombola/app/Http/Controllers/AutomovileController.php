@@ -157,33 +157,21 @@ class AutomovileController extends Controller
     public function edit($id)
     {
           $auto = Automovile::where("id_auto","=",$id)->select("id_auto")->get();
+          
          foreach ($auto as $item) {
-        echo "$item->id_auto";
+      //echo "$item->id_auto";
       }
+      
       $idcar=$item->id_auto;
 
-      $car = DB::table('autosnuevos')
+      $autos = DB::table('autosnuevos')
         ->join('automoviles', 'automoviles.id_auto' ,'autosnuevos.id_auto')        
         ->where('automoviles.id_auto','=', $idcar)
         ->get();
 
-      return view('autos.edit', compact('car'));
+      return view('autos.edit', compact('autos'));
     }
-    public function editusado($id)
-    {
-        $auto = Automovile::where("id_auto","=",$id)->select("id_auto")->get();
-         foreach ($auto as $item) {
-        //echo "$item->idpersona";
-      }
-      $idcar=$item->id_auto;
-
-      $car = DB::table('autosusados')
-        ->join('automoviles', 'automoviles.id_auto' ,'autosusados.id_auto')        
-        ->where('automoviles.id_auto','=', $idcar)
-        ->get();
-
-      return view('autos/editusado', compact('car'));
-    }
+ 
     /**
      * Update the specified resource in storage.
      *
@@ -204,15 +192,37 @@ class AutomovileController extends Controller
                 "version" => $request->get('version'),
                 "color" => $request->get('color'),
                 "vin" => $request->get('vin'),
-                "chasis_num" => $request->get('chasis_num'),
-                "motor_num" => $request->get('motor_num'),
+                
                 "estado" => $request->get('estado'),
 
         ]);
-      //$p->save();
-       return redirect('autos')->with('success', 'Stock has been updated');   
-         /*
-         elseif ($request->input("usado")=="usado") {
+      
+       return redirect('/autos')->with('success', 'Stock has been updated');   
+         
+
+        
+    }
+   public function editusado($id)
+    {
+        $auto = Automovile::where("id_auto","=",$id)->select("id_auto")->get();
+         foreach ($auto as $item) {
+        //echo "$item->idpersona";
+      }
+     // dd($auto);
+      $idcar=$item->id_auto;
+
+      $autos = DB::table('autosusados')
+        ->join('automoviles', 'automoviles.id_auto' ,'autosusados.id_auto')        
+        ->where('automoviles.id_auto','=', $idcar)
+        ->get();
+//dd($autos);
+      return view('autos/editusado', compact('autos'));
+    }
+
+    public function updateusado(Request $request, $id)
+    {
+         //if($request->input("nuevo")=="nuevo"){
+
              DB::table('autosusados')
         ->join('automoviles', 'automoviles.id_auto' ,'autosusados.id_auto')
              ->where('id_auto',"=",$id)
@@ -221,21 +231,19 @@ class AutomovileController extends Controller
                 "modelo" => $request->get('modelo'),
                 "version" => $request->get('version'),
                 "color" => $request->get('color'),
-                "vin" => $request->get('vin'),
-                "chasis_num" => $request->get('chasis_num'),
-                "motor_num" => $request->get('motor_num'),
-                "estado" => $request->get('estado'),
-                 'dominio' => $request->get('dominio'),
-                'titular' => $request->get('titular'),
-                'anio' => $request->get('anio'),
+                "dominio" => $request->get('dominio'),
+                "titular"=>$request->get('titular'),
+                 'anio' => $request->get('anio'),
                 'kilometros' => $request->get('kilometros'),
+                "estado" => $request->get('estado'),
 
         ]);
-         }*/
+      
+       return redirect('/autos')->with('success', 'Stock has been updated');   
+         
 
         
     }
-
     /**
      * Remove the specified resource from storage.
      *

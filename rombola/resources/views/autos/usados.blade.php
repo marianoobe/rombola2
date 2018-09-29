@@ -72,7 +72,7 @@
 										<td>{{$item->color}}</td>
 										<td>{{$item->estado}}</td>
 												<td style="cursor: default;">
-											<a href="{{ route('autos.edit',$item->id_auto)}}" class="btn btn-info btn-sm">
+											<a href="{{ route('editusado',$item->id_auto)}}" class="btn btn-info btn-sm">
 												<span class="glyphicon glyphicon-search"></span></a>
 
 										</td>

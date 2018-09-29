@@ -75,10 +75,7 @@
 											<input type="text" class="form-control" id="chasis_num" name="chasis_num">
 										</div>
 
-										<div class="form-group">
-											<label for="motor_num"><strong>Numero de Motor</strong></label>
-											<input type="text" class="form-control" id="motor_num" name="motor_num">
-										</div>
+										
 										<div class="form-group">
 											<label for="estado"><strong>Estado</strong></label>
 											<select id="estado" name="estado" class="form-control form-control-sm">
