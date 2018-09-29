@@ -59,6 +59,7 @@ Route::resource('clientes','ClienteController');
 //Route::get('autos.index','AutomovileController@autos')->name('autos');
 //Route::get('autos.create','AutomovileController@create')->name('create');
 //Route::get('autos/{auto}/edit','AutomovileController@edit')->name('edit');
+Route::get('autos/{auto}/updateusado','AutomovileController@editusado')->name('updateusado');
 Route::get('autos/{auto}/editusado','AutomovileController@editusado')->name('editusado');
 Route::get('autos/usados','AutomovileController@usados')->name('usados');
 Route::get('autos/createusados','AutomovileController@createusados')->name('agregarusado');
