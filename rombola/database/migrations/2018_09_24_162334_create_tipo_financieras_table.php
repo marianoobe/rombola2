@@ -17,6 +17,7 @@ class CreateTipoFinancierasTable extends Migration
             $table->increments('idtipo');
             $table->text('nombretipo');
             $table->timestamps();
+
         });
     }
 

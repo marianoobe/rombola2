@@ -31,25 +31,12 @@ class PreventaController extends Controller
         return view('preventa.create',compact('tipo_finan'));
     }
 
-<<<<<<< HEAD
     public function getFinanciera(Request $request, $id){
         if($request->ajax()){
             $financ= Financiera::financiera($id);
             return response()->json($financ);
           //  return response()->json($financ);
         }
-=======
-    public function respuesta(Request $request){
-        
-        $nombretipo=$request->get('tipo_financiacion');
-        echo($nombretipo);
-        echo("CAC");
-        return ('nombretipo');
-        /*
-        $idtipo = TipoFinanciera::where("nombretipo","=",$nombretipo)->select("idtipo")->get();        
-        $nombretipo = Financiera::where("idtipo","=",$idtipo)->select("nomb_finac")->get();
-        return ('nombretipo');*/
->>>>>>> eafc9ea23434e9d72f909697396995f94e7824e5
     }
 
     public function getCuotas(Request $request, $id){

@@ -224,40 +224,19 @@
 								</div>
 							</div>
 							<div text-align="center" class="col-xs-12 col-lg-6">
-<<<<<<< HEAD
 								{!! Html::script('js/financiera.js') !!}
 								<div class="form-group">
 									<label><strong>Tipo de Financiación</strong></label>
 									<div>
 										{!! Form::select('tipofinanciera',$tipo_finan,null,['id'=>'tipofinanciera']) !!}
 									</div>
-=======
-
-								<div class="form-group">
-									<label><strong>Tipo de Financiación</strong></label>
-
-									<select id="tipo_financiacion" name="tipo_financiacion" onchange="obtener_valor_select($('#tipo_financiacion').val())" class="form-control form-control-sm">
-										@foreach($tipo_finan as $item)
-										<option value="{{$item->nombretipo}}">{{$item->nombretipo}}</option>
-										@endforeach()
-									</select>
-
->>>>>>> eafc9ea23434e9d72f909697396995f94e7824e5
 								</div>
 
 								<div class="form-group">
 									<label><strong>Financieras</strong></label>
-<<<<<<< HEAD
 									<div>
 										{!! Form::select('nombfinanciera',['placeholder'=>''],null,['id'=>'nombfinanciera']) !!}
 									</div>
-=======
-									<select id="nomb_financiera" name="nomb_financiera" class="form-control form-control-sm">
-											@foreach($nombretipo as $item)
-											<option value="1">{{$item->nomb_finac}}</option>
-											@endforeach
-									</select>
->>>>>>> eafc9ea23434e9d72f909697396995f94e7824e5
 								</div>
 								<div class="form-group">
 									<label><strong>Cantidad de cuotas</strong></label>
@@ -288,7 +267,6 @@
 	</form>
 
 	<script>
-<<<<<<< HEAD
 		function obtener_valor_select(valorCaja1) {
 			var parametros = {
 				"valorCaja1": valorCaja1
@@ -305,24 +283,6 @@
 				}
 			});
 		}
-=======
-			function obtener_valor_select(valorCaja1) {
-				var parametros = {
-					"valorCaja1": valorCaja1
-				};
-				$.ajax({
-					data: parametros, //datos que se envian a traves de ajax
-					url: 'pre-venta.respuesta', //archivo que recibe la peticion
-					type: 'get', //método de envio
-					beforeSend: function () {
-						$("#resultado").html("Procesando, espere por favor...");
-					},
-					success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-						$("#resultado").html(response);
-					}
-				});
-			}
->>>>>>> eafc9ea23434e9d72f909697396995f94e7824e5
 
 		function obtener(opt) {
 			//document.getElementById("nomb_financiera").style.display = "block";
@@ -347,7 +307,6 @@
 				document.getElementById("otropago").disabled = true;
 			}
 		}
-<<<<<<< HEAD
 
 		$(document).ready(function () {
 			$('#tipofinanciera').change(function (event) {
@@ -364,7 +323,7 @@
 				$.get(`cuotas/${event.target.value}`, function (response, idfinanciera) {
 					$("#cantcuotas").empty();
 					response.forEach(element => {
-						$("#cantcuotas").append(`<option value=${element.id}> ${element.numcuotas} </option>`);
+						$("#cantcuotas").append(`<option value=${element.idcant}> ${element.numcuotas} </option>`);
 					});
 
 				});
@@ -372,7 +331,5 @@
 
 		});
 
-=======
->>>>>>> eafc9ea23434e9d72f909697396995f94e7824e5
 	</script>
 	@endsection
