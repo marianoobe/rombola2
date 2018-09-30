@@ -229,6 +229,7 @@
 									<label><strong>Tipo de Financiación</strong></label>
 									<div>
 										{!! Form::select('tipofinanciera',$tipo_finan,null,['id'=>'tipofinanciera']) !!}
+										
 									</div>
 								</div>
 

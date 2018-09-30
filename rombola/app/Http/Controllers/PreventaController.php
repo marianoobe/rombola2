@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\TipoFinanciera;
 use App\Financiera;
 use App\CantidadCuotas;
+use DB;
 
 class PreventaController extends Controller
 {
@@ -26,7 +27,7 @@ class PreventaController extends Controller
      */
     public function create()
     {
-        $tipo_finan = TipoFinanciera::select("nombretipo")->get();
+        $tipo_finan = TipoFinanciera::pluck('nombretipo');
 
         return view('preventa.create',compact('tipo_finan'));
     }
@@ -34,6 +35,7 @@ class PreventaController extends Controller
     public function getFinanciera(Request $request, $id){
         if($request->ajax()){
             $financ= Financiera::financiera($id);
+
             return response()->json($financ);
           //  return response()->json($financ);
         }

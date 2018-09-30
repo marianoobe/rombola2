@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Financiera extends Model
 {
-    protected $fillable = ['idfinanciera','idtipo','nomb_financ'];
+    protected $table ='financieras';
+
+    protected $fillable = ['idfinanciera','nomb_financ','idtipofinanciera'];
 
     public static function financieras($id){
-        return Financiera::where('nomb_financ','=',$id)->get();
+        return Financiera::where('idtipofinanciera','=',$id)->get();
     }
 
 }
