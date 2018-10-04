@@ -11,7 +11,7 @@ class Financiera extends Model
     protected $fillable = ['idfinanciera','nomb_financ','idtipofinanciera'];
 
     public static function financieras($id){
-        return Financiera::where('idtipofinanciera','=',$id)->get();
+        return Financiera::where('idtipofinanciera','=',$id+1)->get();
     }
 
 }

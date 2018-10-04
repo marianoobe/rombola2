@@ -9,9 +9,7 @@
 				<div class="box-header with-border">
 					<h3 class="box-title">PreVentas</h3>
 					<div class="col-sm-offset-10">
-					<button style="margin-bottom:20%;" href="{{ route('pre-venta.create') }}" 
-					class="btn btn-xs btn-success" role="button">NUEVA PREVENTA</button>
-				
+						<button href="{{ route('venta.create') }}" class="btn btn-xl btn-success">NUEVA VENTA</button>
 					</div>
 				</div>
 				<div class="box-body">
@@ -36,15 +34,15 @@
 						<thead>
 							<tr>
 								<th scope="col">Fecha</th>
-								<th scope="col">Auto Buscado</th>
-								<th scope="col">Auto Ofrecido</th>
-								<th scope="col">Dinero que dispone</th>
-								<th scope="col">Formas de Pago</th>
+								<th scope="col">Marca</th>
+								<th scope="col">Modelo</th>
+								<th scope="col">Dominio</th>
+								<th scope="col">Cliente</th>
 								<th scope="col">Estado</th>
 								<th scope="col"></th>
 							</tr>
 						</thead>
 						<tbody>
-						</table>
-					
+					</table>
+
 					@endsection

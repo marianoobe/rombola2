@@ -23,18 +23,8 @@
 					<table class="table table-striped">
 						<div class="row">
 							<div class="col-sm-6">
-								<div class="dt-buttons btn-group">
-									<a class="btn btn-default buttons-excel buttons-html5" tabindex="0" aria-controls="example" href="#" title="Excel"><span><i
-											    class="fa fa-file-excel-o"></i></span></a><a class="btn btn-default buttons-pdf buttons-html5" tabindex="0"
-									    aria-controls="example" href="#" title="PDF"><span><i class="fa fa-file-pdf-o"></i></span></a>
-									<a class="btn btn-default buttons-collection buttons-colvis" tabindex="0" aria-controls="example" href="#"
-									    title="Ocultar Columnas"><span><i class="fa fa-check-square-o"></i></span></a><a class="btn btn-default buttons-print"
-									    tabindex="0" aria-controls="example" href="#" title="Imprimir"><span><i class="fa fa-print"></i></span></a>
-								</div>
-							</div>
-							<div class="col-sm-5">
 								<div id="example_filter" class="dataTables_filter">
-									<label>Buscar:<input id="myInput" type="text" class="form-control" placeholder="" aria-controls="example"></label>
+									<label><input id="myInput" type="text" class="form-control" placeholder="Buscar" aria-controls="example"></label>
 								</div>
 							</div>
 						</div>
@@ -113,7 +103,7 @@
 													<input type="number" class="form-control" id="tel_fijo" name="tel_fijo">
 												</div>
 												<div class="form-group">
-													<label><strong>Celular 2</strong></label>
+													<label><strong>Otro</strong></label>
 													<input type="number" class="form-control" id="cel_2" name="cel_2">
 												</div>
 											</div>

@@ -56,7 +56,7 @@ Route::get('pre-venta/financiera/{id}','PreventaController@getFinanciera');
 
 
 Route::resource('clientes','ClienteController');
-
+Route::resource('venta','VentaController');
 
 //Route::get('autos.index','AutomovileController@autos')->name('autos');
 //Route::get('autos.create','AutomovileController@create')->name('create');

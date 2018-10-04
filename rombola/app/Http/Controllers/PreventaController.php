@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\TipoFinanciera;
 use App\Financiera;
 use App\CantidadCuotas;
-use DB;
 
 class PreventaController extends Controller
 {
@@ -34,10 +33,8 @@ class PreventaController extends Controller
 
     public function getFinanciera(Request $request, $id){
         if($request->ajax()){
-            $financ= Financiera::financiera($id);
-
+            $financ= Financiera::financieras($id);
             return response()->json($financ);
-          //  return response()->json($financ);
         }
     }
 
@@ -83,10 +80,18 @@ class PreventaController extends Controller
           ]);
           $cliente->save();
           //--/insert Persona-Cliente
-
+          if($cel_1 != null)
+          {
+          $tel = new Telefono([
+            'idpersona' => $idpers,
+            'num_tel' => $request->get('cel_1'),
+            'tipo' => '2'
+          ]);
+          $tel->save();
+          }
           //insert Operacion-Preventa
         $operacion = new Operacion([
-          'idpersona' => $idpers,
+          'persona_operacion' => $idpers,
           'estado' => $request->get('estado'),
           'fecha_oper'=> $request->get('fecha_oper'),
           'aviso'=> $request->get('aviso')
@@ -102,18 +107,18 @@ class PreventaController extends Controller
         }
         $idoperacion=$item->idoperacion;
         $preventa = new Preventa([
-          'id_operacion' => $idoperacion,
+          'preventa_operacion' => $idoperacion,
           'auto_interesado' => $request->get('auto_interesado'),
           'detalles' => $request->get('detalles'),
           'usado' => $request->get('usado'),
           'contado' => $request->get('contado'),
-          'cheques' => $request->get('cheques'),
-          'tipo_financiación'=> $request->get('tipo_financiación'),
-          'financieras' => $request->get('financieras'),
-          'cant_cuotas' => $request->get('cant_cuotas'),
-          'importe_finan' => $request->get('importe_finan'),
-          'cant_pormes' => $request->get('cant_pormes')
-        ]);
+          'otropago' => $request->get('otropago'),
+          'nombretipo'=> $request->get('nombretipo'),
+          'nomb_financ' => $request->get('nomb_financ'),
+          'cant_cuotas' => $request->get('numcuotas'),
+          'cant_pormes' => $request->get('cant_pormes'),
+          'importe_finan' => $request->get('importe_finan')
+        ]); 
         $preventa->save();
         //---insert Operacion-Preventa
 

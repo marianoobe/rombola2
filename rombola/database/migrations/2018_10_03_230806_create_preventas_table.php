@@ -14,7 +14,9 @@ class CreatePreventasTable extends Migration
     public function up()
     {
         Schema::create('preventas', function (Blueprint $table) {
-            $table->increments('idpreventa');
+            $table->increments('idpreventa');          
+            $table->integer('preventa_oper')->unsigned();
+            $table->foreign('preventa_oper')->references('id_operacion')->on('operaciones');
             $table->text('auto_interesado');
             $table->text('detalles');
             $table->text('usado');
@@ -26,7 +28,6 @@ class CreatePreventasTable extends Migration
             $table->integer('importe_finan');
             $table->integer('cant_pormes');
             $table->timestamps();
-
         });
     }
 

@@ -58,7 +58,7 @@ id="empresa-logo" src="/img/logo.png" class="img-circle" width="50" height="50">
             </li>
             <li class="treeview"><a href="{{ url('pre-venta') }}"><i class='fa fa-bars'></i> <span>{{
                         trans('adminlte_lang::message.presales') }}</span></a></li>
-            <li><a href=""><i class='fa fa-handshake-o'></i> <span>{{ trans('adminlte_lang::message.sales') }}</span></a></li>
+            <li><a href="{{ url('venta') }}"><i class='fa fa-handshake-o'></i> <span>{{ trans('adminlte_lang::message.sales') }}</span></a></li>
             
             <li class="treeview">
                 <a href="#"><i class='fa fa-users'></i> <span>USUARIOS</span> <i class="fa fa-angle-left pull-right"></i></a>

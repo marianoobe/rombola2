@@ -67,6 +67,7 @@ class ClienteController extends Controller
             //echo "$item->idpersona";
           }
           $idpers=$item->idpersona;
+
           $cliente = new Cliente([
             'idpersona' => $idpers,
             'fecha_nacimiento' => $request->get('fecha_nac'),
