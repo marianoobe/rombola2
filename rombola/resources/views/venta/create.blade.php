@@ -213,11 +213,10 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-14">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Vehículo que Adquiere</h3>
-
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                         </button>
@@ -226,594 +225,412 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="row margenBoot-25">
-                        <div class="col-xs-12 col-lg-4">
-                            <div class="form-group">
-                                <label class="control-label" for="inp-dominio">Tipo Vehiculo:</label>
-                                <div class="btn-group" data-toggle="buttons" id="tipo-vehiculo">
-                                    <label class="btn btn-success active">
-                                        <input type="radio" name="options" autocomplete="off" id="chk-auto" value="AUTO"
-                                            checked="checked">
-                                        AUTO</label>
-                                    <label class="btn btn-success">
-                                        <input type="radio" name="options" value="MOTO" id="chk-moto" autocomplete="off">
-                                        MOTO</label>
-                                </div>
-                            </div>
+                        <div class="col-xs-14 col-lg-6">
+                            <button type="button" class="btn btn-success btn-block" style="margin-bottom: 10%;">0 KM</button>
                         </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <div class="form-group">
-                                    <label><strong>Patente de Mercosur</strong></label>                                <div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-id-chk-patenteMercosur bootstrap-switch-animate bootstrap-switch-on"
-                                    style="width: 86px;">
-                                    <div class="bootstrap-switch-container" style="width: 126px; margin-left: 0px;"><span
-                                            class="bootstrap-switch-handle-on bootstrap-switch-success" style="width: 42px;">SI</span><span
-                                            class="bootstrap-switch-label" style="width: 42px;">&nbsp;</span><span
-                                            class="bootstrap-switch-handle-off bootstrap-switch-danger" style="width: 42px;">NO</span><input
-                                            id="chk-patenteMercosur" data-on-color="success" data-off-color="danger"
-                                            type="checkbox" data-on-text="SI" data-off-text="NO"></div>
-                                </div>
-                            </div>
+                        @php
+                            $p=0;
+                        @endphp
+                        <div class="col-xs-14 col-lg-6">
+                            <button onclick="cambiar($p)" type="button" class="btn btn-success btn-block" style="margin-bottom: 10%;">USADO</button>
                         </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <div class="form-group">
-                                    <label><strong>Dominio</strong></label>
-                                <input type="text" maxlength="11" style="text-transform: uppercase;" class="form-control"
-                                    id="inp-dominio" placeholder="" data-toggle="popover" title="Requerido"
-                                    data-content="Este campo es obligatorio completar.">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row margenBoot-25">
-                        <div class="col-xs-12 col-lg-4">
-                            <div class="form-group">
-                                <label><strong>Marca</strong></label>
-                                <select onchange="verificarOtro();" class="form-control" id="sel-marca">
-                                    <option value="BMW">BMW</option>
-                                    <option value="CHEVROLET">CHEVROLET</option>
-                                    <option value="CITROEN">CITROEN</option>
-                                    <option value="DODGE">DODGE</option>
-                                    <option value="FORD">FORD</option>
-                                    <option value="FIAT">FIAT</option>
-                                    <option value="MERCEDES BENZ">MERCEDES BENZ</option>
-                                    <option value="PEUGEOT">PEUGEOT</option>
-                                    <option value="RENAULT">RENAULT</option>
-                                    <option value="TOYOTA">TOYOTA</option>
-                                    <option value="SUZUKI">SUZUKI</option>
-                                    <option value="VOLKSWAGEN">VOLKSWAGEN</option>
-                                    <option value="Otro">Otro</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-lg-5">
-                            <div class="form-group">
-                                <label for="inp-modelo">Modelo:</label>
-                                <input type="text" maxlength="150" class="form-control" id="inp-modelo" placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-lg-3">
-                            <div class="form-group">
-                                <label for="inp-anno">Año:</label>
-                                <input type="text" maxlength="4" class="form-control" id="inp-anno" placeholder="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row margenBoot-25">
-                        <div class="col-xs-12 col-lg-6">
-                            <div class="form-group">
-                                <label for="inp-tipo">Tipo:</label>
-                                <input type="text" maxlength="120" class="form-control" id="inp-tipo" placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <div class="form-group">
-                                <label for="inp-color">Color:</label>
-                                <input type="text" maxlength="65" class="form-control" id="inp-color" placeholder="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row margenBoot-25">
-                        <div class="col-xs-12 col-lg-6">
-                            <div class="form-group">
-                                <label for="inp-numMotor">Nº Motor:</label>
-                                <input type="text" maxlength="255" class="form-control" id="inp-numMotor" placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <div class="form-group">
-                                <label for="inp-numChasis">Nº Chasis:</label>
-                                <input type="text" maxlength="255" class="form-control" id="inp-numChasis" placeholder="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row margenBoot-25">
-                        <div class="col-xs-12 col-lg-6">
-                            <div class="form-group">
-                                <label for="inp-kilometros">Kilometros:</label>
-                                <input type="text" maxlength="255" class="form-control" id="inp-kilometros" placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <div class="form-group">
-                                <label for="inp-otro">Otro:</label>
-                                <input type="text" maxlength="255" class="form-control" id="inp-otro" placeholder="">
-                            </div>
-                        </div>
+                        @if ($p==1)
+                        @include('adminlte::layouts.partials.create-0km')
+                        @endif
                     </div>
 
-                    <div class="row margenBoot-25" style="margin-bottom:14px;">
-                        <div class="col-xs-12 col-lg-12">
-                            <div class="form-group">
-                                <label for="inp-kilometros">Detalle En Contrato Documentacion Entregada:</label>
-                                <textarea type="text" rows="6" class="form-control" id="inp-observaciones" placeholder=""
-                                    data-toggle="popover" title="" data-content="Es necesario que describa que papeles del auto entrega al comprador en este acto."
-                                    data-original-title="Requerido"></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- /.row -->
                 </div>
-                <!-- ./box-body -->
-                <div class="box-footer">
-
-                    <!-- /.row -->
-                </div>
-                <!-- /.box-footer -->
             </div>
-            <!-- /.box -->
+            <!-- /.col -->
         </div>
-        <!-- /.col -->
-        <!-- Segunda columna -->
-        <div class="col-sm-6">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Detalles de la Operación</h3>
-
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                        </button>
-                    </div>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div class="row margenBoot-25">
-                        <div class="col-xs-12 col-lg-6">
-                            <div class="form-group">
-                                <label for="inp-precioLista" style="display:block;">Precio de Auto:</label>
-                                <input type="text" maxlength="255" class="form-control" id="inp-precioLista"
-                                    placeholder="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row margenBoot-25">
-                        <div class="col-xs-12 col-lg-6">
-                            <div class="form-group">
-                                <label for="inp-descuento" style="display:block;">Descuento:</label>
-                                <input type="text" maxlength="255" class="form-control" id="inp-descuento" placeholder="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-lg-12">
-                            <div class="form-group">
-                                <label for="inp-detalleDescuento" style="display:block;">Descripción Del Descuento:</label>
-                                <textarea class="form-control" id="inp-detalleDescuento" rows="2"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row margenBoot-25">
-                        <div class="col-xs-12 col-lg-6">
-                            <div class="form-group">
-                                <label for="inp-gestoria" style="display:block;">Gestoria:</label>
-                                <input type="text" maxlength="255" class="form-control" id="inp-gestoria" placeholder="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row margenBoot-25">
-                        <div class="col-xs-12 col-lg-6">
-                            <div class="form-group">
-                                <label for="inp-otroOP" style="display:block;">Otros Gastos / Costos:</label>
-                                <input type="text" maxlength="255" class="form-control" id="inp-otroOP" placeholder="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-lg-12">
-                            <div class="form-group">
-                                <label for="inp-detalleOtrosGastos" style="display:block;">Descripción Del Gasto:</label>
-                                <textarea class="form-control" id="inp-detalleOtrosGastos" rows="2"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row margenBoot-25">
-                        <div class="col-xs-12 col-lg-6">
-                            <div class="form-group">
-                                <label for="inp-precioFinal" style="display:block;">Total a Pagar:</label>
-                                <input type="text" maxlength="255" class="form-control" id="inp-precioFinal"
-                                    placeholder="">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <!-- ./box-body -->
-                <div class="box-footer">
-
-                    <!-- /.row -->
-                </div>
-                <!-- /.box-footer -->
-            </div>
-            <!-- /.box -->
-        </div>
-        <!-- /.col -->
-    </div>
 
 
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Forma de Pago</h3>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Forma de Pago</h3>
 
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                        </button>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-xs-12 col-lg-4">
-                            <div class="row margenBoot-25">
-                                <div class="col-xs-12 col-lg-10">
-                                    <div class="form-group">
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-4">
+                                <div class="row margenBoot-25">
+                                    <div class="col-xs-12 col-lg-10">
+                                        <div class="form-group">
                                             <label><strong>Seña</strong></label>
-                                        <input type="text" maxlength="150" class="form-control" id="inp-senna"
-                                            placeholder="">
+                                            <input type="text" maxlength="150" class="form-control" id="inp-senna"
+                                                placeholder="">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row margenBoot-25">
-                                <div class="col-xs-12 col-lg-10">
-                                    <div class="form-group">
+                                <div class="row margenBoot-25">
+                                    <div class="col-xs-12 col-lg-10">
+                                        <div class="form-group">
                                             <label><strong>Valor de Auto que entrega</strong></label>
-                                        <input type="text" maxlength="150" class="form-control" id="inp-vehiculo"
-                                            placeholder="">
+                                            <input type="text" maxlength="150" class="form-control" id="inp-vehiculo"
+                                                placeholder="">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row margenBoot-25">
-                                <div class="col-xs-12 col-lg-10">
-                                    <div class="form-group">
+                                <div class="row margenBoot-25">
+                                    <div class="col-xs-12 col-lg-10">
+                                        <div class="form-group">
                                             <label><strong>Contado</strong></label>
-                                        <input type="text" maxlength="150" class="form-control" id="inp-contado"
-                                            placeholder="">
+                                            <input type="text" maxlength="150" class="form-control" id="inp-contado"
+                                                placeholder="">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row margenBoot-25">
-                                <div class="col-xs-12 col-lg-10">
-                                    <div class="form-group">
+                                <div class="row margenBoot-25">
+                                    <div class="col-xs-12 col-lg-10">
+                                        <div class="form-group">
                                             <label><strong>Cheques</strong></label>
-                                        <input type="text" maxlength="150" class="form-control" id="inp-cheques"
-                                            placeholder="$">
+                                            <input type="text" maxlength="150" class="form-control" id="inp-cheques"
+                                                placeholder="$">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row margenBoot-25 hidden">
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="form-group">
-                                        <label><strong>Cheque</strong></label>
-                                        <span class="tag label label-success"> <span>1312</span> <a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
-                                        </span> <span class="tag label label-success"> <span>1312</span> <a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
-                                        </span> <span class="tag label label-success"> <span>1312</span> <a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
-                                        </span> <span class="tag label label-success"> <span>1312</span> <a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
-                                        </span> </div>
-                                </div>
-                                <div class="col-xs-12 col-lg-2">
-                                    <div class="form-group">
-                                        <button type="button" class="btn btn-primary" onclick="openModal();" style="margin-top:25px;">
-                                            <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        </button>
+                                <div class="row margenBoot-25 hidden">
+                                    <div class="col-xs-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label><strong>Cheque</strong></label>
+                                            <span class="tag label label-success"> <span>1312</span> <a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
+                                            </span> <span class="tag label label-success"> <span>1312</span> <a><i
+                                                        class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
+                                            </span> <span class="tag label label-success"> <span>1312</span> <a><i
+                                                        class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
+                                            </span> <span class="tag label label-success"> <span>1312</span> <a><i
+                                                        class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
+                                            </span> </div>
+                                    </div>
+                                    <div class="col-xs-12 col-lg-2">
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-primary" onclick="openModal();" style="margin-top:25px;">
+                                                <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row margenBoot-25">
-                                <div class="col-xs-12 col-lg-10">
-                                    <div class="form-group">
-                                        <label><strong>Financiacion Propia</strong></label>
-                                        <input type="text" maxlength="150" class="form-control" id="inp-aFinanciar"
-                                            placeholder="">
+                                <div class="row margenBoot-25">
+                                    <div class="col-xs-12 col-lg-10">
+                                        <div class="form-group">
+                                            <label><strong>Financiacion Propia</strong></label>
+                                            <input type="text" maxlength="150" class="form-control" id="inp-aFinanciar"
+                                                placeholder="">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row margenBoot-25">
-                                <div class="col-xs-12 col-lg-10">
-                                    <div class="form-group">
+                                <div class="row margenBoot-25">
+                                    <div class="col-xs-12 col-lg-10">
+                                        <div class="form-group">
                                             <label><strong>Financiación Externa</strong></label>
-                                        <input type="text" maxlength="150" class="form-control" id="inp-aFinanciarExterna"
-                                            placeholder="">
+                                            <input type="text" maxlength="150" class="form-control" id="inp-aFinanciarExterna"
+                                                placeholder="">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row margenBoot-25">
-                                <div class="col-xs-12 col-lg-10">
-                                    <div class="form-group">
-                                        <label>Observaciones Financiación Externa:</label>
-                                        <textarea class="form-control" id="inp-observacionesFinanciacion" rows="4"></textarea>
+                                <div class="row margenBoot-25">
+                                    <div class="col-xs-12 col-lg-10">
+                                        <div class="form-group">
+                                            <label>Observaciones Financiación Externa:</label>
+                                            <textarea class="form-control" id="inp-observacionesFinanciacion" rows="4"></textarea>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row margenBoot-25">
-                                <div class="col-xs-12 col-lg-10">
-                                    <div class="form-group">
-                                        <label><strong>Total</strong></label>
-                                        <input type="text" maxlength="150" class="form-control" id="inp-total"
-                                            placeholder="">
+                                <div class="row margenBoot-25">
+                                    <div class="col-xs-12 col-lg-10">
+                                        <div class="form-group">
+                                            <label><strong>Total</strong></label>
+                                            <input type="text" maxlength="150" class="form-control" id="inp-total"
+                                                placeholder="">
+                                        </div>
                                     </div>
                                 </div>
+                                <div id="alerta-nosonigualesImportes" class="row margenBoot-25 hidden">
+                                    <div class="col-xs-12 col-lg-10"> </div>
+                                </div>
                             </div>
-                            <div id="alerta-nosonigualesImportes" class="row margenBoot-25 hidden">
-                                <div class="col-xs-12 col-lg-10"> </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-lg-8">
-                            <div id="contenedorVehiculosEntrega">
-                                <div name="entradaAuto" class="row">
-                                    <div class="col-sm-12">
-                                        <div class="box box-success">
-                                            <div class="box-header with-border">
-                                                <h3 class="box-title" name="tituloAutoEntrega">Datos del auto que
-                                                    entrega :</h3>
+                            <div class="col-xs-12 col-lg-8">
+                                <div id="contenedorVehiculosEntrega">
+                                    <div name="entradaAuto" class="row">
+                                        <div class="col-sm-12">
+                                            <div class="box box-success">
+                                                <div class="box-header with-border">
+                                                    <h3 class="box-title" name="tituloAutoEntrega">Datos del auto
+                                                        que
+                                                        entrega :</h3>
 
-                                                <div class="box-tools pull-right">
-                                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                                            class="fa fa-minus"></i></button>
-                                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i
-                                                            class="fa fa-times"></i></button>
-                                                </div>
-                                            </div>
-                                            <!-- /.box-header -->
-                                            <div class="box-body">
-                                                <div class="row margenBoot-25">
-                                                    <div class="col-xs-12 col-lg-6">
-                                                        <div class="form-group">
-                                                            <label><strong>Nombre de Titular</strong></label>
-                                                            <input type="text" class="form-control" id="nomb_titular">
-                                                        </div>
-                                                    </div>
-                                                
-                                                <div class="col-xs-12 col-lg-3">
-                                                    {!! Html::script('js/venta.js') !!}
-                                                    <div class="form-group">
-                                                            <label><strong>Patente Mercosur</strong></label>
-                                                        <div class="btn-group btn-toggle">
-                                                            <button class="btn btn-xs btn-default">SI</button>
-                                                            <button class="btn btn-xs btn-success">NO</button>
-                                                        </div>
+                                                    <div class="box-tools pull-right">
+                                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                                                class="fa fa-minus"></i></button>
+                                                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                                                class="fa fa-times"></i></button>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-lg-3">
-                                                    <div class="form-group">
-                                                            <label><strong>Dominio</strong></label>
-                                                        <input type="text" style="text-transform: uppercase;" maxlength="10"
-                                                            class="form-control" id="inp-dominio2" name="inp-dominio2[]"
-                                                            placeholder="" data-toggle="popover" title="Requerido"
-                                                            data-content="Este campo es obligatorio completar.">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row margenBoot-25">
-                                                <div class="col-xs-12 col-lg-3">
-                                                    <div class="form-group">
-                                                            <label><strong>Marca</strong></label>
-                                                        <select onchange="verificarOtroElement(this,'');" class="form-control"
-                                                            id="sel-marca2" name="sel-marca2[]">
-                                                            <option value="BMW">BMW</option>
-                                                            <option value="CHEVROLET">CHEVROLET</option>
-                                                            <option value="CITROEN">CITROEN</option>
-                                                            <option value="DODGE">DODGE</option>
-                                                            <option value="FORD">FORD</option>
-                                                            <option value="FIAT">FIAT</option>
-                                                            <option value="MERCEDES BENZ">MERCEDES BENZ</option>
-                                                            <option value="PEUGEOT">PEUGEOT</option>
-                                                            <option value="RENAULT">RENAULT</option>
-                                                            <option value="TOYOTA">TOYOTA</option>
-                                                            <option value="SUZUKI">SUZUKI</option>
-                                                            <option value="VOLKSWAGEN">VOLKSWAGEN</option>
-                                                            <option value="Otro">Otro</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-12 col-lg-6">
-                                                    <div class="form-group">
-                                                            <label><strong>Modelo</strong></label>
-                                                        <input type="text" maxlength="150" class="form-control" id="inp-modelo2">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-12 col-lg-3">
-                                                    <div class="form-group">
-                                                            <label><strong>Año</strong></label>
-                                                        <input type="text" maxlength="65" class="form-control" id="inp-anno2"
-                                                            name="inp-anno2[]" placeholder="">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row margenBoot-25">                                             
-                                                <div class="col-xs-12 col-lg-3">
-                                                    <div class="form-group">
-                                                            <label><strong>Color</strong></label>
-                                                        <input type="text" maxlength="65" class="form-control" id="inp-color2"
-                                                            name="inp-color2[]" placeholder="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-12 col-lg-5">
-                                                        <div class="form-group">
-                                                                <label><strong>N° Motor</strong></label>
-                                                            <input type="text" maxlength="255" class="form-control" id="inp-numMotor2"
-                                                                name="inp-numMotor2[]" placeholder="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-12 col-lg-4">
+                                                <!-- /.box-header -->
+                                                <div class="box-body">
+                                                    <div class="row margenBoot-25">
+                                                        <div class="col-xs-12 col-lg-6">
                                                             <div class="form-group">
-                                                                    <label><strong>N° Chasis</strong></label>
-                                                                <input type="text" maxlength="255" class="form-control" id="inp-numChasis2"
-                                                                    name="inp-numChasis2[]" placeholder="">
+                                                                <label><strong>Nombre de Titular</strong></label>
+                                                                <input type="text" class="form-control" id="nomb_titular">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xs-12 col-lg-3">
+                                                            {!! Html::script('js/venta.js') !!}
+                                                            <div class="form-group">
+                                                                <label><strong>Patente Mercosur</strong></label>
+                                                                <div class="btn-group btn-toggle">
+                                                                    <button class="btn btn-xs btn-default">SI</button>
+                                                                    <button class="btn btn-xs btn-success">NO</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-lg-3">
+                                                            <div class="form-group">
+                                                                <label><strong>Dominio</strong></label>
+                                                                <input type="text" style="text-transform: uppercase;"
+                                                                    maxlength="10" class="form-control" id="inp-dominio2"
+                                                                    name="inp-dominio2[]" placeholder="" data-toggle="popover"
+                                                                    title="Requerido" data-content="Este campo es obligatorio completar.">
                                                             </div>
                                                         </div>
                                                     </div>
 
-                                            <div class="row margenBoot-25">
-                                                <div class="col-xs-12 col-lg-12">
+                                                    <div class="row margenBoot-25">
+                                                        <div class="col-xs-12 col-lg-3">
+                                                            <div class="form-group">
+                                                                <label><strong>Marca</strong></label>
+                                                                <select onchange="verificarOtroElement(this,'');" class="form-control"
+                                                                    id="sel-marca2" name="sel-marca2[]">
+                                                                    <option value="BMW">BMW</option>
+                                                                    <option value="CHEVROLET">CHEVROLET</option>
+                                                                    <option value="CITROEN">CITROEN</option>
+                                                                    <option value="DODGE">DODGE</option>
+                                                                    <option value="FORD">FORD</option>
+                                                                    <option value="FIAT">FIAT</option>
+                                                                    <option value="MERCEDES BENZ">MERCEDES BENZ</option>
+                                                                    <option value="PEUGEOT">PEUGEOT</option>
+                                                                    <option value="RENAULT">RENAULT</option>
+                                                                    <option value="TOYOTA">TOYOTA</option>
+                                                                    <option value="SUZUKI">SUZUKI</option>
+                                                                    <option value="VOLKSWAGEN">VOLKSWAGEN</option>
+                                                                    <option value="Otro">Otro</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-lg-6">
+                                                            <div class="form-group">
+                                                                <label><strong>Modelo</strong></label>
+                                                                <input type="text" maxlength="150" class="form-control"
+                                                                    id="inp-modelo2">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-lg-3">
+                                                            <div class="form-group">
+                                                                <label><strong>Año</strong></label>
+                                                                <input type="text" maxlength="65" class="form-control"
+                                                                    id="inp-anno2" name="inp-anno2[]" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row margenBoot-25">
+                                                        <div class="col-xs-12 col-lg-3">
+                                                            <div class="form-group">
+                                                                <label><strong>Color</strong></label>
+                                                                <input type="text" maxlength="65" class="form-control"
+                                                                    id="inp-color2" name="inp-color2[]" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-lg-5">
+                                                            <div class="form-group">
+                                                                <label><strong>N° Motor</strong></label>
+                                                                <input type="text" maxlength="255" class="form-control"
+                                                                    id="inp-numMotor2" name="inp-numMotor2[]"
+                                                                    placeholder="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-lg-4">
+                                                            <div class="form-group">
+                                                                <label><strong>N° Chasis</strong></label>
+                                                                <input type="text" maxlength="255" class="form-control"
+                                                                    id="inp-numChasis2" name="inp-numChasis2[]"
+                                                                    placeholder="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row margenBoot-25">
+                                                        <div class="col-xs-12 col-lg-12">
+                                                            <div class="form-group">
+                                                                <label><strong>Documentación Entregada</strong></label>
+                                                                <textarea class="form-control" id="inp-observacion2"
+                                                                    name="inp-observacion2[]" rows="5" maxlength="21844"></textarea>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <!-- /.row -->
+                                                </div>
+                                                <!-- ./box-body -->
+                                                <div class="box-footer" align="center">
+                                                    <button type="button" onclick="limpiarAutoEntrega(this);" name="btn-limpiarAutoEntrega"
+                                                        class="btn btn-sm btn-warning"> <i class="fa fa-recycle"></i>
+                                                        LIMPIAR DATOS </button>
+                                                    <button type="button" onclick="eliminarOpcionAuto(this);" name="btn-BorrarVehiculo"
+                                                        class="btn btn-sm btn-danger hidden"> <i class="fa fa-minus"></i>
+                                                        BORRAR VEHÍCULO</button>
+                                                    <button type="button" onclick="generarNuevaOpcionVehiculo(this);"
+                                                        name="btn-NuevoVehiculo" class="btn btn-sm btn-primary"><i
+                                                            class="fa fa-plus"></i> AGREGAR
+                                                        VEHÍCULO </button>
+                                                    <!-- /.row -->
+                                                </div>
+                                                <!-- /.box-footer -->
+                                            </div>
+                                            <!-- /.box -->
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                </div>
+
+
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <h3 style="margin:5px;"><small>Detalles de financiacion con documentos:</small></h3>
+                                        <div id="div-cuotas">
+                                            <div name="rows" class="row margenBoot-25">
+                                                <div class="col-xs-12 col-lg-2">
+                                                    <input id="idDocumentos" name="inp-idDocumentos[]" type="hidden"
+                                                        value="0">
                                                     <div class="form-group">
-                                                            <label><strong>Documentación Entregada</strong></label>
-                                                        <textarea class="form-control" id="inp-observacion2" name="inp-observacion2[]"
-                                                            rows="5" maxlength="21844"></textarea>
+                                                        <label for="inp-plazo">Cantidad:</label>
+                                                        <input type="text" maxlength="150" class="form-control" name="inp-plazo[]"
+                                                            placeholder="">
                                                     </div>
                                                 </div>
+                                                <div class="col-xs-12 col-lg-4">
+                                                    <div class="form-group">
+                                                        <label for="inp-montoCuota">Monto Cuota:</label>
+                                                        <input type="text" maxlength="65" class="form-control" onblur="darFormato(this);"
+                                                            name="inp-montoCuota[]" placeholder="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-4">
+                                                    <div class="form-group">
+                                                        <label for="inp-vencimiento">Primer vencimiento:</label>
+                                                        <div class="input-group date">
+                                                            <input type="text" class="form-control" name="inp-vencimiento[]">
+                                                            <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span>
+                                                            </span> </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-1">
+                                                    <div class="form-group">
 
-                                            </div>
-                                            <!-- /.row -->
-                                        </div>
-                                        <!-- ./box-body -->
-                                        <div class="box-footer" align="center">
-                                            <button type="button" onclick="limpiarAutoEntrega(this);" name="btn-limpiarAutoEntrega"
-                                                class="btn btn-sm btn-warning"> <i class="fa fa-recycle"></i>
-                                                LIMPIAR DATOS </button>
-                                            <button type="button" onclick="eliminarOpcionAuto(this);" name="btn-BorrarVehiculo"
-                                                class="btn btn-sm btn-danger hidden"> <i class="fa fa-minus"></i>
-                                                BORRAR VEHÍCULO</button>
-                                            <button type="button" onclick="generarNuevaOpcionVehiculo(this);" name="btn-NuevoVehiculo"
-                                                class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> AGREGAR
-                                                VEHÍCULO </button>
-                                            <!-- /.row -->
-                                        </div>
-                                        <!-- /.box-footer -->
-                                    </div>
-                                    <!-- /.box -->
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                        </div>
-
-
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <h3 style="margin:5px;"><small>Detalles de financiacion con documentos:</small></h3>
-                                <div id="div-cuotas">
-                                    <div name="rows" class="row margenBoot-25">
-                                        <div class="col-xs-12 col-lg-2">
-                                            <input id="idDocumentos" name="inp-idDocumentos[]" type="hidden" value="0">
-                                            <div class="form-group">
-                                                <label for="inp-plazo">Cantidad:</label>
-                                                <input type="text" maxlength="150" class="form-control" name="inp-plazo[]"
-                                                    placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-lg-4">
-                                            <div class="form-group">
-                                                <label for="inp-montoCuota">Monto Cuota:</label>
-                                                <input type="text" maxlength="65" class="form-control" onblur="darFormato(this);"
-                                                    name="inp-montoCuota[]" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-lg-4">
-                                            <div class="form-group">
-                                                <label for="inp-vencimiento">Primer vencimiento:</label>
-                                                <div class="input-group date">
-                                                    <input type="text" class="form-control" name="inp-vencimiento[]">
-                                                    <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span>
-                                                    </span> </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-1">
-                                            <div class="form-group">
-
-                                                <button type="button" onclick="generarNuevaOpcionCuota();" name="btn-NuevaCuota"
-                                                    class="btn btn-primary" style="margin-top:25px;"> <span class="glyphicon glyphicon glyphicon-plus"
-                                                        aria-hidden="true"></span> </button>
+                                                        <button type="button" onclick="generarNuevaOpcionCuota();" name="btn-NuevaCuota"
+                                                            class="btn btn-primary" style="margin-top:25px;">
+                                                            <span class="glyphicon glyphicon glyphicon-plus"
+                                                                aria-hidden="true"></span> </button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <h3 style="margin:5px;"><small>Detalles de cheques:</small></h3>
-                                <div id="div-cheques">
-                                    <div name="rows" class="row margenBoot-25">
-                                        <div class="col-xs-12 col-lg-2">
-                                            <input id="idCheques" name="inp-idCheques[]" type="hidden" value="0">
-                                            <div class="form-group">
-                                                    <label><strong>Banco</strong></label>
-                                                <input type="text" maxlength="150" class="form-control" name="inp-banco[]"
-                                                    placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-lg-3">
-                                            <div class="form-group">
-                                                    <label><strong>Número</strong></label>
-                                                <input type="text" maxlength="65" class="form-control" name="inp-numCheque[]"
-                                                    placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-lg-3">
-                                            <div class="form-group">
-                                                    <label><strong>Fecha</strong></label>
-                                                <div class="input-group date" name="date-fechaPagCheque[]">
-                                                    <input type="text" class="form-control">
-                                                    <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span>
-                                                    </span> </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-lg-3">
-                                            <div class="form-group">
-                                                    <label><strong>Importe</strong></label>
-                                                <input type="text" maxlength="65" class="form-control" name="inp-importe[]"
-                                                    onblur="darFormato(this);" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-lg-1" style="padding:0;">
-                                            <div class="form-group">
-                                                <button type="button" onclick="generarNuevaOpcionCheque();" name="btn-NuevoCheque"
-                                                    class="btn btn-primary" style="margin-top:25px;"> <span class="glyphicon glyphicon glyphicon-plus"
-                                                        aria-hidden="true"></span> </button>
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <h3 style="margin:5px;"><small>Detalles de cheques:</small></h3>
+                                        <div id="div-cheques">
+                                            <div name="rows" class="row margenBoot-25">
+                                                <div class="col-xs-12 col-lg-2">
+                                                    <input id="idCheques" name="inp-idCheques[]" type="hidden" value="0">
+                                                    <div class="form-group">
+                                                        <label><strong>Banco</strong></label>
+                                                        <input type="text" maxlength="150" class="form-control" name="inp-banco[]"
+                                                            placeholder="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Número</strong></label>
+                                                        <input type="text" maxlength="65" class="form-control" name="inp-numCheque[]"
+                                                            placeholder="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Fecha</strong></label>
+                                                        <div class="input-group date" name="date-fechaPagCheque[]">
+                                                            <input type="text" class="form-control">
+                                                            <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span>
+                                                            </span> </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Importe</strong></label>
+                                                        <input type="text" maxlength="65" class="form-control" name="inp-importe[]"
+                                                            onblur="darFormato(this);" placeholder="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-1" style="padding:0;">
+                                                    <div class="form-group">
+                                                        <button type="button" onclick="generarNuevaOpcionCheque();"
+                                                            name="btn-NuevoCheque" class="btn btn-primary" style="margin-top:25px;">
+                                                            <span class="glyphicon glyphicon glyphicon-plus"
+                                                                aria-hidden="true"></span> </button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- /.row -->
                     </div>
+                    <!-- ./box-body -->
+                    <div class="box-footer">
+                        <div style="margin-top:25px;">
+                            <div class="col-sm-12 col-lg-12">
+                                <div id="alerta" style="display:none;" class="alert alert-success" role="alert"><strong>Operacion
+                                        Guardada Correctamente!</strong></div>
+                            </div>
+                        </div>
+                        <div class="row margenBoot-25" style="margin-top:25px;">
+                            <div class="col-xs-12 col-lg-12" style="text-align:center;">
+                                <button type="button" id="btn-guardar" data-loading-text="GUARDANDO..." class="btn btn-success"
+                                    onclick="comenzarAGuardar();">GUARDAR</button>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.box-footer -->
                 </div>
-
-                <!-- /.row -->
+                <!-- /.box -->
             </div>
-            <!-- ./box-body -->
-            <div class="box-footer">
-                <div style="margin-top:25px;">
-                    <div class="col-sm-12 col-lg-12">
-                        <div id="alerta" style="display:none;" class="alert alert-success" role="alert"><strong>Operacion
-                                Guardada Correctamente!</strong></div>
-                    </div>
-                </div>
-                <div class="row margenBoot-25" style="margin-top:25px;">
-                    <div class="col-xs-12 col-lg-12" style="text-align:center;">
-                        <button type="button" id="btn-guardar" data-loading-text="GUARDANDO..." class="btn btn-success"
-                            onclick="comenzarAGuardar();">GUARDAR</button>
-                    </div>
-                </div>
-                <!-- /.row -->
-            </div>
-            <!-- /.box-footer -->
+            <!-- /.col -->
         </div>
-        <!-- /.box -->
+        {!! Form::close() !!}
     </div>
-    <!-- /.col -->
-</div>
-{!! Form::close() !!}
-</div>
-@endsection
+<script>
+        $(document).ready(function () {
+            function cambiar($p){
+                $p=1;
+                return $p;
+            }
+            
+        }
+</script>
+    @endsection

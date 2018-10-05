@@ -10,8 +10,7 @@
 					<h3 class="box-title">PreVentas</h3>
 					<div class="col-sm-offset-10">
 					<button style="margin-bottom:20%;" href="{{ route('pre-venta.create') }}" 
-					class="btn btn-xs btn-success" role="button">NUEVA PREVENTA</button>
-				
+					class="btn btn-xl btn-success" role="button">NUEVA PREVENTA</button>
 					</div>
 				</div>
 				<div class="box-body">
