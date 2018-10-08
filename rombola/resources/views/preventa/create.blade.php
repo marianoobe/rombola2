@@ -275,49 +275,6 @@
 			</div>
 		</div>
 
-		<div class="col-sm-12">
-				<div class="box box-primary">
-				  <div class="box-header with-border">
-					<h3 class="box-title">Inicio de Operación</h3>
-		  
-					<div class="box-tools pull-right">
-									  </div>
-				  </div>
-				  <!-- /.box-header -->
-				  <div class="box-body">
-					  <div class="row">
-						  <div class="col-xs-12 col-lg-offset-2 col-lg-3">
-							<div class="form-group">
-							  <label for="inp-fechaOperacion">Fecha de Operacion:</label>
-							  <div class="input-group date" id="date-fechaOperacion">
-								<input type="text" class="form-control">
-								<span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span> </span> </div>
-							</div>
-						  </div>
-						  <div class="col-xs-12 col-lg-3">
-							<div class="form-group">
-							  <label>Vendedor:</label>
-							  <input type="text" maxlength="125" class="form-control" id="inp-vendedor" placeholder="">
-							</div>
-						  </div>
-						  <div class="col-xs-12 col-lg-3">
-							<div class="form-group">
-							  <label>Propietario:</label>
-							  <input type="text" maxlength="125" class="form-control" id="inp-propietario" placeholder="">
-							</div>
-						  </div>
-						</div>
-					<!-- /.row -->
-				  </div>
-				  <!-- ./box-body -->
-				  <div class="box-footer">
-		  
-					<!-- /.row -->
-				  </div>
-				  <!-- /.box-footer -->
-				</div>
-				<!-- /.box -->
-			  </div>
 	</div>
 	{!! Form::close() !!}
 	@endsection

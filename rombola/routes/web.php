@@ -56,6 +56,9 @@ Route::get('pre-venta/financiera/{id}','PreventaController@getFinanciera');
 
 Route::resource('venta','VentaController');
 Route::resource('clientes','ClienteController');
+
+Route::resource('admin/financiera', 'FinancieraController');
+
 Route::get('importExcel', 'ExcelController@importExcel');
 
 //Route::get('autos.index','AutomovileController@autos')->name('autos');

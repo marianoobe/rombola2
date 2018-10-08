@@ -34,7 +34,33 @@ class VentaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         //insert Persona-Cliente
+         $share = new Persona([
+            'dni' => $request->get('dni'),
+            'nombre' => $request->get('nombre'),
+            'apellido'=> $request->get('apellido'),
+            'email'=> $request->get('email'),
+            'act_empresa'=> $request->get('act_empresa')
+          ]);
+          $share->save();
+
+          $dni=$request->get('dni');
+          
+          $pers = Persona::where("dni","=",$dni)->select("idpersona")->get();
+        
+          foreach ($pers as $item) {
+            //echo "$item->idpersona";
+          }
+          $idpers=$item->idpersona;
+          
+          //insert Persona-Garante
+          $garante = new Garante([
+            'idpersona' => $idpers,
+            'fecha_nacimiento' => $request->get('fecha_nac'),
+            'domicilio'=> $request->get('domicilio'),
+            'estado_civil'=> $request->get('estado_civil')
+          ]);
+          $garante->save();
     }
 
     /**

@@ -8,6 +8,6 @@ class TipoFinanciera extends Model
 {
     protected $table = 'tipo_financieras';
 
-    protected $fillable = ['nombretipo'];
+    protected $fillable = ['idtipo','nombretipo'];
 
 }

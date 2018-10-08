@@ -9,7 +9,7 @@
 				<div class="box-header with-border">
 					<h3 class="box-title">PreVentas</h3>
 					<div class="col-sm-offset-10">
-						<button href="{{ route('venta.create') }}" class="btn btn-xl btn-success">NUEVA VENTA</button>
+						<a role="button" href="{{ route('venta.create') }}" class="btn btn-xl btn-success">NUEVA VENTA</a>
 					</div>
 				</div>
 				<div class="box-body">

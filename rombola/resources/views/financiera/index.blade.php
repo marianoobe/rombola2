@@ -7,9 +7,11 @@
 			<!-- Default box -->
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">PreVentas</h3>
+					<h3 class="box-title">Financieras</h3>
 					<div class="col-sm-offset-10">
-							<a role="button" style="margin-bottom:20%;" href="{{ route('pre-venta.create') }}" class="btn btn-xl btn-success">NUEVA PREVENTA</a>
+                        <a role="button" style="margin-bottom:20%;" 
+                        href="{{ route('financiera.create') }}" 
+                        class="btn btn-xl btn-success">NUEVA FINANCIERA</a>
 					</div>
 				</div>
 				<div class="box-body">
@@ -33,16 +35,25 @@
 						</div>-->
 						<thead>
 							<tr>
-								<th scope="col">Fecha</th>
-								<th scope="col">Auto Buscado</th>
-								<th scope="col">Auto Ofrecido</th>
-								<th scope="col">Dinero que dispone</th>
-								<th scope="col">Formas de Pago</th>
-								<th scope="col">Estado</th>
+								<th scope="col">Tipo de Financiera</th>
+								<th scope="col">Nombre</th>
+								<th scope="col">Cuotas</th>
 								<th scope="col"></th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="myTable">
+                                @foreach($financiera as $item)
+                                <tr>
+                                    <td>{{$item->nombretipo}}</td>
+                                    <td>{{$item->nomb_financ}}</td>
+                                    <td>{{$item->numcuotas}}</td>                   
+                                    <td style="cursor: default;">
+                                        <a href="{{ route('financiera.edit',$item->idtipo)}}" class="btn btn-primary btn-sm">
+                                         <span class="glyphicon glyphicon-search"></span></a>							
+                                    </td>
+                                </tr>
+                                @endforeach()
+                            </tbody>
 						</table>
-					
+                        {{$financiera->render()}}
 					@endsection
