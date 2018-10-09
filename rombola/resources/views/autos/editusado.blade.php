@@ -28,10 +28,14 @@
 						<div class="box-body">
 							@foreach($autos as $item)
 							@endforeach()
-							<form method="POST" action="{{ route('updateusado',$item->id_auto) }}">
 
-
+							<form method="POST" action="{{ route('autos.update',$item->id_auto) }}">
+							   <input name="_method" type="hidden" value="PATCH">
+								<input type="hidden" name="_method" value="PUT">
 								<input type="hidden" name="_token" value="{{csrf_token()}}">
+								
+								<input type="hidden" name="id_auto" value="{{ $item->id_auto }}">
+
 								<input type="hidden" id="usado" name="usado" value="usado">
 								<div class="row margenBoot-25">
 									<div class="col-xs-12 col-lg-6">
@@ -106,8 +110,8 @@
 								<div class="box-footer">
 									<div class="row margenBoot-25" style="margin-top:25px;">
 										<div id="actualizar" class="col-xs-12 col-lg-12" style="display:none">
-											<button type="submit" class="btn btn-primary">Actualizar Información</button>
-										</div>
+<button type="submit" onclick="realizaProceso($('#estado').val())" class="btn btn-primary">
+										Actualizar Información</button>										</div>
 									</div>
 								</div>
 							</form>
@@ -123,7 +127,7 @@
 					};
 					$.ajax({
 						data: parametros, //datos que se envian a traves de ajax
-						url: 'autos.store', //archivo que recibe la peticion
+						url: 'autos.update', //archivo que recibe la peticion
 						type: 'post', //método de envio
 						beforeSend: function () {
 							$("#resultado").html("Procesando, espere por favor...");

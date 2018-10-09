@@ -14,14 +14,14 @@ class CreateAutomovilesTable extends Migration
     public function up()
     {
         Schema::create('automoviles', function (Blueprint $table) {
-           $table->increments('id_auto');
-            $table->string('marca');
-            $table->string('modelo');
+            $table->increments('id_auto');
+            $table->integer('vin')->unique()->nullable();
+            $table->string('dominio',15)->unique()->nullable();
+            $table->string('marca',30);
+            $table->string('modelo',60);
             $table->text('version');
-            $table->string('color');            
-            $table->string('combustible');
-            $table->string('chasis_num');
-            $table->string('motor_num');     
+            $table->string('color',10);            
+            $table->string('combustible',10);               
             $table->string('estado');      
             $table->timestamps();
         });

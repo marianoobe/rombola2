@@ -28,11 +28,13 @@
 						<div class="box-body">
 
 							<form method="GET" action="{{ route('autos.index') }}" class="navbar-form pull-right" role="search">
-								{{ csrf_field() }}
+								
 								<div class="input-group">
-									<input type="hidden" id="nuevo" name="nuevo" value="1">
-
+									
+								<input type="hidden" name="_token" value="{{csrf_token()}}">
+	                        
 									<input type="text" class="form-control" name="name" placeholder="Busqueda">
+									<input type="hidden" id="dato" name="dato" value="nuevo">
 									<span class="input-group-btn">
 										<button type="submit" class="btn btn-default">
 											<span class="glyphicon glyphicon-search"></span>

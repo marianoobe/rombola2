@@ -27,7 +27,7 @@
 
 						<div class="box-body">
 
-							<form method="GET" action="{{ route('autos.index') }}" class="navbar-form pull-right" role="search">
+							<form method="GET" action="{{ route('usados') }}" class="navbar-form pull-right" role="search">
 								{{ csrf_field() }}
 								<div class="input-group">
 									<input type="hidden" id="usado" name="usado" value="2">
@@ -53,6 +53,7 @@
 										<th scope="col">MARCA</th>
 										<th scope="col">MODELO</th>
 										<th scope="col">VERSION</th>
+										<th scope="col">DOMINIO</th>
 										<th scope="col">COLOR</th>
 										<th scope="col">ESTADO</th>
 										<th scope="col">VER</th>
@@ -69,6 +70,7 @@
 										<td>{{$item->marca}}</td>
 										<td>{{$item->modelo}}</td>
 										<td>{{$item->version}}</td>
+										<td>{{$item->dominio}}</td>
 										<td>{{$item->color}}</td>
 										<td>{{$item->estado}}</td>
 												<td style="cursor: default;">

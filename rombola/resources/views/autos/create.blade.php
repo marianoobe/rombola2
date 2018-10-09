@@ -12,7 +12,7 @@
 					<!-- Default box -->
 					<div class="box">
 						<div class="box-header with-border">
-							<h3 class="box-title">NUEVO AUTO</h3>
+							<h3 class="box-title">AUTO 0KM</h3>
 
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -37,29 +37,29 @@
 										<div class="form-group">
 											<input type="hidden" id="nuevo" name="nuevo" value="nuevo">
 											<label for="marca"><strong>Marca</strong></label>
-											<input type="text" class="form-control" id="marca" name="marca">
+											<input type="text" class="form-control" id="marca" name="marca" required>
 										</div>
 										<div class="form-group">
 											<label for="modelo"><strong>Modelo</strong></label>
-											<input type="text" class="form-control" id="modelo" name="modelo">
+											<input type="text" class="form-control" id="modelo" name="modelo" required>
 										</div>
 										<div class="form-group">
 											<label for="version"><strong>Version</strong></label>
-											<input type="text" class="form-control" id="version" name="version">
+											<input type="text" class="form-control" id="version" name="version" required>
 										</div>
 										<div class="form-group">
 											<label for="vin"><strong>Vin</strong></label>
-											<input type="text" class="form-control" id="vin" name="vin">
+											<input type="text" class="form-control" id="vin" name="vin" required>
 										</div>
 
 									</div>
 									<div class="col-xs-12 col-lg-6">
 										<div class="form-group">
 											<label for="color"><strong>Color</strong></label>
-											<input type="text" class="form-control" id="color" name="color">
+											<input type="text" class="form-control" id="color" name="color" required>
 										</div>
 									
-									<div class="form-group">
+									  <div class="form-group">
 											<label for="estado"><strong>Combustible</strong></label>
 											<select id="combustible" name="combustible" class="form-control form-control-sm">
 												<option>NAFTA</option>
@@ -68,14 +68,9 @@
 												
 											</select>
 										</div>
-									<div class="col-xs-12 col-lg-6">
+									
 
-										<div class="form-group">
-											<label for="chasis_num"><strong>Numero de Chasis</strong></label>
-											<input type="text" class="form-control" id="chasis_num" name="chasis_num">
-										</div>
-
-										
+																				
 										<div class="form-group">
 											<label for="estado"><strong>Estado</strong></label>
 											<select id="estado" name="estado" class="form-control form-control-sm">
@@ -89,7 +84,7 @@
 
 									</div>
 								</div>
-
+<div class="form-group">
 								<div class="success">
 
 									<button type="submit" onclick="realizaProceso($('#estado').val())" class="btn btn-primary">
@@ -98,7 +93,7 @@
 							</form>
 						</div>
 
-
+					</div>
 					</div>
 				</div>
 			</div>
