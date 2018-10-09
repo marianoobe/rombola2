@@ -17,7 +17,7 @@ class CreateClientesTable extends Migration
             $table->increments('idcliente');
             $table->integer('idpersona');
             $table->string('fecha_nacimiento');
-            $table->text('domicilio');
+            $table->string('domicilio', 50);
             $table->text('estado_civil');
             $table->text('estado_ficha');
             $table->timestamps();

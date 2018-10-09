@@ -143,7 +143,7 @@ class ClienteController extends Controller
         ->join('telefonos','telefonos.idpersona','personas.idpersona')
         ->where('personas.idpersona','=', $idpers)
         ->get();
-
+      
       return view('shares.edit', compact('client'));
     }
     

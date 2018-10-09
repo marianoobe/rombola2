@@ -184,9 +184,21 @@ class PreventaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($dni)
     {
-        //
+      $dnipers = Persona::where("dni","=",$dni)->select("idpersona")->get();
+      foreach ($dnipers as $item) {
+      }
+      $idpers=$item->idpersona;
+      
+      $preventa = DB::table('personas')
+        ->join('operaciones', 'operaciones.id_operacion' ,'personas.idpersona')
+        ->join('preventas','preventas.idpreventa','operaciones.id_operacion')
+        ->where('personas.idpersona','=', $idpers)
+        ->get();
+        
+
+        return view('preventa.edit', compact('preventa'));
     }
 
     /**

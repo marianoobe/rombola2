@@ -7,7 +7,7 @@
 			<!-- Default box -->
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">PreVentas</h3>
+					<h3 class="box-title">Ventas</h3>
 					<div class="col-sm-offset-10">
 						<a role="button" href="{{ route('venta.create') }}" class="btn btn-xl btn-success">NUEVA VENTA</a>
 					</div>
