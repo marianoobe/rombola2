@@ -56,8 +56,12 @@ Route::get('pre-venta/cuotas/{id}','PreventaController@getCuotas');
 Route::get('pre-venta/financiera/{id}','PreventaController@getFinanciera');
 
 Route::resource('venta','VentaController');
-
 Route::resource('admin/financiera', 'FinancieraController');
+
+
+Route::resource('listaprecio', 'ListaPrecioController');
+Route::get('listaprecio/crear', 'ListaPrecioController@importChevrolet')->name('listaprecionuevo');
+
 
 Route::get('importExcel', 'ExcelController@importExcel');
 

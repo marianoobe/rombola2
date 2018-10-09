@@ -21,7 +21,10 @@ class AutomovileController extends Controller
     {
         //$name  = $request->get('name');
        
-       $autos=Automovile::Search($request->name)->orderBY('id_auto')->paginate(3);
+       $autos=Automovile::Search($request->name)
+       ->whereNotNull('vin')
+       ->orderBY('id_auto')
+       ->paginate(3);
                    
               
   //  dd($request->name);
@@ -33,7 +36,10 @@ class AutomovileController extends Controller
     {
         //$name  = $request->get('name');
        
-       $autos=Automovile::Search($request->name)->orderBY('id_auto')->paginate(3);
+       $autos=Automovile::Search($request->name,$request->dato)
+       ->whereNotNull('dominio')
+       ->orderBY('id_auto')
+       ->paginate(3);
         
    
         return view('autos/usados')->with('autos',$autos);
@@ -62,70 +68,54 @@ class AutomovileController extends Controller
      */
     public function store(Request $request)
     {
+        
         if($request->input("nuevo")=="nuevo"){
 
       $share = new Automovile([
-            'marca' => $request->get('marca'),
-            'modelo' => $request->get('modelo'),
-            'version'=> $request->get('version'),
-            'color'=> $request->get('color'),
-            'combustible'=> $request->get('combustible'),
-            'chasis_num'=> $request->get('chasis_num'),
-            'motor_num'=> $request->get('motor_num'),
-            'estado'=> $request->get('estado'),
+            'marca' => $request->input('marca'),
+            'modelo' => $request->input('modelo'),
+            'version'=> $request->input('version'),
+            'color'=> $request->input('color'),
+            'combustible'=> $request->input('combustible'),            
+            'estado'=> $request->input('estado'),
+            'vin' => $request->input('vin'),
           ]);
           $share->save();
 
-           $chasis=$request->get('chasis_num');
-          
-          $car = Automovile::where("chasis_num","=",$chasis)->select("id_auto")->get();
-          
-                  
-        foreach ($car as $item) {
-            //echo "$item->idpersona";
-          }
-          $idauto=$item->id_auto;
-          $nuevo = new Autosnuevo([
-            'id_auto' => $idauto,
-            'vin' => $request->get('vin'),
-           
-          ]);
-          $nuevo->save();        
-
-        
-         //return redirect('/clientes');
+          //return redirect('/clientes');
           return redirect('autos')->with('success', 'Stock has been added');
 
         }
         elseif($request->input("usado")=="usado"){
              $share = new Automovile([
-            'marca' => $request->get('marca'),
-            'modelo' => $request->get('modelo'),
-            'version'=> $request->get('version'),
-            'color'=> $request->get('color'),
-            'combustible'=> $request->get('combustible'),
-            'chasis_num'=> $request->get('chasis_num'),
-            'motor_num'=> $request->get('motor_num'),
-            'estado'=> $request->get('estado'),
+            'marca' => $request->input('marca'),
+            'modelo' => $request->input('modelo'),
+            'version'=> $request->input('version'),
+            'color'=> $request->input('color'),
+            'combustible'=> $request->input('combustible'),           
+            'estado'=> $request->input('estado'),
+            'dominio' => $request->input('dominio'),
           ]);
+          
           $share->save();
 
-          $chasis=$request->get('chasis_num');
+          $dominio=$request->get('dominio');
           
-          $car = Automovile::where("chasis_num","=",$chasis)->select("id_auto")->get();
+          $car = Automovile::where("dominio","=",$dominio)->select("id_auto")->get();
           
-                  
+                
         foreach ($car as $item) {
             //echo "$item->idpersona";
           }
+          
           $idauto=$item->id_auto;
           $nuevo = new Autosusado([
-            'id_auto' => $idauto,
-            'dominio' => $request->get('dominio'),
-            'titular' => $request->get('titular'),
-            'anio' => $request->get('anio'),
-            'kilometros' => $request->get('kilometros'),
-           
+            'id_auto' => $idauto,            
+            'titular' => $request->input('titular'),
+            'anio' => $request->input('anio'),
+            'kilometros' => $request->input('kilometros'),
+            'chasis_num'=> $request->input('chasis_num'),
+            'motor_num'=> $request->input('motor_num'),
           ]);
           $nuevo->save();        
 
@@ -158,16 +148,16 @@ class AutomovileController extends Controller
     {
           $auto = Automovile::where("id_auto","=",$id)->select("id_auto")->get();
           
-         foreach ($auto as $item) {
-      //echo "$item->id_auto";
-      }
-      
+            foreach ($auto as $item) {
+        //echo "$item->idpersona";
+         }
+     // dd($auto);
       $idcar=$item->id_auto;
-
-      $autos = DB::table('autosnuevos')
-        ->join('automoviles', 'automoviles.id_auto' ,'autosnuevos.id_auto')        
+          $autos = DB::table('automoviles')
+               
         ->where('automoviles.id_auto','=', $idcar)
         ->get();
+      
 
       return view('autos.edit', compact('autos'));
     }
@@ -179,27 +169,54 @@ class AutomovileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-         //if($request->input("nuevo")=="nuevo"){
-
-             DB::table('autosnuevos')
-        ->join('automoviles', 'automoviles.id_auto' ,'autosnuevos.id_auto')
-             ->where('id_auto',"=",$id)
-            ->update([
-                "marca" => $request->get('marca'),
-                "modelo" => $request->get('modelo'),
-                "version" => $request->get('version'),
-                "color" => $request->get('color'),
-                "vin" => $request->get('vin'),
                 
-                "estado" => $request->get('estado'),
+       if($request->input("nuevo")=="nuevo"){
 
-        ]);
-      
+                 
+                 $auto = Automovile::find($id);
+                 $auto->marca =strtoupper ($request->input("marca"));
+                 $auto->modelo =strtoupper($request->input("modelo"));
+                 $auto->version = strtoupper($request->input("version"));
+                 $auto->color =strtoupper ($request->input("color"));
+                 $auto->vin = strtoupper($request->input("vin"));              
+                 $auto->estado =strtoupper ($request->input("estado"));
+        $auto->save();
+             
+        
+       
        return redirect('/autos')->with('success', 'Stock has been updated');   
-         
+       }
+        elseif($request->input("usado")=="usado"){
 
+ //dd($request->input('id_auto'));
+                 $auto = Automovile::find($id);
+                 $auto->marca =strtoupper ($request->input("marca"));
+                 $auto->modelo =strtoupper($request->input("modelo"));
+                 $auto->version = strtoupper($request->input("version"));
+                 $auto->color =strtoupper ($request->input("color"));
+                          
+                 $auto->estado =strtoupper ($request->input("estado"));
+                $auto->dominio= strtoupper ($request->input('dominio'));
+               //  dd($auto);
+              $auto->save();
+
+              /*  $autos=Autousado::find(Input::get("id_auto"));
+                $autos->titular=strtoupper ($request->input('titular'));
+                $autos->anio= strtoupper ($request->input('anio'));
+                $autos->kilometros= strtoupper ($request->input('kilometros'));
+                $autos->estado= strtoupper ($request->input('estado'));
+                dd($autos);
+              $autos->save();*/
+       
+      
+       return redirect('autos/usados')->with('success', 'Stock has been updated');  
+
+
+
+
+        }
         
     }
    public function editusado($id)
@@ -219,31 +236,7 @@ class AutomovileController extends Controller
       return view('autos/editusado', compact('autos'));
     }
 
-    public function updateusado(Request $request, $id)
-    {
-         //if($request->input("nuevo")=="nuevo"){
-
-             DB::table('autosusados')
-        ->join('automoviles', 'automoviles.id_auto' ,'autosusados.id_auto')
-             ->where('id_auto',"=",$id)
-            ->update([
-                "marca" => $request->get('marca'),
-                "modelo" => $request->get('modelo'),
-                "version" => $request->get('version'),
-                "color" => $request->get('color'),
-                "dominio" => $request->get('dominio'),
-                "titular"=>$request->get('titular'),
-                 'anio' => $request->get('anio'),
-                'kilometros' => $request->get('kilometros'),
-                "estado" => $request->get('estado'),
-
-        ]);
-      
-       return redirect('/autos')->with('success', 'Stock has been updated');   
-         
-
-        
-    }
+    
     /**
      * Remove the specified resource from storage.
      *

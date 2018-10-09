@@ -37,37 +37,37 @@
 										<div class="form-group">
 											<input type="hidden" id="usado" name="usado" value="usado">
 											<label for="marca"><strong>Marca</strong></label>
-											<input type="text" class="form-control" id="marca" name="marca">
+											<input type="text" class="form-control" id="marca" name="marca" required>
 										</div>
 										<div class="form-group">
 											<label for="modelo"><strong>Modelo</strong></label>
-											<input type="text" class="form-control" id="modelo" name="modelo">
+											<input type="text" class="form-control" id="modelo" name="modelo" required>
 										</div>
 										<div class="form-group">
 											<label for="version"><strong>Version</strong></label>
-											<input type="text" class="form-control" id="version" name="version">
+											<input type="text" class="form-control" id="version" name="version" required>
 										</div>
 										<div class="form-group">
 											<label for="dominio"><strong>Dominio</strong></label>
-											<input type="text" class="form-control" id="dominio" name="dominio">
+											<input type="text" class="form-control" id="dominio" name="dominio" required>
 										</div>
 										<div class="form-group">
 											<label for="titular"><strong>Titular</strong></label>
-											<input type="text" class="form-control" id="titular" name="titular">
+											<input type="text" class="form-control" id="titular" name="titular" required>
 										</div>
 										<div class="form-group">
 											<label for="anio"><strong>Año</strong></label>
-											<input type="number" class="form-control" id="anio" name="anio">
+											<input type="number" class="form-control" id="anio" name="anio" required>
 										</div>
 									</div>
 									<div class="col-xs-12 col-lg-6">
 										<div class="form-group">
 											<label for="color"><strong>Color</strong></label>
-											<input type="text" class="form-control" id="color" name="color">
+											<input type="text" class="form-control" id="color" name="color" required>
 										</div>
 										<div class="form-group">
 											<label for="estado"><strong>Combustible</strong></label>
-											<select id="combustible" name="combustible" class="form-control form-control-sm">
+											<select id="combustible" name="combustible" class="form-control form-control-sm" required>
 												<option>NAFTA</option>
 												<option>DIESEL</option>
 												<option>GNC</option>
@@ -77,7 +77,7 @@
 										
 										<div class="form-group">
 											<label for="kilometros"><strong>kilometros</strong></label>
-											<input type="text" class="form-control" id="kilometros" name="kilometros">
+											<input type="text" class="form-control" id="kilometros" name="kilometros" required>
 										</div>
 									</div>
 
@@ -85,16 +85,16 @@
 
 										<div class="form-group">
 											<label for="chasis_num"><strong>Numero de Chasis</strong></label>
-											<input type="text" class="form-control" id="chasis_num" name="chasis_num">
+											<input type="text" class="form-control" id="chasis_num" name="chasis_num" required>
 										</div>
 
 										<div class="form-group">
 											<label for="motor_num"><strong>Numero de Motor</strong></label>
-											<input type="text" class="form-control" id="motor_num" name="motor_num">
+											<input type="text" class="form-control" id="motor_num" name="motor_num" required>
 										</div>
 										<div class="form-group">
 											<label for="estado"><strong>Estado</strong></label>
-											<select id="estado" name="estado" class="form-control form-control-sm">
+											<select id="estado" name="estado" class="form-control form-control-sm" required>
 												<option>Disponible</option>
 												<option>Stock Playa</option>
 												<option>Vendido</option>

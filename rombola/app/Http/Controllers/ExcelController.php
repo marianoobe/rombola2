@@ -8,7 +8,7 @@ use DB;
 
 class ExcelController extends Controller
 {
-    public function importExcel()
+    public function importExcel() 
     {
         /** El método load permite cargar el archivo definido como primer parámetro */
         Excel::load('productos.xlsx', function ($reader) {
