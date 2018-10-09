@@ -16,9 +16,9 @@ class UpdateUsers extends Migration
          
 
          Schema::table('users', function ($table) {
-             $table->string('nombres', 60);
+             /*$table->string('nombres', 60);
              $table->string('apellidos', 60);
-             $table->string('telefono', 60);
+             $table->string('telefono', 60);*/
         });
 
 

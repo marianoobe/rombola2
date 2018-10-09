@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Persona;
+use App\Cliente;
+use App\Operaciones;
+use App\Preventa;
+use App\Telefono;
 use App\TipoFinanciera;
 use App\Financiera;
 use App\CantidadCuotas;
+use DB;
 
 class PreventaController extends Controller
 {
@@ -16,7 +22,12 @@ class PreventaController extends Controller
      */
     public function index()
     {
-        return view('pre-venta');
+        $preventa_cliente = DB::table('preventas')
+        ->join('operaciones','operaciones.id_operacion','preventas.preventa_oper')
+        ->join('personas','personas.idpersona','operaciones.persona_operacion')
+        ->paginate(3);
+
+        return view('pre-venta',compact('preventa_cliente'));
     }
 
     /**
@@ -80,7 +91,7 @@ class PreventaController extends Controller
           ]);
           $cliente->save();
           //--/insert Persona-Cliente
-          if($cel_1 != null)
+          if($request->get('cel_1') != null)
           {
           $tel = new Telefono([
             'idpersona' => $idpers,
@@ -90,34 +101,64 @@ class PreventaController extends Controller
           $tel->save();
           }
           //insert Operacion-Preventa
-        $operacion = new Operacion([
+        $fecha_oper=$request->get('fecha_oper');
+        $operacion = new Operaciones([
           'persona_operacion' => $idpers,
-          'estado' => $request->get('estado'),
-          'fecha_oper'=> $request->get('fecha_oper'),
-          'aviso'=> $request->get('aviso')
+          'estado' => "",
+          'fecha_oper'=> $fecha_oper,
+          'aviso'=> ""
         ]);
         $operacion->save();
 
-        $fecha_oper=$request->get('fecha_oper');
-        
-        $operacion = Operacion::where("fecha_oper","=",$fecha_oper)->select("idoperacion")->get();
+        $operacion = Operaciones::where("fecha_oper","=",$fecha_oper)->select("id_operacion")->get();
       
-        foreach ($operacion as $item) {
+        foreach ($operacion as $oper) {
           //echo "$item->idpersona";
+        } 
+        $operacion=$oper->id_operacion;
+        
+        $idtipo = $request->get('tipofinanciera');
+
+        $idp = TipoFinanciera::where("idtipo","=",$idtipo+1)->select("nombretipo")->get();
+        
+        foreach ($idp as $item) {}
+
+
+        if ($item->nombretipo == "Sin") {
+            $nomtipo ="#";
+            $nomfinanc = "#";
+            $cant = 0;
+            $importe = 0;
         }
-        $idoperacion=$item->idoperacion;
+        else{
+            $idnom = $request->get('nombfinanciera');
+            $idcuota = $request->get('numcuotas');
+    
+            $idf = Financiera::where("idfinanciera","=",$idnom)->select("nomb_financ")->get();
+            $idc = CantidadCuotas::where("idcant","=",$idcuota)->select("numcuotas")->get();
+    
+            foreach ($idf as $item1) {}
+    
+            foreach ($idc as $item2) {}
+
+            $nomtipo = $item->nombretipo;
+            $nomfinanc = $item1->nomb_financ;
+            $cant = $item2->numcuotas;
+            $importe = $request->get('impor_finan');
+        }
+
         $preventa = new Preventa([
-          'preventa_operacion' => $idoperacion,
+          'preventa_oper' => $operacion,
           'auto_interesado' => $request->get('auto_interesado'),
           'detalles' => $request->get('detalles'),
           'usado' => $request->get('usado'),
           'contado' => $request->get('contado'),
-          'otropago' => $request->get('otropago'),
-          'nombretipo'=> $request->get('nombretipo'),
-          'nomb_financ' => $request->get('nomb_financ'),
-          'cant_cuotas' => $request->get('numcuotas'),
+          'otropago' => "",//$request->get('otropago'),
+          'nombretipo'=> $nomtipo,
+          'nomb_financ' => $nomfinanc,
+          'numcuotas' => $cant,
           'cant_pormes' => $request->get('cant_pormes'),
-          'importe_finan' => $request->get('importe_finan')
+          'importe_finan' => $importe
         ]); 
         $preventa->save();
         //---insert Operacion-Preventa

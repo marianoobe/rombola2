@@ -42,7 +42,22 @@
 								<th scope="col"></th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="myTable">
+								@foreach($preventa_cliente as $item)
+								<tr>
+									<td>{{$item->fecha_oper}}</td>
+									<td>{{$item->auto_interesado}}</td>
+									<td>{{$item->usado}}</td>
+									<td>{{$item->contado}}</td>
+									<td>{{$item->importe_finan}}</td>
+									<td style="cursor: default;">
+										<a href="{{ route('pre-venta.edit',$item->dni)}}" class="btn btn-primary btn-sm">
+										 <span class="glyphicon glyphicon-search"></span></a>							
+									</td>
+								</tr>
+								@endforeach()
+							</tbody>
 						</table>
+						{{$preventa_cliente->render()}}	
 					
 					@endsection

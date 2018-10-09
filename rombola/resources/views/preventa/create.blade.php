@@ -32,8 +32,8 @@
 					<div class="row margenBoot-25">
 						<div class="col-xs-12 col-lg-offset-3 col-lg-3">
 							<div class="form-group">
-								<div class='input-group date' id='fecha_preventa'>
-									<input type='date' class="form-control" />
+								<div class='input-group date'>
+									<input type="date" class="form-control" id="fecha_oper" name="fecha_oper">
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -176,7 +176,7 @@
 					</div>
 					<div class="form-group">
 						<label>Información de documentación,cliente,etc...</label>
-						<textarea class="form-control" id="detalle" rows="7"></textarea>
+						<textarea class="form-control" id="detalles" name="detalles" rows="7"></textarea>
 					</div>
 				</div>
 				<!-- /.box-body -->
@@ -202,7 +202,7 @@
 						<div class="col-xs-12 col-lg-6">
 							<div class="form-group">
 								<label><strong>Usado</strong></label>
-								<textarea class="form-control rounded-0" id="usado" rows="4"></textarea>
+								<textarea class="form-control rounded-0" id="usado" name="usado" rows="4"></textarea>
 							</div>
 							<div class="form-group">
 								<label><strong>Contado</strong></label>
@@ -217,11 +217,11 @@
 										tranferencia
 										bancaria,etc)</label>
 								</div>
-								<textarea class="form-control rounded-0" id="otropago" rows="2" disabled="true"></textarea>
+								<textarea class="form-control rounded-0" id="otropago" name="otropago" rows="2" ></textarea>
 							</div>
 							<div class="form-group">
 								<label><strong>Hasta cuánto puede pagar por mes</strong></label>
-								<input type="number" class="form-control" id="cuanto_mes" name="cuanto_mes">
+								<input type="number" class="form-control" id="cant_pormes" name="cant_pormes">
 							</div>
 						</div>
 						<div text-align="center" class="col-xs-12 col-lg-6">
@@ -230,7 +230,7 @@
 							<div class="form-group">
 								<label><strong>Tipo de Financiación</strong></label>
 								<div>
-									{!! Form::select('tipofinanciera',$tipo_finan,['class'=>'form-group'],['id'=>'tipofinanciera']) !!}
+									{!! Form::select('tipofinanciera',$tipo_finan,null,['class'=>'form-control','id'=>'tipofinanciera']) !!}
 								</div>
 								<p></p>
 							</div>
@@ -238,7 +238,7 @@
 								<div class="form-group">
 									<label><strong>Financieras</strong></label>
 									<div>
-										{!! Form::select('nombfinanciera',['placeholder'=>''],null,['id'=>'nombfinanciera']) !!}
+										{!! Form::select('nombfinanciera',[],null,['placeholder'=>'','class'=>'form-control','id'=>'nombfinanciera']) !!}
 									</div>
 									<p></p>
 								</div>
@@ -247,7 +247,7 @@
 								<div class="form-group">
 									<label><strong>Cantidad de Cuotas</strong></label>
 									<div>
-										{!! Form::select('numcuotas',['placeholder'=>''],null,['id'=>'cantcuotas']) !!}
+										{!! Form::select('numcuotas',['placeholder'=>''],null,['placeholder'=>'','class'=>'form-control','id'=>'cantcuotas']) !!}
 									</div>
 									<p></p>
 								</div>
@@ -266,11 +266,13 @@
 						</div>
 						<div class="row margenBoot-25" style="margin-top:25px;">
 							<div class="col-xs-12 col-lg-12" style="text-align:center;">
-								<button type="button" id="btn-guardar" data-loading-text="GUARDANDO..." class="btn btn-success" onclick="guardar();">GUARDAR</button>
+								
+								{!! Form::submit("Guardar", ['class'=>'btn btn-success']) !!}
+								
 							</div>
 						</div>
 						<!-- /.row -->
-					</div>
+					</div> 
 				</div>
 			</div>
 		</div>
