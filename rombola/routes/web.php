@@ -60,8 +60,6 @@ Route::resource('admin/financiera', 'FinancieraController');
 
 
 Route::resource('listaprecio', 'ListaPrecioController');
-Route::get('listaprecio/crear', 'ListaPrecioController@importChevrolet')->name('listaprecionuevo');
-
 
 Route::get('importExcel', 'ExcelController@importExcel');
 

@@ -19,8 +19,8 @@ class ClienteController extends Controller
     public function index()
     {
         $client_pers = DB::table('clientes')
-        ->join('personas','personas.idpersona','clientes.idpersona')
-        ->join('telefonos', 'telefonos.idpersona', 'personas.idpersona')
+        ->join('personas','personas.idpersona','clientes.cliente_persona')
+        ->join('telefonos', 'telefonos.personas_telefono', 'personas.idpersona')
         ->where('telefonos.tipo','=', 1)
         ->paginate(3);
 
@@ -69,7 +69,7 @@ class ClienteController extends Controller
           $idpers=$item->idpersona;
 
           $cliente = new Cliente([
-            'idpersona' => $idpers,
+            'cliente_persona' => $idpers,
             'fecha_nacimiento' => $request->get('fecha_nac'),
             'domicilio'=> $request->get('domicilio'),
             'estado_civil'=> $request->get('estado_civil'),
@@ -84,7 +84,7 @@ class ClienteController extends Controller
           if($telef != null)
           {
           $tel = new Telefono([
-            'idpersona' => $idpers,
+            'personas_telefono' => $idpers,
             'num_tel' => $request->get('tel_fijo'),
             'tipo' => '1'
           ]);
@@ -93,7 +93,7 @@ class ClienteController extends Controller
           if($cel_1 != null)
           {
           $tel = new Telefono([
-            'idpersona' => $idpers,
+            'personas_telefono' => $idpers,
             'num_tel' => $request->get('cel_1'),
             'tipo' => '2'
           ]);
@@ -102,7 +102,7 @@ class ClienteController extends Controller
         if($cel_2 != null)
           {
           $tel = new Telefono([
-            'idpersona' => $idpers,
+            'personas_telefono' => $idpers,
             'num_tel' => $request->get('cel_2'),
             'tipo' => '3'
           ]);
@@ -139,8 +139,8 @@ class ClienteController extends Controller
       $idpers=$item->idpersona;
 
       $client = DB::table('clientes')
-        ->join('personas', 'personas.idpersona' ,'clientes.idpersona')
-        ->join('telefonos','telefonos.idpersona','personas.idpersona')
+        ->join('personas', 'personas.idpersona' ,'clientes.cliente_persona')
+        ->join('telefonos','telefonos.personas_telefono','personas.idpersona')
         ->where('personas.idpersona','=', $idpers)
         ->get();
       
@@ -157,8 +157,8 @@ class ClienteController extends Controller
     public function update(Request $request, $id)
     {
       DB::table('clientes')
-        ->join('personas', 'personas.idpersona' ,'clientes.idpersona')
-        ->join('telefonos','telefonos.idpersona','personas.idpersona')
+        ->join('personas', 'personas.idpersona' ,'clientes.cliente_persona')
+        ->join('telefonos','telefonos.personas_telefono','personas.idpersona')
             ->where('idpersona',"=",$id)
             ->update([
                 "dni" => $request->get('dni'),
@@ -172,7 +172,6 @@ class ClienteController extends Controller
                 "estado_civil" => $request->get('estado_civil'),
 
         ]);
-      //$p->save();
       return redirect('/clientes')->with('success', 'Stock has been updated');   
     }
 

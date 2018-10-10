@@ -5,6 +5,9 @@
 	@foreach($preventa as $item)
 	@endforeach()
 	<form method="POST" action="{{ route('pre-venta.update',$item->idpersona) }}">
+			<input name="_method" type="hidden" value="PATCH">
+			<input type="hidden" name="_method" value="PUT">
+			<input type="hidden" name="_token" value="{{csrf_token()}}">
 		<div class="row">
 			<div class="col-md-14 col-md-offset-0">
 				<!-- Default box -->
@@ -31,7 +34,7 @@
 							<div class="col-xs-12 col-lg-offset-3 col-lg-3">
 								<div class="form-group">
 									<div class='input-group date' id='fecha_preventa'>
-										<input type='date' class="form-control" value={{ $item->fecha_oper }} disabled="disabled" />
+										<input type='date' class="form-control" value="{{ $item->fecha_oper }}" disabled="disabled" />
 										<span class="input-group-addon">
 											<span class="glyphicon glyphicon-calendar"></span>
 										</span>
@@ -90,16 +93,16 @@
 
 						<div class="form-group">
 							<label><strong>DNI</strong></label>
-							<input type="number" class="form-control" id="dni" name="dni" value={{ $item->dni }} disabled="disabled">
+							<input type="number" class="form-control" id="dni" name="dni" value="{{ $item->dni }}" disabled="disabled">
 						</div>
 
 						<div class="form-group">
-							<label for="nombre">Nombres:</label>
-							<input type="text" class="form-control" name="nombre" value={{ $item->nombre }} disabled="disabled" />
+							<label>Nombres:</label>
+							<input type="text" class="form-control" name="nombre" value="{{ $item->nombre }}" disabled="disabled" />
 						</div>
 						<div class="form-group">
-							<label for="apellido">Apellidos:</label>
-							<input type="text" class="form-control" name="apellido" value={{ $item->apellido }} disabled="disabled" />
+							<label>Apellidos:</label>
+							<input type="text" class="form-control" name="apellido" value="{{ $item->apellido }}" disabled="disabled" />
 						</div>
 
 					</div>
@@ -118,12 +121,12 @@
 					<div class="box-body">
 						<div class="form-group">
 							<label><strong>Auto Interesado</strong></label>
-							<input type="text" class="form-control" id="auto_interesado" name="auto_interesado" value={{ $item->auto_interesado }}
+							<input type="text" class="form-control" id="auto_interesado" name="auto_interesado" value="{{ $item->auto_interesado }}"
 							 disabled="disabled">
 						</div>
 						<div class="form-group">
 							<label>Información de documentación,cliente,etc...</label>
-							<textarea class="form-control" id="detalle" rows="7" value={{ $item->detalles }} disabled="disabled"></textarea>
+							<textarea class="form-control" id="detalle" rows="7" value="{{ $item->detalles }}" disabled="disabled"></textarea>
 						</div>
 					</div>
 					<!-- /.box-body -->
@@ -150,25 +153,24 @@
 							<div class="col-xs-12 col-lg-6">								
 								<div class="form-group">
 										<label><strong>Usado</strong></label>
-									<input type="text" class="form-control" id="usado" name="usado" disabled="disabled">
+									<input type="text" class="form-control" id="usado" name="usado" disabled="disabled" value="{{ $item->usado}}">
 									<p></p>
 								</div>
 								<div class="form-group">
 										<label><strong>Contado</strong></label>
 										<div class="input-group">
-											<input class="form-control border-rigth-0" type="text" class="form-control" id="contado" name="contado" value={{ $item->contado }}
+											<input class="form-control border-rigth-0" type="text" class="form-control" id="contado" name="contado" value="{{ $item->contado }}"
 											 disabled="disabled">
 											<span class="input-group-addon bg-white border-left-0"><i class="glyphicon glyphicon-usd"></i></span>
 										</div>
 									</div>
 									<div class="form-group">
 										<label><strong>Otra Forma de Pago</strong></label>
-										<input class="form-control border-rigth-0" type="text" class="form-control" id="otropago" name="otropago" value={{ $item->otropago }}
-										disabled="disabled">
+										<input class="form-control border-rigth-0" type="text" class="form-control" id="otropago" name="otropago" value="{{ $item->otropago }}" disabled="disabled">
 									</div>
 									<div class="form-group">
 										<label><strong>Hasta cuanto puede pagar por mes</strong></label>
-										<input type="number" class="form-control" id="cant_pormes" name="cant_pormes" value={{ $item->cant_pormes }}
+										<input type="number" class="form-control" id="cant_pormes" name="cant_pormes" value="{{ $item->cant_pormes }}"
 										 disabled="disabled">
 									</div>
 							</div>
@@ -176,25 +178,25 @@
 							<div class="col-xs-12 col-lg-6">								
 									<div class="form-group">
 										<label><strong>Tipo de Financiación</strong></label>
-										<input type="text" class="form-control" id="tipofinanciera" name="tipofinanciera" value={{ $item->nombretipo }}
+										<input type="text" class="form-control" id="tipofinanciera" name="tipofinanciera" value="{{ $item->nombretipo }}"
 										 disabled="disabled">
 										<p></p>
 									</div>
 									<div class="form-group">
 										<label><strong>Financiera</strong></label>
-										<input type="text" class="form-control" id="nombfinanciera" name="nombfinanciera" value={{ $item->nomb_financ }}
+										<input type="text" class="form-control" id="nombfinanciera" name="nombfinanciera" value="{{ $item->nomb_financ }}"
 										 disabled="disabled">
 										<p></p>
 									</div>
 									<div class="form-group">
 										<label><strong>Cantidad de Cuotas</strong></label>
-										<input type="text" class="form-control" id="cantcuotas" name="cantcuotas" value={{ $item->numcuotas }}
+										<input type="text" class="form-control" id="cantcuotas" name="cantcuotas" value="{{ $item->numcuotas }}"
 										 disabled="disabled">
 										<p></p>
 									</div>
 									<div class="form-group">
 										<label><strong>Importe</strong></label>
-										<input type="text" class="form-control" id="importe" name="importe" value={{ $item->importe_finan }} disabled="disabled">
+										<input type="text" class="form-control" id="importe" name="importe" value="{{ $item->importe_finan }}" disabled="disabled">
 										<p></p>
 									</div>
 								</div>

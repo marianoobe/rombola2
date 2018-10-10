@@ -15,8 +15,8 @@ class CreateListaPreciosTable extends Migration
     {
         Schema::create('lista_precios', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('modelo');
-            $table->string('descripcion');
+            $table->string('modelos',100);
+            $table->string('descripcion',500);
             $table->integer('precio');
             $table->timestamps();
         });

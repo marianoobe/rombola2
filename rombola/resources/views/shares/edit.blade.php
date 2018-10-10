@@ -3,8 +3,10 @@
 @section('seccion')
 @foreach($client as $item)
 @endforeach()
-<form method="PATCH" action="{{ route('clientes.update', $item->idpersona) }}">
-	<input type="hidden" name="_token" value="{{csrf_token()}}">
+<form method="post" action="{{ route('clientes.update',$item->idpersona) }}">
+		<input name="_method" type="hidden" value="PATCH">
+								<input type="hidden" name="_method" value="PUT">
+								<input type="hidden" name="_token" value="{{csrf_token()}}">
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="box box-primary">
@@ -20,52 +22,52 @@
 						<div class="col-xs-16 col-lg-6">
 							<div class="form-group">
 								<label>Dni:</label>
-								<input id="dni" type="text" class="form-control" name="dni" value={{ $item->dni }} disabled="disabled" />
+								<input id="dni" type="text" class="form-control" name="dni" value="{{ $item->dni }}" disabled="disabled" />
 							</div>
 							<div class="form-group">
 								<label>Nombres:</label>
-								<input type="text" class="form-control" name="nombre" value={{ $item->nombre }} disabled="disabled" />
+								<input type="text" class="form-control" name="nombre" value="{{ $item->nombre }}" disabled="disabled" />
 							</div>
 							<div class="form-group">
 								<label>Apellidos:</label>
-								<input type="text" class="form-control" name="apellido" value={{ $item->apellido }} disabled="disabled" />
+								<input type="text" class="form-control" name="apellido" value="{{ $item->apellido }}" disabled="disabled" />
 							</div>
 							<div class="form-group">
 								<label>Email:</label>
-								<input type="text" class="form-control" name="email" value={{ $item->email }} disabled="disabled" />
+								<input type="text" class="form-control" name="email" value="{{ $item->email }}" disabled="disabled" />
 							</div>
 
 							<div class="form-group">
 								<label>Domicilio:</label>
-								<input type="string" class="form-control" name="domicilio" value={{ $item->email }} disabled="disabled" />
+								<input type="string" class="form-control" name="domicilio" value="{{ $item->domicilio }}" disabled="disabled" />
 							</div>
 
 							<div class="form-group">
 								<label>Actividad/Empresa:</label>
-								<input type="text" class="form-control" name="act_empresa" value={{ $item->act_empresa }} disabled="disabled" />
+								<input type="text" class="form-control" name="act_empresa" value="{{ $item->act_empresa }}" disabled="disabled" />
 							</div>
 
 						</div>
 						<div class="col-xs-16 col-lg-6">
 							<div class="form-group">
 								<label>Teléfono Fijo:</label>
-								<input type="text" class="form-control" name="num_tel" value={{ $item->num_tel }} disabled="disabled" />
+								<input type="text" class="form-control" name="num_tel" value="{{ $item->num_tel }}" disabled="disabled" />
 							</div>
 							<div class="form-group">
 								<label>Celular 1:</label>
-								<input type="text" class="form-control" name="num_tel" value={{ $item->num_tel }} disabled="disabled" />
+								<input type="text" class="form-control" name="num_tel" value="{{ $item->num_tel }}" disabled="disabled" />
 							</div>
 							<div class="form-group">
 								<label>Celular 2:</label>
-								<input type="text" class="form-control" name="num_tel" value={{ $item->num_tel }} disabled="disabled" />
+								<input type="text" class="form-control" name="num_tel" value="{{ $item->num_tel }}" disabled="disabled" />
 							</div>
 							<div class="form-group">
 								<label>Fecha de Nacimiento:</label>
-								<input type="text" class="form-control" name="fecha_nacimiento" value={{ $item->fecha_nacimiento }} disabled="disabled" />
+								<input type="text" class="form-control" name="fecha_nacimiento" value="{{ $item->fecha_nacimiento }}" disabled="disabled" />
 							</div>
 							<div class="form-group">
 								<label>Estado Civil:</label>
-								<input type="text" class="form-control" name="estado_civil" value={{ $item->estado_civil }} disabled="disabled" />
+								<input type="text" class="form-control" name="estado_civil" value="{{ $item->estado_civil }}" disabled="disabled" />
 							</div>
 						</div>
 

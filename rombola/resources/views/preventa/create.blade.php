@@ -33,7 +33,7 @@
 						<div class="col-xs-12 col-lg-offset-3 col-lg-3">
 							<div class="form-group">
 								<div class='input-group date'>
-									<input type="date" class="form-control" id="fecha_oper" name="fecha_oper">
+									<input type="text" class="form-control" id="fecha_oper" name="fecha_oper" value="<?php echo date("d-m-Y H:i");?>" disabled>
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -42,7 +42,7 @@
 						</div>
 						<div class="col-xs-12 col-lg-3">
 							<div class="form-group">
-								<input type="text" maxlength="125" class="form-control" id="nom_vendedor" disabled="disabled" value="{{ Auth::user()->name }}">
+								<input type="text" maxlength="125" class="form-control" id="nom_vendedor" disabled value="{{ Auth::user()->name }}">
 							</div>
 						</div>
 					</div>
@@ -119,30 +119,30 @@
 										<div class="row margenBoot-25">
 											<div class="col-xs-12 col-lg-6">
 												<div class="form-group">
-													<label><strong>DNI</strong></label>
+													<label><strong>*DNI</strong></label>
 													<input type="number" class="form-control" id="dni" name="dni">
 												</div>
 												<div class="form-group">
-													<label><strong>Nombres</strong></label>
+													<label><strong>*Nombres</strong></label>
 													<input type="text" class="form-control" id="nombre" name="nombre">
 												</div>
 												<div class="form-group">
-													<label><strong>Apellidos</strong></label>
+													<label><strong>*Apellidos</strong></label>
 													<input type="text" class="form-control" id="apellido" name="apellido">
 												</div>
 
 											</div>
 											<div class="col-xs-12 col-lg-6">
 												<div class="form-group">
-													<label><strong>Correo Electrónico</strong></label>
+													<label><strong>*Correo Electrónico</strong></label>
 													<input type="email" class="form-control" id="email" name="email">
 												</div>
 												<div class="form-group">
-													<label><strong>Celular</strong></label>
+													<label><strong>*Celular</strong></label>
 													<input type="number" class="form-control" id="cel_1" name="cel_1">
 												</div>
 												<div class="form-group">
-													<label><strong>Actividad/Empresa</strong></label>
+													<label><strong>*Actividad/Empresa</strong></label>
 													<input type="text" class="form-control" id="act_empresa" name="act_empresa">
 												</div>
 											</div>
@@ -172,7 +172,7 @@
 
 				<div class="box-body">
 					<div class="form-group">
-						<input type="text" class="form-control" id="auto_interesado" name="auto_interesado" placeholder="Marca - Modelo - Año - Versión ....">
+						<input type="text" class="form-control" id="auto_interesado" name="auto_interesado" placeholder="* Marca - Modelo - Año - Versión ...." required>
 					</div>
 					<div class="form-group">
 						<label>Información de documentación,cliente,etc...</label>
@@ -201,13 +201,13 @@
 					<div class="row margenBoot-25">
 						<div class="col-xs-12 col-lg-6">
 							<div class="form-group">
-								<label><strong>Usado</strong></label>
-								<textarea class="form-control rounded-0" id="usado" name="usado" rows="4"></textarea>
+								<label><strong>*Usado</strong></label>
+								<textarea class="form-control rounded-0" id="usado" name="usado" rows="4" required></textarea>
 							</div>
 							<div class="form-group">
-								<label><strong>Contado</strong></label>
+								<label><strong>*Contado</strong></label>
 								<div class="input-group">
-									<input class="form-control border-rigth-0" type="text" class="form-control" id="contado" name="contado">
+									<input class="form-control border-rigth-0" type="number" class="form-control" id="contado" name="contado" required>
 									<span class="input-group-addon bg-white border-left-0"><i class="glyphicon glyphicon-usd"></i></span>
 								</div>
 							</div>
@@ -220,8 +220,8 @@
 								<textarea class="form-control rounded-0" id="otropago" name="otropago" rows="2" ></textarea>
 							</div>
 							<div class="form-group">
-								<label><strong>Hasta cuánto puede pagar por mes</strong></label>
-								<input type="number" class="form-control" id="cant_pormes" name="cant_pormes">
+								<label><strong>*Hasta cuánto puede pagar por mes</strong></label>
+								<input type="number" class="form-control" id="cant_pormes" name="cant_pormes" required>
 							</div>
 						</div>
 						<div text-align="center" class="col-xs-12 col-lg-6">
@@ -236,7 +236,7 @@
 							</div>
 							<section id="box-financiera" style="display:none" class="box box-default">
 								<div class="form-group">
-									<label><strong>Financieras</strong></label>
+									<label><strong>*Financieras</strong></label>
 									<div>
 										{!! Form::select('nombfinanciera',[],null,['placeholder'=>'','class'=>'form-control','id'=>'nombfinanciera']) !!}
 									</div>
@@ -245,7 +245,7 @@
 							</section>
 							<section id="box-cuotas" style="display:none" class="box box-default">
 								<div class="form-group">
-									<label><strong>Cantidad de Cuotas</strong></label>
+									<label><strong>*Cantidad de Cuotas</strong></label>
 									<div>
 										{!! Form::select('numcuotas',['placeholder'=>''],null,['placeholder'=>'','class'=>'form-control','id'=>'cantcuotas']) !!}
 									</div>

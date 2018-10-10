@@ -3,36 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use DB;
 
 class ListaPrecioController extends Controller
 {
 
     public function importChevrolet() 
     {
-        $format= $request->get("formato");
-        dd("AAAAAAAANDA");
-
-        dd($format);
-        /** El método load permite cargar el archivo definido como primer parámetro */
-        Excel::load('Chevrolet-modificada'.'xlsx', function ($reader) {
-            /**
-             * $reader->get() nos permite obtener todas las filas de nuestro archivo
-             */
-            foreach ($reader->get() as $key => $row) {
-                $crevrolet = [
-                    'modelos' => $row['modelos'],
-                    'descripcion' => $row['descripcion'],
-                    'precio' => $row['precio'],
-                ];
-                /** Una vez obtenido los datos de la fila procedemos a registrarlos */
-                if (!empty($producto)) {
-                    DB::table('chevrolet')->insert($crevrolet);
-                }
-            }
-            echo 'La lista se cargó exitosamente';
-        });
-
-        return view('lista-precios');
+        
     }
 
 
@@ -64,7 +43,49 @@ class ListaPrecioController extends Controller
      */
     public function store(Request $request)
     {
-        dd("store");
+        $format = $request->get("formato");
+
+        if($format==1){
+        $nomb= 'Chevrolet.xlsx';
+        Excel::load('Chevrolet.xlsx', function ($reader) {
+            /**
+             * $reader->get() nos permite obtener todas las filas de nuestro archivo
+             */
+            foreach ($reader->get() as $key => $row) {
+                $producto = [
+                    'modelos' => $row['modelos'],
+                    'descripcion' => $row['descripcion'],
+                    'precio' => $row['precio'],
+                ];
+                /** Una vez obtenido los datos de la fila procedemos a registrarlos */
+                if (!empty($producto)) {
+                    DB::table('lista_precios')->insert($producto);
+                }
+            }
+            echo 'La lista se cargó exitosamente';
+        });
+    }
+    else{
+        Excel::load('Peugeot.xlsx', function ($reader) {
+            /**
+             * $reader->get() nos permite obtener todas las filas de nuestro archivo
+             */
+            foreach ($reader->get() as $key => $row) {
+                $producto = [
+                    'modelos' => $row['modelos'],
+                    'descripcion' => $row['descripcion'],
+                    'precio' => $row['precio'],
+                ];
+                /** Una vez obtenido los datos de la fila procedemos a registrarlos */
+                if (!empty($producto)) {
+                    DB::table('peugeots')->insert($producto);
+                }
+            }
+            echo 'La lista se cargó exitosamente';
+        });
+    }
+
+        return view('lista-precios');
     }
 
     /**

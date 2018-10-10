@@ -83,7 +83,7 @@ class PreventaController extends Controller
           }
           $idpers=$item->idpersona;
           $cliente = new Cliente([
-            'idpersona' => $idpers,
+            'cliente_persona' => $idpers,
             'fecha_nacimiento' => "####",
             'domicilio'=> "####",
             'estado_civil'=> "####",
@@ -94,7 +94,7 @@ class PreventaController extends Controller
           if($request->get('cel_1') != null)
           {
           $tel = new Telefono([
-            'idpersona' => $idpers,
+            'personas_telefono' => $idpers,
             'num_tel' => $request->get('cel_1'),
             'tipo' => '2'
           ]);
@@ -192,12 +192,11 @@ class PreventaController extends Controller
       $idpers=$item->idpersona;
       
       $preventa = DB::table('personas')
-        ->join('operaciones', 'operaciones.id_operacion' ,'personas.idpersona')
-        ->join('preventas','preventas.idpreventa','operaciones.id_operacion')
+        ->join('operaciones', 'operaciones.persona_operacion' ,'personas.idpersona')
+        ->join('preventas','preventas.preventa_oper','operaciones.id_operacion')
         ->where('personas.idpersona','=', $idpers)
         ->get();
         
-
         return view('preventa.edit', compact('preventa'));
     }
 

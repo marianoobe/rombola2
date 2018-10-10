@@ -74,6 +74,7 @@
 									<h4 class="modal-title">
 										<font style="vertical-align: inherit;">
 											<font style="vertical-align: inherit;">NUEVO CLIENTE</font>
+											<h6 style="vertical-align: inherit;">*campos obligatorios</h6>
 										</font>
 									</h4>
 								</div>
@@ -83,46 +84,47 @@
 										<div class="row margenBoot-25">
 											<div class="col-xs-12 col-lg-6">
 												<div class="form-group">
-													<label><strong>DNI</strong></label>
-													<input type="number" class="form-control" id="dni" name="dni">
+													<label><strong>*DNI</strong></label>
+													<input type="number" class="form-control" id="dni" name="dni" required>
 												</div>
 												<div class="form-group">
-													<label><strong>Nombres</strong></label>
-													<input type="text" class="form-control" id="nombre" name="nombre">
+													<label><strong>*Nombres</strong></label>
+													<input type="text" class="form-control" id="nombre" name="nombre" required>
 												</div>
 												<div class="form-group">
-													<label><strong>Apellidos</strong></label>
-													<input type="text" class="form-control" id="apellido" name="apellido">
+													<label><strong>*Apellidos</strong></label>
+													<input type="text" class="form-control" id="apellido" name="apellido" required>
 												</div>
 												<div class="form-group">
-													<label><strong>Correo Electrónico</strong></label>
-													<input type="email" class="form-control" id="email" name="email">
+													<label><strong>*Correo Electrónico</strong></label>
+													<input type="email" class="form-control" id="email" name="email" required>
 												</div>
 												<div class="form-group">
-													<label><strong>Teléfono Fijo</strong></label>
-													<input type="number" class="form-control" id="tel_fijo" name="tel_fijo">
-												</div>
+														<label><strong>*Celular</strong></label>
+														<input type="number" class="form-control" id="cel_1" name="cel_1" required>
+													</div>
+											
 												<div class="form-group">
-													<label><strong>Otro</strong></label>
+													<label><strong>Otro (opcional)</strong></label>
 													<input type="number" class="form-control" id="cel_2" name="cel_2">
 												</div>
 											</div>
 											<div class="col-xs-12 col-lg-6">
 												<div class="form-group">
-													<label><strong>Actividad/Empresa</strong></label>
-													<input type="text" class="form-control" id="act_empresa" name="act_empresa">
+													<label><strong>*Actividad/Empresa</strong></label>
+													<input type="text" class="form-control" id="act_empresa" name="act_empresa" required>
 												</div>
 												<div class="form-group">
-													<label><strong>Fecha de Nacimiento</strong></label>
-													<input type="date" class="form-control" id="fecha_nac" name="fecha_nac">
+													<label><strong>*Fecha de Nacimiento</strong></label>
+													<input type="date" class="form-control" id="fecha_nac" name="fecha_nac" required>
 												</div>
 												<div class="form-group">
 													<div class="form-group">
-														<label><strong>Domicilio</strong></label>
-														<input type="text" class="form-control" id="domicilio" name="domicilio">
+														<label><strong>*Domicilio</strong></label>
+														<input type="text" class="form-control" id="domicilio" name="domicilio" required>
 													</div>
 													<div class="form-group">
-														<label><strong>Estado Civil</strong></label>
+														<label><strong>*Estado Civil</strong></label>
 														<select id="estado_civil" name="estado_civil" class="form-control form-control-sm">
 															<option>Soltero</option>
 															<option>Convive</option>
@@ -131,10 +133,8 @@
 															<option>Viudo</option>
 														</select>
 													</div>
-													<div class="form-group">
-														<label><strong>Celular 1</strong></label>
-														<input type="number" class="form-control" id="cel_1" name="cel_1">
-													</div>
+													
+
 												</div>
 											</div><!-- /.modal-content -->
 										</div><!-- /.modal-dialog -->

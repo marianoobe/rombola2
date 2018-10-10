@@ -15,13 +15,15 @@ class CreateClientesTable extends Migration
     {
         Schema::create('clientes', function (Blueprint $table) {
             $table->increments('idcliente');
-            $table->integer('idpersona');
+            $table->integer('cliente_persona')->unsigned();
+            $table->foreign('cliente_persona')->references('idpersona')->on('personas');
             $table->string('fecha_nacimiento');
             $table->string('domicilio', 50);
             $table->text('estado_civil');
             $table->text('estado_ficha');
             $table->timestamps();
         });
+
     }
 
     /**

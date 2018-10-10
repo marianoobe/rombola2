@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateUsers extends Migration
+class CreatePeugeotsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class UpdateUsers extends Migration
      */
     public function up()
     {
-         
-
-         Schema::table('users', function ($table) {
-             $table->string('nombres', 60)->nullable();
-             $table->string('apellidos', 60)->nullable();
-             $table->string('telefono', 60)->nullable();
+        Schema::create('peugeots', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('modelo');
+            $table->string('version',150);
+            $table->string('precio',30);
+            $table->timestamps();
         });
-
-
     }
 
     /**
@@ -31,6 +29,6 @@ class UpdateUsers extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('peugeots');
     }
 }
