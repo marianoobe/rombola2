@@ -7,9 +7,9 @@
 			<!-- Default box -->
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">PreVentas</h3>
+					<h3 class="box-title">Ventas</h3>
 					<div class="col-sm-offset-10">
-							<a role="button" style="margin-bottom:20%;" href="{{ route('pre-venta.create') }}" class="btn btn-xl btn-success">NUEVA PREVENTA</a>
+						<a role="button" href="{{ route('venta.create') }}" class="btn btn-xl btn-success">NUEVA VENTA</a>
 					</div>
 				</div>
 				<div class="box-body">
@@ -34,30 +34,15 @@
 						<thead>
 							<tr>
 								<th scope="col">Fecha</th>
-								<th scope="col">Auto Buscado</th>
-								<th scope="col">Auto Ofrecido</th>
-								<th scope="col">Dinero que dispone</th>
-								<th scope="col">Formas de Pago</th>
+								<th scope="col">Marca</th>
+								<th scope="col">Modelo</th>
+								<th scope="col">Dominio</th>
+								<th scope="col">Cliente</th>
 								<th scope="col">Estado</th>
 								<th scope="col"></th>
 							</tr>
 						</thead>
-						<tbody id="myTable">
-								@foreach($preventa_cliente as $item)
-								<tr>
-									<td>{{$item->fecha_oper}}</td>
-									<td>{{$item->auto_interesado}}</td>
-									<td>{{$item->usado}}</td>
-									<td>{{$item->contado}}</td>
-									<td>{{$item->importe_finan}}</td>
-									<td style="cursor: default;">
-										<a href="{{ route('pre-venta.edit',$item->dni)}}" class="btn btn-primary btn-sm">
-										 <span class="glyphicon glyphicon-search"></span></a>							
-									</td>
-								</tr>
-								@endforeach()
-							</tbody>
-						</table>
-						{{$preventa_cliente->render()}}	
-					
+						<tbody>
+					</table>
+
 					@endsection

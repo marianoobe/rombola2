@@ -50,13 +50,18 @@ Route::group(['middleware' => 'auth'], function () {
     
 });
 
+Route::resource('clientes','ClienteController');
 Route::resource('pre-venta','PreventaController');
 Route::get('pre-venta/cuotas/{id}','PreventaController@getCuotas');
 Route::get('pre-venta/financiera/{id}','PreventaController@getFinanciera');
 
+Route::resource('venta','VentaController');
+Route::resource('admin/financiera', 'FinancieraController');
 
-Route::resource('clientes','ClienteController');
 
+Route::resource('listaprecio', 'ListaPrecioController');
+
+Route::get('importExcel', 'ExcelController@importExcel');
 
 //Route::get('autos.index','AutomovileController@autos')->name('autos');
 //Route::get('autos.create','AutomovileController@create')->name('create');
