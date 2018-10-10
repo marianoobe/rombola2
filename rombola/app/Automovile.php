@@ -30,26 +30,7 @@ class Automovile extends Model
                     ->orWhere('estado','LIKE', '%'.$name.'%')                                      
                     ->orWhere('dominio','LIKE', '%'.$name.'%')
                      ->orWhere('vin','LIKE', '%'.$name.'%'); 
-      /*  if($dato=='nuevo'){
-
-           return $query->where('marca','LIKE','%'.$name.'%')
-                    ->orWhere('version','LIKE', '%'.$name.'%')
-                    ->orWhere('color','LIKE', '%'.$name.'%')
-                    ->orWhere('estado','LIKE', '%'.$name.'%')                                      
-                    
-                     ->orWhere('vin','LIKE', '%'.$name.'%');                     
-        
-        }
-        elseif($dato=='usado'){
-
-             return $query->where('marca','LIKE','%'.$name.'%')
-                    ->orWhere('version','LIKE', '%'.$name.'%')
-                    ->orWhere('color','LIKE', '%'.$name.'%')
-                    ->orWhere('estado','LIKE', '%'.$name.'%')                                      
-                    ->orWhere('dominio','LIKE', '%'.$name.'%'); 
-                                        
-        
-        }*/
+     
        
         
      }

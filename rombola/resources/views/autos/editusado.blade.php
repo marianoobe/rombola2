@@ -30,12 +30,7 @@
 							@endforeach()
 
 							<form method="POST" action="{{ route('autos.update',$item->id_auto) }}">
-							   <input name="_method" type="hidden" value="PATCH">
-								<input type="hidden" name="_method" value="PUT">
-								<input type="hidden" name="_token" value="{{csrf_token()}}">
 								
-								<input type="hidden" name="id_auto" value="{{ $item->id_auto }}">
-
 								<input type="hidden" id="usado" name="usado" value="usado">
 								<div class="row margenBoot-25">
 									<div class="col-xs-12 col-lg-6">
@@ -51,10 +46,7 @@
 											<label for="version"><strong>Version</strong></label>
 											<input type="text" class="form-control" id="version" name="version" value={{ $item->version }} disabled="disabled">
 										</div>
-										<div class="form-group">
-											<label for="dominio"><strong>Dominio</strong></label>
-											<input type="text" class="form-control" id="dominio" name="dominio" value={{ $item->dominio }} disabled="disabled">
-										</div>
+										
 										<div class="form-group">
 											<label for="titular"><strong>Titular</strong></label>
 											<input type="text" class="form-control" id="titular" name="titular" value={{ $item->titular }} disabled="disabled">
@@ -63,6 +55,7 @@
 											<label for="anio"><strong>Año</strong></label>
 											<input type="number" class="form-control" id="anio" name="anio" value={{ $item->anio}} disabled="disabled">
 										</div>
+											
 
 									</div>
 									<div class="col-xs-12 col-lg-6">
@@ -110,8 +103,8 @@
 								<div class="box-footer">
 									<div class="row margenBoot-25" style="margin-top:25px;">
 										<div id="actualizar" class="col-xs-12 col-lg-12" style="display:none">
-<button type="submit" onclick="realizaProceso($('#estado').val())" class="btn btn-primary">
-										Actualizar Información</button>										</div>
+											<button type="submit" onclick="realizaProceso($('#estado').val())" class="btn btn-primary">
+												Actualizar Información</button> </div>
 									</div>
 								</div>
 							</form>

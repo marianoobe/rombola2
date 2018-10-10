@@ -27,6 +27,7 @@
 
 						<div class="box-body">
 							@foreach($autos as $item)
+							
 							@endforeach()
 
 							
@@ -35,7 +36,7 @@
 								<input type="hidden" name="_method" value="PUT">
 								<input type="hidden" name="_token" value="{{csrf_token()}}">
 								<input type="hidden" id="nuevo" name="nuevo" value="nuevo">
-								<input type="hidden" name="id_auto" value="{{ $item->id_auto }}">
+								
 
 								<div class="row margenBoot-25">
 									<div class="col-xs-12 col-lg-6">

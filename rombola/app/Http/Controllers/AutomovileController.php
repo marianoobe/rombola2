@@ -24,7 +24,7 @@ class AutomovileController extends Controller
        $autos=Automovile::Search($request->name)
        ->whereNotNull('vin')
        ->orderBY('id_auto')
-       ->paginate(3);
+       ->paginate(5);
                    
               
   //  dd($request->name);
@@ -36,12 +36,12 @@ class AutomovileController extends Controller
     {
         //$name  = $request->get('name');
        
-       $autos=Automovile::Search($request->name,$request->dato)
+       $autos=Automovile::Search($request->name)
        ->whereNotNull('dominio')
        ->orderBY('id_auto')
-       ->paginate(3);
+       ->paginate(5);
         
-   
+         
         return view('autos/usados')->with('autos',$autos);
 
        
@@ -146,19 +146,13 @@ class AutomovileController extends Controller
      */
     public function edit($id)
     {
-          $auto = Automovile::where("id_auto","=",$id)->select("id_auto")->get();
-          
-            foreach ($auto as $item) {
+         $autos = Automovile::where("id_auto","=",$id)->get();
+         foreach ($autos as $item) {
         //echo "$item->idpersona";
-         }
-     // dd($auto);
-      $idcar=$item->id_auto;
-          $autos = DB::table('automoviles')
-               
-        ->where('automoviles.id_auto','=', $idcar)
-        ->get();
-      
-
+      }
+     //d($autos);
+     
+//dd($autos);
       return view('autos.edit', compact('autos'));
     }
  
@@ -225,7 +219,7 @@ class AutomovileController extends Controller
          foreach ($auto as $item) {
         //echo "$item->idpersona";
       }
-     // dd($auto);
+     
       $idcar=$item->id_auto;
 
       $autos = DB::table('autosusados')
