@@ -55,7 +55,10 @@
 											<label for="anio"><strong>Año</strong></label>
 											<input type="number" class="form-control" id="anio" name="anio" value={{ $item->anio}} disabled="disabled">
 										</div>
-											
+												<div class="form-group">
+											<label for="anio"><strong>Dominio</strong></label>
+											<input type="text" class="form-control" id="dominio" name="dominio" value="{{ $item->dominio}}" disabled="disabled">
+										</div>
 
 									</div>
 									<div class="col-xs-12 col-lg-6">
