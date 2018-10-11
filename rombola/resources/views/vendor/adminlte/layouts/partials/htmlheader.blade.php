@@ -33,5 +33,7 @@
             echo json_encode($trans);
         @endphp
     </script>
+    <script src="jquery.js" type="text/javascript"></script>
+    <script src="js/jquery-pdf/src/jquery.maskedinput.js"></script>
 
 </head>

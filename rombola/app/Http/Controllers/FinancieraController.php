@@ -47,7 +47,7 @@ class FinancieraController extends Controller
     {        
         $tipo = $request->input('tipofinanciera')+1;
         $tipo_finan = TipoFinanciera::where("idtipo","=",$tipo)->select('idtipo')->first();
-
+        dd($tipo_finan);
         $financiera= new Financiera([
             'idtipofinanciera' => $tipo,
             'nomb_financ' => $request->input('nombrefinanc')

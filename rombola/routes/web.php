@@ -54,6 +54,7 @@ Route::resource('clientes','ClienteController');
 Route::resource('pre-venta','PreventaController');
 Route::get('pre-venta/cuotas/{id}','PreventaController@getCuotas');
 Route::get('pre-venta/financiera/{id}','PreventaController@getFinanciera');
+Route::get('pdf','ReportController@generar');
 
 Route::resource('venta','VentaController');
 Route::resource('admin/financiera', 'FinancieraController');

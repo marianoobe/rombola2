@@ -56,6 +56,7 @@
     {!! Form::close() !!}
 
     <script>
+  
         function realizaProceso(valorCaja1) {
             var parametros = {
                 "valorCaja1": valorCaja1
