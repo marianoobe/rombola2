@@ -136,7 +136,7 @@ return [
     |
     */
 
-    'providers' => [
+    'providers' => [ 
 
         /*
          * Laravel Framework Service Providers...
@@ -163,6 +163,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        
 
         /*
          * Package Service Providers...
@@ -177,6 +178,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
          Collective\Html\HtmlServiceProvider::class,
+         Barryvdh\Snappy\ServiceProvider::class,
+
         /*
         * Acacha AdminLTE template provider
         */
@@ -205,7 +208,6 @@ return [
     */
 
     'aliases' => [
-        'PDF' => Barryvdh\DomPFD\Facade::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
@@ -241,6 +243,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
+        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
         /*
         * Acacha AdminLTE template alias
         */
