@@ -3,7 +3,7 @@
 @section('seccion1')
 <div class="container-fluid spark-screen">
     {!! Form::open(['route'=>'pre-venta.store','method'=>'post','class'=>'form-group']) !!}
-
+    {!! Html::script('js/financiera.js') !!}
     <div class="row">
         <div class="col-md-14 col-md-offset-0">
             <div class="box box-primary">
@@ -18,10 +18,11 @@
                     <div class="row">
                         <div class="col-xs-12 col-lg-offset-2 col-lg-3">
                             <div class="form-group">
-                                <div id="fecha_preventa" class="input-group date">
-                                    <input type="date" class="form-control"> <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar">
-                                        </span>
+                                <div class='input-group date'>
+                                    <input type="text" class="form-control" id="fecha_oper" name="fecha_oper" 
+                                    value="<?php echo date("d-m-Y");?>" disabled>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
                             </div>
@@ -77,24 +78,29 @@
                                         <div class="row margenBoot-25">
                                             <div class="col-xs-12 col-lg-6">
                                                 <div class="form-group">
-                                                    <label><strong>DNI</strong></label>
-                                                    <input type="number" class="form-control" id="dni" name="dni">
+                                                    <label><strong>*DNI</strong></label>
+                                                    <input type="number" class="form-control" id="dni" name="dni"
+                                                        required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label><strong>Nombres</strong></label>
-                                                    <input type="text" class="form-control" id="nombre" name="nombre">
+                                                    <label><strong>*Nombres</strong></label>
+                                                    <input type="text" class="form-control" id="nombre" name="nombre"
+                                                        required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label><strong>Apellidos</strong></label>
-                                                    <input type="text" class="form-control" id="apellido" name="apellido">
+                                                    <label><strong>*Apellidos</strong></label>
+                                                    <input type="text" class="form-control" id="apellido" name="apellido"
+                                                        required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label><strong>Fecha de Nacimiento</strong></label>
-                                                    <input type="date" class="form-control" id="fecha_nac" name="fecha_nac">
+                                                    <label><strong>*Fecha de Nacimiento</strong></label>
+                                                    <input type="date" class="form-control" id="fecha_nac" name="fecha_nac"
+                                                        required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label><strong>Estado Civil</strong></label>
-                                                    <select id="estado_civil" name="estado_civil" class="form-control form-control-sm">
+                                                    <label><strong>*Estado Civil</strong></label>
+                                                    <select id="estado_civil" name="estado_civil" class="form-control form-control-sm"
+                                                        required>
                                                         <option>Soltero</option>
                                                         <option>Convive</option>
                                                         <option>Casado</option>
@@ -106,29 +112,28 @@
                                             </div>
                                             <div class="col-xs-12 col-lg-6">
                                                 <div class="form-group">
-                                                    <label><strong>Correo Electrónico</strong></label>
-                                                    <input type="email" class="form-control" id="email" name="email">
+                                                    <label><strong>*Correo Electrónico</strong></label>
+                                                    <input type="email" class="form-control" id="email" name="email"
+                                                        placeholder="email@gmail.com" required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label><strong>Teléfono Fijo</strong></label>
-                                                    <input type="number" class="form-control" id="tel_fijo" name="tel_fijo">
-                                                </div>
+                                                    <label><strong>*Celular</strong></label>
+                                                    <input type="text" class="form-control" id="cel_1" name="cel_1"
+                                                        required> </div>
                                                 <div class="form-group">
-                                                    <label><strong>Celular</strong></label>
-                                                    <input type="number" class="form-control" id="cel_1" name="cel_1">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label><strong>Otro</strong></label>
-                                                    <input type="number" class="form-control" id="cel_2" name="cel_2">
+                                                    <label><strong>Otro</strong>(tel. fijo o celular)</label>
+                                                    <input type="text" class="form-control" id="cel_2" name="cel_2">
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="form-group">
-                                                        <label><strong>Domicilio</strong></label>
-                                                        <input type="text" class="form-control" id="domicilio" name="domicilio">
+                                                        <label><strong>*Domicilio</strong></label>
+                                                        <input type="text" class="form-control" id="domicilio" name="domicilio"
+                                                            required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label><strong>Actividad/Empresa</strong></label>
-                                                        <input type="text" class="form-control" id="act_empresa" name="act_empresa">
+                                                        <label><strong>*Actividad/Empresa</strong></label>
+                                                        <input type="text" class="form-control" id="act_empresa" name="act_empresa"
+                                                            required>
                                                     </div>
 
                                                 </div>
@@ -149,6 +154,63 @@
 
                 </div>
                 <div class="box-footer">
+
+                    <div class="box box-primary">
+                        <div ALIGN="left" class="box-header with-border">
+                            <h4 class="box-title">¿Convive?</h4>
+                            <label><input type="checkbox" value="" onclick="javascript:validar_check_venta(this);"> Si</label>
+                        </div>
+                        <section id="conyuge" style="display:none" class="box box-default">
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            <div class="row margenBoot-25">
+                                <div class="col-xs-12 col-lg-6">
+                                    <div class="form-group">
+                                        <label><strong>*DNI</strong></label>
+                                        <input type="number" class="form-control" id="dni" name="dni" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>*Nombres</strong></label>
+                                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>*Apellidos</strong></label>
+                                        <input type="text" class="form-control" id="apellido" name="apellido" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>*Fecha de Nacimiento</strong></label>
+                                        <input type="date" class="form-control" id="fecha_nac" name="fecha_nac"
+                                            required>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12 col-lg-6">
+                                    <div class="form-group">
+                                        <label><strong>*Celular</strong></label>
+                                        <input type="text" class="form-control" id="cel_1" name="cel_1" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>Otro</strong>(tel. fijo o celular)</label>
+                                        <input type="text" class="form-control" id="cel_2" name="cel_2">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label><strong>*Domicilio</strong></label>
+                                            <input type="text" class="form-control" id="domicilio" name="domicilio"
+                                                required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label><strong>*Actividad/Empresa</strong></label>
+                                            <input type="text" class="form-control" id="act_empresa" name="act_empresa"
+                                                required>
+                                        </div>
+
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div>
+                        </section>
+                    </div>
+
+
                     <div class="box box-primary">
                         <div ALIGN="left" class="box-header with-border">
                             <h4 class="box-title">Información del Garante</h4>
@@ -157,24 +219,25 @@
                         <div class="row margenBoot-25">
                             <div class="col-xs-12 col-lg-6">
                                 <div class="form-group">
-                                    <label><strong>DNI</strong></label>
-                                    <input type="number" class="form-control" id="dni" name="dni">
+                                    <label><strong>*DNI</strong></label>
+                                    <input type="number" class="form-control" id="dni" name="dni" required>
                                 </div>
                                 <div class="form-group">
-                                    <label><strong>Nombres</strong></label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre">
+                                    <label><strong>*Nombres</strong></label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" required>
                                 </div>
                                 <div class="form-group">
-                                    <label><strong>Apellidos</strong></label>
-                                    <input type="text" class="form-control" id="apellido" name="apellido">
+                                    <label><strong>*Apellidos</strong></label>
+                                    <input type="text" class="form-control" id="apellido" name="apellido" required>
                                 </div>
                                 <div class="form-group">
-                                    <label><strong>Fecha de Nacimiento</strong></label>
-                                    <input type="date" class="form-control" id="fecha_nac" name="fecha_nac">
+                                    <label><strong>*Fecha de Nacimiento</strong></label>
+                                    <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" required>
                                 </div>
                                 <div class="form-group">
-                                    <label><strong>Estado Civil</strong></label>
-                                    <select id="estado_civil" name="estado_civil" class="form-control form-control-sm">
+                                    <label><strong>*Estado Civil</strong></label>
+                                    <select id="estado_civil" name="estado_civil" class="form-control form-control-sm"
+                                        required>
                                         <option>Soltero</option>
                                         <option>Convive</option>
                                         <option>Casado</option>
@@ -186,21 +249,23 @@
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <div class="form-group">
-                                    <label><strong>Celular</strong></label>
-                                    <input type="number" class="form-control" id="cel_1" name="cel_1">
+                                    <label><strong>*Celular</strong></label>
+                                    <input type="text" class="form-control" id="cel_1" name="cel_1" required>
                                 </div>
                                 <div class="form-group">
-                                    <label><strong>Otro</strong></label>
-                                    <input type="number" class="form-control" id="cel_2" name="cel_2">
+                                    <label><strong>Otro</strong>(tel. fijo o celular)</label>
+                                    <input type="text" class="form-control" id="cel_2" name="cel_2">
                                 </div>
                                 <div class="form-group">
                                     <div class="form-group">
-                                        <label><strong>Domicilio</strong></label>
-                                        <input type="text" class="form-control" id="domicilio" name="domicilio">
+                                        <label><strong>*Domicilio</strong></label>
+                                        <input type="text" class="form-control" id="domicilio" name="domicilio"
+                                            required>
                                     </div>
                                     <div class="form-group">
-                                        <label><strong>Actividad/Empresa</strong></label>
-                                        <input type="text" class="form-control" id="act_empresa" name="act_empresa">
+                                        <label><strong>*Actividad/Empresa</strong></label>
+                                        <input type="text" class="form-control" id="act_empresa" name="act_empresa"
+                                            required>
                                     </div>
 
                                 </div>
@@ -229,7 +294,7 @@
                             <button type="button" class="btn btn-success btn-block" style="margin-bottom: 10%;">0 KM</button>
                         </div>
                         @php
-                            $p=0;
+                        $p=0;
                         @endphp
                         <div class="col-xs-14 col-lg-6">
                             <button onclick="cambiar($p)" type="button" class="btn btn-success btn-block" style="margin-bottom: 10%;">USADO</button>
@@ -473,7 +538,7 @@
                                                             <div class="form-group">
                                                                 <label><strong>Documentación Entregada</strong></label>
                                                                 <textarea class="form-control" id="inp-observacion2"
-                                                                    name="inp-observacion2[]" rows="5" maxlength="21844"></textarea>
+                                                                    name="inp-observacion2[]" rows="5" maxlength="21844">CÉDULA DE IDENTIFICACIÓN DEL VEHÍCULO, CÉDULA DE AUTORIZADO, VTV EN VIGENCIA, CONSTANCIA DE LIBRE DEUDA MUNICIPAL DE IMPUESTOS Y MULTAS, INFORME DE DOMINIO, F12 CONFECCIONADO POR POLICÍA O GENDARMERÍA NACIONAL CON FECHA ACTUAL, TÍTULO Y F08 DEBIDAMENTE FIRMADO.</textarea>
                                                             </div>
                                                         </div>
 
@@ -624,13 +689,5 @@
         </div>
         {!! Form::close() !!}
     </div>
-<script>
-        $(document).ready(function () {
-            function cambiar($p){
-                $p=1;
-                return $p;
-            }
-            
-        }
-</script>
+
     @endsection

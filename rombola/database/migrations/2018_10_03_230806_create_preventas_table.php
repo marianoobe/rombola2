@@ -27,6 +27,7 @@ class CreatePreventasTable extends Migration
             $table->integer('numcuotas');
             $table->integer('importe_finan');
             $table->integer('cant_pormes');
+            $table->integer('visible');
             $table->timestamps();
         });
     }

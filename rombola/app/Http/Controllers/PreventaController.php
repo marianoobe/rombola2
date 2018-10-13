@@ -35,7 +35,7 @@ class PreventaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create() 
     {
         $tipo_finan = TipoFinanciera::pluck('nombretipo');
 
@@ -87,7 +87,8 @@ class PreventaController extends Controller
             'fecha_nacimiento' => "####",
             'domicilio'=> "####",
             'estado_civil'=> "####",
-            'estado_ficha'=> "Incompleta"
+            'estado_ficha'=> "Incompleta",
+            'visible'=> 1
           ]);
           $cliente->save();
           //--/insert Persona-Cliente

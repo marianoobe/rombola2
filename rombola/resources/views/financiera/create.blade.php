@@ -20,11 +20,11 @@
                             <div class="form-group">
                                 @php
                                 $cuotas = [
-                                "0" => "4",
-                                "1" => "8",
-                                "2" => "12",
-                                "3" => "24",
-                                "4" => "36",
+                                "4" => "4",
+                                "8" => "8",
+                                "12" => "12",
+                                "24" => "24",
+                                "36" => "36",
                                 ];
                                 @endphp
                                 <label><strong>Tipo de Financiación: </strong></label>
@@ -40,7 +40,7 @@
                             <div class="form-group">
                                 <p></p>
                                 <label><strong>Cantidad de Cuotas</strong></label>
-                                {!!Form::select('tipofinanciera',$cuotas,null,['class'=>'form-control','id'=>'tipofinanciera','multiple'=> true])!!}
+                                {!!Form::select('cantcuotas[]',$cuotas,null,['class'=>'form-control','id'=>'cantcuotas','multiple'=> true])!!}
                             </div>
                             <p></p>
                             {!! Form::submit("Guardar",['class'=>'btn btn-primary']) !!}

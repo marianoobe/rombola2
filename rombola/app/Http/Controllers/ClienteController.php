@@ -21,7 +21,7 @@ class ClienteController extends Controller
         $client_pers = DB::table('clientes')
         ->join('personas','personas.idpersona','clientes.cliente_persona')
         ->join('telefonos', 'telefonos.personas_telefono', 'personas.idpersona')
-        ->where('telefonos.tipo','=', 1)
+        ->where('telefonos.tipo','=', 2)
         ->paginate(3);
 
 
@@ -73,7 +73,8 @@ class ClienteController extends Controller
             'fecha_nacimiento' => $request->get('fecha_nac'),
             'domicilio'=> $request->get('domicilio'),
             'estado_civil'=> $request->get('estado_civil'),
-            'estado_ficha'=> "Completa"
+            'estado_ficha'=> "Completa",
+            'visible'=> 1
           ]);
           $cliente->save();
 

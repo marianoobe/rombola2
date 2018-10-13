@@ -1,6 +1,6 @@
 @extends('adminlte::layouts.app')
 
-@section('seccion1')
+@section('seccion')
 
 <div class="container-fluid spark-screen">
 
@@ -33,7 +33,7 @@
 						<div class="col-xs-12 col-lg-offset-3 col-lg-3">
 							<div class="form-group">
 								<div class='input-group date'>
-									<input type="text" class="form-control" id="fecha_oper" name="fecha_oper" value="<?php echo date("d-m-Y H:i");?>" disabled>
+									<input type="text" class="form-control" id="fecha_oper" name="fecha_oper" value="<?php echo date("d-m-Y ");?>" disabled>
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -120,30 +120,30 @@
 											<div class="col-xs-12 col-lg-6">
 												<div class="form-group">
 													<label><strong>*DNI</strong></label>
-													<input type="number" class="form-control" id="dni" name="dni">
+													<input type="number" class="form-control" id="dni" name="dni" required>
 												</div>
 												<div class="form-group">
 													<label><strong>*Nombres</strong></label>
-													<input type="text" class="form-control" id="nombre" name="nombre">
+													<input type="text" class="form-control" id="nombre" name="nombre" required>
 												</div>
 												<div class="form-group">
 													<label><strong>*Apellidos</strong></label>
-													<input type="text" class="form-control" id="apellido" name="apellido">
+													<input type="text" class="form-control" id="apellido" name="apellido" required>
 												</div>
 
 											</div>
 											<div class="col-xs-12 col-lg-6">
 												<div class="form-group">
 													<label><strong>*Correo Electrónico</strong></label>
-													<input type="email" class="form-control" id="email" name="email">
+													<input type="email" placeholder="email@gmail.com" class="form-control" id="email" name="email" required>
 												</div>
 												<div class="form-group">
 													<label><strong>*Celular</strong></label>
-													<input type="number" class="form-control" id="cel_1" name="cel_1">
+													<input type="text" class="form-control" id="cel_1" name="cel_1" required>
 												</div>
 												<div class="form-group">
 													<label><strong>*Actividad/Empresa</strong></label>
-													<input type="text" class="form-control" id="act_empresa" name="act_empresa">
+													<input type="text" class="form-control" id="act_empresa" name="act_empresa" required>
 												</div>
 											</div>
 										</div><!-- /.modal-content -->
@@ -217,7 +217,7 @@
 										tranferencia
 										bancaria,etc)</label>
 								</div>
-								<textarea class="form-control rounded-0" id="otropago" name="otropago" rows="2" ></textarea>
+								<textarea class="form-control rounded-0" id="otropago" name="otropago" rows="2" disabled></textarea>
 							</div>
 							<div class="form-group">
 								<label><strong>*Hasta cuánto puede pagar por mes</strong></label>
@@ -227,7 +227,7 @@
 						<div text-align="center" class="col-xs-12 col-lg-6">
 							{!! Html::script('js/financiera.js') !!}
 
-							<div class="form-group">
+							<div class="form-group"> 
 								<label><strong>Tipo de Financiación</strong></label>
 								<div>
 									{!! Form::select('tipofinanciera',$tipo_finan,null,['class'=>'form-control','id'=>'tipofinanciera']) !!}
@@ -279,4 +279,13 @@
 
 	</div>
 	{!! Form::close() !!}
+	<script>
+			
+			$(function ($) {
+				$("#inp-dominio").mask("99/99/9999");
+				$("#cel_1").mask("(999) 999-9999");
+				$("#ff_elem1178").mask("999-99-9999");
+			});
+		
+	</script>
 	@endsection

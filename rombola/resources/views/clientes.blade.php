@@ -48,7 +48,8 @@
 								<td>{{$item->email}}</td>
 								<td>{{$item->domicilio}}</td>
 								<td>{{$item->num_tel}}</td>
-								<td> <span class="label label-info">{{$item->estado_ficha}}</span></td>
+
+								<td> <span ><strong>{{$item->estado_ficha}}</strong></span></td>
 								<td style="cursor: default;">
 									<a href="{{ route('clientes.edit',$item->dni)}}" class="btn btn-primary btn-sm">
                                      <span class="glyphicon glyphicon-search"></span></a>							
@@ -97,16 +98,16 @@
 												</div>
 												<div class="form-group">
 													<label><strong>*Correo Electrónico</strong></label>
-													<input type="email" class="form-control" id="email" name="email" required>
+													<input type="email" placeholder="email@gmail.com" class="form-control" id="email" name="email" required>
 												</div>
 												<div class="form-group">
-														<label><strong>*Celular</strong></label>
-														<input type="number" class="form-control" id="cel_1" name="cel_1" required>
+														<label><strong>*Celular</strong></label> 
+														<input type="text" class="form-control" id="cel_1" name="cel_1" required>
 													</div>
 											
 												<div class="form-group">
 													<label><strong>Otro (opcional)</strong></label>
-													<input type="number" class="form-control" id="cel_2" name="cel_2">
+													<input type="text" class="form-control" id="cel_2" name="cel_2">
 												</div>
 											</div>
 											<div class="col-xs-12 col-lg-6">
@@ -149,6 +150,9 @@
 						</div>
 					</div>
 					<script>
+
+							
+
 						function realizaProceso(valorCaja1) {
 							var parametros = {
 								"valorCaja1": valorCaja1
@@ -165,8 +169,9 @@
 								}
 							});
 						}
-
+						
 						$(document).ready(function(){
+							
 							$("#myInput").on("keyup", function() {
 							  var value = $(this).val().toLowerCase();
 							  $("#myTable tr").filter(function() {
@@ -174,5 +179,12 @@
 							  });
 							});
 						  });
+						
+						  $(function ($) {
+							$("#inp-dominio").mask("99/99/9999");
+							$("#cel_1").mask("(999) 999-9999");
+							$("#ff_elem1178").mask("999-99-9999");
+						});
 					</script>
+		
 					@endsection

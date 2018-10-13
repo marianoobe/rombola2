@@ -96,7 +96,7 @@ function convert_html()
         #cabecera {
             width: 740px;
             padding: 0px;
-            height: 220px;
+            height: 200px;
             margin: 0px;
         }
 
@@ -128,7 +128,14 @@ function convert_html()
             margin-left: 350px;
         }
 
-        
+        #financiado.b {
+            visibility: hidden;
+        }
+
+        #financiado.a {
+            visibility: visible;
+        }
+
     </style>
 </head>
 
@@ -136,6 +143,13 @@ function convert_html()
 ;
 foreach($preventa as $item)
      {
+         $p=1;
+         if($p==1){
+          $h="a";
+         }
+         else{
+            $h="b";
+         }
     $output .= '
     <div id="cabecera">
         <div id="izquierda">
@@ -155,72 +169,54 @@ foreach($preventa as $item)
             <label >'.$item->nombre.'</label>
             
         </div>
-       
     </div>
-    <br>
+    <hr>
     <div id="fila1">
-    <p></p>
-        <label><strong>Vendedor</strong>: </label>
-        <label id="vendedor">sdfgsdg</label>
+        <p> <strong>Vendedor</strong>: Fabricio Carrio </p>
+        <p> <strong>Nombres y Apellidos</strong>: '.$item->nombre.' '.$item->apellido.' </p>
         <p></p>
-        <label><strong>Nombres y Apellidos</strong>: </label>
-        <label id="nombapell" value="">'.$item->nombre.' '.$item->apellido.'</label>
-
+        <p> <strong>Correo Electrónico</strong>: '.$item->email.'</p>
         <p></p>
-        <label><strong>Correo Electrónico</strong>: </label>
-        <label id="email">'.$item->email.'</label>
-
+        <p> <strong>Teléfono</strong>: </p>
         <p></p>
-        <label><strong>Teléfono</strong>: </label>
-        <label id="telefono"> </label>
-
-        <p></p>
-        <label><strong>Auto de Interés</strong>: </label>
-        <label id="auto_interes">'.$item->auto_interesado.'</label>
-
+        <p> <strong>Auto de Interés</strong>: '.$item->auto_interesado.'</p>
+        <hr>
         <div ALIGN="center" class="box-header with-border">
-        <h4 class="box-title">DETALLE</h4>
-    </div>
+        <h5 class="box-title">DETALLE</h5>
+        </div>
         <p>'.$item->detalles.'</p>
         <br><br><br><br><br>
         <p></p>
-
+        <hr>
     <div ALIGN="center" class="box-header with-border">
-        <h4 class="box-title">FORMA DE PAGO</h4>
+        <h5 class="box-title">FORMA DE PAGO</h5>
     </div>
         <p></p>
-        <label for="vendedor"><strong>Auto que entrega</strong>: </label>
-        <label for="">'.$item->usado.'</label>
+        <p> <strong>Auto que entrega</strong>: '.$item->usado.'</p>
     
         <p></p>
-        <label for="vendedor"><strong>Contado</strong>: </label>
-        <label for="">'.$item->contado.'</label>
-
+        <p> <strong>Contado</strong>: $'.$item->contado.'</p>
+        
         <p></p>
-        <label><strong>Financiación</strong>: </label>
-        <label for="">'.$item->nombretipo.'</label>
+        <p> <strong>Financiación</strong>: '.$item->nombretipo.'</p>
+        <hr>
     
-    <section id="financiado">
+    <section id="financiado" class="'.$h.'">
         <div ALIGN="center" class="box-header with-border">
             <h5 class="box-title">Detalles de Financiación</h5>
         </div>
-        <div class="form-group">
             <p></p>
-            <label for="vendedor"><strong>Nombre de Financiera</strong>: </label>
-            <label for="">'.$item->nomb_financ.'</label>
-        </div>
-        <div class="form-group">
+            <p> <strong>Nombre de Financiera</strong>: '.$item->nomb_financ.'</p>
+
             <p></p>
-            <label for="vendedor"><strong>Cantidad de Cuotas</strong>: </label>
-            <label for="">'.$item->numcuotas.'</label>
-        </div>
-        <div class="form-group">
+            <p> <strong>Cantidad de Cuotas</strong>: '.$item->numcuotas.'</p>
+
             <p></p>
-            <label for="vendedor"><strong>Importe Total</strong>: </label>
-            <label for="">'.$item->importe_finan.'</label>
+            <p> <strong>Importe Total</strong>: $'.$item->importe_finan.'</p>
+
         </div>
     </section>
-    <div ALIGN="center" class="panel-footer">
+    <div ALIGN="center">
         <h6>Los precios consignados son meramente informativos</h6>
     </div>
 </div>

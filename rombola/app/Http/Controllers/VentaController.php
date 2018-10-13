@@ -52,7 +52,17 @@ class VentaController extends Controller
             //echo "$item->idpersona";
           }
           $idpers=$item->idpersona;
-          
+          //insert Persona-Cliente
+          $cliente = new Cliente([
+            'cliente_persona' => $idpers,
+            'fecha_nacimiento' => $request->get('fecha_nac'),
+            'domicilio'=> $request->get('domicilio'),
+            'estado_civil'=> $request->get('estado_civil'),
+            'estado_ficha'=> "Completa",
+            'visible'=> 1
+          ]);
+          $cliente->save();
+
           //insert Persona-Garante
           $garante = new Garante([
             'idpersona' => $idpers,

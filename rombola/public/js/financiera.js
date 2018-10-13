@@ -31,6 +31,10 @@ function obtener(opt) {
 
 }
 
+
+$("#cel_1").mask("(999) 999-9999");
+
+
 function validar_check(obj) {
     if (obj.checked == true) {
         document.getElementById("otropago").disabled = false;
@@ -39,8 +43,15 @@ function validar_check(obj) {
     }
 }
 
-$(document).ready(function () {
+function validar_check_venta(obj) {
+    if (obj.checked == true) {
+        document.getElementById("conyuge").style.display = "block";
+    } else {
+        document.getElementById("conyuge").style.display = "none";
+    }
+}
 
+$(document).ready(function () {
     $('#tipofinanciera').change(function (event) {
         document.getElementById("box-financiera").style.display = "block";
         $.get(`financiera/${event.target.value}`, function (response, tipofinanciera) {

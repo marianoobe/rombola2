@@ -45,11 +45,10 @@ class FinancieraController extends Controller
      */
     public function store(Request $request)
     {        
-        $tipo = $request->input('tipofinanciera')+1;
-        $tipo_finan = TipoFinanciera::where("idtipo","=",$tipo)->select('idtipo')->first();
-        dd($tipo_finan);
+        $tipo = $request->input('tipofinanciera');
+        
         $financiera= new Financiera([
-            'idtipofinanciera' => $tipo,
+            'idtipofinanciera' => $tipo+1,
             'nomb_financ' => $request->input('nombrefinanc')
         ]);
         $financiera->save();
@@ -59,10 +58,11 @@ class FinancieraController extends Controller
         foreach ($finan as $item) {}
         
         $id = $item->idfinanciera;
-        
-        $cuotas = $request->input('cantcuotas');
 
+        $cuotas = $request->input('cantcuotas');
+        
         for ($i=0; $i < count($cuotas); $i++) { 
+            
         $cantidad = new CantidadCuotas ([
             'idcant_financ' => $id,
             'numcuotas' => $cuotas[$i]
