@@ -56,8 +56,9 @@ Route::get('pre-venta/cuotas/{id}','PreventaController@getCuotas');
 Route::get('pre-venta/financiera/{id}','PreventaController@getFinanciera');
 
 //Route::get('pdf','PdfController@index')->name('pdf');
-Route::get('generate-pdf', 'PdfController@index')->name('generate-pdf');
-Route::get('pdf', 'PdfController@pdf')->name('pdf');
+//Route::get('generate-pdf', 'PdfController@index')->name('generate-pdf');
+Route::get('print/{id}', 'PdfController@pdf')->name('print');
+Route::get('print_venta/{id}', 'PdfController@pdf_venta')->name('print_venta');
 
 
 Route::resource('venta','VentaController');

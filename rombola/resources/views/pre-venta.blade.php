@@ -50,10 +50,14 @@
 									<td>{{$item->usado}}</td>
 									<td>{{$item->contado}}</td>
 									<td>{{$item->importe_finan}}</td>
+									<td>{{$item->estado}}</td>
 									<td style="cursor: default;">
 										<a href="{{ route('pre-venta.edit',$item->dni)}}" class="btn btn-primary btn-sm">
-										 <span class="glyphicon glyphicon-search"></span></a>							
+										 <span class="glyphicon glyphicon-search"></span></a>
+										 <a href="{{ route('print',$item->dni)}}" class="btn btn-primary btn-sm">
+											<span class="glyphicon glyphicon-print"></span></a>								
 									</td>
+									
 								</tr>
 								@endforeach()
 							</tbody>

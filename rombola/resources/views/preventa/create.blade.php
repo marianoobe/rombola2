@@ -33,7 +33,7 @@
 						<div class="col-xs-12 col-lg-offset-3 col-lg-3">
 							<div class="form-group">
 								<div class='input-group date'>
-									<input type="text" class="form-control" id="fecha_oper" name="fecha_oper" value="<?php echo date("d-m-Y ");?>" disabled>
+									<input type="text" class="form-control" id="fecha_oper" name="fecha_oper" value="<?php echo date("d-m-Y ");?>" >
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -241,7 +241,7 @@
 										{!! Form::select('nombfinanciera',[],null,['placeholder'=>'','class'=>'form-control','id'=>'nombfinanciera']) !!}
 									</div>
 									<p></p>
-								</div>
+								</div> 
 							</section>
 							<section id="box-cuotas" style="display:none" class="box box-default">
 								<div class="form-group">

@@ -15,6 +15,9 @@ class CreateVentasTable extends Migration
     {
         Schema::create('ventas', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('codigo',11);
+            $table->text('cod_part1',4);
+            $table->text('cod_part2',4);
             $table->timestamps();
         });
     }

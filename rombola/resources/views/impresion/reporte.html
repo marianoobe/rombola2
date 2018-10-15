@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        #cabecera {
+            width: 740px;
+            padding: 0px;
+            height: 200px;
+            margin: 0px;
+        }
+
+        #comprador {
+            width: 300px;
+            padding: 0px;
+            height: 200px;
+            margin: 0px;
+            background-color: #CCCCCC;
+        }
+
+        h1 {
+            text-align: center;
+        }
+        
+        p {
+            font-size:12px;
+        }
+
+        #izquierda{ width: 280px;
+            }
+
+        #derecha {
+            margin-left:200px;
+            
+        }
+
+        #izquierda {
+            float: left;
+        }
+
+        #derecha {
+            float: right;
+        }
+
+        #financiado.b {
+            visibility: hidden;
+        }
+
+        #financiado.a {
+            visibility: visible;
+        }
+
+
+        #contenedor1{
+            text-align: left;
+            width: 750px;
+            margin: auto;}
+            
+            #lateral1{
+            width: 350px;  /*Este será el ancho que tendrá tu columna*/
+            float:left; /*Aqui determinas de lado quieres quede esta "columna" */
+            }
+            
+            #principal1{
+            margin-left:370px; /*Este margen hace que no se encime el contenido en tu menúlateral, es     importante que pongas un pocos pixeles más que el ancho  de tu columna lateral*/
+            font-size:11px;
+            border:#000000 1px solid; /*ponemos un dorde para que se vea bonito*/
+            }
+
+
+        </style>
+
+</head>
+
+<body>
+    <div id="cabecera">
+        <img src="C:\xampp\htdocs\rombolaagencia\rombola\public\img\encabezado.png" width="740" height="100" />
+        <p>Direccion Telefono</p>
+        <div ALIGN="center" class="box-header with-border">
+            <h5 class="box-title">SOLICITUD DE RESERVA</h5>
+        </div>
+        <p style="font-size:8px;">De mi consideración</p>
+        <p style="font-size:8px;">Por la presenta solicito a Ustedes la RESERVA de
+            la unidad seguidamente detallada en un todo de acuerdo a las condiciones generales
+            impresas en esta solicitud. Las que declaro conocer y aceptar por ser ellas de clara
+            comprensión y formar parte de esta petición, a las que voluntariamente adhiero, no significando
+            ello limitación alguna de mi libertad contractual, hallandome en igualdad de condiciones que la agencia
+            para la subscripción, presentado de esta forma mi consentimiento y por resultar conveniente para mis
+            intereses</p>
+    
+        <br>
+        <div id="derecha">
+        <p> <strong>Fecha</strong>: </p>
+        </div>
+        <br>
+        <br>
+         <div id="contenedor1">
+            <div id="lateral1">
+                <p> <strong>Comprador</strong>: </p>
+                <p>DNI</strong>: </p>
+                <p></p>
+                <p> Fecha de Nacimiento: </p>
+                <p></p>
+                <p>Domicilio: </p>
+                <p></p>
+                <p>Estado Civi: </p>
+                <p></p>
+                <p>Teléfono: </p>
+                <p></p>
+            </div>
+            <div id="principal1">
+                <strong>Conyuge</strong>: Fabricito
+                <br>
+                <br>
+                DNI:
+                <br>
+                <br>
+                Fecha de Nacimiento:
+                <br>
+                <br>
+                Teléfono:
+                <br>
+                <br>
+                <br>
+            </div>
+
+            <hr>
+            <p><strong>Garante</strong>: </p>
+            <p></p>
+            <p>DNI: </p>
+            <p></p>
+            <p>Fecha de Nacimiento: </p>
+            <p></p>
+            <p>Domicilio: </p>
+            <p></p>
+            <p>Estado Civil: </p>
+            <p></p>
+            <p>Teléfono: </p>
+            <hr>
+            <section id="usado" class=" ">
+                <p><strong>Marca</strong>: </p>
+                <p></p>
+                <p>Modelo: </p>
+                <p></p>
+                <p>Motor N°: </p>
+                <p></p>
+                <p>Chasis: </p>
+                <p></p>
+                <p>Dominio: </p>
+                <p></p>
+                <p>Titular: </p>
+                <p></p>
+                <p>DNI (titular): </p>
+                <hr>
+            </section>
+
+                    <section id="usado_entregado" class=" ">
+                        <p><strong>Marca de auto entregado</strong>: </p>
+                        <p></p>
+                        <p>Modelo: </p>
+                        <p></p>
+                        <p>Dominio: </p>
+                        <p></p>
+                        <p>Motor N°: </p>
+                        <p></p>
+                        <p>Chasis: </p>
+                        <p></p>
+                        <p>Titular: </p>
+                        <p></p>
+                        <p>Documentación que entrega: </p>
+                        <hr>
+                    </section>
+
+                            <div ALIGN="center" class="box-header with-border">
+                                <h5 class="box-title">DETALLE DE LA OPERACIÓN</h5>
+                            </div>
+                            <p></p>
+                            <p>Precio de Auto reservado</strong>: $</p>
+
+                            <p></p>
+                            <p>Precio de Auto entregado</strong>: $</p>
+
+                            <p></p>
+                            <p> <strong>Efectivo entregado</strong>: $</p>
+                            <hr>
+
+                            <section id="cheques" class="   ">
+                                <p></p>
+                                <p>Cheque N°: </p>
+
+                                <p></p>
+                                <p>Fecha: </p>
+
+                                <p></p>
+                                <p>Importe: $</p>
+
+                                <p></p>
+                                <p>Banco: </p>
+                            </section>
+        </div>
+
+        <p style="color:#C0C0C0;">____________________________________________________________________________________________________________</p>
+    <div>
+        
+        <hr>
+        <p></p>
+        <p>Gastos: $</p>
+        <p></p>
+        <p> <strong>Totales</strong>: $</p>
+
+        <section id="financiacion" class=" ">
+            <div ALIGN="center" class="box-header with-border">
+                <h5 class="box-title">FINANCIACION</h5>
+            </div>
+            <p></p>
+            <p>Cuotas de: $</p>
+            <p></p>
+            <p>Vencimiento 1°: </p>
+            
+        </section>
+
+                <div>
+                    <h5>Firmas</h5>
+                </div>
+                <br>
+                <img src="C:\xampp\htdocs\rombolaagencia\rombola\public\img\footerfirma.jpg" width="720" height="100" />
+
+                <div ALIGN="center">
+                    <h6>Los precios consignados son meramente informativos</h6>
+                </div>
+
+
+    </div>
+    </div>
+
+
+    
+
+</body>
+
+</html>

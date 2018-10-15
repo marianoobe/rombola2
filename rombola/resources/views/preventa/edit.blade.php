@@ -11,7 +11,7 @@
 		<div class="row">
 			<div class="col-md-14 col-md-offset-0">
 				<!-- Default box -->
-				<div class="box">
+				<div class="box box-primary">
 					<div class="box-header with-border">
 						<h3 class="box-title">Inicio de Negociación</h3>
 						<!--<div class="box-tools pull-right">
@@ -34,7 +34,7 @@
 							<div class="col-xs-12 col-lg-offset-3 col-lg-3">
 								<div class="form-group">
 									<div class='input-group date' id='fecha_preventa'>
-										<input type='date' class="form-control" value="{{ $item->fecha_oper }}" disabled="disabled" />
+										<input type='text' class="form-control" value="{{ $item->fecha_oper }}" disabled="disabled" />
 										<span class="input-group-addon">
 											<span class="glyphicon glyphicon-calendar"></span>
 										</span>
@@ -84,7 +84,7 @@
 
 		<div class="row">
 			<div class="col-md-14 col-md-offset-0">
-				<div class="box">
+				<div class="box box-primary">
 					<div class="box-header with-border">
 						<h3 class="box-title">Cliente</h3>
 					</div>
@@ -126,7 +126,7 @@
 						</div>
 						<div class="form-group">
 							<label>Información de documentación,cliente,etc...</label>
-							<textarea class="form-control" id="detalle" rows="7" value="{{ $item->detalles }}" disabled="disabled"></textarea>
+							<textarea class="form-control" id="detalle" rows="7" disabled="disabled">{{ $item->detalles }}</textarea>
 						</div>
 					</div>
 					<!-- /.box-body -->
@@ -153,7 +153,7 @@
 							<div class="col-xs-12 col-lg-6">								
 								<div class="form-group">
 										<label><strong>Usado</strong></label>
-									<input type="text" class="form-control" id="usado" name="usado" disabled="disabled" value="{{ $item->usado}}">
+										<textarea class="form-control" id="usado" rows="2" disabled="disabled">{{ $item->usado }}</textarea>
 									<p></p>
 								</div>
 								<div class="form-group">

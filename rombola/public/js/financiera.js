@@ -32,9 +32,6 @@ function obtener(opt) {
 }
 
 
-$("#cel_1").mask("(999) 999-9999");
-
-
 function validar_check(obj) {
     if (obj.checked == true) {
         document.getElementById("otropago").disabled = false;

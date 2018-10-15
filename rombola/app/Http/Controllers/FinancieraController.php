@@ -44,8 +44,23 @@ class FinancieraController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
+    {         
         $tipo = $request->input('tipofinanciera');
+
+        $p = DB::table('financieras')
+        ->select('nomb_financ')
+        ->orderBy('created_at','DESC')
+        ->take(1)
+        ->get();
+        $p=count($p);
+
+        if ($p==0) {
+            $financiera= new Financiera([
+                'idtipofinanciera' => $tipo+1,
+                'nomb_financ' => "Seleccionar financiera..."
+            ]);
+            $financiera->save();
+        }
         
         $financiera= new Financiera([
             'idtipofinanciera' => $tipo+1,
@@ -60,12 +75,24 @@ class FinancieraController extends Controller
         $id = $item->idfinanciera;
 
         $cuotas = $request->input('cantcuotas');
+
+        $c = DB::table('cantidad_cuotas')
+        ->select('idcant')->get();
+        $c=count($c);
+
+        if ($c==0) {
+            $cantidad = new CantidadCuotas ([
+                'idcant_financ' => $id,
+                'numcuotas' => "Seleccionar cuota..."
+            ]);
+            $cantidad->save();
+        }
         
         for ($i=0; $i < count($cuotas); $i++) { 
             
         $cantidad = new CantidadCuotas ([
             'idcant_financ' => $id,
-            'numcuotas' => $cuotas[$i]
+            'numcuotas' => (string)$cuotas[$i]
         ]);
         $cantidad->save();
         }

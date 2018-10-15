@@ -74,7 +74,7 @@ class ClienteController extends Controller
             'domicilio'=> $request->get('domicilio'),
             'estado_civil'=> $request->get('estado_civil'),
             'estado_ficha'=> "Completa",
-            'visible'=> 1
+            'visible'=> true
           ]);
           $cliente->save();
 

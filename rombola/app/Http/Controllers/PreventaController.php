@@ -64,6 +64,7 @@ class PreventaController extends Controller
      */
     public function store(Request $request)
     {
+        
           //insert Persona-Cliente
           $share = new Persona([
             'dni' => $request->get('dni'),
@@ -88,7 +89,7 @@ class PreventaController extends Controller
             'domicilio'=> "####",
             'estado_civil'=> "####",
             'estado_ficha'=> "Incompleta",
-            'visible'=> 1
+            'visible'=> true,
           ]);
           $cliente->save();
           //--/insert Persona-Cliente
@@ -105,9 +106,10 @@ class PreventaController extends Controller
         $fecha_oper=$request->get('fecha_oper');
         $operacion = new Operaciones([
           'persona_operacion' => $idpers,
-          'estado' => "",
+          'estado' => "En Negociación",
           'fecha_oper'=> $fecha_oper,
-          'aviso'=> ""
+          'aviso'=> false,
+          'visible' => true,
         ]);
         $operacion->save();
 
@@ -148,6 +150,34 @@ class PreventaController extends Controller
             $importe = $request->get('impor_finan');
         }
 
+        $p = DB::table('preventas')
+        ->select('codigo','cod_part1','cod_part2')
+        ->orderBy('created_at','DESC')
+        ->take(1)
+        ->get();
+        $cant=count($p);
+
+        if ($cant==0) {
+        
+            $part1 = '000';
+            $part2 = '001';
+            $codigo = "PV-".$part1."-".$part2 ;
+        }
+        else {
+            foreach ($p as $itemcod) {}
+            $part1 = $itemcod->cod_part1;
+            $part2 = (int)$itemcod->cod_part2;
+
+            if ($part2 <100) {
+                $part2 = "0".($part2+1);
+            }
+            else {
+                $part2 = (string)($part2+1);
+            }
+
+            $codigo = "PV-"."000"."-".$part2 ;
+        }
+        //dd($codigo);
         $preventa = new Preventa([
           'preventa_oper' => $operacion,
           'auto_interesado' => $request->get('auto_interesado'),
@@ -159,7 +189,10 @@ class PreventaController extends Controller
           'nomb_financ' => $nomfinanc,
           'numcuotas' => $cant,
           'cant_pormes' => $request->get('cant_pormes'),
-          'importe_finan' => $importe
+          'importe_finan' => $importe,
+          'cod_part1' => $part1,
+          'cod_part2' => $part2,
+          'codigo' => $codigo,
         ]); 
         $preventa->save();
         //---insert Operacion-Preventa

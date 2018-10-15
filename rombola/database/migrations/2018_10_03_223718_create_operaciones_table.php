@@ -17,9 +17,10 @@ class CreateOperacionesTable extends Migration
             $table->increments('id_operacion');
             $table->integer('persona_operacion')->unsigned();
             $table->foreign('persona_operacion')->references('idpersona')->on('personas');
-            $table->date('fecha_oper');
+            $table->text('fecha_oper');
             $table->text('estado');
-            $table->text('aviso');
+            $table->boolean('aviso');
+            $table->boolean('visible');
             $table->timestamps();
         });
     }
