@@ -91,11 +91,10 @@
 				</div>
 
 				<div class="box-body">
-
 					<ul class="nav nav-pills nav-justified" id="pills-tab" role="tablist">
 						<li class="nav-item">
 							<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home"
-							 aria-selected="true">Buscar</a>
+							 aria-selected="true">Buscar</a> 
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile"
@@ -280,12 +279,8 @@
 	</div>
 	{!! Form::close() !!}
 	<script>
-			
-			$(function ($) {
-				$("#inp-dominio").mask("99/99/9999");
+			$(document).ready(function () {
 				$("#cel_1").mask("(999) 999-9999");
-				$("#ff_elem1178").mask("999-99-9999");
-			});
-		
+		    });
 	</script>
 	@endsection

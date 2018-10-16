@@ -1,5 +1,7 @@
 @extends('adminlte::layouts.app')
 
+@role('vendedor')
+
 @section('seccion1')
 <div class="container-fluid spark-screen">
     {!! Form::open(['route'=>'pre-venta.store','method'=>'post','class'=>'form-group']) !!}
@@ -691,3 +693,7 @@
     </div>
 
     @endsection
+
+    @else
+    <h3 style="margin:5px;"><small>Sal de Aqui Insecto</small></h3>
+@endrole

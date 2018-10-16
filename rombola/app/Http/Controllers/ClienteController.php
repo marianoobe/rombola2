@@ -16,13 +16,13 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $client_pers = DB::table('clientes')
-        ->join('personas','personas.idpersona','clientes.cliente_persona')
+        $client_pers = Persona::Search($request->name)
+        ->join('clientes','clientes.cliente_persona','personas.idpersona')
         ->join('telefonos', 'telefonos.personas_telefono', 'personas.idpersona')
         ->where('telefonos.tipo','=', 2)
-        ->paginate(3);
+        ->paginate(6);
 
 
         return view('clientes',compact('client_pers'));

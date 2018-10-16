@@ -10,4 +10,12 @@ class Preventa extends Model
     'usado','contado','otropago','nombretipo','nomb_financ','numcuotas','importe_finan','cant_pormes','cod_part1',
     'cod_part2','codigo'];
  
+    public function scopeSearch($query,$name)
+    {
+       // dd($dato);
+        return $query->where('nombretipo','LIKE','%'.$name.'%')
+                  ->orWhere('usado','LIKE', '%'.$name.'%')
+                   ->orWhere('auto_interesado','LIKE', '%'.$name.'%'); 
+                 
+    }
 }

@@ -60,8 +60,10 @@ Route::get('pre-venta/financiera/{id}','PreventaController@getFinanciera');
 Route::get('print/{id}', 'PdfController@pdf')->name('print');
 Route::get('print_venta/{id}', 'PdfController@pdf_venta')->name('print_venta');
 
+Route::get('prueba','VentaController@prueba')->name('prueba');
 
 Route::resource('venta','VentaController');
+
 Route::resource('admin/financiera', 'FinancieraController');
 
 

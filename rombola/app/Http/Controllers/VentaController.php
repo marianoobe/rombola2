@@ -84,6 +84,12 @@ class VentaController extends Controller
         //
     }
 
+    public function prueba()
+    {
+
+        return view('venta.prueba');
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

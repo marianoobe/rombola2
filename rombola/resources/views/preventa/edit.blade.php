@@ -66,12 +66,9 @@
 					<div class="modal-body">
 						<label for="inp-estado">Estado de la Negociación:</label>
 						<select class="form-control" id="sel-estadonegociacion">
-							<option value="INTERESADO">INTERESADO</option>
-							<option value="CLIENTE">CLIENTE</option>
-							<option value="CLIENTE ACTIVO">CLIENTE ACTIVO</option>
-							<option value="NEGOCIANDO">NEGOCIANDO</option>
-							<option value="DESINTERESADO">DESINTERESADO</option>
-							<option value="COMPETENCIA">COMPETENCIA</option>
+							<option value="EN NEGOCIACION">EN NEGOCIACION</option>
+							<option value="COMPLETADA">COMPLETADA</option>
+							<option value="BAJA">BAJA</option>
 						</select>
 					</div>
 					<div class="modal-footer">

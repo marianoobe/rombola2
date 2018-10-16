@@ -20,9 +20,9 @@ class PreventaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $preventa_cliente = DB::table('preventas')
+        $preventa_cliente = Preventa::Search($request->name)
         ->join('operaciones','operaciones.id_operacion','preventas.preventa_oper')
         ->join('personas','personas.idpersona','operaciones.persona_operacion')
         ->paginate(3);

@@ -19,7 +19,7 @@ class AutomovileController extends Controller
      */
     public function index(Request $request)
     {
-        //$name  = $request->get('name');
+        //$name  = $request->get('name'); 
        
        $autos=Automovile::Search($request->name)
        ->whereNotNull('vin')

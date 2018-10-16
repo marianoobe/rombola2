@@ -8,11 +8,26 @@
 			<div class="box box-primary">
 				<div class="box-header with-border">
 					<h3 class="box-title">Ventas</h3>
-					<div class="col-sm-offset-10">
-						<a role="button" href="{{ route('venta.create') }}" class="btn btn-xl btn-success">NUEVA VENTA</a>
-					</div>
 				</div>
 				<div class="box-body">
+						<div class="col-sm-4 pull-left">
+								 <a role="button" href="{{ route('venta.create') }}" class="btn btn-xl btn-success">NUEVA VENTA</a>
+							</div>
+							<div class="col-sm-4 pull-right">
+								<form method="GET" action="{{ route('venta.index') }}" class="navbar-form pull-right" role="search">
+									<div class="input-group">
+										<input type="hidden" name="_token" value="{{csrf_token()}}">
+										<input type="text" class="form-control" name="name" placeholder="Busqueda">
+										<input type="hidden" id="dato" name="dato" value="nuevo">
+										<span class="input-group-btn">
+											<button type="submit" class="btn btn-default">
+												<span class="glyphicon glyphicon-search"></span>
+											</button>
+										</span>
+									</div>
+								</form>
+		
+							</div>
 					<table class="table table-striped">
 						<!--<div class="row">
 							<div class="col-sm-6">
@@ -26,8 +41,8 @@
 								</div>
 							</div>
 							<div class="col-sm-5">
-								<div id="example_filter" class="dataTables_filter">
-									<label>Buscar:<input type="search" class="form-control input-sm" placeholder="" aria-controls="example"></label>
+								<div id="example_filter" class="dataTables_filter">													  
+									<label>Buscar:<input type="search" class="form-control input-sm" placeholder="" aria-controls="example" ></label>
 								</div>
 							</div>
 						</div>-->
@@ -42,7 +57,26 @@
 								<th scope="col"></th>
 							</tr>
 						</thead>
-						<tbody>
-					</table>
+						<tbody id="myTable">
+								
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td style="cursor: default;">
+										<a href="" class="btn btn-primary btn-sm">
+											<span class="glyphicon glyphicon-search"></span></a>
+										<a href="" class="btn btn-primary btn-sm">
+											<span class="glyphicon glyphicon-print"></span></a>
+									</td>
+		
+								</tr>
+								
+							</tbody>
+						</table>
+						
 
 					@endsection

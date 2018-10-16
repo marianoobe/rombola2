@@ -7,28 +7,33 @@
 			<!-- Default box -->
 			<div class="box">
 				<div class="box-header with-border">
-					<h3 class="box-title">Clientes</h3>
-					<div class="col-sm-offset-10">
-						<button type="button" class="btn btn-success btn-block" id="btn-nuevaFicha" data-toggle="modal" data-target="#modal-clienteNuevo"
-						 style="margin-bottom:10%;">NUEVO CLIENTE</button>
-					</div>
-					<div class="box-tools pull-right">
-						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-							<i class="fa fa-minus"></i></button>
-						<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-							<i class="fa fa-times"></i></button>
-					</div>
+					<h3 class="box-title">Clientes</h3>			
 				</div>
 				<div class="box-body">
-					<table class="table table-striped">
+					
 						<div class="row">
-							<div class="col-sm-6">
-								<div id="example_filter" class="dataTables_filter">
-									<label><input id="myInput" type="text" class="form-control" placeholder="Buscar" aria-controls="example"></label>
-								</div>
+								<div class="col-sm-4 pull-left">
+										<button type="button" class="btn btn-success btn-block" id="btn-nuevaFicha" data-toggle="modal" data-target="#modal-clienteNuevo"
+						 style="margin-bottom:10%;">NUEVO CLIENTE</button>
+
+									</div>
+							<div class="col-sm-4 pull-right">
+								<form method="GET" action="{{ route('clientes.index') }}" class="navbar-form pull-right" role="search">
+									<div class="input-group">
+										<input type="hidden" name="_token" value="{{csrf_token()}}">
+										<input type="text" class="form-control" name="name" placeholder="Busqueda">
+										<input type="hidden" id="dato" name="dato" value="nuevo">
+										<span class="input-group-btn">
+											<button type="submit" class="btn btn-default">
+												<span class="glyphicon glyphicon-search"></span>
+											</button>
+										</span>
+									</div>
+								</form>
+
 							</div>
 						</div>
-
+						<table class="table table-striped">
 						<thead>
 							<tr>
 								<th scope="col">DNI</th>
@@ -49,17 +54,17 @@
 								<td>{{$item->domicilio}}</td>
 								<td>{{$item->num_tel}}</td>
 
-								<td> <span ><strong>{{$item->estado_ficha}}</strong></span></td>
+								<td> <span><strong>{{$item->estado_ficha}}</strong></span></td>
 								<td style="cursor: default;">
 									<a href="{{ route('clientes.edit',$item->dni)}}" class="btn btn-primary btn-sm">
-                                     <span class="glyphicon glyphicon-search"></span></a>							
+										<span class="glyphicon glyphicon-search"></span></a>
 								</td>
 							</tr>
 							@endforeach()
 						</tbody>
 					</table>
 					{{$client_pers->render()}}
-					
+
 
 					<!--Modal -->
 					<div class="modal fade" id="modal-clienteNuevo" tabindex="-1" role="dialog" aria-labelledby="modal-clienteNuevo"
@@ -101,10 +106,10 @@
 													<input type="email" placeholder="email@gmail.com" class="form-control" id="email" name="email" required>
 												</div>
 												<div class="form-group">
-														<label><strong>*Celular</strong></label> 
-														<input type="text" class="form-control" id="cel_1" name="cel_1" required>
-													</div>
-											
+													<label><strong>*Celular</strong></label>
+													<input type="text" class="form-control" id="cel_1" name="cel_1" required>
+												</div>
+
 												<div class="form-group">
 													<label><strong>Otro (opcional)</strong></label>
 													<input type="text" class="form-control" id="cel_2" name="cel_2">
@@ -134,7 +139,7 @@
 															<option>Viudo</option>
 														</select>
 													</div>
-													
+
 
 												</div>
 											</div><!-- /.modal-content -->
@@ -150,9 +155,6 @@
 						</div>
 					</div>
 					<script>
-
-							
-
 						function realizaProceso(valorCaja1) {
 							var parametros = {
 								"valorCaja1": valorCaja1
@@ -169,22 +171,22 @@
 								}
 							});
 						}
-						
-						$(document).ready(function(){
-							
-							$("#myInput").on("keyup", function() {
-							  var value = $(this).val().toLowerCase();
-							  $("#myTable tr").filter(function() {
-								$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-							  });
+
+						$(document).ready(function () {
+
+							$("#myInput").on("keyup", function () {
+								var value = $(this).val().toLowerCase();
+								$("#myTable tr").filter(function () {
+									$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+								});
 							});
-						  });
-						
-						  $(function ($) {
+						});
+
+						$(function ($) {
 							$("#inp-dominio").mask("99/99/9999");
 							$("#cel_1").mask("(999) 999-9999");
 							$("#ff_elem1178").mask("999-99-9999");
 						});
 					</script>
-		
+
 					@endsection
