@@ -22,6 +22,7 @@ class ClienteController extends Controller
         ->join('clientes','clientes.cliente_persona','personas.idpersona')
         ->join('telefonos', 'telefonos.personas_telefono', 'personas.idpersona')
         ->where('telefonos.tipo','=', 2)
+        ->where('visible','=', 1)
         ->paginate(6);
 
         return view('clientes',compact('client_pers'));
@@ -73,7 +74,7 @@ class ClienteController extends Controller
             'domicilio'=> $request->get('domicilio'),
             'estado_civil'=> $request->get('estado_civil'),
             'estado_ficha'=> "Completa",
-            'visible'=> true
+            'visible'=> 1
           ]);
           $cliente->save();
 
@@ -181,8 +182,15 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($dni)
     {
-        //
+      DB::table('clientes')
+      ->join('personas', 'personas.idpersona' ,'clientes.cliente_persona')
+      ->where('dni','=',$dni)
+      ->update([
+        "visible"=> 0
+      ]);
+
+      return redirect('/clientes')->with('success', 'Cliente Eliminado');
     }
 }

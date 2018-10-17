@@ -20,7 +20,7 @@ class FinancieraController extends Controller
         $financiera = DB::table('tipo_financieras')
         ->join('financieras','financieras.idtipofinanciera','tipo_financieras.idtipo')
         ->join('cantidad_cuotas', 'cantidad_cuotas.idcant_financ', 'financieras.idfinanciera')
-        ->paginate(3);
+        ->paginate(8);
 
        return view('financiera.index',compact('financiera'));
     }
@@ -47,20 +47,6 @@ class FinancieraController extends Controller
     {         
         $tipo = $request->input('tipofinanciera');
 
-        $p = DB::table('financieras')
-        ->select('nomb_financ')
-        ->orderBy('created_at','DESC')
-        ->take(1)
-        ->get();
-        $p=count($p);
-
-        if ($p==0) {
-            $financiera= new Financiera([
-                'idtipofinanciera' => $tipo+1,
-                'nomb_financ' => "Seleccionar financiera..."
-            ]);
-            $financiera->save();
-        }
         
         $financiera= new Financiera([
             'idtipofinanciera' => $tipo+1,
@@ -75,18 +61,7 @@ class FinancieraController extends Controller
         $id = $item->idfinanciera;
 
         $cuotas = $request->input('cantcuotas');
-
-        $c = DB::table('cantidad_cuotas')
-        ->select('idcant')->get();
-        $c=count($c);
-
-        if ($c==0) {
-            $cantidad = new CantidadCuotas ([
-                'idcant_financ' => $id,
-                'numcuotas' => "Seleccionar cuota..."
-            ]);
-            $cantidad->save();
-        }
+      
         
         for ($i=0; $i < count($cuotas); $i++) { 
             
@@ -96,7 +71,7 @@ class FinancieraController extends Controller
         ]);
         $cantidad->save();
         }
-        return redirect('/admin/financiera')->with('success', 'Financiera Guardada');
+        return redirect('/financiera')->with('success', 'Financiera Guardada');
         
     }
     /**

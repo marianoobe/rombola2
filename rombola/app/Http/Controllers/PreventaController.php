@@ -25,6 +25,7 @@ class PreventaController extends Controller
         $preventa_cliente = Preventa::Search($request->name)
         ->join('operaciones','operaciones.id_operacion','preventas.preventa_oper')
         ->join('personas','personas.idpersona','operaciones.persona_operacion')
+        ->where('visible','=', 1)
         ->paginate(3);
 
         return view('pre-venta',compact('preventa_cliente'));
@@ -276,7 +277,7 @@ class PreventaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       
     }
 
     /**
@@ -285,8 +286,21 @@ class PreventaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($dni)
     {
-        //
+       
+      $dnipers = Persona::where("dni","=",$dni)->select("idpersona")->get();
+      foreach ($dnipers as $item) {
+      }
+      $idpers=$item->idpersona;
+      
+      $preventa = DB::table('personas')
+        ->join('operaciones', 'operaciones.persona_operacion' ,'personas.idpersona')
+        ->where('personas.idpersona','=', $idpers)
+        ->update([
+            "visible"=>"0"
+        ]);
+
+        return redirect('/pre-venta')->with('success', 'Preventa Eliminada');
     }
 }

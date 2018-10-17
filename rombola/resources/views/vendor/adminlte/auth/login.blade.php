@@ -2,7 +2,7 @@
 
 @section('content')
 <body>      
-    <!--<div class="mytop-content" >
+    <div class="mytop-content" >
         
         <div class="container" > 
           
@@ -15,7 +15,7 @@
                        Login
                   </a>
                
-                </div>-->
+                </div>
 
  <div class="col-sm-12">
             @if (count($errors) > 0)

@@ -43,9 +43,11 @@ function obtener(opt) {
 function validar_check(obj) {
     if (obj.checked == true) {
         document.getElementById("otropago").style.display = "block";
-        document.getElementById("otropago").value = "No";
+        
     } else {
         document.getElementById("otropago").style.display = "none";
+        document.getElementById("otropago").value = "No";
+        document.getElementById("otropago").required = true;
     }
 }
 
@@ -60,6 +62,23 @@ function validar_check_venta(obj) {
 function enable_buscar(){
     if(document.getElementById("nuevo").style.display =="none" && document.getElementById("buscar").style.display =="none"){
     document.getElementById("buscar").style.display = "block";
+    document.getElementById("cancer").value = "buscar";
+    $('#dninuevo').removeAttr("required");
+                $('#nombre').removeAttr("required");
+                $('#apellido').removeAttr("required");
+                $('#cel_1').removeAttr("required");
+                $('#email').removeAttr("required");
+                $('#act_empresa').removeAttr("required");             
+    }
+    else{
+        if(document.getElementById("buscar").style.display =="block"){
+            document.getElementById("buscar").style.display = "none";
+        }
+    }
+
+    if(document.getElementById("buscar").style.display =="none" && document.getElementById("nuevo").style.display =="block" ){
+        document.getElementById("buscar").style.display = "block";
+        document.getElementById("nuevo").style.display = "none";
     $('#dninuevo').removeAttr("required");
                 $('#nombre').removeAttr("required");
                 $('#apellido').removeAttr("required");
@@ -67,11 +86,6 @@ function enable_buscar(){
                 $('#email').removeAttr("required");
                 $('#act_empresa').removeAttr("required");
                 document.getElementById("cancer").value = "buscar";
-    }
-    else{
-        if(document.getElementById("buscar").style.display =="block"){
-            document.getElementById("buscar").style.display = "none";
-        }
     }
 }
 function enable_nuevo(){
@@ -91,6 +105,17 @@ function enable_nuevo(){
                 
             }
         }
+
+        if(document.getElementById("nuevo").style.display =="none" && document.getElementById("buscar").style.display =="block" ){
+            document.getElementById("nuevo").style.display = "block";
+            document.getElementById("buscar").style.display = "none";
+            $('#dninuevo').removeAttr("required");
+            $('#nombre').removeAttr("required");
+            $('#apellido').removeAttr("required");
+            $('#cel_1').removeAttr("required");
+            $('#email').removeAttr("required");
+            $('#act_empresa').removeAttr("required");
+        }
 }
 
 $(document).ready(function () {
@@ -98,6 +123,7 @@ $(document).ready(function () {
         document.getElementById("box-financiera").style.display = "block";
         $.get(`financiera/${event.target.value}`, function (response, tipofinanciera) {
             $("#nombfinanciera").empty();
+            $("#nombfinanciera").append(`<option>Seleccionar Financiera</option>`);
             response.forEach(element => {
                 $("#nombfinanciera").append(`<option value=${element.idfinanciera}>${element.nomb_financ}</option>`);
             });
@@ -109,6 +135,7 @@ $(document).ready(function () {
         document.getElementById("box-cuotas").style.display = "block";
         $.get(`cuotas/${event.target.value}`, function (response, idfinanciera) {
             $("#cantcuotas").empty();
+            $("#cantcuotas").append(`<option>Seleccionar Cuotas</option>`);
             response.forEach(element => {
                 $("#cantcuotas").append(`<option value=${element.idcant}> ${element.numcuotas} </option>`);
             });

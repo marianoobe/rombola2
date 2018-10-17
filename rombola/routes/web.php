@@ -64,7 +64,7 @@ Route::get('prueba','VentaController@prueba')->name('prueba');
 
 Route::resource('venta','VentaController');
 
-Route::resource('admin/financiera', 'FinancieraController');
+Route::resource('financiera', 'FinancieraController');
 
 
 Route::resource('listaprecio', 'ListaPrecioController');

@@ -1,5 +1,5 @@
 @extends('adminlte::layouts.app')
-
+@include('adminlte::layouts.partials.htmlheader')
 @section('seccion1')
 
 <div class="container-fluid spark-screen">
@@ -34,7 +34,7 @@
                             </div>
                             <div class="form-group">
                                 <p></p>
-                                <label><strong>Nombre de Financiera: </strong></label>
+                                <label><strong>Nombre de Financiera: </strong></label><br>
                                 {!! Form::text("nombrefinanc") !!}
                             </div>
                             <div class="form-group">
@@ -42,7 +42,7 @@
                                 <label><strong>Cantidad de Cuotas</strong></label>
                                 {!!Form::select('cantcuotas[]',$cuotas,null,['class'=>'form-control','id'=>'cantcuotas','multiple'=> true])!!}
                             </div>
-                            <p></p>
+                            <p></p> 
                             {!! Form::submit("Guardar",['class'=>'btn btn-primary']) !!}
                         </div>
                     </div>
@@ -53,25 +53,8 @@
     </div>
     <!-- /.row -->
 
-    {!! Form::close() !!}
+    <input id="money" type="text" class="form-control" />
 
-    <script>
-  
-        function realizaProceso(valorCaja1) {
-            var parametros = {
-                "valorCaja1": valorCaja1
-            };
-            $.ajax({
-                data: parametros, //datos que se envian a traves de ajax
-                url: 'clientes.store', //archivo que recibe la peticion
-                type: 'post', //método de envio
-                beforeSend: function () {
-                    $("#resultado").html("Procesando, espere por favor...");
-                },
-                success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                    $("#resultado").html(response);
-                }
-            });
-        }
-    </script>
+    {!! Form::close() !!}
+   
     @endsection

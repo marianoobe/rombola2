@@ -45,8 +45,11 @@
                                 @foreach($financiera as $item)
                                 <tr>
                                     <td>{{$item->nombretipo}}</td>
-                                    <td>{{$item->nomb_financ}}</td>
-                                    <td>{{$item->numcuotas}}</td>                   
+									<td>{{$item->nomb_financ}}</td>
+									<td>
+									@foreach($financiera as $item)
+									{{$item->numcuotas}} 
+									@endforeach()                  
                                     <td style="cursor: default;">
                                         <a href="{{ route('financiera.edit',$item->idtipo)}}" class="btn btn-primary btn-sm">
                                          <span class="glyphicon glyphicon-search"></span></a>							

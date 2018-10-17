@@ -11,6 +11,7 @@
         "barryvdh/laravel-snappy": "^0.4.3",
         "caffeinated/shinobi": "^3.3",
         "fideloper/proxy": "~3.3",
+        "igorescobar/jquery-mask-plugin": "^1.14",
         "intervention/image": "^2.4",
         "intervention/imagecache": "^2.3",
         "knplabs/knp-snappy": "^1.0",

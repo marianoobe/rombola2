@@ -7,33 +7,33 @@
 			<!-- Default box -->
 			<div class="box">
 				<div class="box-header with-border">
-					<h3 class="box-title">Clientes</h3>			
+					<h3 class="box-title">Clientes</h3>
 				</div>
 				<div class="box-body">
-					
-						<div class="row">
-								<div class="col-sm-4 pull-left">
-										<button type="button" class="btn btn-success btn-block" id="btn-nuevaFicha" data-toggle="modal" data-target="#modal-clienteNuevo"
-						 style="margin-bottom:10%;">NUEVO CLIENTE</button>
 
-									</div>
-							<div class="col-sm-4 pull-right">
-								<form method="GET" action="{{ route('clientes.index') }}" class="navbar-form pull-right" role="search">
-									<div class="input-group">
-										<input type="hidden" name="_token" value="{{csrf_token()}}">
-										<input type="text" class="form-control" name="name" placeholder="Busqueda">
-										<input type="hidden" id="dato" name="dato" value="nuevo">
-										<span class="input-group-btn">
-											<button type="submit" class="btn btn-default">
-												<span class="glyphicon glyphicon-search"></span>
-											</button>
-										</span>
-									</div>
-								</form>
+					<div class="row">
+						<div class="col-sm-4 pull-left">
+							<button type="button" class="btn btn-success btn-block" id="btn-nuevaFicha" data-toggle="modal" data-target="#modal-clienteNuevo"
+							 style="margin-bottom:10%;">NUEVO CLIENTE</button>
 
-							</div>
 						</div>
-						<table class="table table-striped">
+						<div class="col-sm-4 pull-right">
+							<form method="GET" action="{{ route('clientes.index') }}" class="navbar-form pull-right" role="search">
+								<div class="input-group">
+									<input type="hidden" name="_token" value="{{csrf_token()}}">
+									<input type="text" class="form-control" name="name" placeholder="Busqueda">
+									<input type="hidden" id="dato" name="dato" value="nuevo">
+									<span class="input-group-btn">
+										<button type="submit" class="btn btn-default">
+											<span class="glyphicon glyphicon-search"></span>
+										</button>
+									</span>
+								</div>
+							</form>
+
+						</div>
+					</div>
+					<table class="table table-striped">
 						<thead>
 							<tr>
 								<th scope="col">DNI</th>
@@ -56,12 +56,20 @@
 
 								<td> <span><strong>{{$item->estado_ficha}}</strong></span></td>
 								<td style="cursor: default;">
+									@can('vendedor')
 									<a href="{{ route('clientes.edit',$item->dni)}}" class="btn btn-primary btn-sm">
 										<span class="glyphicon glyphicon-search"></span></a>
-										@can('admin')															
-										<a href="" class="btn btn-danger btn-sm">
-												<span class="glyphicon glyphicon-trash"></span></a>
-										@endcan
+									@endcan
+									@can('admin')
+									<form id="myform" action="{{ route('clientes.destroy',$item->dni)}}" method="post">
+										<input name="_method" type="hidden" value="DELETE" style="display:none">
+										<input type="hidden" name="_token" value="{{csrf_token()}}" style="display:none">
+										<a href="{{ route('clientes.edit',$item->dni)}}" class="btn btn-primary btn-sm">
+											<span class="glyphicon glyphicon-search"></span></a>
+										<a href="#" onclick="document.getElementById('myform').submit()" class="btn btn-danger btn-sm">
+											<span class="glyphicon glyphicon-trash"></span></a>
+									</form>
+									@endcan
 								</td>
 							</tr>
 							@endforeach()

@@ -13,7 +13,8 @@
 
 
 					<div class="col-sm-4 pull-left">
-						 <a style="margin-bottom:10%;" role="button" href="{{ route('pre-venta.create') }}" class="btn btn-xl btn-success">NUEVA PREVENTA</a>
+						<a style="margin-bottom:10%;" role="button" href="{{ route('pre-venta.create') }}" class="btn btn-xl btn-success">NUEVA
+							PREVENTA</a>
 					</div>
 					<div class="col-sm-4 pull-right">
 						<form method="GET" action="{{ route('pre-venta.index') }}" class="navbar-form pull-right" role="search">
@@ -54,19 +55,25 @@
 							<td>${{$item->contado}}</td>
 							<td>{{$item->importe_finan}}</td>
 							<td>{{$item->estado}}</td>
-							<td style="cursor: default;">
-									@can('vendedor')
+							<td>
+								@can('vendedor')
 								<a href="{{ route('pre-venta.edit',$item->dni)}}" class="btn btn-primary btn-sm">
 									<span class="glyphicon glyphicon-search"></span></a>
-									@endcan
-									@can('admin')
+								@endcan
+								@can('admin')
+								<form id="myform" action="{{ route('pre-venta.destroy',$item->dni)}}" method="post">
 									<a href="{{ route('pre-venta.edit',$item->dni)}}" class="btn btn-primary btn-sm">
-								<span class="glyphicon glyphicon-search"></span></a>
-								<a href="{{ route('print',$item->dni)}}" class="btn btn-primary btn-sm">
-									<span class="glyphicon glyphicon-print"></span></a>														
-										<a href="{{ route('pre-venta.destroy',$item->dni)}}" class="btn btn-danger btn-sm">
-												<span class="glyphicon glyphicon-trash"></span></a>
-									@endcan
+										<span class="glyphicon glyphicon-search"></span></a>
+									<a href="{{ route('print',$item->dni)}}" class="btn btn-primary btn-sm">
+										<span class="glyphicon glyphicon-print"></span></a>
+									<input name="_method" type="hidden" value="DELETE" style="display:none">
+									<input type="hidden" name="_token" value="{{csrf_token()}}" style="display:none">
+									<a href="#" onclick="document.getElementById('myform').submit()" class="btn btn-danger btn-sm">
+										<span class="glyphicon glyphicon-trash"></span></a>
+								</form>
+
+
+								@endcan
 							</td>
 
 						</tr>

@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-
+    <script src="C:\xampp\htdocs\rombolaagencia\rombola\public\plugins\jquery.js"></script>
+    <script src="C:\xampp\htdocs\rombolaagencia\rombola\public\js\mask\src\jquery.mask.js"></script>
+    
     <style>
         #cabecera {
             width: 740px;
@@ -238,9 +240,17 @@
     </div>
     </div>
 
+    <input id="money" type="text" class="form-control" />
 
     
 
 </body>
+<script>
+        
+        $(document).ready(function(){
+            $('.money').mask('000.000.000.000.000,00', {reverse: true});
+        });
 
+        
+</script>
 </html>

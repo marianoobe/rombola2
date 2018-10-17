@@ -197,7 +197,7 @@
 								<div class="form-group">
 									<label><strong>*Financieras</strong></label>
 									<div>
-										{!! Form::select('nombfinanciera',[],null,['placeholder'=>'','class'=>'form-control','id'=>'nombfinanciera']) !!}
+										{!! Form::select('nombfinanciera',[],null,['class'=>'form-control','id'=>'nombfinanciera']) !!}
 									</div>
 									<p></p>
 								</div> 
@@ -206,7 +206,7 @@
 								<div class="form-group">
 									<label><strong>*Cantidad de Cuotas</strong></label>
 									<div>
-										{!! Form::select('numcuotas',['placeholder'=>''],null,['placeholder'=>'','class'=>'form-control','id'=>'cantcuotas']) !!}
+										{!! Form::select('numcuotas',[],null,['class'=>'form-control','id'=>'cantcuotas']) !!}
 									</div>
 									<p></p>
 								</div>

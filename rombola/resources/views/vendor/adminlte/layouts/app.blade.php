@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
+
 <html lang="es">
 
 @section('htmlheader')
@@ -64,8 +61,8 @@ desired effect
            <!-- @yield('main-content')-->
             @yield('seccion')
             @yield('seccion1')
-        </section><!-- /.content -->
-    </div><!-- /.content-wrapper -->
+        </section>
+    </div>
 
     @include('adminlte::layouts.partials.controlsidebar')
 
