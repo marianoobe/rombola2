@@ -42,25 +42,20 @@
 								<input type="string" class="form-control" name="domicilio" value="{{ $item->domicilio }}" disabled="disabled" />
 							</div>
 
-							<div class="form-group">
-								<label>Actividad/Empresa:</label>
-								<input type="text" class="form-control" name="act_empresa" value="{{ $item->act_empresa }}" disabled="disabled" />
-							</div>
-
 						</div>
 						<div class="col-xs-16 col-lg-6">
 							<div class="form-group">
-								<label>Teléfono Fijo:</label>
+								<label>Actividad/Empresa:</label>
+								<input type="text" class="form-control" name="act_empresa" value="{{ $item->act_empresa }}" disabled="disabled" />
+							</div>		
+							<div class="form-group">
+								<label>Celular:</label>
 								<input type="text" class="form-control" name="num_tel" value="{{ $item->num_tel }}" disabled="disabled" />
 							</div>
 							<div class="form-group">
-								<label>Celular 1:</label>
+								<label>Otro:</label>
 								<input type="text" class="form-control" name="num_tel" value="{{ $item->num_tel }}" disabled="disabled" />
-							</div>
-							<div class="form-group">
-								<label>Celular 2:</label>
-								<input type="text" class="form-control" name="num_tel" value="{{ $item->num_tel }}" disabled="disabled" />
-							</div>
+							</div>							
 							<div class="form-group">
 								<label>Fecha de Nacimiento:</label>
 								<input type="text" class="form-control" name="fecha_nacimiento" value="{{ $item->fecha_nacimiento }}" disabled="disabled" />
@@ -77,7 +72,7 @@
 					<div class="box-footer">
 						<div class="row margenBoot-25" style="margin-top:25px;">
 							<div id="actualizar" class="col-xs-12 col-lg-12" style="display:none">
-								<button type="submit" class="btn btn-primary">Update</button>
+								<button type="submit" class="btn btn-primary">Guardar Cambios</button>
 							</div>
 						</div>
 					</div>

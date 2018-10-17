@@ -38,9 +38,12 @@ class PreventaController extends Controller
     public function create() 
     {
         $tipo_finan = TipoFinanciera::pluck('nombretipo');
-
-        return view('preventa.create',compact('tipo_finan'));
+        $dni = Persona::pluck('dni');
+        $nombre = Persona::pluck('nombre');
+        $apellido = Persona::pluck('apellido');
+        return view('preventa.create',compact('tipo_finan','dni','nombre','apellido'));
     }
+        
 
     public function getFinanciera(Request $request, $id){
         if($request->ajax()){
@@ -65,6 +68,8 @@ class PreventaController extends Controller
     public function store(Request $request)
     {
         
+        $can = $request->get('cancer');
+          if ($can == 'nuevo') {
           //insert Persona-Cliente
           $share = new Persona([
             'dni' => $request->get('dni'),
@@ -102,7 +107,36 @@ class PreventaController extends Controller
           ]);
           $tel->save();
           }
-          //insert Operacion-Preventa
+
+          $fecha_oper=$request->get('fecha_oper');
+          $operacion = new Operaciones([
+            'persona_operacion' => $idpers,
+            'estado' => "En Negociación",
+            'fecha_oper'=> $fecha_oper,
+            'aviso'=> false,
+            'visible' => true,
+          ]);
+          $operacion->save();
+        }
+        else{
+            $dni = $request->get('tipodni');
+            
+            $idpersona = Persona::where("dni","=",$dni)->select("idpersona")->get();
+            foreach ($idpersona as $items) {
+            }
+            $idpersona = $items->idpersona;
+            $fecha_oper=$request->get('fecha_oper');
+           $operacion = new Operaciones([
+          'persona_operacion' => $idpersona,
+          'estado' => "En Negociación",
+          'fecha_oper'=> $fecha_oper,
+          'aviso'=> false,
+          'visible' => true,
+        ]);
+        $operacion->save();
+
+        }
+          /*insert Operacion-Preventa
         $fecha_oper=$request->get('fecha_oper');
         $operacion = new Operaciones([
           'persona_operacion' => $idpers,
@@ -112,7 +146,7 @@ class PreventaController extends Controller
           'visible' => true,
         ]);
         $operacion->save();
-
+*/
         $operacion = Operaciones::where("fecha_oper","=",$fecha_oper)->select("id_operacion")->get();
       
         foreach ($operacion as $oper) {
@@ -125,7 +159,6 @@ class PreventaController extends Controller
         $idp = TipoFinanciera::where("idtipo","=",$idtipo+1)->select("nombretipo")->get();
         
         foreach ($idp as $item) {}
-
 
         if ($item->nombretipo == "Sin") {
             $nomtipo ="#";
@@ -184,7 +217,7 @@ class PreventaController extends Controller
           'detalles' => $request->get('detalles'),
           'usado' => $request->get('usado'),
           'contado' => $request->get('contado'),
-          'otropago' => "",//$request->get('otropago'),
+          'otropago' => $request->get('otropago'),
           'nombretipo'=> $nomtipo,
           'nomb_financ' => $nomfinanc,
           'numcuotas' => $cant,

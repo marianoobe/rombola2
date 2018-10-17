@@ -20,11 +20,8 @@
 								<i class="fa fa-times"></i></button>
 						</div>-->
 					<div class="box-tools pull-right">
-						<a class="btn btn-xs btn-primary" onclick="history.back(1);">
+						<a class="btn btn-xs btn-success" onclick="history.back(1);">
 							<i class="fa fa-chevron-left"></i> VOLVER</a>
-						<button type="button" onclick="$('#modal-estado').modal('show');" class="btn btn-xs btn-warning">Cambiar Estado</button>
-						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-						</button>
 					</div>
 				</div>
 
@@ -56,32 +53,6 @@
 
 	</div>
 
-	<div id="modal-estado" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-	 style="display: none;">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-					<h4 class="modal-title">Cambio de Estado</h4>
-				</div>
-				<div class="modal-body">
-					<label>Estado de la Negociación:</label>
-					<select class="form-control" id="sel-estadonegociacion">
-						<option value="INTERESADO">INTERESADO</option>
-						<option value="CLIENTE">CLIENTE</option>
-						<option value="CLIENTE ACTIVO">CLIENTE ACTIVO</option>
-						<option value="NEGOCIANDO">NEGOCIANDO</option>
-						<option value="DESINTERESADO">DESINTERESADO</option>
-						<option value="COMPETENCIA">COMPETENCIA</option>
-					</select>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal">CERRAR</button>
-					<button type="button" onclick="changeEstado();" class="btn btn-success">GUARDAR</button>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<div class="row">
 		<div class="col-md-14 col-md-offset-0">
@@ -91,70 +62,58 @@
 				</div>
 
 				<div class="box-body">
-					<ul class="nav nav-pills nav-justified" id="pills-tab" role="tablist">
-						<li class="nav-item">
-							<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home"
-							 aria-selected="true">Buscar</a> 
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile"
-							 aria-selected="false">Nuevo</a>
-						</li>
-					</ul>
-					<div class="tab-content" id="pills-tabContent">
-						<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-							<div aling="center" class="form-group">
-								<br> </br>
-								<input type="number" class="form-control" id="buscar_cliente" name="buscar_cliente" placeholder="Ingrese DNI">
-							</div>
-						</div>
-						<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-							<div class="panel panel-default" style="margin-left:20px; margin-right:20px;">
-								<div class="panel-body">
-									<!-- inicio panel filtros -->
-
-									<div class="box-body">
-										<input type="hidden" name="_token" value="{{csrf_token()}}">
-										<div class="row margenBoot-25">
-											<div class="col-xs-12 col-lg-6">
-												<div class="form-group">
-													<label><strong>*DNI</strong></label>
-													<input type="number" class="form-control" id="dni" name="dni" required>
-												</div>
-												<div class="form-group">
-													<label><strong>*Nombres</strong></label>
-													<input type="text" class="form-control" id="nombre" name="nombre" required>
-												</div>
-												<div class="form-group">
-													<label><strong>*Apellidos</strong></label>
-													<input type="text" class="form-control" id="apellido" name="apellido" required>
-												</div>
-
-											</div>
-											<div class="col-xs-12 col-lg-6">
-												<div class="form-group">
-													<label><strong>*Correo Electrónico</strong></label>
-													<input type="email" placeholder="email@gmail.com" class="form-control" id="email" name="email" required>
-												</div>
-												<div class="form-group">
-													<label><strong>*Celular</strong></label>
-													<input type="text" class="form-control" id="cel_1" name="cel_1" required>
-												</div>
-												<div class="form-group">
-													<label><strong>*Actividad/Empresa</strong></label>
-													<input type="text" class="form-control" id="act_empresa" name="act_empresa" required>
-												</div>
-											</div>
-										</div><!-- /.modal-content -->
-
-									</div>
-
-									<!-- fin panel filtros -->
+						<input type="text" id="cancer" name="cancer" style="display:none">
+						<input type="text" id="tipodni" name="tipodni" style="display:none">
+						<div class="row margenBoot-25">
+								<div class="col-xs-14 col-lg-6">
+									<button onclick="enable_buscar()" type="button" class="btn btn-success btn-block" style="margin-bottom: 10%;">Buscar Cliente</button>
+									<section id="buscar" style="display:none">
+											<select id="dnis" onchange="obtenervalue()" class="selectpicker" data-live-search="true" data-width="100%" data-size="2">
+												@foreach ($dni as $item)
+												<option value="{{$item}}">{{$item}}</option>
+												@endforeach
+											  </select>
+											  
+											<br><br><br><br><br><br><br>
+										</section>
+								</div>
+								<div class="col-xs-14 col-lg-6">
+									<button onclick="enable_nuevo()" type="button" class="btn btn-success btn-block" style="margin-bottom: 10%;">Nuevo Cliente</button>
 								</div>
 							</div>
-						</div>
+							<section id="nuevo" style="display:none">
+							<div class="row margenBoot-25">
+									<div class="col-xs-12 col-lg-6">
+										<div class="form-group">
+											<label><strong>*DNI</strong></label>
+											<input type="number" class="form-control" id="dninuevo" name="dni" required>
+										</div>
+										<div class="form-group">
+											<label><strong>*Nombres</strong></label>
+											<input type="text" class="form-control" id="nombre" name="nombre" required>
+										</div>
+										<div class="form-group">
+											<label><strong>*Apellidos</strong></label>
+											<input type="text" class="form-control" id="apellido" name="apellido" required>
+										</div>
 
-					</div>
+									</div>
+									<div class="col-xs-12 col-lg-6">
+										<div class="form-group">
+											<label><strong>*Correo Electrónico</strong></label>
+											<input type="email" placeholder="email@gmail.com" class="form-control" id="email" name="email" required>
+										</div>
+										<div class="form-group">
+											<label><strong>*Celular</strong></label>
+											<input type="text" class="form-control" id="cel_1" name="cel_1" required>
+										</div>
+										<div class="form-group">
+											<label><strong>*Actividad/Empresa</strong></label>
+											<input type="text" class="form-control" id="act_empresa" name="act_empresa" required>
+										</div>
+									</div>
+							</div>
+
 
 				</div>
 			</div>
@@ -216,8 +175,9 @@
 										tranferencia
 										bancaria,etc)</label>
 								</div>
-								<textarea class="form-control rounded-0" id="otropago" name="otropago" rows="2" disabled></textarea>
+								<textarea style="display:none" class="form-control rounded-0" id="otropago" name="otropago" rows="2" ></textarea>
 							</div>
+							<br>
 							<div class="form-group">
 								<label><strong>*Hasta cuánto puede pagar por mes</strong></label>
 								<input type="number" class="form-control" id="cant_pormes" name="cant_pormes" required>
@@ -275,7 +235,6 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 	{!! Form::close() !!}
 	<script>

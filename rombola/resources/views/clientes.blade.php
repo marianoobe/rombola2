@@ -58,6 +58,10 @@
 								<td style="cursor: default;">
 									<a href="{{ route('clientes.edit',$item->dni)}}" class="btn btn-primary btn-sm">
 										<span class="glyphicon glyphicon-search"></span></a>
+										@can('admin')															
+										<a href="" class="btn btn-danger btn-sm">
+												<span class="glyphicon glyphicon-trash"></span></a>
+										@endcan
 								</td>
 							</tr>
 							@endforeach()

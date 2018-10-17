@@ -4,7 +4,7 @@ function obtener_valor_select(valorCaja1) {
     };
     $.ajax({
         data: parametros, //datos que se envian a traves de ajax
-        url: 'pre-venta.respuesta', //archivo que recibe la peticion
+        url: 'pre-venta.store', //archivo que recibe la peticion
         type: 'get', //método de envio
         beforeSend: function () {
             $("#resultado").html("Procesando, espere por favor...");
@@ -14,6 +14,14 @@ function obtener_valor_select(valorCaja1) {
         }
     });
 }
+
+function obtenervalue() {
+    var res= document.getElementById("dnis").value;
+    console.log(res);
+    document.getElementById("tipodni").value = res;
+
+}
+
 
 function obtener(opt) {
     //document.getElementById("pepe").style.display = "block";
@@ -34,9 +42,10 @@ function obtener(opt) {
 
 function validar_check(obj) {
     if (obj.checked == true) {
-        document.getElementById("otropago").disabled = false;
+        document.getElementById("otropago").style.display = "block";
+        document.getElementById("otropago").value = "No";
     } else {
-        document.getElementById("otropago").disabled = true;
+        document.getElementById("otropago").style.display = "none";
     }
 }
 
@@ -46,6 +55,42 @@ function validar_check_venta(obj) {
     } else {
         document.getElementById("conyuge").style.display = "none";
     }
+}
+
+function enable_buscar(){
+    if(document.getElementById("nuevo").style.display =="none" && document.getElementById("buscar").style.display =="none"){
+    document.getElementById("buscar").style.display = "block";
+    $('#dninuevo').removeAttr("required");
+                $('#nombre').removeAttr("required");
+                $('#apellido').removeAttr("required");
+                $('#cel_1').removeAttr("required");
+                $('#email').removeAttr("required");
+                $('#act_empresa').removeAttr("required");
+                document.getElementById("cancer").value = "buscar";
+    }
+    else{
+        if(document.getElementById("buscar").style.display =="block"){
+            document.getElementById("buscar").style.display = "none";
+        }
+    }
+}
+function enable_nuevo(){
+    if(document.getElementById("nuevo").style.display =="none" && document.getElementById("buscar").style.display =="none"){
+        document.getElementById("nuevo").style.display = "block";
+        document.getElementById("cancer").value = "nuevo";
+        }
+        else{
+            if(document.getElementById("nuevo").style.display =="block"){
+                document.getElementById("nuevo").style.display = "none";
+                $('#dninuevo').removeAttr("required");
+                $('#nombre').removeAttr("required");
+                $('#apellido').removeAttr("required");
+                $('#cel_1').removeAttr("required");
+                $('#email').removeAttr("required");
+                $('#act_empresa').removeAttr("required");
+                
+            }
+        }
 }
 
 $(document).ready(function () {

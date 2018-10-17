@@ -23,7 +23,6 @@
 						<div class="box-tools pull-right">
 							<a class="btn btn-xs btn-primary" onclick="history.back(1);">
 								<i class="fa fa-chevron-left"></i> VOLVER</a>
-							<button type="button" onclick="$('#modal-estado').modal('show');" class="btn btn-xs btn-warning">Cambiar Estado</button>
 							<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
 							</button>
 						</div>
@@ -52,30 +51,6 @@
 				</div>
 				<!-- /.box-body -->
 
-			</div>
-		</div>
-
-		<div id="modal-estado" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-		 style="display: none;">
-			<div class="modal-dialog modal-sm">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-						<h4 class="modal-title">Cambio de Estado</h4>
-					</div>
-					<div class="modal-body">
-						<label for="inp-estado">Estado de la Negociación:</label>
-						<select class="form-control" id="sel-estadonegociacion">
-							<option value="EN NEGOCIACION">EN NEGOCIACION</option>
-							<option value="COMPLETADA">COMPLETADA</option>
-							<option value="BAJA">BAJA</option>
-						</select>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">CERRAR</button>
-						<button type="button" onclick="changeEstado();" class="btn btn-success">GUARDAR</button>
-					</div>
-				</div>
 			</div>
 		</div>
 

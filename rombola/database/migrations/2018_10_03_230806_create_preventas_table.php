@@ -21,7 +21,7 @@ class CreatePreventasTable extends Migration
             $table->text('detalles');
             $table->text('usado');
             $table->integer('contado');
-            $table->text('otropago');
+            $table->text('otropago')->nullable();
             $table->text('nombretipo');
             $table->text('nomb_financ');
             $table->integer('numcuotas');

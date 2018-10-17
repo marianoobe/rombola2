@@ -1,6 +1,5 @@
 @extends('adminlte::layouts.app')
 
-@role('vendedor')
 
 @section('seccion1')
 <div class="container-fluid spark-screen">
@@ -13,6 +12,10 @@
                     <h3 class="box-title">Inicio de Operación</h3>
 
                     <div class="box-tools pull-right">
+                            <a class="btn btn-xs btn-success" onclick="history.back(1);">
+                                    <i class="fa fa-chevron-left"></i> VOLVER</a>
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
                     </div>
                 </div>
                 <!-- /.box-header -->
@@ -42,6 +45,8 @@
         </div>
         <!-- /.col -->
     </div>
+
+
 
     <div class="row">
         <div class="col-md-14 col-md-offset-0">
@@ -693,7 +698,3 @@
     </div>
 
     @endsection
-
-    @else
-    <h3 style="margin:5px;"><small>Sal de Aqui Insecto</small></h3>
-@endrole

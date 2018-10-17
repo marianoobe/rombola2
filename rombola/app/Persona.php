@@ -16,4 +16,5 @@ class Persona extends Model
                    ->orWhere('apellido','LIKE', '%'.$name.'%'); 
                  
     }
+
 }

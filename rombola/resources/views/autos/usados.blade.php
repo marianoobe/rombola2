@@ -73,10 +73,11 @@
 										<td>{{$item->dominio}}</td>
 										<td>{{$item->color}}</td>
 										<td>{{$item->estado}}</td>
+										@can('admin')
 												<td style="cursor: default;">
 											<a href="{{ route('editusado',$item->id_auto)}}" class="btn btn-info btn-sm">
 												<span class="glyphicon glyphicon-search"></span></a>
-
+                                        @endcan
 										</td>
 																
 									  

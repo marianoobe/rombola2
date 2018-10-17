@@ -35,5 +35,11 @@
     </script>
     <script src="jquery.js" type="text/javascript"></script>
     <script src="js/jquery-pdf/src/jquery.maskedinput.js"></script>
+    
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
 
 </head>
