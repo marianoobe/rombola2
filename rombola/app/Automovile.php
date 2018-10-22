@@ -9,27 +9,29 @@ class Automovile extends Model
     protected  $primaryKey = 'id_auto';
     protected $fillable=[
            'id_auto',
+           'precio',
            'vin',
            'dominio',
-           'marca',
+           'idmarca',
            'modelo',
-           'version',
+           'descripcion',
            'color',          
            'combustible',         
            'estado',
+           'ficha',
+           'visible',
     ];
 
 
     public function scopeSearch($query,$name)
      {
         // dd($dato);
-         return $query->where('marca','LIKE','%'.$name.'%')
-                   ->orWhere('modelo','LIKE', '%'.$name.'%')
-                    ->orWhere('version','LIKE', '%'.$name.'%')
+         return $query->Where('modelo','LIKE', '%'.$name.'%')
+                   
                     ->orWhere('color','LIKE', '%'.$name.'%')
                     ->orWhere('estado','LIKE', '%'.$name.'%')                                      
                     ->orWhere('dominio','LIKE', '%'.$name.'%')
-                     ->orWhere('vin','LIKE', '%'.$name.'%'); 
+                     ->where('marcas.nombre', 'LIKE', '%' . $name . '%')->join('marcas', 'marcas.idmarca', '=', 'automoviles.idmarca');
      
        
         

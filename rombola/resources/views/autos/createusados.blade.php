@@ -30,30 +30,49 @@
 
 								{{ csrf_field() }}
 								<input type="hidden" name="_token" value="{{csrf_token()}}">
-
+								<input type="hidden" id="usado" name="usado" value="usado">
 								<div class="row margenBoot-25">
 									<div class="col-xs-12 col-lg-6">
+
 										<div class="form-group">
-											<input type="hidden" id="usado" name="usado" value="usado">
-											<label for="marca"><strong>Marca</strong></label>
-											<input type="text" class="form-control" id="marca" name="marca" required>
+
+											<label><strong>*MARCA DE VEHICULO</strong></label>
+											<select id="marca" name="marca" class="selectpicker show-tick" data-show-subtext="true" data-live-search="true"
+											 data-style="btn-primary" data-placeholder="Seleccione marca vehiculo..." data-width="100%">
+												<option value="">Seleccionar marca del vehiculo</option>
+												@foreach ($marcas as $item){
+												<option value="{{$item->idmarca}}"> {{ $item->nombre }} </option>
+												}
+												@endforeach
+
+											</select>
+
+
 										</div>
 										<div class="form-group">
 											<label for="modelo"><strong>Modelo</strong></label>
 											<input type="text" class="form-control" id="modelo" name="modelo" required>
 										</div>
 										<div class="form-group">
+<<<<<<< HEAD
+											<label for="version"><strong>Descripcion</strong></label>
+=======
 											<label for="version"><strong>Versión</strong></label>
+>>>>>>> a217e494ab529d7ec7ebe3b531a8d0f1009eaf7e
 											<input type="text" class="form-control" id="version" name="version" required>
-										</div>
-										<div class="form-group">
-											<label for="dominio"><strong>Dominio</strong></label>
-											<input type="text" class="form-control" id="dominio" name="dominio" required>
 										</div>
 										<div class="form-group">
 											<label for="titular"><strong>Titular</strong></label>
 											<input type="text" class="form-control" id="titular" name="titular" required>
 										</div>
+										<div class="form-group">
+											<label for="dominio"><strong>Dominio</strong></label>
+											<input type="text" class="form-control" id="dominio" name="dominio" required>
+
+										</div>
+
+
+
 										<div class="form-group">
 											<label for="anio"><strong>Año</strong></label>
 											<input type="number" class="form-control" id="anio" name="anio" required>
@@ -64,25 +83,31 @@
 											<label for="color"><strong>Color</strong></label>
 											<input type="text" class="form-control" id="color" name="color" required>
 										</div>
-										<div class="form-group">
-											<label for="estado"><strong>Combustible</strong></label>
-											<select id="combustible" name="combustible" class="form-control form-control-sm" required>
-												<option>NAFTA</option>
-												<option>DIESEL</option>
-												<option>GNC</option>
 
-											</select>
-										</div>
-										
+
 										<div class="form-group">
+<<<<<<< HEAD
+											<label for="kilometros"><strong>kilometros</strong></label>
+											<input type="number" class="form-control" id="kilometros" name="kilometros" required>
+=======
 											<label for="kilometros"><strong>Kilómetros</strong></label>
 											<input type="text" class="form-control" id="kilometros" name="kilometros" required>
+>>>>>>> a217e494ab529d7ec7ebe3b531a8d0f1009eaf7e
 										</div>
 									</div>
 
 									<div class="col-xs-12 col-lg-6">
 
 										<div class="form-group">
+<<<<<<< HEAD
+											<label for="chasis_num"><strong>Numero de Chasis</strong></label>
+											<input type="text" class="form-control" id="chasis_num" name="chasis_num">
+										</div>
+
+										<div class="form-group">
+											<label for="motor_num"><strong>Numero de Motor</strong></label>
+											<input type="text" class="form-control" id="motor_num" name="motor_num">
+=======
 											<label for="chasis_num"><strong>Número de Chasis</strong></label>
 											<input type="text" class="form-control" id="chasis_num" name="chasis_num" required>
 										</div>
@@ -90,16 +115,23 @@
 										<div class="form-group">
 											<label for="motor_num"><strong>Número de Motor</strong></label>
 											<input type="text" class="form-control" id="motor_num" name="motor_num" required>
+>>>>>>> a217e494ab529d7ec7ebe3b531a8d0f1009eaf7e
 										</div>
 										<div class="form-group">
 											<label for="estado"><strong>Estado</strong></label>
 											<select id="estado" name="estado" class="form-control form-control-sm" required>
 												<option>Disponible</option>
-												<option>Stock Playa</option>
 												<option>Vendido</option>
 												<option>A designar</option>
 
 											</select>
+
+										</div>
+										<div class="form-group">
+											<label for="inp-montoCuota"><strong>Valor del vehiculo</strong></label>
+											<input type="number" maxlength="65" class="form-control" 
+											  onblur="darFormato(this);" name="precio" id="precio"
+											 placeholder="">
 										</div>
 
 									</div>
@@ -107,7 +139,7 @@
 
 								<div class="success">
 
-									<button type="submit" onclick="realizaProceso($('#estado').val())" class="btn btn-primary">
+									<button type="submit" onclick="realizaProceso($('#marca').val())" class="btn btn-primary">
 										Guardar</button>
 								</div>
 							</form>
