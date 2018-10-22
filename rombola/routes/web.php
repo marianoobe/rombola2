@@ -47,7 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('borrar_rol/{idrol}', 'UsuariosController@borrar_rol');
     //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
     #adminlte_routes
-    
+    Route::resource('listaprecios','ListaprecioController');
 });
 
 Route::resource('clientes','ClienteController');

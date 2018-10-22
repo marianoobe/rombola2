@@ -3,17 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use DB;
-
-class ListaPrecioController extends Controller
+use App\Marca;
+use App\Listaprecio;
+use Storage;
+use Illuminate\Support\Facades\Validator;
+class ListaprecioController extends Controller
 {
-
-    public function importChevrolet() 
-    {
-        
-    }
-
+    
 
     /**
      * Display a listing of the resource.
@@ -22,7 +20,23 @@ class ListaPrecioController extends Controller
      */
     public function index()
     {
-        return view('lista-precios');
+
+        $lista = DB::table('listaprecios')
+        ->join('marcas','marcas.idmarca','listaprecios.idmarca')             
+        ->paginate(5);
+         $rutalista= "storage/listas/";
+         $rutaimgmarcas= "../storage/imgmarcas/";
+        $marcas= DB::table('marcas')
+        ->orderby('nombre','asc')
+        ->get();
+
+
+         
+        return view('listaprecios.index')
+        ->with('lista',$lista)
+        ->with('marcas',$marcas)
+        ->with("rutalista",$rutalista)
+        ->with("rutaimgmarcas",$rutaimgmarcas);    
     }
 
     /**
@@ -32,7 +46,9 @@ class ListaPrecioController extends Controller
      */
     public function create()
     {
-        return view('listaprecios.create');
+        $marcas=DB::table('marcas')->get();
+        
+        return view('listaprecios.create')->with('marcas',$marcas);
     }
 
     /**
@@ -43,49 +59,41 @@ class ListaPrecioController extends Controller
      */
     public function store(Request $request)
     {
-        $format = $request->get("formato");
-
-        if($format==1){
-        $nomb= 'Chevrolet.xlsx';
-        Excel::load('Chevrolet.xlsx', function ($reader) {
-            /**
-             * $reader->get() nos permite obtener todas las filas de nuestro archivo
-             */
-            foreach ($reader->get() as $key => $row) {
-                $producto = [
-                    'modelos' => $row['modelos'],
-                    'descripcion' => $row['descripcion'],
-                    'precio' => $row['precio'],
-                ];
-                /** Una vez obtenido los datos de la fila procedemos a registrarlos */
-                if (!empty($producto)) {
-                    DB::table('lista_precios')->insert($producto);
-                }
-            }
-            echo 'La lista se cargó exitosamente';
-        });
-    }
-    else{
-        Excel::load('Peugeot.xlsx', function ($reader) {
-            /**
-             * $reader->get() nos permite obtener todas las filas de nuestro archivo
-             */
-            foreach ($reader->get() as $key => $row) {
-                $producto = [
-                    'modelos' => $row['modelos'],
-                    'descripcion' => $row['descripcion'],
-                    'precio' => $row['precio'],
-                ];
-                /** Una vez obtenido los datos de la fila procedemos a registrarlos */
-                if (!empty($producto)) {
-                    DB::table('peugeots')->insert($producto);
-                }
-            }
-            echo 'La lista se cargó exitosamente';
-        });
-    }
-
-        return view('lista-precios');
+       // dd($request);
+        $archivo = $request->file('file');
+    	$input  = array('file' => $archivo) ;
+       $reglas = array('file' => 'required|mimes:pdf|max:50000');  //recordar que para activar mimes se debe descomentar la linea de codigo  'extension=php_fileinfo.dll' del php.ini
+        $validacion = Validator::make($input,  $reglas);
+        if ($validacion->fails())
+        {
+          return view("mensajes.msj_rechazado")->with("msj","El archivo no es un pdf o es demasiado Grande para subirlo");
+        }
+        else
+        {
+             $idmarca=$request->get('marcas');
+          //dd($request->input('fecha'));
+          $marca = Marca::where("idmarca","=",$idmarca)->select("idmarca")->get();
+        
+          foreach ($marca as $item) {
+            //echo "$item->idpersona";
+          }
+          //dd($marca);
+          $idmarcas=$item->idmarca;
+        $carpeta=$request->input("marcas");
+	      $ruta=$archivo->getClientOriginalName();
+		    $r1=Storage::disk('listas')->put($ruta,\File::get($archivo));
+ $lista = new Listaprecio([
+            'idmarca' => $idmarcas,         
+          
+            'rutalista' => $ruta,
+           
+            'fechalista' => $request->input('fecha'),
+          ]);
+          $lista->save();
+      
+	       
+         }
+            return redirect('/listaprecios')->with('success', 'Lista Guardada');
     }
 
     /**
@@ -132,4 +140,5 @@ class ListaPrecioController extends Controller
     {
         //
     }
+
 }

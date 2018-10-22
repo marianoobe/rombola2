@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateListaPreciosTable extends Migration
+class CreateMarcasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateListaPreciosTable extends Migration
      */
     public function up()
     {
-        Schema::create('lista_precios', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('modelos',100);
-            $table->string('descripcion',500);
-            $table->integer('precio');
+        Schema::create('marcas', function (Blueprint $table) {
+            $table->increments('idmarca');
+            $table->string('nombre',20);
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateListaPreciosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lista_precios');
+        Schema::dropIfExists('marcas');
     }
 }
