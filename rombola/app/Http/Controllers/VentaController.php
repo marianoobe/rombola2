@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\TipoFinanciera;
 use App\Persona;
+use App\Automovile;
 
 class VentaController extends Controller
 {
@@ -28,7 +29,12 @@ class VentaController extends Controller
         $tipo_finan = TipoFinanciera::pluck('nombretipo');
         $nombapell = Persona::pluck('nombre_apellido');
 
-        return view('venta.create',compact('tipo_finan','nombapell'));
+        $autos=Automovile::select('*')
+       ->whereNotNull('dominio')
+       ->orderBY('id_auto')
+       ->paginate(5);
+
+        return view('venta.create',compact('tipo_finan','nombapell','autos'));
     }
 
     /**

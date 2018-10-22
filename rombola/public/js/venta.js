@@ -143,5 +143,13 @@ function validar_check_financiera(obj){
   if (obj.checked == true) {
   $('#modal-financiera').modal('show');
   }
+}
 
+function validar_entregado(obj){
+  if (obj.checked == true) {
+    document.getElementById("section_usado_entregado").style.display = "block";
+  }
+  else{
+    document.getElementById("section_usado_entregado").style.display = "none";
+  }
 }

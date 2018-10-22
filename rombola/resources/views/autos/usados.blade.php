@@ -44,11 +44,10 @@
 						<div>
 
 							<table class="table table-striped">
-
 								<thead>
 									<tr>
-										
-									    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label=" : activate to sort column ascending" style="width: 58px;"/>
+										<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label=" : activate to sort column ascending"
+										 style="width: 58px;" />
 										<th scope="col">ID</th>
 										<th scope="col">MARCA</th>
 										<th scope="col">MODELO</th>
@@ -57,7 +56,6 @@
 										<th scope="col">COLOR</th>
 										<th scope="col">ESTADO</th>
 										<th scope="col">VER</th>
-										
 									</tr>
 								</thead>
 								<tbody>
@@ -74,14 +72,14 @@
 										<td>{{$item->color}}</td>
 										<td>{{$item->estado}}</td>
 										@can('admin')
-												<td style="cursor: default;">
+										<td style="cursor: default;">
 											<a href="{{ route('editusado',$item->id_auto)}}" class="btn btn-info btn-sm">
 												<span class="glyphicon glyphicon-search"></span></a>
-                                        @endcan
+											@endcan
 										</td>
-																
-									  
-								</td>
+
+
+										</td>
 									</tr>
 									@endforeach()
 								</tbody>
@@ -89,4 +87,4 @@
 
 							{{ $autos->render() }}
 
-@endsection
+							@endsection
