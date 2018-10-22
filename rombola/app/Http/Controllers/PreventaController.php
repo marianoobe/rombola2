@@ -39,10 +39,8 @@ class PreventaController extends Controller
     public function create() 
     {
         $tipo_finan = TipoFinanciera::pluck('nombretipo');
-        $dni = Persona::pluck('dni');
-        $nombre = Persona::pluck('nombre');
-        $apellido = Persona::pluck('apellido');
-        return view('preventa.create',compact('tipo_finan','dni','nombre','apellido'));
+        $nombapell = Persona::pluck('nombre_apellido');
+        return view('preventa.create',compact('tipo_finan','nombapell'));
     }
         
 
@@ -72,12 +70,24 @@ class PreventaController extends Controller
         $can = $request->get('cancer');
           if ($can == 'nuevo') {
           //insert Persona-Cliente
+          $nombre= $request->get('nombre');
+          if($request->get('apellido')==null)
+          $apellido = "";
+          else
+          $apellido = $request->get('apellido');
+
+          if($request->get('email')==null)
+          $email = "";
+          else
+          $email = $request->get('email');
+
           $share = new Persona([
-            'dni' => $request->get('dni'),
+            'dni' => 0,
             'nombre' => $request->get('nombre'),
             'apellido'=> $request->get('apellido'),
-            'email'=> $request->get('email'),
-            'act_empresa'=> $request->get('act_empresa')
+            'nombre_apellido'=> $nombre." ".$apellido,
+            'email'=> $email,
+            'act_empresa'=> ""
           ]);
           $share->save();
 
@@ -91,9 +101,9 @@ class PreventaController extends Controller
           $idpers=$item->idpersona;
           $cliente = new Cliente([
             'cliente_persona' => $idpers,
-            'fecha_nacimiento' => "####",
-            'domicilio'=> "####",
-            'estado_civil'=> "####",
+            'fecha_nacimiento' => " ",
+            'domicilio'=> " ",
+            'estado_civil'=> " ",
             'estado_ficha'=> "Incompleta",
             'visible'=> true,
           ]);
@@ -162,8 +172,8 @@ class PreventaController extends Controller
         foreach ($idp as $item) {}
 
         if ($item->nombretipo == "Sin") {
-            $nomtipo ="#";
-            $nomfinanc = "#";
+            $nomtipo ="No";
+            $nomfinanc = "No";
             $cant = 0;
             $importe = 0;
         }

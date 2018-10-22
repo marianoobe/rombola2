@@ -18,6 +18,7 @@ class CreatePersonasTable extends Migration
             $table->integer('dni');
             $table->text('nombre', 20);
             $table->text('apellido', 20);
+            $table->text('nombre_apellido', 30);
             $table->text('email');
             $table->text('act_empresa', 25);
             $table->timestamps();

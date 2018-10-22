@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\TipoFinanciera;
+use App\Persona;
 
 class VentaController extends Controller
 {
@@ -23,7 +25,10 @@ class VentaController extends Controller
      */
     public function create()
     {
-        return view('venta.create');
+        $tipo_finan = TipoFinanciera::pluck('nombretipo');
+        $dni = Persona::pluck('dni');
+
+        return view('venta.create',compact('tipo_finan','dni'));
     }
 
     /**

@@ -16,7 +16,7 @@ function obtener_valor_select(valorCaja1) {
 }
 
 function obtenervalue() {
-    var res= document.getElementById("dnis").value;
+    var res = document.getElementById("dnis").value;
     console.log(res);
     document.getElementById("tipodni").value = res;
 
@@ -43,13 +43,14 @@ function obtener(opt) {
 function validar_check(obj) {
     if (obj.checked == true) {
         document.getElementById("otropago").style.display = "block";
-        
+
     } else {
         document.getElementById("otropago").style.display = "none";
         document.getElementById("otropago").value = "No";
         document.getElementById("otropago").required = true;
     }
 }
+
 
 function validar_check_venta(obj) {
     if (obj.checked == true) {
@@ -59,63 +60,45 @@ function validar_check_venta(obj) {
     }
 }
 
-function enable_buscar(){
-    if(document.getElementById("nuevo").style.display =="none" && document.getElementById("buscar").style.display =="none"){
-    document.getElementById("buscar").style.display = "block";
-    document.getElementById("cancer").value = "buscar";
-    $('#dninuevo').removeAttr("required");
-                $('#nombre').removeAttr("required");
-                $('#apellido').removeAttr("required");
-                $('#cel_1').removeAttr("required");
-                $('#email').removeAttr("required");
-                $('#act_empresa').removeAttr("required");             
-    }
-    else{
-        if(document.getElementById("buscar").style.display =="block"){
+function enable_buscar() {
+    if (document.getElementById("nuevo").style.display == "none" && document.getElementById("buscar").style.display == "none") {
+        document.getElementById("buscar").style.display = "block";
+        document.getElementById("cancer").value = "buscar";
+
+        $('#nombre').removeAttr("required");
+    } else {
+        if (document.getElementById("buscar").style.display == "block") {
             document.getElementById("buscar").style.display = "none";
         }
     }
 
-    if(document.getElementById("buscar").style.display =="none" && document.getElementById("nuevo").style.display =="block" ){
+    if (document.getElementById("buscar").style.display == "none" && document.getElementById("nuevo").style.display == "block") {
         document.getElementById("buscar").style.display = "block";
         document.getElementById("nuevo").style.display = "none";
-    $('#dninuevo').removeAttr("required");
-                $('#nombre').removeAttr("required");
-                $('#apellido').removeAttr("required");
-                $('#cel_1').removeAttr("required");
-                $('#email').removeAttr("required");
-                $('#act_empresa').removeAttr("required");
-                document.getElementById("cancer").value = "buscar";
+
+        $('#nombre').removeAttr("required");
+
+        document.getElementById("cancer").value = "buscar";
     }
 }
-function enable_nuevo(){
-    if(document.getElementById("nuevo").style.display =="none" && document.getElementById("buscar").style.display =="none"){
+
+function enable_nuevo() {
+    if (document.getElementById("nuevo").style.display == "none" && document.getElementById("buscar").style.display == "none") {
         document.getElementById("nuevo").style.display = "block";
         document.getElementById("cancer").value = "nuevo";
-        }
-        else{
-            if(document.getElementById("nuevo").style.display =="block"){
-                document.getElementById("nuevo").style.display = "none";
-                $('#dninuevo').removeAttr("required");
-                $('#nombre').removeAttr("required");
-                $('#apellido').removeAttr("required");
-                $('#cel_1').removeAttr("required");
-                $('#email').removeAttr("required");
-                $('#act_empresa').removeAttr("required");
-                
-            }
-        }
-
-        if(document.getElementById("nuevo").style.display =="none" && document.getElementById("buscar").style.display =="block" ){
-            document.getElementById("nuevo").style.display = "block";
-            document.getElementById("buscar").style.display = "none";
-            $('#dninuevo').removeAttr("required");
+    } else {
+        if (document.getElementById("nuevo").style.display == "block") {
+            document.getElementById("nuevo").style.display = "none";
             $('#nombre').removeAttr("required");
-            $('#apellido').removeAttr("required");
-            $('#cel_1').removeAttr("required");
-            $('#email').removeAttr("required");
-            $('#act_empresa').removeAttr("required");
+
         }
+    }
+
+    if (document.getElementById("nuevo").style.display == "none" && document.getElementById("buscar").style.display == "block") {
+        document.getElementById("nuevo").style.display = "block";
+        document.getElementById("buscar").style.display = "none";
+        $('#nombre').removeAttr("required");
+    }
 }
 
 $(document).ready(function () {
@@ -157,6 +140,3 @@ $(document).ready(function () {
     });
 
 });
-
-
-

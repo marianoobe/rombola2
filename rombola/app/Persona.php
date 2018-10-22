@@ -6,14 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Persona extends Model
 {
-    protected $fillable = ['idpersona','dni','nombre','apellido','email','act_empresa'];
+    protected $fillable = ['idpersona','dni','nombre','apellido','nombre_apellido','email','act_empresa'];
 
     public function scopeSearch($query,$name)
     {
        // dd($dato);
         return $query->where('dni','LIKE','%'.$name.'%')
                   ->orWhere('nombre','LIKE', '%'.$name.'%')
-                   ->orWhere('apellido','LIKE', '%'.$name.'%'); 
+                   ->orWhere('apellido','LIKE', '%'.$name.'%')
+                   ->orWhere('nombre_apellido','LIKE', '%'.$name.'%'); 
                  
     }
 

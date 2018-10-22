@@ -50,10 +50,13 @@ class ClienteController extends Controller
             'domicilio'=> 'required|text',
             'estado_civil' => 'required|text'
           ]);*/
+          $nombre= $request->get('nombre');
+          $apellido = $request->get('apellido');
           $share = new Persona([
             'dni' => $request->get('dni'),
             'nombre' => $request->get('nombre'),
             'apellido'=> $request->get('apellido'),
+            'nombre_apellido'=> $nombre." ".$apellido,
             'email'=> $request->get('email'),
             'act_empresa'=> $request->get('act_empresa')
           ]);
@@ -157,6 +160,9 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
+      $nombre= $request->get('nombre');
+      $apellido = $request->get('apellido');
+
       DB::table('clientes')
         ->join('personas', 'personas.idpersona' ,'clientes.cliente_persona')
         ->join('telefonos','telefonos.personas_telefono','personas.idpersona')
@@ -165,6 +171,7 @@ class ClienteController extends Controller
                 "dni" => $request->get('dni'),
                 "nombre" => $request->get('nombre'),
                 "apellido" => $request->get('apellido'),
+                "nombre_apellido" => $nombre." ".$apellido,
                 "email" => $request->get('email'),
                 "domicilio" => $request->get('domicilio'),
                 "act_empresa" => $request->get('act_empresa'),

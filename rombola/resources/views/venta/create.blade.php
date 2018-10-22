@@ -4,7 +4,7 @@
 @section('seccion1')
 <div class="container-fluid spark-screen">
     {!! Form::open(['route'=>'pre-venta.store','method'=>'post','class'=>'form-group']) !!}
-    {!! Html::script('js/financiera.js') !!}
+    {!! Html::script('js/venta.js') !!}
     <div class="row">
         <div class="col-md-14 col-md-offset-0">
             <div class="box box-primary">
@@ -12,10 +12,10 @@
                     <h3 class="box-title">Inicio de Operación</h3>
 
                     <div class="box-tools pull-right">
-                            <a class="btn btn-xs btn-success" onclick="history.back(1);">
-                                    <i class="fa fa-chevron-left"></i> VOLVER</a>
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                </button>
+                        <a class="btn btn-xs btn-success" onclick="history.back(1);">
+                            <i class="fa fa-chevron-left"></i> VOLVER</a>
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
                     </div>
                 </div>
                 <!-- /.box-header -->
@@ -24,8 +24,11 @@
                         <div class="col-xs-12 col-lg-offset-2 col-lg-3">
                             <div class="form-group">
                                 <div class='input-group date'>
-                                    <input type="text" class="form-control" id="fecha_oper" name="fecha_oper" 
-                                    value="<?php echo date("d-m-Y");?>" disabled>
+                                    @php
+                                    $fecha = date("d-m-Y");
+                                    @endphp
+                                    <input type="text" class="form-control" id="fecha_oper" name="fecha_oper" value="{{$fecha}}"
+                                        disabled>
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -57,158 +60,133 @@
 
                 <div class="box-body">
 
-                    <ul class="nav nav-pills nav-justified" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
-                                aria-controls="pills-home" aria-selected="true">Buscar</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
-                                aria-controls="pills-profile" aria-selected="false">Nuevo</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                            <div aling="center" class="form-group">
-                                <br> </br>
-                                <input type="number" class="form-control" id="buscar_cliente" name="buscar_cliente"
-                                    placeholder="Ingrese DNI">
-                            </div>
+                    <input type="text" id="cancer" name="cancer" style="display:none">
+                    <input type="text" id="tipodni" name="tipodni" style="display:none">
+                    <div class="row margenBoot-25">
+                        <div class="col-xs-14 col-lg-6">
+                            <button onclick="enable_buscar()" type="button" class="btn btn-success btn-block" style="margin-bottom: 10%;">Buscar
+                                Cliente</button>
+                            <section id="buscar" style="display:none">
+                                <select id="dnis" onchange="obtenervalue()" class="selectpicker" data-live-search="true"
+                                    data-width="100%" data-size="2">
+                                    @foreach ($dni as $item)
+                                    <option value="{{$item}}">{{$item}}</option>
+                                    @endforeach
+                                </select>
+
+                                <br><br><br><br><br><br><br>
+                            </section>
                         </div>
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                            <div class="panel panel-default" style="margin-left:20px; margin-right:20px;">
-                                <div class="panel-body">
-                                    <!-- inicio panel filtros -->
-
-                                    <div class="box-body">
-                                        <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                        <div class="row margenBoot-25">
-                                            <div class="col-xs-12 col-lg-6">
-                                                <div class="form-group">
-                                                    <label><strong>*DNI</strong></label>
-                                                    <input type="number" class="form-control" id="dni" name="dni"
-                                                        required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label><strong>*Nombres</strong></label>
-                                                    <input type="text" class="form-control" id="nombre" name="nombre"
-                                                        required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label><strong>*Apellidos</strong></label>
-                                                    <input type="text" class="form-control" id="apellido" name="apellido"
-                                                        required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label><strong>*Fecha de Nacimiento</strong></label>
-                                                    <input type="date" class="form-control" id="fecha_nac" name="fecha_nac"
-                                                        required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label><strong>*Estado Civil</strong></label>
-                                                    <select id="estado_civil" name="estado_civil" class="form-control form-control-sm"
-                                                        required>
-                                                        <option>Soltero</option>
-                                                        <option>Convive</option>
-                                                        <option>Casado</option>
-                                                        <option>Divorciado</option>
-                                                        <option>Viudo</option>
-                                                    </select>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-xs-12 col-lg-6">
-                                                <div class="form-group">
-                                                    <label><strong>*Correo Electrónico</strong></label>
-                                                    <input type="email" class="form-control" id="email" name="email"
-                                                        placeholder="email@gmail.com" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label><strong>*Celular</strong></label>
-                                                    <input type="text" class="form-control" id="cel_1" name="cel_1"
-                                                        required> </div>
-                                                <div class="form-group">
-                                                    <label><strong>Otro</strong>(tel. fijo o celular)</label>
-                                                    <input type="text" class="form-control" id="cel_2" name="cel_2">
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="form-group">
-                                                        <label><strong>*Domicilio</strong></label>
-                                                        <input type="text" class="form-control" id="domicilio" name="domicilio"
-                                                            required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label><strong>*Actividad/Empresa</strong></label>
-                                                        <input type="text" class="form-control" id="act_empresa" name="act_empresa"
-                                                            required>
-                                                    </div>
-
-                                                </div>
-                                            </div><!-- /.modal-content -->
-                                        </div><!-- /.modal-dialog -->
-                                        <div class="modal-footer">
-                                            <button type="submit" onclick="realizaProceso($('#estado_civil').val())"
-                                                class="btn btn-primary">Guardar</button>
-                                        </div>
+                        <div class="col-xs-14 col-lg-6">
+                            <button onclick="enable_nuevo()" type="button" class="btn btn-success btn-block" style="margin-bottom: 10%;">Nuevo
+                                Cliente</button>
+                        </div>
+                    </div>
+                    <section id="nuevo" style="display:none">
+                        <div class="row margenBoot-25">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="form-group">
+                                    <label><strong>*DNI</strong></label>
+                                    <input type="number" class="form-control" id="nuevo_dni" name="dni" required>
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>*Nombres</strong></label>
+                                    <input type="text" class="form-control" id="nuevo_nombre" name="nombre" required>
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>*Apellidos</strong></label>
+                                    <input type="text" class="form-control" id="nuevo_apellido" name="apellido" required>
+                                </div>
+ <div class="form-group">
+                                        <label><strong>*Fecha de Nacimiento</strong></label>
+                                        <input type="date" class="form-control" id="nuevo_garante_fecha_nac" name="garante_fecha_nac">
                                     </div>
-
-                                    <!-- fin panel filtros -->
+                                    <div class="form-group">
+                                        <label><strong>*Estado Civil</strong></label>
+                                        <select id="estado_civil" name="nuevo_estado_civil" class="form-control form-control-sm">
+                                            <option>Soltero</option>
+                                            <option>Convive</option>
+                                            <option>Casado</option>
+                                            <option>Divorciado</option>
+                                            <option>Viudo</option>
+                                        </select>
+                                    </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="form-group">
+                                    <label><strong>*Correo Electrónico</strong></label>
+                                    <input type="email" placeholder="email@gmail.com" class="form-control" id="nuevo_email"
+                                        name="nuevo_email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>*Celular</strong></label>
+                                    <input type="text" class="form-control" id="nuevo_cel_1" name="nuevo_cel_1" required>
+                                </div>
+                                <div class="form-group">
+                                        <label><strong>Otro</strong>(tel. fijo o celular)</label>
+                                        <input type="text" class="form-control" id="garante_cel_2" name="garante_cel_2">
+                                    </div>
+                                    
+                                        <div class="form-group">
+                                            <label><strong>*Domicilio</strong></label>
+                                            <input type="text" class="form-control" id="garante_domicilio" name="garante_domicilio">
+                                        </div>
+                                <div class="form-group">
+                                    <label><strong>*Actividad/Empresa</strong></label>
+                                    <input type="text" class="form-control" id="nuevo_act_empresa" name="nuevo_act_empresa"
+                                        required>
                                 </div>
                             </div>
                         </div>
 
-                    </div>
 
                 </div>
                 <div class="box-footer">
 
-                    <div class="box box-primary">
+                    <div class="box box-default">
                         <div ALIGN="left" class="box-header with-border">
-                            <h4 class="box-title">¿Convive?</h4>
-                            <label><input type="checkbox" value="" onclick="javascript:validar_check_venta(this);"> Si</label>
+                            <h4 class="box-title">¿Convive? </h4>
+                            <input id="check_conyuge" onchange="validar_check_conyuge(this);" type="checkbox" data-style="slow" data-toggle="toggle" data-size="mini" data-on="Si" data-off="No">
                         </div>
-                        <section id="conyuge" style="display:none" class="box box-default">
+                        <section id="conyuge" style="display:none" class="box box-primary">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <div class="row margenBoot-25">
                                 <div class="col-xs-12 col-lg-6">
                                     <div class="form-group">
                                         <label><strong>*DNI</strong></label>
-                                        <input type="number" class="form-control" id="dni" name="dni" required>
+                                        <input type="number" class="form-control" id="conyuge_dni" name="conyuge_dni">
                                     </div>
                                     <div class="form-group">
                                         <label><strong>*Nombres</strong></label>
-                                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                        <input type="text" class="form-control" id="conyuge_nombre" name="conyuge_nombre">
                                     </div>
                                     <div class="form-group">
                                         <label><strong>*Apellidos</strong></label>
-                                        <input type="text" class="form-control" id="apellido" name="apellido" required>
+                                        <input type="text" class="form-control" id="conyuge_apellido" name="conyuge_apellido">
                                     </div>
                                     <div class="form-group">
                                         <label><strong>*Fecha de Nacimiento</strong></label>
-                                        <input type="date" class="form-control" id="fecha_nac" name="fecha_nac"
-                                            required>
+                                        <input type="date" class="form-control" id="conyuge_fecha_nac" name="conyuge_fecha_nac">
                                     </div>
 
                                 </div>
                                 <div class="col-xs-12 col-lg-6">
                                     <div class="form-group">
                                         <label><strong>*Celular</strong></label>
-                                        <input type="text" class="form-control" id="cel_1" name="cel_1" required>
+                                        <input type="text" class="form-control" id="conyuge_cel_1" name="conyuge_cel_1">
                                     </div>
                                     <div class="form-group">
                                         <label><strong>Otro</strong>(tel. fijo o celular)</label>
-                                        <input type="text" class="form-control" id="cel_2" name="cel_2">
+                                        <input type="text" class="form-control" id="conyuge_cel_2" name="conyuge_cel_2">
                                     </div>
                                     <div class="form-group">
                                         <div class="form-group">
                                             <label><strong>*Domicilio</strong></label>
-                                            <input type="text" class="form-control" id="domicilio" name="domicilio"
-                                                required>
+                                            <input type="text" class="form-control" id="conyuge_domicilio" name="conyuge_domicilio">
                                         </div>
                                         <div class="form-group">
                                             <label><strong>*Actividad/Empresa</strong></label>
-                                            <input type="text" class="form-control" id="act_empresa" name="act_empresa"
-                                                required>
+                                            <input type="text" class="form-control" id="conyuge_act_empresa" name="conyuge_act_empresa">
                                         </div>
 
                                     </div>
@@ -218,66 +196,68 @@
                     </div>
 
 
-                    <div class="box box-primary">
+                    <div class="box box-default">
                         <div ALIGN="left" class="box-header with-border">
                             <h4 class="box-title">Información del Garante</h4>
-                        </div>
-                        <input type="hidden" name="_token" value="{{csrf_token()}}">
-                        <div class="row margenBoot-25">
-                            <div class="col-xs-12 col-lg-6">
-                                <div class="form-group">
-                                    <label><strong>*DNI</strong></label>
-                                    <input type="number" class="form-control" id="dni" name="dni" required>
-                                </div>
-                                <div class="form-group">
-                                    <label><strong>*Nombres</strong></label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" required>
-                                </div>
-                                <div class="form-group">
-                                    <label><strong>*Apellidos</strong></label>
-                                    <input type="text" class="form-control" id="apellido" name="apellido" required>
-                                </div>
-                                <div class="form-group">
-                                    <label><strong>*Fecha de Nacimiento</strong></label>
-                                    <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" required>
-                                </div>
-                                <div class="form-group">
-                                    <label><strong>*Estado Civil</strong></label>
-                                    <select id="estado_civil" name="estado_civil" class="form-control form-control-sm"
-                                        required>
-                                        <option>Soltero</option>
-                                        <option>Convive</option>
-                                        <option>Casado</option>
-                                        <option>Divorciado</option>
-                                        <option>Viudo</option>
-                                    </select>
-                                </div>
+                                <input id="ingarante" onchange="validar_check_garante(this);" type="checkbox" data-style="slow" data-toggle="toggle" data-size="mini" data-on="Si" data-off="No">
 
+
+                        </div>
+                        <section id="garante" style="display:none" class="box box-primary">
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            <div class="row margenBoot-25">
+                                <div class="col-xs-12 col-lg-6">
+                                    <div class="form-group">
+                                        <label><strong>*DNI</strong></label>
+                                        <input type="number" class="form-control" id="garante_dni" name="garante_dni">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>*Nombres</strong></label>
+                                        <input type="text" class="form-control" id="garante_nombre" name="garante_nombre">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>*Apellidos</strong></label>
+                                        <input type="text" class="form-control" id="garante_apellido" name="garante_apellido">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>*Fecha de Nacimiento</strong></label>
+                                        <input type="date" class="form-control" id="garante_fecha_nac" name="garante_fecha_nac">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>*Estado Civil</strong></label>
+                                        <select id="estado_civil" name="estado_civil" class="form-control form-control-sm">
+                                            <option>Soltero</option>
+                                            <option>Convive</option>
+                                            <option>Casado</option>
+                                            <option>Divorciado</option>
+                                            <option>Viudo</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12 col-lg-6">
+                                    <div class="form-group">
+                                        <label><strong>*Celular</strong></label>
+                                        <input type="text" class="form-control" id="garante_cel_1" name="garante_cel_1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>Otro</strong>(tel. fijo o celular)</label>
+                                        <input type="text" class="form-control" id="garante_cel_2" name="garante_cel_2">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label><strong>*Domicilio</strong></label>
+                                            <input type="text" class="form-control" id="garante_domicilio" name="garante_domicilio">
+                                        </div>
+                                        <div class="form-group">
+                                            <label><strong>*Actividad/Empresa</strong></label>
+                                            <input type="text" class="form-control" id="garante_act_empresa" name="garante_act_empresa">
+                                        </div>
+
+                                    </div>
+                                </div><!-- /.modal-content -->
                             </div>
-                            <div class="col-xs-12 col-lg-6">
-                                <div class="form-group">
-                                    <label><strong>*Celular</strong></label>
-                                    <input type="text" class="form-control" id="cel_1" name="cel_1" required>
-                                </div>
-                                <div class="form-group">
-                                    <label><strong>Otro</strong>(tel. fijo o celular)</label>
-                                    <input type="text" class="form-control" id="cel_2" name="cel_2">
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label><strong>*Domicilio</strong></label>
-                                        <input type="text" class="form-control" id="domicilio" name="domicilio"
-                                            required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label><strong>*Actividad/Empresa</strong></label>
-                                        <input type="text" class="form-control" id="act_empresa" name="act_empresa"
-                                            required>
-                                    </div>
-
-                                </div>
-                            </div><!-- /.modal-content -->
-                        </div>
+                        </section>
                     </div>
                 </div>
             </div>
@@ -432,17 +412,16 @@
                                 <div id="contenedorVehiculosEntrega">
                                     <div name="entradaAuto" class="row">
                                         <div class="col-sm-12">
-                                            <div class="box box-success">
+                                            <div class="box box-success collapsed-box">
                                                 <div class="box-header with-border">
+                                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                                            class="fa fa-plus"></i></button>
                                                     <h3 class="box-title" name="tituloAutoEntrega">Datos del auto
                                                         que
                                                         entrega :</h3>
 
                                                     <div class="box-tools pull-right">
-                                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                                                class="fa fa-minus"></i></button>
-                                                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i
-                                                                class="fa fa-times"></i></button>
+                                                        <!--minimizar o maximizar-->
                                                     </div>
                                                 </div>
                                                 <!-- /.box-header -->
@@ -456,13 +435,12 @@
                                                         </div>
 
                                                         <div class="col-xs-12 col-lg-3">
-                                                            {!! Html::script('js/venta.js') !!}
-                                                            <div class="form-group">
+                                                            
                                                                 <label><strong>Patente Mercosur</strong></label>
                                                                 <div class="btn-group btn-toggle">
-                                                                    <button class="btn btn-xs btn-default">SI</button>
-                                                                    <button class="btn btn-xs btn-success">NO</button>
-                                                                </div>
+                                                                    <button onclick="javascript:valida();" class="btn btn-xs btn-default">SI</button>
+                                                                    <button onclick="javascript:valida();" class="btn btn-xs btn-success">NO</button>
+                                                                
                                                             </div>
                                                         </div>
                                                         <div class="col-xs-12 col-lg-3">
@@ -554,6 +532,7 @@
                                                 </div>
                                                 <!-- ./box-body -->
                                                 <div class="box-footer" align="center">
+                                                    <!--
                                                     <button type="button" onclick="limpiarAutoEntrega(this);" name="btn-limpiarAutoEntrega"
                                                         class="btn btn-sm btn-warning"> <i class="fa fa-recycle"></i>
                                                         LIMPIAR DATOS </button>
@@ -564,7 +543,7 @@
                                                         name="btn-NuevoVehiculo" class="btn btn-sm btn-primary"><i
                                                             class="fa fa-plus"></i> AGREGAR
                                                         VEHÍCULO </button>
-                                                    <!-- /.row -->
+                                                    -->
                                                 </div>
                                                 <!-- /.box-footer -->
                                             </div>
@@ -695,6 +674,7 @@
             <!-- /.col -->
         </div>
         {!! Form::close() !!}
+
     </div>
 
     @endsection

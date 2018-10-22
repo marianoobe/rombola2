@@ -210,7 +210,7 @@ function convert_html_venta()
         #cabecera {
             width: 740px;
             padding: 0px;
-            height: 200px;
+            height: 170px;
             margin: 0px;
         }
 
@@ -227,9 +227,20 @@ function convert_html_venta()
         }
         
         p {
-            font-size:12px;
+            font-size:10px;
         }
 
+        #pepe{
+            line-height: 50%;
+        }
+
+        #garante{
+            line-height: 80%;
+        }
+
+        #usado, #usado_entregado{
+            line-height: 80%;
+        }
         #izquierda{ width: 280px;
             }
 
@@ -261,16 +272,39 @@ function convert_html_venta()
             margin: auto;}
             
             #lateral1{
+            line-height: 80%;
             width: 350px;  /*Este será el ancho que tendrá tu columna*/
             float:left; /*Aqui determinas de lado quieres quede esta "columna" */
             }
             
             #principal1{
+            line-height: 80%;
             margin-left:370px; /*Este margen hace que no se encime el contenido en tu menúlateral, es     importante que pongas un pocos pixeles más que el ancho  de tu columna lateral*/
             font-size:11px;
             //border:#000000 1px solid; /*ponemos un dorde para que se vea bonito*/
             }
 
+            p.cuadrado {
+                width: 100px;
+                //padding: 12px 20px;
+                //margin: 8px 0;
+                //box-sizing: border-box;
+                border: 1px solid black;
+            }
+
+            table {
+                font-size:11px;
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+            
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+            
 
         </style>
         </head>
@@ -287,11 +321,11 @@ function convert_html_venta()
            }*/
     $output .= '
     <div id="cabecera">
-    <img src="C:\xampp\htdocs\rombolaagencia\rombola\public\img\encabezado.png" width="740" height="100" />
-    <p>Direccion Telefono</p>
-    <div ALIGN="center" class="box-header with-border">
-        <h5 class="box-title">SOLICITUD DE RESERVA</h5>
-    </div>
+    <img src="C:\xampp\htdocs\rombolaagencia\rombola\public\img\logogrande.png" width="160" height="50" />
+    <div id="pepe"><p style="font-size:8px;">Direccion Telefono</p>
+    <p style="font-size:8px;">info@ragroup.com.ar</p></div>
+    <hr>
+        <p ALIGN="center" style="font-size:10px;"><strong>SOLICITUD DE RESERVA</strong></p>
     <p style="font-size:8px;">De mi consideración</p>
     <p style="font-size:8px;">Por la presenta solicito a Ustedes la RESERVA de
         la unidad seguidamente detallada en un todo de acuerdo a las condiciones generales
@@ -301,92 +335,45 @@ function convert_html_venta()
         para la subscripción, presentado de esta forma mi consentimiento y por resultar conveniente para mis
         intereses</p>
 
-    <br>
     <div id="derecha">
-    <p> <strong>Fecha</strong>: </p>
+    <p><strong>Fecha</strong>: 21/12/1991 </p>
     </div>
     <br>
     <br>
      <div id="contenedor1">
-        <div id="lateral1">
-            <p> <strong>Comprador</strong>: </p>
-            <p>DNI</strong>: </p>
-            <p></p>
-            <p> Fecha de Nacimiento: </p>
-            <p></p>
-            <p>Domicilio: </p>
-            <p></p>
-            <p>Estado Civi: </p>
-            <p></p>
-            <p>Teléfono: </p>
-            <p></p>
-        </div>
-        <div id="principal1">
-            <strong>Conyuge</strong>: Fabricito
-            <br>
-            <br>
-            DNI:
-            <br>
-            <br>
-            Fecha de Nacimiento:
-            <br>
-            <br>
-            Teléfono:
-            <br>
-            <br>
-            <br>
-        </div>
 
-        <hr>
-        <p><strong>Garante</strong>: </p>
-        <p></p>
-        <p>DNI: </p>
-        <p></p>
-        <p>Fecha de Nacimiento: </p>
-        <p></p>
-        <p>Domicilio: </p>
-        <p></p>
-        <p>Estado Civil: </p>
-        <p></p>
-        <p>Teléfono: </p>
-        <hr>
+        <p> <strong>Comprador</strong>:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DNI</strong>:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Fecha de Nacimiento: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Domicilio:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        Estado Civil: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Teléfono: </p>
+        <br>
+        <div id="conyuge">
+        <p><strong>Conyuge</strong>:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha de Nacimiento:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Teléfono:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </p>
+        </div>
+        
+        <div id="garante">
+        <p><strong>Garante</strong>: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DNI:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Fecha de Nacimiento:   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Domicilio:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Estado Civil:   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Teléfono: </p>
+        </div>
+        
         <section id="usado" class=" ">
-            <p><strong>Marca</strong>: </p>
-            <p></p>
-            <p>Modelo: </p>
-            <p></p>
-            <p>Motor N°: </p>
-            <p></p>
-            <p>Chasis: </p>
-            <p></p>
-            <p>Dominio: </p>
-            <p></p>
-            <p>Titular: </p>
-            <p></p>
-            <p>DNI (titular): </p>
-            <hr>
+            <p><strong>Marca</strong>: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modelo:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Motor N°: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Chasis:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            Dominio:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Titular: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            DNI (titular): </p>
+            
         </section>
 
                 <section id="usado_entregado" class=" ">
-                    <p><strong>Marca de auto entregado</strong>: </p>
-                    <p></p>
-                    <p>Modelo: </p>
-                    <p></p>
-                    <p>Dominio: </p>
-                    <p></p>
-                    <p>Motor N°: </p>
-                    <p></p>
-                    <p>Chasis: </p>
-                    <p></p>
-                    <p>Titular: </p>
-                    <p></p>
-                    <p>Documentación que entrega: </p>
+                    <p><strong>Marca de auto entregado</strong>: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Modelo: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dominio: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    Motor N°: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Chasis: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Titular: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Documentación que entrega: </p>
                     <hr>
                 </section>
 
-                <div ALIGN="center" class="box-header with-border">
-                <h5 class="box-title">DETALLE DE LA OPERACIÓN</h5>
-                </div>
+                <p ALIGN="center" style="font-size:10px;"><strong>DETALLE DE LA OPERACION</strong></p>
             <p></p>
             <p>Precio de Auto reservado</strong>: $</p>
 
@@ -396,43 +383,57 @@ function convert_html_venta()
             <p></p>
             <p> <strong>Efectivo entregado</strong>: $</p>
             
-            <section id="cheques" class="   ">
-            <hr>
-                <p></p>
-                <p>Cheque N°: </p>
-
-                <p></p>
-                <p>Fecha: </p>
-
-                <p></p>
-                <p>Importe: $</p>
-
-                <p></p>
-                <p>Banco: </p>
-            </section>
-
-<p></p>
+<section id="cheques" class="   ">
+<table style="width:100%">
+  <tr>
+    <th>Cheque N°</th>
+    <th>Fecha</th> 
+    <th>Banco</th>
+    <th>Importe</th>
+    
+  </tr>
+  <tr>
+    <td>2321312</td>
+    <td>21/12/1996</td>
+    <td>Nacion</td>
+    <td>$30000</td>
+    
+  </tr>
+  
+</table>
+</section>
+         
+<br>
 <p>Gastos: $</p>
 <p></p>
 <p> <strong>Totales</strong>: $</p>
-
+<hr>
 <section id="financiacion" class=" ">
 <div ALIGN="center" class="box-header with-border">
-<h5 class="box-title">FINANCIACION</h5>
+<p ALIGN="center" style="font-size:10px;"><strong>FINANCIACION</strong></p>
 </div>
-<p></p>
-<p>Cuotas de: $</p>
-<p></p>
-<p>Vencimiento 1°: </p>
-
+<p>
+ Cuotas de: $    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Vencimiento 1°:
+ </p>
 </section>
 
 <div>
     <h5>Firmas</h5>
 </div>
 <br>
-<br><br>
-<img src="C:\xampp\htdocs\rombolaagencia\rombola\public\img\footerfirma.jpg" width="720" height="100" />                   
+<p>
+...........................................  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ........................................  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ......................................    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ......................................
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    SOLICITANTE      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           GARANTE       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         AUTORIZO         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         VENDEDOR
+<br>
+<br>
+</p>
+<p>
+...........................................  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  .....................................  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ..........................................    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ......................................
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ACLARACION      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           ACLARACION       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         ACLARACION         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        ACLARACION
+<br>
+</p>
 
 
 </div>

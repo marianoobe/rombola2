@@ -30,7 +30,7 @@
 						<div class="col-xs-12 col-lg-offset-3 col-lg-3">
 							<div class="form-group">
 								<div class='input-group date'>
-									<input type="text" class="form-control" id="fecha_oper" name="fecha_oper" value="<?php echo date("d-m-Y ");?>" >
+									<input type="text" class="form-control" id="fecha_oper" name="fecha_oper" value="<?php echo date(" d-m-Y ");?>">
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -62,59 +62,53 @@
 				</div>
 
 				<div class="box-body">
-						<input type="text" id="cancer" name="cancer" style="display:none">
-						<input type="text" id="tipodni" name="tipodni" style="display:none">
+					<input type="text" id="cancer" name="cancer" style="display:none">
+					<input type="text" id="tipodni" name="tipodni" style="display:none">
+					<div class="row margenBoot-25">
+						<div class="col-xs-14 col-lg-6">
+							<button onclick="enable_buscar()" type="button" class="btn btn-success btn-block" style="margin-bottom: 10%;">Buscar
+								Cliente</button>
+							<section id="buscar" style="display:none">
+								<select id="dnis" onchange="obtenervalue()" class="selectpicker" data-live-search="true" data-width="100%"
+								 data-size="2">
+									@foreach ($nombapell as $item)
+									<option value="{{$item}}">{{$item}}</option>
+									@endforeach
+								</select>
+
+								<br><br><br><br><br><br><br>
+							</section>
+						</div>
+						<div class="col-xs-14 col-lg-6">
+							<button onclick="enable_nuevo()" type="button" class="btn btn-success btn-block" style="margin-bottom: 10%;">Nuevo
+								Cliente</button>
+						</div>
+					</div>
+					<section id="nuevo" style="display:none">
 						<div class="row margenBoot-25">
-								<div class="col-xs-14 col-lg-6">
-									<button onclick="enable_buscar()" type="button" class="btn btn-success btn-block" style="margin-bottom: 10%;">Buscar Cliente</button>
-									<section id="buscar" style="display:none">
-											<select id="dnis" onchange="obtenervalue()" class="selectpicker" data-live-search="true" data-width="100%" data-size="2">
-												@foreach ($dni as $item)
-												<option value="{{$item}}">{{$item}}</option>
-												@endforeach
-											  </select>
-											  
-											<br><br><br><br><br><br><br>
-										</section>
+							<div class="col-xs-12 col-lg-6">
+								<div class="form-group">
+									<label><strong>*Nombres</strong></label>
+									<input type="text" class="form-control" id="nombre" name="nombre" required>
 								</div>
-								<div class="col-xs-14 col-lg-6">
-									<button onclick="enable_nuevo()" type="button" class="btn btn-success btn-block" style="margin-bottom: 10%;">Nuevo Cliente</button>
+								<div class="form-group">
+									<label><strong>*Apellidos</strong></label>
+									<input type="text" class="form-control" id="apellido" name="apellido">
 								</div>
+
 							</div>
-							<section id="nuevo" style="display:none">
-							<div class="row margenBoot-25">
-									<div class="col-xs-12 col-lg-6">
-										<div class="form-group">
-											<label><strong>*DNI</strong></label>
-											<input type="number" class="form-control" id="dninuevo" name="dni" required>
-										</div>
-										<div class="form-group">
-											<label><strong>*Nombres</strong></label>
-											<input type="text" class="form-control" id="nombre" name="nombre" required>
-										</div>
-										<div class="form-group">
-											<label><strong>*Apellidos</strong></label>
-											<input type="text" class="form-control" id="apellido" name="apellido" required>
-										</div>
+							<div class="col-xs-12 col-lg-6">
+								<div class="form-group">
+									<label><strong>*Celular</strong></label>
+									<input type="text" class="form-control" id="cel_1" name="cel_1">
+								</div>
+								<div class="form-group">
+									<label><strong>Correo Electrónico</strong></label>
+									<input type="email" placeholder="email@gmail.com" class="form-control" id="email" name="email">
+								</div>
 
-									</div>
-									<div class="col-xs-12 col-lg-6">
-										<div class="form-group">
-											<label><strong>*Correo Electrónico</strong></label>
-											<input type="email" placeholder="email@gmail.com" class="form-control" id="email" name="email" required>
-										</div>
-										<div class="form-group">
-											<label><strong>*Celular</strong></label>
-											<input type="text" class="form-control" id="cel_1" name="cel_1" required>
-										</div>
-										<div class="form-group">
-											<label><strong>*Actividad/Empresa</strong></label>
-											<input type="text" class="form-control" id="act_empresa" name="act_empresa" required>
-										</div>
-									</div>
 							</div>
-
-
+						</div>
 				</div>
 			</div>
 		</div>
@@ -130,7 +124,8 @@
 
 				<div class="box-body">
 					<div class="form-group">
-						<input type="text" class="form-control" id="auto_interesado" name="auto_interesado" placeholder="* Marca - Modelo - Año - Versión ...." required>
+						<input type="text" class="form-control" id="auto_interesado" name="auto_interesado" placeholder="* Marca - Modelo - Año - Versión ...."
+						 required>
 					</div>
 					<div class="form-group">
 						<label>Información de documentación,cliente,etc...</label>
@@ -165,7 +160,8 @@
 							<div class="form-group">
 								<label><strong>*Contado</strong></label>
 								<div class="input-group">
-									<input class="form-control border-rigth-0" type="number" class="form-control" id="contado" name="contado" required>
+									<input class="form-control border-rigth-0" type="number" class="form-control" id="contado" name="contado"
+									 required>
 									<span class="input-group-addon bg-white border-left-0"><i class="glyphicon glyphicon-usd"></i></span>
 								</div>
 							</div>
@@ -175,7 +171,7 @@
 										tranferencia
 										bancaria,etc)</label>
 								</div>
-								<textarea style="display:none" class="form-control rounded-0" id="otropago" name="otropago" rows="2" ></textarea>
+								<textarea style="display:none" class="form-control rounded-0" id="otropago" name="otropago" rows="2"></textarea>
 							</div>
 							<br>
 							<div class="form-group">
@@ -186,7 +182,7 @@
 						<div text-align="center" class="col-xs-12 col-lg-6">
 							{!! Html::script('js/financiera.js') !!}
 
-							<div class="form-group"> 
+							<div class="form-group">
 								<label><strong>Tipo de Financiación</strong></label>
 								<div>
 									{!! Form::select('tipofinanciera',$tipo_finan,null,['class'=>'form-control','id'=>'tipofinanciera']) !!}
@@ -200,7 +196,7 @@
 										{!! Form::select('nombfinanciera',[],null,['class'=>'form-control','id'=>'nombfinanciera']) !!}
 									</div>
 									<p></p>
-								</div> 
+								</div>
 							</section>
 							<section id="box-cuotas" style="display:none" class="box box-default">
 								<div class="form-group">
@@ -225,21 +221,21 @@
 						</div>
 						<div class="row margenBoot-25" style="margin-top:25px;">
 							<div class="col-xs-12 col-lg-12" style="text-align:center;">
-								
+
 								{!! Form::submit("Guardar", ['class'=>'btn btn-success']) !!}
-								
+
 							</div>
 						</div>
 						<!-- /.row -->
-					</div> 
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	{!! Form::close() !!}
 	<script>
-			$(document).ready(function () {
-				$("#cel_1").mask("(999) 999-9999");
-		    });
+		$(document).ready(function () {
+			$("#cel_1").mask("(999) 999-9999");
+		});
 	</script>
 	@endsection
