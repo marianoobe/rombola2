@@ -26,9 +26,9 @@ class VentaController extends Controller
     public function create()
     {
         $tipo_finan = TipoFinanciera::pluck('nombretipo');
-        $dni = Persona::pluck('dni');
+        $nombapell = Persona::pluck('nombre_apellido');
 
-        return view('venta.create',compact('tipo_finan','dni'));
+        return view('venta.create',compact('tipo_finan','nombapell'));
     }
 
     /**
