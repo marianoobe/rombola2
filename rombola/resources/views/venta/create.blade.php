@@ -64,7 +64,7 @@
                     <input type="text" id="tipodni" name="tipodni" style="display:none">
                     <div class="row margenBoot-25">
                         <div class="col-xs-14 col-lg-6">
-                            <button onclick="enable_buscar()" type="button" class="btn btn-success btn-block" style="margin-bottom: 10%;">Buscar
+                            <button onclick="enable_buscar()" type="button" class="btn btn-primary btn-block" style="margin-bottom: 10%;">Buscar
                                 Cliente</button>
                             <section id="buscar" style="display:none">
                                 <select id="dnis" onchange="obtenervalue()" class="selectpicker" data-live-search="true"
@@ -78,7 +78,7 @@
                             </section>
                         </div>
                         <div class="col-xs-14 col-lg-6">
-                            <button onclick="enable_nuevo()" type="button" class="btn btn-success btn-block" style="margin-bottom: 10%;">Nuevo
+                            <button onclick="enable_nuevo()" type="button" class="btn btn-primary btn-block" style="margin-bottom: 10%;">Nuevo
                                 Cliente</button>
                         </div>
                     </div>
@@ -278,17 +278,21 @@
                 <div class="box-body">
                     <div class="row margenBoot-25">
                         <div class="col-xs-14 col-lg-6">
-                            <button type="button" class="btn btn-success btn-block" style="margin-bottom: 10%;">0 KM</button>
+                            <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modal-0km" style="margin-bottom: 10%;">0 KM</button>
                         </div>
-                        @php
-                        $p=0;
-                        @endphp
                         <div class="col-xs-14 col-lg-6">
-                            <button onclick="cambiar($p)" type="button" class="btn btn-success btn-block" style="margin-bottom: 10%;">USADO</button>
+                            <button onclick="enable_usado()" type="button" class="btn btn-success btn-block" style="margin-bottom: 10%;">USADO</button>
+                            
+                            <section id="buscar_usados" style="display:none">
+                                    <select id="select_marcas" onchange="obtenervalue()" class="selectpicker" data-live-search="true" data-width="100%" data-size="2">
+                                               <!-- @foreach ($nombapell as $item)
+                                                <option value="{{$item}}">{{$item}}</option>
+                                                @endforeach -->
+                                    </select>
+                                    <br><br><br><br><br><br><br>
+                                    <input type="text" id="modelousado" name="modelousado" style="display:none">
+                                    </section>
                         </div>
-                        @if ($p==1)
-                        @include('adminlte::layouts.partials.create-0km')
-                        @endif
                     </div>
 
                 </div>
@@ -356,21 +360,12 @@
                                 <div class="row margenBoot-25">
                                     <div class="col-xs-12 col-lg-10">
                                         <div class="form-group">
-                                            <label><strong>Financiacion Propia</strong></label>
-                                            <input type="text" maxlength="150" class="form-control" id="inp-aFinanciar"
-                                                placeholder="">
+                                            <label><strong>Financiación</strong></label>
+                                            <input id="check_conyuge" onchange="validar_check_financiera(this);" type="checkbox" data-style="slow" data-toggle="toggle" data-size="mini" data-on="Si" data-off="No">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row margenBoot-25">
-                                    <div class="col-xs-12 col-lg-10">
-                                        <div class="form-group">
-                                            <label><strong>Financiación Externa</strong></label>
-                                            <input type="text" maxlength="150" class="form-control" id="inp-aFinanciarExterna"
-                                                placeholder="">
-                                        </div>
-                                    </div>
-                                </div>
+                                <br>
                                 <div class="row margenBoot-25">
                                     <div class="col-xs-12 col-lg-10">
                                         <div class="form-group">
@@ -399,7 +394,7 @@
                                             <div class="box box-default collapsed-box">
                                                 <div class="box-header with-border">
                                                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                                            class="fa fa-plus" style="color:Tomato;font-size: 1.8em;"></i></button>
+                                                            class="fa fa-plus" style="color:blue;font-size: 1.8em;"></i></button>
                                                     <h3 class="box-title" name="tituloAutoEntrega">Datos del auto que entrega :</h3>
                                                     <div class="box-tools pull-right">
                                                         <!--minimizar o maximizar-->
@@ -649,6 +644,121 @@
             </div>
             <!-- /.col -->
         </div>
+
+        <!--Modal 0KM-->
+					<div class="modal fade" id="modal-0km" tabindex="-1" role="dialog" aria-labelledby="modal-0km"
+					 aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+											<font style="vertical-align: inherit;">
+												<font style="vertical-align: inherit;">×</font>
+											</font>
+										</span></button>
+									<h4 class="modal-title">
+										<font style="vertical-align: inherit;">
+											<font style="vertical-align: inherit;">Cargar 0 KM </font>
+											
+										</font>
+									</h4>
+								</div>
+								<div class="modal-body">
+										<div class="row margenBoot-25">
+											<div class="col-xs-12 col-lg-12">
+                                                    <div class="form-group">
+                                                            <label><strong>*Marca</strong></label>
+                                                            <select id="marca" name="marca" class="form-control form-control-sm">
+                                                                <option>Soltero</option>
+                                                                <option>Convive</option>
+                                                                <option>Casado</option>
+                                                                <option>Divorciado</option>
+                                                                <option>Viudo</option>
+                                                            </select>
+                                                        </div>
+												<div class="form-group">
+													<label><strong>*Modelo</strong></label>
+													<input type="text" class="form-control" id="modelo" name="modelo" required>
+                                                </div>
+                                                <div class="form-group">
+                                                        <label><strong>*Versión</strong></label>
+                                                        <input type="text" class="form-control" id="version" name="version" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                            <label><strong>*Precio</strong></label>
+                                                            <input type="text" class="form-control" id="precio" name="precio" required>
+                                                        </div>
+											</div>
+											
+										</div><!-- /.modal-dialog -->
+										<div class="modal-footer">
+											<button  type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+											<button  type="submit" onclick="realizaProceso($('#estado_civil').val())" class="btn btn-primary">Continuar</button>
+										</div>
+                                </div>
+                                
+							</div>
+						</div>
+                    </div>
+
+                    <!--Modal Financiera-->
+
+                    <div class="modal fade" id="modal-financiera" tabindex="-1" role="dialog" aria-labelledby="modal-financiera"
+					 aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+											<font style="vertical-align: inherit;">
+												<font style="vertical-align: inherit;">×</font>
+											</font>
+										</span></button>
+									<h4 class="modal-title">
+										<font style="vertical-align: inherit;">
+											<font style="vertical-align: inherit;">FINANCIERAS</font>
+											
+										</font>
+									</h4>
+								</div>
+								<div class="modal-body">
+										<!--<div class="row margenBoot-25">
+											<div class="col-xs-12 col-lg-12">
+                                                <div class="form-group">
+                                                            <label><strong>*Marca</strong></label>
+                                                            <select id="marca" name="marca" class="form-control form-control-sm">
+                                                                <option>Soltero</option>
+                                                                <option>Convive</option>
+                                                                <option>Casado</option>
+                                                                <option>Divorciado</option>
+                                                                <option>Viudo</option>
+                                                            </select>
+                                                        </div>
+												<div class="form-group">
+													<label><strong>*Modelo</strong></label>
+													<input type="text" class="form-control" id="modelo" name="modelo" required>
+                                                </div>
+                                                <div class="form-group">
+                                                        <label><strong>*Versión</strong></label>
+                                                        <input type="text" class="form-control" id="version" name="version" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                            <label><strong>*Precio</strong></label>
+                                                            <input type="text" class="form-control" id="precio" name="precio" required>
+                                                        </div>
+											</div>
+											
+										</div><!-- /.modal-dialog -->
+										<div class="modal-footer">
+											<button  type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+											<button  type="submit" onclick="realizaProceso($('#estado_civil').val())" class="btn btn-primary">Continuar</button>
+                                        </div> 
+                                    
+                                </div>
+                                
+							</div>
+						</div>
+                    </div>
+                    
         {!! Form::close() !!}
 
     </div>

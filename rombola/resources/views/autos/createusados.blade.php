@@ -17,8 +17,7 @@
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
 									<i class="fa fa-minus"></i></button>
-								<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-									<i class="fa fa-times"></i></button>
+								
 							</div>
 						</div>
 						<div class="box-header">
@@ -44,7 +43,7 @@
 											<input type="text" class="form-control" id="modelo" name="modelo" required>
 										</div>
 										<div class="form-group">
-											<label for="version"><strong>Version</strong></label>
+											<label for="version"><strong>Versión</strong></label>
 											<input type="text" class="form-control" id="version" name="version" required>
 										</div>
 										<div class="form-group">
@@ -76,7 +75,7 @@
 										</div>
 										
 										<div class="form-group">
-											<label for="kilometros"><strong>kilometros</strong></label>
+											<label for="kilometros"><strong>Kilómetros</strong></label>
 											<input type="text" class="form-control" id="kilometros" name="kilometros" required>
 										</div>
 									</div>
@@ -84,12 +83,12 @@
 									<div class="col-xs-12 col-lg-6">
 
 										<div class="form-group">
-											<label for="chasis_num"><strong>Numero de Chasis</strong></label>
+											<label for="chasis_num"><strong>Número de Chasis</strong></label>
 											<input type="text" class="form-control" id="chasis_num" name="chasis_num" required>
 										</div>
 
 										<div class="form-group">
-											<label for="motor_num"><strong>Numero de Motor</strong></label>
+											<label for="motor_num"><strong>Número de Motor</strong></label>
 											<input type="text" class="form-control" id="motor_num" name="motor_num" required>
 										</div>
 										<div class="form-group">

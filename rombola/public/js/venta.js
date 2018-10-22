@@ -81,6 +81,49 @@ function enable_nuevo() {
   }
 }
 
+function enable_usado() {
+  if (document.getElementById("nuevo").style.display == "none" && document.getElementById("buscar_usados").style.display == "none") {
+      document.getElementById("buscar_usados").style.display = "block";
+      document.getElementById("cancer").value = "buscar";
+      $('#select_marcas').required=true;
+  } else {
+      if (document.getElementById("buscar_usados").style.display == "block") {
+          document.getElementById("buscar_usados").style.display = "none";
+          $('#select_marcas').required=false;
+      }
+  }
+  if (document.getElementById("buscar_usados").style.display == "none" && document.getElementById("nuevo").style.display == "block") {
+      document.getElementById("buscar_usados").style.display = "block";
+      document.getElementById("nuevo").style.display = "none";
+      $('#select_marcas').required=true;
+      document.getElementById("cancer").value = "buscar";
+  }
+}
+
+function obtenervalue() {
+  var res = document.getElementById("buscar_usados").value;
+  console.log(res);
+  document.getElementById("modelousado").value = res;
+
+}
+
+function realizaProceso(valorCaja1) {
+  var parametros = {
+    "valorCaja1": valorCaja1
+  };
+  $.ajax({
+    data: parametros, //datos que se envian a traves de ajax
+    url: 'ventas.store', //archivo que recibe la peticion
+    type: 'post', //método de envio
+    beforeSend: function () {
+      $("#resultado").html("Procesando, espere por favor...");
+    },
+    success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+      $("#resultado").html(response);
+    }
+  });
+}
+
 function cheques(){
   $('.div-cheques').append('<div class="col-xs-12 col-lg-2"><input id="idCheques" name="inp-idCheques[]" type="hidden" value="0"><div class="form-group"><label><strong>Banco</strong></label><input type="text" maxlength="150" class="form-control" name="inp-banco[]"placeholder=""></div></div> <div class="col-xs-12 col-lg-3"> <div class="form-group"> <label><strong>Número</strong></label> <input type="text" maxlength="65" class="form-control" name="inp-numCheque[]" placeholder=""> </div> </div> <div class="col-xs-12 col-lg-3"> <div class="form-group"> <label><strong>Fecha</strong></label> <div class="input-group date" name="date-fechaPagCheque[]"> <input type="text" class="form-control"> <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span> </span> </div> </div> </div> <div class="col-xs-12 col-lg-3"> <div class="form-group"> <label><strong>Importe</strong></label> <input type="text" maxlength="65" class="form-control" name="inp-importe[]" onblur="darFormato(this);" placeholder=""> </div> </div>');
 }
@@ -94,4 +137,11 @@ function validar_check_cheque(obj) {
     document.getElementById("inp-cheques").style.display = "none";
     document.getElementById("detalle_cheque").style.display = "none";
   }
+}
+
+function validar_check_financiera(obj){
+  if (obj.checked == true) {
+  $('#modal-financiera').modal('show');
+  }
+
 }

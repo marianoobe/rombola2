@@ -32,7 +32,7 @@
 											
 											<th scope="col">MES DE LISTA</th>
 											<th scope="col">MARCA</th>
-											<th scope="col">Logo</th>
+											<th scope="col">LOGO</th>
 											<th scope="col">VER</th>
 
 										</tr>
