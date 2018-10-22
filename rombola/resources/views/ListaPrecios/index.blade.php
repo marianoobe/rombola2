@@ -13,10 +13,10 @@
 					<div class="box">
 						<div class="box-header with-border">
 							<h3 class="box-title">LISTAS DE AUTOS 0KM</h3>
-							<div class="col-sm-offset-10">
+							@can('admin')<div class="col-sm-offset-10">
 								<button type="button" class="btn btn-success btn-block" id="btn-nuevaFicha" data-toggle="modal" data-target="#modal-listaNuevo"
 								 style="margin-bottom:10%;">NUEVA LISTA</button>
-							</div>
+							</div> @endcan
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
 									<i class="fa fa-minus"></i></button>

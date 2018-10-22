@@ -54,11 +54,7 @@
 											<input type="text" class="form-control" id="modelo" name="modelo" required>
 										</div>
 										<div class="form-group">
-<<<<<<< HEAD
 											<label for="version"><strong>Descripcion</strong></label>
-=======
-											<label for="version"><strong>Versión</strong></label>
->>>>>>> a217e494ab529d7ec7ebe3b531a8d0f1009eaf7e
 											<input type="text" class="form-control" id="version" name="version" required>
 										</div>
 										<div class="form-group">
@@ -86,20 +82,14 @@
 
 
 										<div class="form-group">
-<<<<<<< HEAD
 											<label for="kilometros"><strong>kilometros</strong></label>
 											<input type="number" class="form-control" id="kilometros" name="kilometros" required>
-=======
-											<label for="kilometros"><strong>Kilómetros</strong></label>
-											<input type="text" class="form-control" id="kilometros" name="kilometros" required>
->>>>>>> a217e494ab529d7ec7ebe3b531a8d0f1009eaf7e
 										</div>
 									</div>
 
 									<div class="col-xs-12 col-lg-6">
 
 										<div class="form-group">
-<<<<<<< HEAD
 											<label for="chasis_num"><strong>Numero de Chasis</strong></label>
 											<input type="text" class="form-control" id="chasis_num" name="chasis_num">
 										</div>
@@ -107,15 +97,6 @@
 										<div class="form-group">
 											<label for="motor_num"><strong>Numero de Motor</strong></label>
 											<input type="text" class="form-control" id="motor_num" name="motor_num">
-=======
-											<label for="chasis_num"><strong>Número de Chasis</strong></label>
-											<input type="text" class="form-control" id="chasis_num" name="chasis_num" required>
-										</div>
-
-										<div class="form-group">
-											<label for="motor_num"><strong>Número de Motor</strong></label>
-											<input type="text" class="form-control" id="motor_num" name="motor_num" required>
->>>>>>> a217e494ab529d7ec7ebe3b531a8d0f1009eaf7e
 										</div>
 										<div class="form-group">
 											<label for="estado"><strong>Estado</strong></label>

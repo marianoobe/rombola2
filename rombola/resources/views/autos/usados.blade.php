@@ -70,11 +70,11 @@
 										<td>{{$item->dominio}}</td>
 										
 										
-												<td style="cursor: default;">
+												@can('admin')<td style="cursor: default;">
 											<a href="{{ route('editusado',$item->id_auto)}}" class="btn btn-info btn-sm">
 												<span class="glyphicon glyphicon-search"></span></a>
                                         
-										</td>
+										</td>@endcan
 																
 									  
 								</td>
