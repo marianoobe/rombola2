@@ -80,3 +80,18 @@ function enable_nuevo() {
       $('#nombre').removeAttr("required");
   }
 }
+
+function cheques(){
+  $('.div-cheques').append('<div class="col-xs-12 col-lg-2"><input id="idCheques" name="inp-idCheques[]" type="hidden" value="0"><div class="form-group"><label><strong>Banco</strong></label><input type="text" maxlength="150" class="form-control" name="inp-banco[]"placeholder=""></div></div> <div class="col-xs-12 col-lg-3"> <div class="form-group"> <label><strong>Número</strong></label> <input type="text" maxlength="65" class="form-control" name="inp-numCheque[]" placeholder=""> </div> </div> <div class="col-xs-12 col-lg-3"> <div class="form-group"> <label><strong>Fecha</strong></label> <div class="input-group date" name="date-fechaPagCheque[]"> <input type="text" class="form-control"> <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span> </span> </div> </div> </div> <div class="col-xs-12 col-lg-3"> <div class="form-group"> <label><strong>Importe</strong></label> <input type="text" maxlength="65" class="form-control" name="inp-importe[]" onblur="darFormato(this);" placeholder=""> </div> </div>');
+}
+
+function validar_check_cheque(obj) {
+  if (obj.checked == true) {
+    document.getElementById("inp-cheques").style.display = "block";
+    document.getElementById("detalle_cheque").style.display = "block";
+  }
+  else{
+    document.getElementById("detalle_cheque").style.display = "none";
+    document.getElementById("detalle_cheque").style.display = "none";
+  }
+}

@@ -342,33 +342,17 @@
                                 <div class="row margenBoot-25">
                                     <div class="col-xs-12 col-lg-10">
                                         <div class="form-group">
-                                            <label><strong>Cheques</strong></label>
-                                            <input type="text" maxlength="150" class="form-control" id="inp-cheques"
+                                            <br>
+                                            <label><strong>Cheques   </strong></label>
+                                            <input id="check_conyuge" onchange="validar_check_cheque(this);" type="checkbox" data-style="slow" data-toggle="toggle" data-size="mini" data-on="Si" data-off="No">
+                                            <br>
+                                            <input type="text" style="display:none;" maxlength="20" class="form-control" id="inp-cheques"
                                                 placeholder="$">
+                                            
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row margenBoot-25 hidden">
-                                    <div class="col-xs-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label><strong>Cheque</strong></label>
-                                            <span class="tag label label-success"> <span>1312</span> <a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
-                                            </span> <span class="tag label label-success"> <span>1312</span> <a><i
-                                                        class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
-                                            </span> <span class="tag label label-success"> <span>1312</span> <a><i
-                                                        class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
-                                            </span> <span class="tag label label-success"> <span>1312</span> <a><i
-                                                        class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
-                                            </span> </div>
-                                    </div>
-                                    <div class="col-xs-12 col-lg-2">
-                                        <div class="form-group">
-                                            <button type="button" class="btn btn-primary" onclick="openModal();" style="margin-top:25px;">
-                                                <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                                <br>
                                 <div class="row margenBoot-25">
                                     <div class="col-xs-12 col-lg-10">
                                         <div class="form-group">
@@ -412,14 +396,11 @@
                                 <div id="contenedorVehiculosEntrega">
                                     <div name="entradaAuto" class="row">
                                         <div class="col-sm-12">
-                                            <div class="box box-success collapsed-box">
+                                            <div class="box box-default collapsed-box">
                                                 <div class="box-header with-border">
                                                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                                            class="fa fa-plus"></i></button>
-                                                    <h3 class="box-title" name="tituloAutoEntrega">Datos del auto
-                                                        que
-                                                        entrega :</h3>
-
+                                                            class="fa fa-plus" style="color:Tomato;font-size: 1.8em;"></i></button>
+                                                    <h3 class="box-title" name="tituloAutoEntrega">Datos del auto que entrega :</h3>
                                                     <div class="box-tools pull-right">
                                                         <!--minimizar o maximizar-->
                                                     </div>
@@ -435,13 +416,8 @@
                                                         </div>
 
                                                         <div class="col-xs-12 col-lg-3">
-                                                            
                                                                 <label><strong>Patente Mercosur</strong></label>
-                                                                <div class="btn-group btn-toggle">
-                                                                    <button onclick="javascript:valida();" class="btn btn-xs btn-default">SI</button>
-                                                                    <button onclick="javascript:valida();" class="btn btn-xs btn-success">NO</button>
-                                                                
-                                                            </div>
+                                                                <input id="check_patente" onchange="validar_check_patente(this);" type="checkbox" data-style="slow" data-toggle="toggle" data-size="normal" data-on="Si" data-off="No">
                                                         </div>
                                                         <div class="col-xs-12 col-lg-3">
                                                             <div class="form-group">
@@ -598,10 +574,10 @@
                                     </div>
                                 </div>
 
-                                <div class="panel panel-default">
+                                <div id="detalle_cheque" style="display:none;" class="panel panel-default">
                                     <div class="panel-body">
                                         <h3 style="margin:5px;"><small>Detalles de cheques:</small></h3>
-                                        <div id="div-cheques">
+                                        <div class="div-cheques">
                                             <div name="rows" class="row margenBoot-25">
                                                 <div class="col-xs-12 col-lg-2">
                                                     <input id="idCheques" name="inp-idCheques[]" type="hidden" value="0">
@@ -636,7 +612,7 @@
                                                 </div>
                                                 <div class="col-xs-12 col-lg-1" style="padding:0;">
                                                     <div class="form-group">
-                                                        <button type="button" onclick="generarNuevaOpcionCheque();"
+                                                        <button type="button" onclick="cheques();"
                                                             name="btn-NuevoCheque" class="btn btn-primary" style="margin-top:25px;">
                                                             <span class="glyphicon glyphicon glyphicon-plus"
                                                                 aria-hidden="true"></span> </button>
