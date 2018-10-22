@@ -16,8 +16,7 @@
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
 									<i class="fa fa-minus"></i></button>
-								<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-									<i class="fa fa-times"></i></button>
+								
 							</div>
 						</div>
 						<div class="box-header">
@@ -49,14 +48,12 @@
 									<tr>
 										
 									    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label=" : activate to sort column ascending" style="width: 58px;"/>
-										<th scope="col">ID</th>
+										
 										<th scope="col">MARCA</th>
 										<th scope="col">MODELO</th>
-										<th scope="col">VERSION</th>
-										<th scope="col">DOMINIO</th>
-										<th scope="col">COLOR</th>
-										<th scope="col">ESTADO</th>
-										<th scope="col">VER</th>
+										<th scope="col">DESCRIPCION</th>
+										<th scope="col">DOMINIO</th>										
+										@can('admin')<th scope="col">EDITAR</th>  @endcan
 										
 									</tr>
 								</thead>
@@ -64,20 +61,19 @@
 									@foreach($autos as $item)
 									<tr>
 										<td align="center" style="cursor: default;">
-											<img src={{url('img/sinimagen.jpg')}} alt="..." class="img-circle" style="width: 80px; height: 80px;" />
+											<img src={{url("img/marcas/$item->nombre.jpg")}} alt="..." class="img-circle" style="width: 80px; height: 80px;" />
 										</td>
-										<td>{{$item->id_auto}}</td>
-										<td>{{$item->marca}}</td>
+										
+										<td>{{$item->nombre}}</td>
 										<td>{{$item->modelo}}</td>
-										<td>{{$item->version}}</td>
+										<td>{{$item->descripcion}}</td>
 										<td>{{$item->dominio}}</td>
-										<td>{{$item->color}}</td>
-										<td>{{$item->estado}}</td>
-										@can('admin')
+										
+										
 												<td style="cursor: default;">
 											<a href="{{ route('editusado',$item->id_auto)}}" class="btn btn-info btn-sm">
 												<span class="glyphicon glyphicon-search"></span></a>
-                                        @endcan
+                                        
 										</td>
 																
 									  

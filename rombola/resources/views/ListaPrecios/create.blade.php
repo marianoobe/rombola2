@@ -40,7 +40,7 @@
                                             data-placeholder="Seleccione marca vehiculo..." data-width="100%">
                                             <option value="">Seleccionar marca del vehiculo</option>
                                             @foreach ($marcas as $item)
-                                            <option value="$item->id"> {{ $item->nombre }} </option>
+                                            <option value={{$item->idmarca}}> {{ $item->nombre }} </option>
                                             @endforeach
 
                                         </select>

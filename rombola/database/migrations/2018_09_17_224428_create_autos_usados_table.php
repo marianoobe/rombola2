@@ -18,7 +18,7 @@ class CreateAutosUsadosTable extends Migration
             $table->integer('id_auto')->unsigned()->index();
             $table->text('titular');
             $table->integer('anio');
-            $table->integer('kilometros');
+            $table->integer('kilometros')->nullable();
             $table->string('chasis_num')->nullable();
             $table->string('motor_num')->nullable(); 
             $table->timestamps();

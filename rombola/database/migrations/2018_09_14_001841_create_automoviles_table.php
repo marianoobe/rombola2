@@ -15,15 +15,19 @@ class CreateAutomovilesTable extends Migration
     {
         Schema::create('automoviles', function (Blueprint $table) {
             $table->increments('id_auto');
-            $table->integer('vin')->unique()->nullable();
             $table->string('dominio',15)->unique()->nullable();
-            $table->string('marca',30);
+            $table->string('vin',15)->unique()->nullable();
+            $table->integer('idmarca')->unsigned()->index();                   
             $table->string('modelo',60);
-            $table->text('version');
+            $table->text('descripcion');
             $table->string('color',10);            
-            $table->string('combustible',10);               
-            $table->string('estado');      
+            $table->string('combustible',10)->nullable();               
+            $table->string('estado')->nullable();  
+            $table->string('ficha')->nullable();
+            $table->integer('precio');
+            $table->boolean('visible');
             $table->timestamps();
+            
         });
     }
 
