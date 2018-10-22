@@ -143,5 +143,34 @@ function validar_check_financiera(obj){
   if (obj.checked == true) {
   $('#modal-financiera').modal('show');
   }
+}
 
+function validar_entregado(obj){
+  if (obj.checked == true) {
+    document.getElementById("section_usado_entregado").style.display = "block";
+  }
+  else{
+    document.getElementById("section_usado_entregado").style.display = "none";
+  }
+}
+
+function check_lista_usados(valorCaja1){
+  if (obj.checked == true) {
+    
+    var parametros = {
+      "valorCaja1": valorCaja1
+    };
+    $.ajax({
+      data: parametros, //datos que se envian a traves de ajax
+      url: 'ventas.store', //archivo que recibe la peticion
+      type: 'post', //método de envio
+      beforeSend: function () {
+        $("#select_usado").html("Procesando, espere por favor...");
+      },
+      success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+        $("#select_usado").html(response);
+      }
+    });
+
+  }
 }
