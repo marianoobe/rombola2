@@ -69,9 +69,9 @@
                             <section id="buscar" style="display:none">
                                 <select id="dnis" onchange="obtenervalue()" class="selectpicker" data-live-search="true"
                                     data-width="100%" data-size="2">
-                                    @foreach ($dni as $item)
-                                    <option value="{{$item}}">{{$item}}</option>
-                                    @endforeach
+                                    @foreach ($nombapell as $item)
+									<option value="{{$item}}">{{$item}}</option>
+									@endforeach
                                 </select>
 
                                 <br><br><br><br><br><br><br>

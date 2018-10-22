@@ -91,7 +91,7 @@ function validar_check_cheque(obj) {
     document.getElementById("detalle_cheque").style.display = "block";
   }
   else{
-    document.getElementById("detalle_cheque").style.display = "none";
+    document.getElementById("inp-cheques").style.display = "none";
     document.getElementById("detalle_cheque").style.display = "none";
   }
 }
