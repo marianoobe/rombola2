@@ -147,17 +147,7 @@ class PreventaController extends Controller
         $operacion->save();
 
         }
-          /*insert Operacion-Preventa
-        $fecha_oper=$request->get('fecha_oper');
-        $operacion = new Operaciones([
-          'persona_operacion' => $idpers,
-          'estado' => "En Negociación",
-          'fecha_oper'=> $fecha_oper,
-          'aviso'=> false,
-          'visible' => true,
-        ]);
-        $operacion->save();
-*/
+        
         $operacion = Operaciones::where("fecha_oper","=",$fecha_oper)->select("id_operacion")->get();
       
         foreach ($operacion as $oper) {

@@ -100,11 +100,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label><strong>*Fecha de Nacimiento</strong></label>
-                                    <input type="date" class="form-control" id="nuevo_garante_fecha_nac" name="garante_fecha_nac">
+                                    <input type="date" class="form-control" id="nuevo_fecha_nac" name="nuevo_fecha_nac">
                                 </div>
                                 <div class="form-group">
                                     <label><strong>*Estado Civil</strong></label>
-                                    <select id="estado_civil" name="nuevo_estado_civil" class="form-control form-control-sm">
+                                    <select id="nuevo_estado_civil" name="nuevo_estado_civil" class="form-control form-control-sm">
                                         <option>Soltero</option>
                                         <option>Convive</option>
                                         <option>Casado</option>
@@ -126,12 +126,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label><strong>Otro</strong>(tel. fijo o celular)</label>
-                                    <input type="text" class="form-control" id="garante_cel_2" name="garante_cel_2">
+                                    <input type="text" class="form-control" id="nuevo_cel_2" name="nuevo_cel_2">
                                 </div>
 
                                 <div class="form-group">
                                     <label><strong>*Domicilio</strong></label>
-                                    <input type="text" class="form-control" id="garante_domicilio" name="garante_domicilio">
+                                    <input type="text" class="form-control" id="nuevo_domicilio" name="nuevo_domicilio">
                                 </div>
                                 <div class="form-group">
                                     <label><strong>*Actividad/Empresa</strong></label>
@@ -287,90 +287,74 @@
                         </div>
                         <div class="col-xs-14 col-lg-6">
                             <button onclick="enable_usado()" type="button" class="btn btn-success btn-block" style="margin-bottom: 10%;">USADO</button>
-                    
+
                         </div>
-                        
+
                         <div class="col-xs-14 col-lg-12">
-                                <section id="buscar_usados" style="display:none">
-                                        <div class="container-fluid spark-screen">
-                                                <div class="row">
-                                                    <div class="col-md-14 col-md-offset-0">
-                                                        <div class="box">
-                                                            <div class="box-header with-border">
-                                            
-                                            
-                                                                <!-- Default box -->
-                                                                <div class="box">
-                                                                    <div class="box-header with-border">
-                                                                        <h3 class="box-title">AUTOS USADOS</h3>
-                                            
-                                                                        <div class="box-tools pull-right">
-                                                                            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                                                                <i class="fa fa-minus"></i></button>
-                                                                            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                                                                                <i class="fa fa-times"></i></button>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="box-header">
-                                            
-                                            
-                                                                    </div>
-                                            
-                                                                    <div class="box-body">
-                                            
-                                                                        <form method="GET" action="{{ route('usados') }}" class="navbar-form pull-right" role="search">
-                                                                            {{ csrf_field() }}
-                                                                            <div class="input-group">
-                                                                                <input type="hidden" id="usado" name="usado" value="2">
-                                                                               <!-- <input type="text" class="form-control" name="name" placeholder="Busqueda"> 
+                            <section id="buscar_usados" style="display:none">
+                                <div class="container-fluid spark-screen">
+                                    <div class="row">
+                                        <div class="col-md-14 col-md-offset-0">
+                                            <div class="box">
+                                                <div class="box-header with-border">
+                                                        <div class="box-header">
+                                                        </div>
+                                                        <div class="box-body">
+                                                            <form method="GET" action="{{ route('usados') }}" class="navbar-form pull-right"
+                                                                role="search">
+                                                                {{ csrf_field() }}
+                                                                <div class="input-group">
+                                                                    <input type="hidden" id="usado" name="usado" value="2">
+                                                                    <!-- <input type="text" class="form-control" name="name" placeholder="Busqueda"> 
                                                                                 <span class="input-group-btn">
                                                                                     <button type="submit" class="btn btn-default">
                                                                                         <span class="glyphicon glyphicon-search"></span>
                                                                                     </button>
                                                                                 </span>
                                                                             -->
-                                                                            </div>
-                                                                        </form>
-                                                                    </div>
-                                            
-                                                                    <div>
-                                                                        <table class="table table-striped">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label=" : activate to sort column ascending"
-                                                                                     style="width: 58px;" />
-                                                                                    <th scope="col">ID</th>
-                                                                                    <th scope="col">MARCA</th>
-                                                                                    <th scope="col">MODELO</th>
-                                                                                    <th scope="col">VERSION</th>
-                                                                                    <th scope="col">DOMINIO</th>
-                                                                                    <th scope="col">COLOR</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody>
-                                                                                @foreach($autos as $item)
-                                                                                <tr>
-                                                                                    <td align="center" style="cursor: default;">
-                                                                                        <img src={{url('img/sinimagen.jpg')}} alt="..." class="img-circle" style="width: 80px; height: 80px;" />
-                                                                                    </td>
-                                                                                    <td>{{$item->id_auto}}</td>
-                                                                                    <td>{{$item->marca}}</td>
-                                                                                    <td>{{$item->modelo}}</td>
-                                                                                    <td>{{$item->version}}</td>
-                                                                                    <td>{{$item->dominio}}</td>
-                                                                                    <td>{{$item->color}}</td>
-                                                                                    
-                                                                                </td>
-                                                                                </tr>
-                                                                                @endforeach()
-                                                                            </tbody>
-                                                                        </table>
-                                            
-                                                                        {{ $autos->render() }}
-                                                                    </section>
-            
-            
-                                        <!--
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                        <div>
+                                                            <table class="table table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="sorting" tabindex="0" aria-controls="example"
+                                                                            rowspan="1" colspan="1" aria-label=" : activate to sort column ascending"
+                                                                            style="width: 58px;" />
+                                                                        <th scope="col">ID</th>
+                                                                        <th scope="col">MARCA</th>
+                                                                        <th scope="col">MODELO</th>
+                                                                        <th scope="col">VERSION</th>
+                                                                        <th scope="col">DOMINIO</th>
+                                                                        <th scope="col">COLOR</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach($autos as $item)
+                                                                    <tr>
+                                                                        <td align="center" style="cursor: default;">
+                                                                        <input class="form-check-input" type="radio" change="check_lista_usados({{$item->dominio}})" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                                        </td>
+                                                                        <td>{{$item->id_auto}}</td>
+                                                                        <td>{{$item->marca}}</td>
+                                                                        <td>{{$item->modelo}}</td>
+                                                                        <td>{{$item->version}}</td>
+                                                                        <td>{{$item->dominio}}</td>
+                                                                        <td>{{$item->color}}</td>
+
+                                                                        </td>
+                                                                    </tr>
+                                                                    @endforeach()
+                                                                </tbody>
+                                                            </table>
+
+                                                            {{ $autos->render() }}
+                            </section>
+
+
+                            <!--
                                         <section id="buscar_usados" style="display:none">
                                             <select id="select_marcas" onchange="obtenervalue()" class="selectpicker"
                                                 data-live-search="true" data-width="100%" data-size="2">
@@ -386,7 +370,7 @@
                         </div>
 
 
-                        
+
                     </div>
 
                 </div>
