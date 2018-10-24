@@ -15,8 +15,9 @@ class FileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        dd($request);
         $files = File::orderBy('created_at','DESC')->paginate(30);
         return view('file.index', ['files' => $files]);
     }
@@ -36,12 +37,13 @@ class FileController extends Controller
     public function dropzone(Request $request){
 
         //dd($request->input('idauto'));
-
+         $idauto=$request->input('idauto');
         $file = $request->file('file');
         File::create([
             'title' => $file->getClientOriginalName(),
             'description' => 'Upload with dropzone.js',
-            'path' => $file->store('public/storage')
+            'path' => $file->store('public/storage'),
+            'id_auto'=>$idauto
         ]);
     }
 

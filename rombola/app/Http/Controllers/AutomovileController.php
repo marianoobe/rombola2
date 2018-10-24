@@ -17,16 +17,16 @@ class AutomovileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         //$name  = $request->get('name'); 
        
        $autos=Automovile::Search($request->name)      
        ->orderBY('id_auto')
        ->paginate(5);
-                   
-       $files = File::orderBy('created_at','DESC')->paginate(30);   
-  //  dd($request->name);
+              
+       $files = File::orderBy('created_at','DESC')->paginate(6);   
+    
         return view('autos.index')->with('autos',$autos)
                                   ->with('files',$files);
 
@@ -40,7 +40,7 @@ class AutomovileController extends Controller
           
        ->orderBY('id_auto')
        ->paginate(5);
-        
+       
        $marcas=Marca::All();
          $files = File::orderBy('created_at','DESC')->paginate(30);
         return view('autos/usados')->with('autos',$autos)
@@ -152,7 +152,12 @@ class AutomovileController extends Controller
      */
     public function show($id)
     {
-        //
+        $files = File::find($id)
+        ->orderBy('created_at','DESC')
+        ->paginate(6);   
+    dd($files);
+        return view('usados')->with('autos',$autos)
+                                  ->with('files',$files);
     }
 
     /**

@@ -60,6 +60,7 @@
 								</thead>
 								<tbody>
 									@foreach($autos as $item)
+									<input type="hidden" name="idauto" value="{{ $item->id_auto }}">
 									<tr>
 										<td align="center" style="cursor: default;">
 											<img src={{url("img/marcas/$item->nombre.jpg")}} alt="..." class="img-circle" style="width: 80px; height: 80px;" />
@@ -71,16 +72,16 @@
 										<td>{{$item->dominio}}</td>
 
 
-										@can('admin')<td style="cursor: default;">
-											<a href="{{ route('editusado',$item->id_auto)}}" class="btn btn-info btn-sm">
-												<span class="glyphicon glyphicon-search"></span></a>
-
-										</td>@endcan
 										<td style="cursor: default;">
 											<a href="{{ route('editusado',$item->id_auto)}}" class="btn btn-info btn-sm">
 												<span class="glyphicon glyphicon-search"></span></a>
 
-											<button type="button" class="btn btn-default btn-sm" id="btn-foto" data-toggle="modal" data-target="#modal-foto"
+										</td>
+										<td style="cursor: default;">
+											<a href="{{ route('editusado',$item->id_auto)}}" class="btn btn-info btn-sm">
+												<span class="glyphicon glyphicon-search"></span></a>
+
+											<button type="button" class="btn btn-default btn-sm" id="btn-foto" data-toggle="modal" data-target="#modal-listaNuevo"
 											 style="margin-bottom:10%;"><span class="glyphicon glyphicon-picture"></span></button>
 											<a href="{{ route('formfile',$item->id_auto)}}"  class="btn btn-default btn-sm">
 												<span class="glyphicon glyphicon-camera"></span> Camera
@@ -95,7 +96,9 @@
 
 
 							<!--Modal -->
-							<div class="modal fade" id="modal-foto" tabindex="-1" role="dialog" aria-labelledby="modal-foto" aria-hidden="true">
+							<div class="modal fade" id="modal-listaNuevo" tabindex="-1" role="dialog" aria-labelledby="modal-listaNuevo" aria-hidden="true">
+
+						
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
