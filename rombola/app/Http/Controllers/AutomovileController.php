@@ -3,14 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use DB;
+ use DB;
 use App\Automovile;
 use App\Marca;
 use App\Autosnuevo;
 use App\Autosusado;
-use App\File;
-class AutomovileController extends Controller
+ class AutomovileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,6 +22,7 @@ class AutomovileController extends Controller
        $autos=Automovile::Search($request->name)      
        ->orderBY('id_auto')
        ->paginate(5);
+<<<<<<< HEAD
               
        $files = File::orderBy('created_at','DESC')->paginate(6);   
     
@@ -31,6 +30,15 @@ class AutomovileController extends Controller
                                   ->with('files',$files);
 
        
+=======
+                   
+              
+  //  dd($request->name);
+        return view('autos.index')->with('autos',$autos);
+       $autos = Automovile::all();
+        
+        return view('autos.index', compact('autos'));
+>>>>>>> 66362415a9fd52d70ebd30f2bea40f1f8dbadb6a
     }
       public function usados(Request $request)
     {
@@ -42,11 +50,10 @@ class AutomovileController extends Controller
        ->paginate(5);
        
        $marcas=Marca::All();
-         $files = File::orderBy('created_at','DESC')->paginate(30);
+         
         return view('autos/usados')->with('autos',$autos)
-                                    ->with('marcas',$marcas)
-                                     ->with('files',$files);
-       
+                                    ->with('marcas',$marcas);
+        
     }
     /**
      * Show the form for creating a new resource.
@@ -63,37 +70,30 @@ class AutomovileController extends Controller
       
         return view('autos/createusados')->with('marcas',$marcas);
        
+        //
     }
     
-    /**
+     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+@@ -72,77 +37,9 @@ public function createusados()
      */
     public function store(Request $request)
-    {
-        
+    { 
         if($request->input("nuevo")=="nuevo"){
-
-      $share = new Automovile([
-            
+        $share = new Automovile([
             'modelo' => $request->input('modelo'),
             'descripcion'=> $request->input('version'),
             'color'=> $request->input('color'),
-                   
             'estado'=> $request->input('estado'),
             'vin' => $request->input('vin'),
-          ]);
-          $share->save();
-
-          //return redirect('/clientes');
-          return redirect('autos')->with('success', 'Stock has been added');
-
-        }
+        ]);
+        $share->save();
+           //return redirect('/clientes');
+        return redirect('autos')->with('success', 'Stock has been added');
+         }
         elseif($request->input("usado")=="usado"){
-
-           $idmarca=$request->get('marca');
+            $idmarca=$request->get('marca');
        //dd($request->get('marca'));   
           $marca = Marca::where("idmarca","=",$idmarca)->select("idmarca")->get();
         
@@ -102,8 +102,7 @@ class AutomovileController extends Controller
           }  
           //dd($marca);        
           $idmarcas=$item->idmarca;
-
-             $share = new Automovile([
+              $share = new Automovile([
             'idmarca' => $idmarcas, 
             'modelo' => $request->input('modelo'),
             'descripcion'=> $request->input('version'),
@@ -115,8 +114,7 @@ class AutomovileController extends Controller
           ]);
           
           $share->save();
-
-          $dominio=$request->get('dominio');
+           $dominio=$request->get('dominio');
           
           $car = Automovile::where("dominio","=",$dominio)->select("id_auto")->get();
           
@@ -135,18 +133,18 @@ class AutomovileController extends Controller
             'motor_num'=> $request->input('motor_num'),
           ]);
           $nuevo->save();        
-
-        
+         
          //return redirect('/clientes');
           return redirect('autos/usados')->with('success', 'Stock has been added');
         }
          
-
+         //
     }
   
-    /**
+     /**
      * Display the specified resource.
      *
+<<<<<<< HEAD
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -165,6 +163,9 @@ class AutomovileController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+=======
+@@ -162,79 +59,21 @@ public function show($id)
+>>>>>>> 66362415a9fd52d70ebd30f2bea40f1f8dbadb6a
      */
     public function edit($id)
     {
@@ -176,9 +177,10 @@ class AutomovileController extends Controller
      
 //dd($autos);
       return view('autos.edit', compact('autos'));
+        //
     }
  
-    /**
+     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -209,16 +211,11 @@ class AutomovileController extends Controller
                 "anio" => $request->get('anio'),
                 "kilometros" => $request->get('kilometros'),
                 "precio" => $request->get('precio'),
-
-        ]);
+         ]);
                         
       
        return redirect('autos/usados')->with('success', 'Stock has been updated');  
-
-
-
-
-        }
+         }
         
     }
    public function editusado($id)
@@ -230,28 +227,14 @@ class AutomovileController extends Controller
       }
      
       $idcar=$item->id_auto;
-
-      $autos = DB::table('autosusados')
+       $autos = DB::table('autosusados')
         ->join('automoviles', 'automoviles.id_auto' ,'autosusados.id_auto') 
         ->join('marcas','marcas.idmarca','automoviles.idmarca')       
         ->where('automoviles.id_auto','=', $idcar)
         ->get();
 //dd($autos);
       return view('autos/editusado', compact('autos'));
-    }
-
-    
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
         //
     }
-
-    
-
-}
+     
+  }

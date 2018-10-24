@@ -91,9 +91,9 @@ class PreventaController extends Controller
           ]);
           $share->save();
 
-          $dni=$request->get('dni');
+          $nombre=$request->get('nombre');
           
-          $pers = Persona::where("dni","=",$dni)->select("idpersona")->get();
+          $pers = Persona::where("nombre","=",$nombre)->select("idpersona")->get();
         
           foreach ($pers as $item) {
             //echo "$item->idpersona";
@@ -212,7 +212,7 @@ class PreventaController extends Controller
             $codigo = "PV-"."000"."-".$part2 ;
         }
         //dd($codigo);
-        $preventa = new Preventa([
+        $preventa = new Preventa([ 
           'preventa_oper' => $operacion,
           'auto_interesado' => $request->get('auto_interesado'),
           'detalles' => $request->get('detalles'),

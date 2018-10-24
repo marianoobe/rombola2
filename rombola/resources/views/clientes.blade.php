@@ -132,6 +132,7 @@
 													<label><strong>*Actividad/Empresa</strong></label>
 													<input type="text" class="form-control" id="act_empresa" name="act_empresa" required>
 												</div>
+												
 												<div class="form-group">
 													<label><strong>*Fecha de Nacimiento</strong></label>
 													<input type="date" class="form-control" id="fecha_nac" name="fecha_nac" required>
@@ -151,8 +152,7 @@
 															<option>Viudo</option>
 														</select>
 													</div>
-
-
+													
 												</div>
 											</div><!-- /.modal-content -->
 										</div><!-- /.modal-dialog -->

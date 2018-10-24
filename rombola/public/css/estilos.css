@@ -1,0 +1,35 @@
+.w3-row-padding, .w3-row-padding>.w3-half, .w3-row-padding>.w3-third, .w3-row-padding>.w3-twothird, .w3-row-padding>.w3-threequarter, .w3-row-padding>.w3-quarter, .w3-row-padding>.w3-col {
+    padding: 0 8px;
+}
+
+element.style {
+    width: 100%;
+}
+img {
+    vertical-align: middle;
+}
+img {
+    border-style: none;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+element.style {
+    margin: 0;
+    padding: 0;
+}
+.w3-btn, .w3-btn:link, .w3-btn:visited {
+    color: #FFFFFF;
+    background-color: #4CAF50;
+}
+.w3-white, .w3-hover-white:hover {
+    color: #000!important;
+    background-color: #fff!important;
+}
+.w3-ripple {
+    transition: opacity 0s;
+}
+
+.imagen:hover {filter: opacity(.5);}
+

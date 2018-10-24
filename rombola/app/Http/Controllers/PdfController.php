@@ -336,52 +336,52 @@ function convert_html_venta()
         intereses</p>
 
     <div id="derecha">
-    <p><strong>Fecha</strong>: 21/12/1991 </p>
+    <p><strong>Fecha</strong>: 22/10/2018 </p>
     </div>
     <br>
     <br>
      <div id="contenedor1">
 
-        <p> <strong>Comprador</strong>:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DNI</strong>:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Fecha de Nacimiento: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Domicilio:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-        Estado Civil: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Teléfono: </p>
+        <p> <strong>Comprador</strong>: Fabricio Andrés Carrio &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DNI</strong>: 35852537 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Fecha de Nacimiento: 21/12/1991&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Domicilio: Rioja 2512 (sur) Barrio Libertad - Rawson &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        Estado Civil: Soltero&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Teléfono: 154054675</p>
         <br>
         <div id="conyuge">
-        <p><strong>Conyuge</strong>:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha de Nacimiento:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Teléfono:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </p>
+        <p><strong>Conyuge</strong>: Paula Rodriguez&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha de Nacimiento: 14/05/1996 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Teléfono: 155786932 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </p>
         </div>
         
         <div id="garante">
-        <p><strong>Garante</strong>: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DNI:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Fecha de Nacimiento:   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Domicilio:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Estado Civil:   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Teléfono: </p>
+        <p><strong>Garante</strong>: Gladys Esther Rodriguez&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DNI: 17879922 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Fecha de Nacimiento: 05/03/1986 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Domicilio: Libertador 34 (oeste) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Estado Civil: Casada  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Teléfono: 154984461</p>
         </div>
         
         <section id="usado" class=" ">
-            <p><strong>Marca</strong>: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modelo:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Motor N°: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Chasis:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-            Dominio:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Titular: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-            DNI (titular): </p>
+            <p><strong>Marca</strong>: Ford &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modelo: Ká &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Motor N°: 32156165 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Chasis: 6516164 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            Dominio: ASD 458 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Titular: Alberto Gomez&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            DNI (titular): 19632456</p>
             
         </section>
 
                 <section id="usado_entregado" class=" ">
-                    <p><strong>Marca de auto entregado</strong>: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    Modelo: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dominio: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                    Motor N°: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Chasis: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    Titular: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Documentación que entrega: </p>
+                    <p><strong>Marca de auto entregado</strong>: Chevrolet&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Modelo: Corsa &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dominio: SDF 332&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    Motor N°: 1212445&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Chasis: 4514245 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Titular: Aldo Rombola&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Documentación que entrega: Tarjeta verde, Manual oficial, Titulo, RTO</p>
                     <hr>
                 </section>
 
                 <p ALIGN="center" style="font-size:10px;"><strong>DETALLE DE LA OPERACION</strong></p>
             <p></p>
-            <p>Precio de Auto reservado</strong>: $</p>
+            <p>Precio de Auto reservado</strong>: $400000</p>
 
             <p></p>
-            <p>Precio de Auto entregado</strong>: $</p>
+            <p>Precio de Auto entregado</strong>: $300000</p>
 
             <p></p>
-            <p> <strong>Efectivo entregado</strong>: $</p>
+            <p> <strong>Efectivo entregado</strong>: $50000</p>
             
 <section id="cheques" class="   ">
 <table style="width:100%">
@@ -394,8 +394,8 @@ function convert_html_venta()
   </tr>
   <tr>
     <td>2321312</td>
-    <td>21/12/1996</td>
-    <td>Nacion</td>
+    <td>21/12/2018</td>
+    <td>Banco Nacion</td>
     <td>$30000</td>
     
   </tr>
@@ -404,16 +404,16 @@ function convert_html_venta()
 </section>
          
 <br>
-<p>Gastos: $</p>
+<p>Gastos: $15000</p>
 <p></p>
-<p> <strong>Totales</strong>: $</p>
+<p> <strong>Totales</strong>: $415000</p>
 <hr>
 <section id="financiacion" class=" ">
 <div ALIGN="center" class="box-header with-border">
 <p ALIGN="center" style="font-size:10px;"><strong>FINANCIACION</strong></p>
 </div>
 <p>
- Cuotas de: $    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Vencimiento 1°:
+ Cuotas de: $ 5000   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Vencimiento 1°: 22/12/2018
  </p>
 </section>
 
@@ -429,9 +429,9 @@ function convert_html_venta()
 <br>
 </p>
 <p>
-...........................................  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  .....................................  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ..........................................    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ......................................
+...........................................  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  .....................................  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ..........................................    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ......................................
 <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ACLARACION      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           ACLARACION       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         ACLARACION         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        ACLARACION
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ACLARACION      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           ACLARACION       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         ACLARACION         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        ACLARACION
 <br>
 </p>
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Persona extends Model
 {
-    protected $fillable = ['idpersona','dni','nombre','apellido','nombre_apellido','email','act_empresa'];
+    protected $fillable = ['idpersona','dni','nombre','apellido','nombre_apellido','email','act_empresa','domicilio_empresa','profesion'];
 
     public function scopeSearch($query,$name)
     {
