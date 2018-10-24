@@ -16,7 +16,7 @@ class CreateChequesTable extends Migration
         Schema::create('cheques', function (Blueprint $table) {
             $table->increments('idcheque');
             $table->integer('cheque_venta')->unsigned();
-            $table->foreign('cheque_venta')->references('idventacontado')->on('venta_contados');
+            $table->foreign('cheque_venta')->references('idventa')->on('ventas');
             $table->integer('numero');
             $table->text('fecha');
             $table->text('banco');

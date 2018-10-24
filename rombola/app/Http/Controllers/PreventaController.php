@@ -212,7 +212,7 @@ class PreventaController extends Controller
             $codigo = "PV-"."000"."-".$part2 ;
         }
         //dd($codigo);
-        $preventa = new Preventa([
+        $preventa = new Preventa([ 
           'preventa_oper' => $operacion,
           'auto_interesado' => $request->get('auto_interesado'),
           'detalles' => $request->get('detalles'),

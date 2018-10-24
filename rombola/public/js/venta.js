@@ -10,13 +10,13 @@ function validar_check_conyuge(obj) {
     document.getElementById("conyuge_act_empresa").required = true;
   } else {
     document.getElementById("conyuge").style.display = "none";
-    document.getElementById("conyuge_dni").removeAttr("required");
-    document.getElementById("conyuge_nombre").removeAttr("required");
-    document.getElementById("conyuge_apellido").removeAttr("required");
-    document.getElementById("conyuge_fecha_nac").removeAttr("required");
-    document.getElementById("conyuge_cel_1").removeAttr("required");
-    document.getElementById("conyuge_domicilio").removeAttr("required");
-    document.getElementById("conyuge_act_empresa").removeAttr("required");
+    $('#conyuge_dni').removeAttr("required");
+    $('#conyuge_nombre').removeAttr("required");
+    $('#conyuge_apellido').removeAttr("required");
+    $('#conyuge_fecha_nac').removeAttr("required");
+    $('#conyuge_cel_1').removeAttr("required");
+    $('#conyuge_domicilio').removeAttr("required");
+    $('#conyuge_act_empresa').removeAttr("required");
   }
 }
 
@@ -32,13 +32,13 @@ function validar_check_garante(obj) {
     document.getElementById("garante_act_empresa").required = true;
   } else {
     document.getElementById("garante").style.display = "none";
-    document.getElementById("garante_dni").removeAttr("required");
-    document.getElementById("garante_nombre").removeAttr("required");
-    document.getElementById("garante_apellido").removeAttr("required");
-    document.getElementById("garante_fecha_nac").removeAttr("required");
-    document.getElementById("garante_cel_1").removeAttr("required");
-    document.getElementById("garante_domicilio").removeAttr("required");
-    document.getElementById("garante_act_empresa").removeAttr("required");
+    $('#garante_dni').removeAttr("required");
+    $('#garante_nombre').removeAttr("required");
+    $('#garante_apellido').removeAttr("required");
+    $('#garante_fecha_nac').removeAttr("required");
+    $('#garante_cel_1').removeAttr("required");
+    $('#garante_domicilio').removeAttr("required");
+    $('#garante_act_empresa').removeAttr("required");
   }
 }
 
@@ -139,9 +139,22 @@ function validar_check_cheque(obj) {
   if (obj.checked == true) {
     document.getElementById("inpcheques").style.display = "block";
     document.getElementById("detalle_cheque").style.display = "block";
+    document.getElementById("inpcheques").required = true;
+    document.getElementById("banco").required = true;
+    document.getElementById("numero_cheque").required = true;
+    document.getElementById("fecha_cheque").required = true;
+    document.getElementById("importe_cheque").required = true;
+    document.getElementById("valor_cheque").value = "si";
+
   } else {
+    $('#inpcheques').removeAttr("required");
+    $('#banco').removeAttr("required");
+    $('#numero_cheque').removeAttr("required");
+    $('#fecha_cheque').removeAttr("required");
+    $('#importe_cheque').removeAttr("required");
     document.getElementById("inpcheques").style.display = "none";
     document.getElementById("detalle_cheque").style.display = "none";
+    document.getElementById("valor_cheque").value = "no";
   }
 }
 
@@ -154,9 +167,26 @@ function validar_check_financiera(obj) {
   function validar_entregado(obj) {
     if (obj.checked == true) {
       document.getElementById("section_usado_entregado").style.display = "block";
+      document.getElementById("valor_entregado").value = "si";
+      document.getElementById("nomb_titular").required = true;
+      document.getElementById("dominio").required = true;
+      document.getElementById("conyuge_act_empresa").required = true;
+      document.getElementById("modelo").required = true;
+      document.getElementById("anio").required = true;
+      document.getElementById("color").required = true;
+      document.getElementById("chasis_num").required = true;
+      document.getElementById("motor_num").required = true;
     } else {
       document.getElementById("section_usado_entregado").style.display = "none";
+      document.getElementById("valor_entregado").value = "no";
     }
+  }
+
+  function obtener_marca_buscada() {
+    var res = document.getElementById("marca").value;
+    console.log(res);
+    document.getElementById("marca_selec").value = res;
+  
   }
 
   function check_lista_usados(valorCaja1) {

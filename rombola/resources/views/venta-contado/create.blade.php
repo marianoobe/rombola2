@@ -362,8 +362,6 @@
                                                     {{ $autos->render() }}
                         </section>
 
-
-                        <!--
                                         <section id="buscar_usados" style="display:none">
                                             <select id="select_marcas" onchange="obtenervalue()" class="selectpicker"
                                                 data-live-search="true" data-width="100%" data-size="2">
@@ -375,7 +373,7 @@
                                             <input type="text" id="modelousado" name="modelousado" style="display:none">
                                
                                         </section>
-                                        -->
+                        
                     </div>
 
 
@@ -441,6 +439,7 @@
                                         <input id="check_cheque" onchange="validar_check_cheque(this);" type="checkbox"
                                             data-style="slow" data-toggle="toggle" data-size="mini" data-on="Si"
                                             data-off="No" value="0">
+                                            <input id="valor_cheque" type="text" style="display:none;">
                                         <br>
                                         <input type="number" style="display:none;" maxlength="20" class="form-control" id="inpcheques" value="0">
                                     </div>
@@ -470,6 +469,7 @@
                                         <input id="check_usado" onchange="validar_entregado(this);" type="checkbox"
                                             data-style="slow" data-toggle="toggle" data-size="mini" data-on="Si"
                                             data-off="No">
+                                            <input id="valor_entregado" type="text" style="display:none;">
 
                                     </div>
                                     <!-- /.box-header -->
@@ -493,46 +493,37 @@
                                                     <div class="form-group">
                                                         <label><strong>Dominio</strong></label>
                                                         <input type="text" style="text-transform: uppercase;" maxlength="10"
-                                                            class="form-control" id="inp-dominio2" name="inp-dominio2[]"
-                                                            placeholder="" data-toggle="popover" title="Requerido"
-                                                            data-content="Este campo es obligatorio completar.">
+                                                            class="form-control" id="dominio" name="dominio"
+                                                            placeholder="" >
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="row margenBoot-25">
-                                                <div class="col-xs-12 col-lg-3">
-                                                    <div class="form-group">
-                                                        <label><strong>Marca</strong></label>
-                                                        <select onchange="verificarOtroElement(this,'');" class="form-control"
-                                                            id="sel-marca2" name="sel-marca2[]">
-                                                            <option value="BMW">BMW</option>
-                                                            <option value="CHEVROLET">CHEVROLET</option>
-                                                            <option value="CITROEN">CITROEN</option>
-                                                            <option value="DODGE">DODGE</option>
-                                                            <option value="FORD">FORD</option>
-                                                            <option value="FIAT">FIAT</option>
-                                                            <option value="MERCEDES BENZ">MERCEDES BENZ</option>
-                                                            <option value="PEUGEOT">PEUGEOT</option>
-                                                            <option value="RENAULT">RENAULT</option>
-                                                            <option value="TOYOTA">TOYOTA</option>
-                                                            <option value="SUZUKI">SUZUKI</option>
-                                                            <option value="VOLKSWAGEN">VOLKSWAGEN</option>
-                                                            <option value="Otro">Otro</option>
-                                                        </select>
-                                                    </div>
+                                                <div class="col-xs-12 col-lg-4">
+                                                        <div class="form-group">
+                                                                <label><strong>*Marca</strong></label>
+                                                                <select id="marca" name="marca" class="selectpicker show-tick" data-show-subtext="true" data-live-search="true"
+                                                                 data-style="btn-default" data-width="100%">
+                                                                    <option value="">Seleccionar marca</option>
+                                                                    @foreach ($marcas as $item){
+                                                                    <option value="{{ $item->nombre }}"> {{ $item->nombre }} </option>
+                                                                    }
+                                                                    @endforeach
+                                                                </select>
+                                                                <input id="marca_selec" type="text" style="display:none;">
+                                                        </div>
                                                 </div>
                                                 <div class="col-xs-12 col-lg-6">
                                                     <div class="form-group">
                                                         <label><strong>Modelo</strong></label>
-                                                        <input type="text" maxlength="150" class="form-control" id="inp-modelo2">
+                                                        <input type="text" maxlength="150" class="form-control" id="modelo">
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12 col-lg-3">
+                                                <div class="col-xs-12 col-lg-2">
                                                     <div class="form-group">
                                                         <label><strong>Año</strong></label>
-                                                        <input type="text" maxlength="65" class="form-control" id="inp-anno2"
-                                                            name="inp-anno2[]" placeholder="">
+                                                        <input type="text" maxlength="65" class="form-control" id="anio">
                                                     </div>
                                                 </div>
                                             </div>
@@ -541,33 +532,31 @@
                                                 <div class="col-xs-12 col-lg-3">
                                                     <div class="form-group">
                                                         <label><strong>Color</strong></label>
-                                                        <input type="text" maxlength="65" class="form-control" id="inp-color2"
-                                                            name="inp-color2[]" placeholder="">
+                                                        <input type="text" maxlength="65" class="form-control" id="color">
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-12 col-lg-5">
                                                     <div class="form-group">
                                                         <label><strong>N° Motor</strong></label>
-                                                        <input type="text" maxlength="255" class="form-control" id="inp-numMotor2"
-                                                            name="inp-numMotor2[]" placeholder="">
+                                                        <input type="text" maxlength="255" class="form-control" id="motor_num">
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-12 col-lg-4">
                                                     <div class="form-group">
                                                         <label><strong>N° Chasis</strong></label>
-                                                        <input type="text" maxlength="255" class="form-control" id="inp-numChasis2"
-                                                            name="inp-numChasis2[]" placeholder="">
+                                                        <input type="text" maxlength="255" class="form-control" id="chasis_num">
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="row margenBoot-25">
                                                 <div class="col-xs-12 col-lg-12">
-                                                    <div class="form-group">
+                                                        <!-- <div class="form-group">
                                                         <label><strong>Documentación Entregada</strong></label>
                                                         <textarea class="form-control" id="inp-observacion2" name="inp-observacion2[]"
                                                             rows="5" maxlength="21844">CÉDULA DE IDENTIFICACIÓN DEL VEHÍCULO, CÉDULA DE AUTORIZADO, VTV EN VIGENCIA, CONSTANCIA DE LIBRE DEUDA MUNICIPAL DE IMPUESTOS Y MULTAS, INFORME DE DOMINIO, F12 CONFECCIONADO POR POLICÍA O GENDARMERÍA NACIONAL CON FECHA ACTUAL, TÍTULO Y F08 DEBIDAMENTE FIRMADO.</textarea>
-                                                    </div>
+                                                        
+                                                        </div> -->
                                                 </div>
 
                                             </div>
@@ -672,7 +661,7 @@
                                             <div class="col-xs-12 col-lg-3">
                                                 <div class="form-group">
                                                     <label><strong>Importe</strong></label>
-                                                    <input id="importe_chuque" type="text" maxlength="65" class="form-control"
+                                                    <input id="importe_cheque" type="text" maxlength="65" class="form-control"
                                                         onblur="darFormato(this);">
                                                 </div>
                                             </div>
