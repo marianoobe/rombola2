@@ -16,7 +16,7 @@
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
 									<i class="fa fa-minus"></i></button>
-								
+
 							</div>
 						</div>
 						<div class="box-header">
@@ -46,15 +46,16 @@
 
 								<thead>
 									<tr>
-										
-									    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label=" : activate to sort column ascending" style="width: 58px;"/>
-										
+
+										<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label=" : activate to sort column ascending"
+										 style="width: 58px;" />
+
 										<th scope="col">MARCA</th>
 										<th scope="col">MODELO</th>
 										<th scope="col">DESCRIPCION</th>
-										<th scope="col">DOMINIO</th>										
-										@can('admin')<th scope="col">EDITAR</th>  @endcan
-										
+										<th scope="col">DOMINIO</th>
+										@can('admin')<th scope="col">EDITAR</th> @endcan
+
 									</tr>
 								</thead>
 								<tbody>
@@ -63,26 +64,99 @@
 										<td align="center" style="cursor: default;">
 											<img src={{url("img/marcas/$item->nombre.jpg")}} alt="..." class="img-circle" style="width: 80px; height: 80px;" />
 										</td>
-										
+
 										<td>{{$item->nombre}}</td>
 										<td>{{$item->modelo}}</td>
 										<td>{{$item->descripcion}}</td>
 										<td>{{$item->dominio}}</td>
-										
-										
-												@can('admin')<td style="cursor: default;">
+
+
+										@can('admin')<td style="cursor: default;">
 											<a href="{{ route('editusado',$item->id_auto)}}" class="btn btn-info btn-sm">
 												<span class="glyphicon glyphicon-search"></span></a>
-                                        
+
 										</td>@endcan
-																
-									  
-								</td>
+										<td style="cursor: default;">
+											<a href="{{ route('editusado',$item->id_auto)}}" class="btn btn-info btn-sm">
+												<span class="glyphicon glyphicon-search"></span></a>
+
+											<button type="button" class="btn btn-default btn-sm" id="btn-foto" data-toggle="modal" data-target="#modal-foto"
+											 style="margin-bottom:10%;"><span class="glyphicon glyphicon-picture"></span></button>
+											<a href="{{ route('formfile',$item->id_auto)}}"  class="btn btn-default btn-sm">
+												<span class="glyphicon glyphicon-camera"></span> Camera
+											</button>
+										</td>
+
+										</td>
 									</tr>
 									@endforeach()
 								</tbody>
 							</table>
 
+
+							<!--Modal -->
+							<div class="modal fade" id="modal-foto" tabindex="-1" role="dialog" aria-labelledby="modal-foto" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+													<font style="vertical-align: inherit;">
+														<font style="vertical-align: inherit;">×</font>
+													</font>
+												</span></button>
+											<h4 class="modal-title">
+												<font style="vertical-align: inherit;">
+													<font style="vertical-align: inherit;">NUEVA LISTA</font>
+													<h6 style="vertical-align: inherit;">*campos obligatorios</h6>
+												</font>
+											</h4>
+										</div>
+										<div class="modal-body">
+											<form method="POST" id="my-awesome-dropzone" action="" enctype="multipart/form-data">
+
+												<input type="hidden" name="_token" value="{{csrf_token()}}">
+												<div class="box-body">
+													<div class="row">
+														@foreach($files as $file)
+														<div class="col-md-4">
+															<div class="card">
+																<img class="card-img-top" src="{{ Storage::url($file->path)}}">
+																<div class="card-body">
+																	<strong class="card-title">{{ $file->title }}</strong>
+																	<p class="card-text">{{ $file->created_at->diffForHumans() }}</p>
+																	<form action="{{ route('deletefile', $file->id) }}" method="post">
+																		<input type="hidden" name="_token" value="{{csrf_token()}}">
+																		<input type="hidden" name="_method" value="DELETE">
+
+																		<button type="submit" class="btn btn-danger">Delete</button>
+
+																	</form>
+																</div>
+															</div>
+														</div>
+														@endforeach
+													</div>
+
+												</div>
+
+												<div class="success">
+
+													<br>
+													<div class="modal-footer">
+														<div class="row margenBoot-25" style="margin-top:25px;">
+															<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+														</div>
+													</div>
+												</div>
+										</div>
+										</form>
+									</div>
+								</div>
+							</div>
+
+
+
+
 							{{ $autos->render() }}
 
-@endsection
+							@endsection

@@ -52,7 +52,7 @@ id="empresa-logo" src="/img/logo.png" class="img-circle" width="50" height="50">
 
                     <li><a href="{{url('listaprecios')}}">{{ trans('adminlte_lang::message.list-0km') }}</a></li>
                     <li><a href="{{url('autos/usados')}}">{{ trans('adminlte_lang::message.list-used') }}</a></li>
-                   @can('admin') <li><a href="{{url('autos/createusados')}}">{{ trans('adminlte_lang::message.agregate used') }}</a></li>@endcan
+                   <li><a href="{{url('autos/createusados')}}">{{ trans('adminlte_lang::message.agregate used') }}</a></li>
                         
                    <!-- <li><a href="{{url('autos/create')}}">{{ trans('adminlte_lang::message.new-car') }}</a></li> !-->
                    
@@ -65,7 +65,7 @@ id="empresa-logo" src="/img/logo.png" class="img-circle" width="50" height="50">
             
             <li><a href="{{ url('financiera') }}"><i class='fa fa-university'></i> <span>Financieras</span></a></li>
 
-             @can('admin')     
+             @can('administrador')     
             <li class="treeview">
                 <a href="#"><i class='fa fa-users'></i> <span>USUARIOS</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
