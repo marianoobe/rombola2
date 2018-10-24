@@ -21,6 +21,8 @@ class CreatePersonasTable extends Migration
             $table->text('nombre_apellido', 30);
             $table->text('email');
             $table->text('act_empresa', 25);
+            $table->text('domicilio_empleo', 30)->nullable();
+            $table->text('profesion', 25)->nullable();
             $table->timestamps();
         });
     }

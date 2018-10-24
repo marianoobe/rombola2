@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGarantesTable extends Migration
+class CreateConyugesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,18 @@ class CreateGarantesTable extends Migration
      */
     public function up()
     {
-        Schema::create('garantes', function (Blueprint $table) {
+        Schema::create('conyuges', function (Blueprint $table) {
             $table->increments('idgarante');
-            $table->integer('idgarante_persona')->unsigned();
-            $table->foreign('idgarante_persona')->references('idpersona')->on('personas');
+            $table->integer('idconyuge_persona')->unsigned();
+            $table->foreign('idconyuge_persona')->references('idpersona')->on('personas');
             $table->string('fecha_nacimiento');
             $table->text('domicilio');
-            $table->text('estado_civil');
+            $table->text('relacion_dependencia');
+            $table->text('antiguedad');
+            $table->text('ingresos_mesuales');
+            $table->text('ingresos_otros');
+            $table->text('nombre_padre');
+            $table->text('nombre_madre');
             $table->boolean('visible');
             $table->timestamps();
         });
@@ -32,6 +37,6 @@ class CreateGarantesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('garantes');
+        Schema::dropIfExists('conyuges');
     }
 }
