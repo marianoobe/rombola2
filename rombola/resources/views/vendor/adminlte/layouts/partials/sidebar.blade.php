@@ -50,10 +50,11 @@ id="empresa-logo" src="/img/logo.png" class="img-circle" width="50" height="50">
                         trans('adminlte_lang::message.car') }}</span>  <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
 
-                    <li><a href="{{url('listaprecios')}}">{{ trans('adminlte_lang::message.list-0km') }}</a></li>
+                    <li><a href="{{url('listaprecios')}}">{{ trans('adminlte_lang::message.list-price') }}</a></li>
                     <li><a href="{{url('autos/usados')}}">{{ trans('adminlte_lang::message.list-used') }}</a></li>
                    <li><a href="{{url('autos/createusados')}}">{{ trans('adminlte_lang::message.agregate used') }}</a></li>
-                        
+                      <li><a href="{{url('cero/create')}}">{{ trans('adminlte_lang::message.new-car') }}</a></li>   
+                       <li><a href="{{url('cero')}}">{{ trans('adminlte_lang::message.list-0km') }}</a></li>
                    <!-- <li><a href="{{url('autos/create')}}">{{ trans('adminlte_lang::message.new-car') }}</a></li> !-->
                    
                    
