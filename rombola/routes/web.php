@@ -82,7 +82,17 @@ Route::get('autos/createusados','AutomovileController@createusados')->name('agre
 
 
 Route::resource('autos', 'AutomovileController');
+Route::resource('cero', 'AutoceroController');
+Route::get('resizeImage', 'ImageController@resizeImage');
+Route::post('resizeImagePost',['as'=>'resizeImagePost','uses'=>'ImageController@resizeImagePost']);
 
 
 
+Route::get('/file','FileController@index')->name('viewfile');
+Route::get('/file/upload/{id}','FileController@create')->name('formfile');
+Route::post('/file/upload','FileController@store')->name('uploadfile');
+Route::delete('/file/{id}','FileController@destroy')->name('deletefile');
+//Route::get('/file/download/{id}','FileController@show')->name('downloadfile');
+//Route::get('/file/email/{id}','FileController@edit')->name('emailfile');
+Route::post('/file/dropzone','FileController@dropzone')->name('dropzone');
 ?>

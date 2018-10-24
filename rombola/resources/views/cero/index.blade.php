@@ -26,7 +26,7 @@
 
 						<div class="box-body">
 
-							<form method="GET" action="{{ route('cero.index') }}" class="navbar-form pull-right" role="search">
+							<form method="GET" action="{{ route('autos.index') }}" class="navbar-form pull-right" role="search">
 								
 								<div class="input-group">
 									
@@ -50,14 +50,14 @@
 								<thead>
 									<tr>
 										<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label=" : activate to sort column ascending"
-										 style="width: 58px;" />
-										<th scope="col">ID</th>
+										 style="width: 58px;"/>
+										
 										<th scope="col">MARCA</th>
 										<th scope="col">MODELO</th>
 										<th scope="col">VERSION</th>
 										<th scope="col">COLOR</th>
-										<th scope="col">ESTADO</th>
-										<th scope="col">VER</th>
+										
+										<th scope="col">EDITAR</th>
 
 									</tr>
 								</thead>
@@ -65,16 +65,16 @@
 									@foreach($autos as $item)
 									<tr>
 										<td align="center" style="cursor: default;">
-											<img src={{url('img/sinimagen.jpg')}} alt="..." class="img-circle" style="width: 80px; height: 80px;" />
+											<img src={{url("img/marcas/$item->nombre.jpg")}} alt="..." class="img-circle" style="width: 80px; height: 80px;" />
 										</td>
-										<td>{{$item->id_auto}}</td>
-										<td>{{$item->marca}}</td>
+										
+										<td >{{$item->nombre}}</td>
 										<td>{{$item->modelo}}</td>
-										<td>{{$item->version}}</td>
+										<td>{{$item->descripcion}}</td>
 										<td>{{$item->color}}</td>
-										<td>{{$item->estado}}</td>
+										
 										<td style="cursor: default;">
-											<a href="{{ route('cero.edit',$item->id_auto)}}" class="btn btn-info btn-sm">
+											<a href="{{ route('cero.edit',$item->id_autocero)}}" class="btn btn-info btn-sm">
 												<span class="glyphicon glyphicon-search"></span></a>
 
 										</td>

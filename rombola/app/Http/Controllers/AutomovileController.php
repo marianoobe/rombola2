@@ -9,7 +9,7 @@ use App\Automovile;
 use App\Marca;
 use App\Autosnuevo;
 use App\Autosusado;
-
+use App\File;
 class AutomovileController extends Controller
 {
     /**
@@ -25,9 +25,10 @@ class AutomovileController extends Controller
        ->orderBY('id_auto')
        ->paginate(5);
                    
-              
+       $files = File::orderBy('created_at','DESC')->paginate(30);   
   //  dd($request->name);
-        return view('autos.index')->with('autos',$autos);
+        return view('autos.index')->with('autos',$autos)
+                                  ->with('files',$files);
 
        
     }
@@ -41,10 +42,10 @@ class AutomovileController extends Controller
        ->paginate(5);
         
        $marcas=Marca::All();
-         
+         $files = File::orderBy('created_at','DESC')->paginate(30);
         return view('autos/usados')->with('autos',$autos)
-                                    ->with('marcas',$marcas);
-
+                                    ->with('marcas',$marcas)
+                                     ->with('files',$files);
        
     }
     /**
@@ -79,7 +80,7 @@ class AutomovileController extends Controller
             
             'modelo' => $request->input('modelo'),
             'descripcion'=> $request->input('version'),
-                        'color'=> $request->input('color'),
+            'color'=> $request->input('color'),
                    
             'estado'=> $request->input('estado'),
             'vin' => $request->input('vin'),
