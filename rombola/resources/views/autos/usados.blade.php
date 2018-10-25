@@ -54,11 +54,16 @@
 										<th scope="col">MODELO</th>
 										<th scope="col">DESCRIPCION</th>
 										<th scope="col">DOMINIO</th>
-										@can('admin')<th scope="col">EDITAR</th> @endcan
+										<th scope="col">EDITAR</th>
+										<th scope="col">VER FOTO</th>
+										<th scope="col">CARGAR FOTO</th>
 
 									</tr>
 								</thead>
 								<tbody>
+
+
+
 									@foreach($autos as $item)
 									<input type="hidden" name="idauto" value="{{ $item->id_auto }}">
 									<tr>
@@ -70,22 +75,22 @@
 										<td>{{$item->modelo}}</td>
 										<td>{{$item->descripcion}}</td>
 										<td>{{$item->dominio}}</td>
+										
 
 
 										<td style="cursor: default;">
-											<a href="{{ route('editusado',$item->id_auto)}}" class="btn btn-info btn-sm">
-												<span class="glyphicon glyphicon-search"></span></a>
+											<a href="{{ route('editusado',$item->id_auto)}}" class="edit-modal btn btn-info">
+												<span class="glyphicon glyphicon-edit"></span></a>
 
 										</td>
-										<td style="cursor: default;">
-											<a href="{{ route('editusado',$item->id_auto)}}" class="btn btn-info btn-sm">
-												<span class="glyphicon glyphicon-search"></span></a>
-
-											<button type="button" class="btn btn-default btn-sm" id="btn-foto" data-toggle="modal" data-target="#modal-listaNuevo"
+										<td>
+											<button type="button" class="btn btn-info" id="btn-foto" data-toggle="modal" data-target="#modal-listaNuevo"
 											 style="margin-bottom:10%;"><span class="glyphicon glyphicon-picture"></span></button>
-											<a href="{{ route('formfile',$item->id_auto)}}"  class="btn btn-default btn-sm">
+										</td>
+										<td>
+											<a href="{{ route('formfile',$item->id_auto)}}" class="btn btn-info">
 												<span class="glyphicon glyphicon-camera"></span> Camera
-											</button>
+												</button>
 										</td>
 
 										</td>
@@ -93,12 +98,11 @@
 									@endforeach()
 								</tbody>
 							</table>
-
+							<!-- Modal form to show a post -->
 
 							<!--Modal -->
-							<div class="modal fade" id="modal-listaNuevo" tabindex="-1" role="dialog" aria-labelledby="modal-listaNuevo" aria-hidden="true">
-
-						
+							<div class="modal fade" id="modal-listaNuevo" tabindex="-1" role="dialog" aria-labelledby="modal-listaNuevo"
+							 aria-hidden="true">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -109,21 +113,22 @@
 												</span></button>
 											<h4 class="modal-title">
 												<font style="vertical-align: inherit;">
-													<font style="vertical-align: inherit;">NUEVA LISTA</font>
-													<h6 style="vertical-align: inherit;">*campos obligatorios</h6>
+													<font style="vertical-align: inherit;">FOTOS</font>
+
 												</font>
 											</h4>
 										</div>
 										<div class="modal-body">
-											<form method="POST" id="my-awesome-dropzone" action="" enctype="multipart/form-data">
+											<form method="POST" action="" enctype="multipart/form-data">
 
 												<input type="hidden" name="_token" value="{{csrf_token()}}">
 												<div class="box-body">
 													<div class="row">
+
 														@foreach($files as $file)
 														<div class="col-md-4">
 															<div class="card">
-																<img class="card-img-top" src="{{ Storage::url($file->path)}}">
+																<img class="card-img-top" src={{ url("$file->path")}} class="img-circle" style="width: 120px; height: 120px;">
 																<div class="card-body">
 																	<strong class="card-title">{{ $file->title }}</strong>
 																	<p class="card-text">{{ $file->created_at->diffForHumans() }}</p>
@@ -131,7 +136,7 @@
 																		<input type="hidden" name="_token" value="{{csrf_token()}}">
 																		<input type="hidden" name="_method" value="DELETE">
 
-																		<button type="submit" class="btn btn-danger">Delete</button>
+
 
 																	</form>
 																</div>
@@ -158,8 +163,5 @@
 							</div>
 
 
-
-
-							{{ $autos->render() }}
 
 							@endsection

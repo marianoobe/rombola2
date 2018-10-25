@@ -8,6 +8,8 @@ use App\Automovile;
 use App\Marca;
 use App\Autosnuevo;
 use App\Autosusado;
+use App\File;
+use Storage;
  class AutomovileController extends Controller
 {
     /**
@@ -18,42 +20,45 @@ use App\Autosusado;
     public function index()
     {
         //$name  = $request->get('name'); 
-       
+       $rutalista= "storage/fotos/";
        $autos=Automovile::Search($request->name)      
        ->orderBY('id_auto')
        ->paginate(5);
-<<<<<<< HEAD
               
        $files = File::orderBy('created_at','DESC')->paginate(6);   
-    
-        return view('autos.index')->with('autos',$autos)
-                                  ->with('files',$files);
-
-       
-=======
-                   
-              
-  //  dd($request->name);
-        return view('autos.index')->with('autos',$autos);
-       $autos = Automovile::all();
         
-        return view('autos.index', compact('autos'));
->>>>>>> 66362415a9fd52d70ebd30f2bea40f1f8dbadb6a
+        dd($rutafotos);
+        return view('autos.index')->with('autos',$autos)
+                                  ->with('files',$files)
+                                   ->with("rutalista",$rutalista); 
+       
     }
       public function usados(Request $request)
     {
       
+      
        
+        
        $autos=Automovile::Search($request->name)   
           
-       ->orderBY('id_auto')
-       ->paginate(5);
+      ->orderBY('id_auto')
+      ->paginate(5);
        
        $marcas=Marca::All();
-         
-        return view('autos/usados')->with('autos',$autos)
-                                    ->with('marcas',$marcas);
+
+       $todo = DB::table('files')
+        ->join('automoviles', 'automoviles.id_auto' ,'files.id_auto') 
+        ->join('marcas','marcas.idmarca','automoviles.idmarca') 
+       
+        ->get();
+
         
+          $files = File::orderBy('created_at','DESC')->paginate(6); 
+        return view('autos/usados')->with('autos',$autos)
+                                      ->with('todo',$todo)
+                                       ->with('files',$files)
+                                    ->with('marcas',$marcas);
+                                    
     }
     /**
      * Show the form for creating a new resource.
@@ -74,9 +79,7 @@ use App\Autosusado;
     }
     
      /**
-     * Store a newly created resource in storage.
-     *
-@@ -72,77 +37,9 @@ public function createusados()
+ 
      */
     public function store(Request $request)
     { 
@@ -144,18 +147,17 @@ use App\Autosusado;
      /**
      * Display the specified resource.
      *
-<<<<<<< HEAD
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $files = File::find($id)
+        $files = File::where("id_auto","=",$id)
         ->orderBy('created_at','DESC')
         ->paginate(6);   
-    dd($files);
-        return view('usados')->with('autos',$autos)
-                                  ->with('files',$files);
+    
+        return view('usados')->with('files',$files);
+   
     }
 
     /**
@@ -163,9 +165,6 @@ use App\Autosusado;
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-=======
-@@ -162,79 +59,21 @@ public function show($id)
->>>>>>> 66362415a9fd52d70ebd30f2bea40f1f8dbadb6a
      */
     public function edit($id)
     {
@@ -236,5 +235,6 @@ use App\Autosusado;
       return view('autos/editusado', compact('autos'));
         //
     }
-     
+
+        
   }

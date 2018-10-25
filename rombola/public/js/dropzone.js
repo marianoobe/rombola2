@@ -419,7 +419,7 @@ var Dropzone = function (_Emitter) {
         /**
          * The text used before any files are dropped.
          */
-        dictDefaultMessage: "Drop files here to upload",
+        dictDefaultMessage: "ARRASTRA LAS IMAGENES QUE DESEA SUBIR ",
 
         /**
          * The text that replaces the default message text it the browser is not supported.
@@ -442,7 +442,7 @@ var Dropzone = function (_Emitter) {
         /**
          * If the file doesn't match the file type.
          */
-        dictInvalidFileType: "You can't upload files of this type.",
+        dictInvalidFileType: "NO PUEDE SUBIR ESTE TIPO DE ARCHIVO TIENE QUE SER IMAGEN JPG/PNG.",
 
         /**
          * If the server response was invalid.
@@ -3524,5 +3524,3 @@ function __guardMethod__(obj, methodName, transform) {
     return undefined;
   }
 }
-
-

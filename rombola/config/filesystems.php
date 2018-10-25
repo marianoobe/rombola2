@@ -58,6 +58,10 @@ return [
             'driver' => 'local',
             'root'   => storage_path('listas'),
         ],
+        'fotos' => [
+            'driver' => 'local',
+            'root'   => public_path('storage/fotos'),
+        ],
 
         's3' => [
             'driver' => 's3',
