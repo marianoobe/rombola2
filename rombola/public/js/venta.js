@@ -8,6 +8,7 @@ function validar_check_conyuge(obj) {
     document.getElementById("conyuge_cel_1").required = true;
     document.getElementById("conyuge_domicilio").required = true;
     document.getElementById("conyuge_act_empresa").required = true;
+    document.getElementById("input_conyuge").value = "si";
   } else {
     document.getElementById("conyuge").style.display = "none";
     $('#conyuge_dni').removeAttr("required");
@@ -17,6 +18,7 @@ function validar_check_conyuge(obj) {
     $('#conyuge_cel_1').removeAttr("required");
     $('#conyuge_domicilio').removeAttr("required");
     $('#conyuge_act_empresa').removeAttr("required");
+    document.getElementById("input_conyuge").value = "no";
   }
 }
 
@@ -47,17 +49,37 @@ function enable_buscar() {
   if (document.getElementById("nuevo").style.display == "none" && document.getElementById("buscar").style.display == "none") {
     document.getElementById("buscar").style.display = "block";
     document.getElementById("cancer").value = "buscar";
-    $('#nombre').removeAttr("required");
+    document.getElementById("dnis").required = true;
+    $('#nuevo_dni').removeAttr("required");
+    $('#nuevo_nombre').removeAttr("required");
+    $('#nuevo_apellido').removeAttr("required");
+    $('#nuevo_fecha_nac').removeAttr("required");
+    $('#nuevo_estado_civil').removeAttr("required");
+    $('#nuevo_email').removeAttr("required");
+    $('#nuevo_cel_1').removeAttr("required");
+    $('#nuevo_domicilio').removeAttr("required");
+    $('#nuevo_act_empresa').removeAttr("required");
+
   } else {
     if (document.getElementById("buscar").style.display == "block") {
       document.getElementById("buscar").style.display = "none";
+      $('#dnis').removeAttr("required");
     }
   }
 
   if (document.getElementById("buscar").style.display == "none" && document.getElementById("nuevo").style.display == "block") {
     document.getElementById("buscar").style.display = "block";
     document.getElementById("nuevo").style.display = "none";
-    $('#nombre').removeAttr("required");
+    document.getElementById("dnis").required = true;
+    $('#nuevo_dni').removeAttr("required");
+    $('#nuevo_nombre').removeAttr("required");
+    $('#nuevo_apellido').removeAttr("required");
+    $('#nuevo_fecha_nac').removeAttr("required");
+    $('#nuevo_estado_civil').removeAttr("required");
+    $('#nuevo_email').removeAttr("required");
+    $('#nuevo_cel_1').removeAttr("required");
+    $('#nuevo_domicilio').removeAttr("required");
+    $('#nuevo_act_empresa').removeAttr("required");
     document.getElementById("cancer").value = "buscar";
   }
 }
@@ -66,37 +88,72 @@ function enable_nuevo() {
   if (document.getElementById("nuevo").style.display == "none" && document.getElementById("buscar").style.display == "none") {
     document.getElementById("nuevo").style.display = "block";
     document.getElementById("cancer").value = "nuevo";
+
+    document.getElementById("nuevo_dni").required = true;
+    document.getElementById("nuevo_nombre").required = true;
+    document.getElementById("nuevo_apellido").required = true;
+    document.getElementById("nuevo_fecha_nac").required = true;
+    document.getElementById("nuevo_estado_civil").required = true;
+    document.getElementById("nuevo_email").required = true;
+    document.getElementById("nuevo_cel_1").required = true;
+    document.getElementById("nuevo_domicilio").required = true;
+    document.getElementById("nuevo_act_empresa").required = true;
+
+    $('#dnis').removeAttr("required");
+
+
   } else {
     if (document.getElementById("nuevo").style.display == "block") {
       document.getElementById("nuevo").style.display = "none";
-      $('#nombre').removeAttr("required");
+    $('#nuevo_dni').removeAttr("required");
+    $('#nuevo_nombre').removeAttr("required");
+    $('#nuevo_apellido').removeAttr("required");
+    $('#nuevo_fecha_nac').removeAttr("required");
+    $('#nuevo_estado_civil').removeAttr("required");
+    $('#nuevo_email').removeAttr("required");
+    $('#nuevo_cel_1').removeAttr("required");
+    $('#nuevo_domicilio').removeAttr("required");
+    $('#nuevo_act_empresa').removeAttr("required");
 
+    document.getElementById("dnis").required = true; 
     }
   }
 
   if (document.getElementById("nuevo").style.display == "none" && document.getElementById("buscar").style.display == "block") {
     document.getElementById("nuevo").style.display = "block";
     document.getElementById("buscar").style.display = "none";
-    $('#nombre').removeAttr("required");
+    
+    document.getElementById("nuevo_dni").required = true;
+    document.getElementById("nuevo_nombre").required = true;
+    document.getElementById("nuevo_apellido").required = true;
+    document.getElementById("nuevo_fecha_nac").required = true;
+    document.getElementById("nuevo_estado_civil").required = true;
+    document.getElementById("nuevo_email").required = true;
+    document.getElementById("nuevo_cel_1").required = true;
+    document.getElementById("nuevo_domicilio").required = true;
+    document.getElementById("nuevo_act_empresa").required = true;
+    
   }
 }
 
 function enable_usado() {
   if (document.getElementById("nuevo").style.display == "none" && document.getElementById("buscar_usados").style.display == "none") {
     document.getElementById("buscar_usados").style.display = "block";
-    document.getElementById("cancer").value = "buscar";
+    document.getElementById("check_usado").value = "si";
     $('#select_marcas').required = true;
   } else {
     if (document.getElementById("buscar_usados").style.display == "block") {
       document.getElementById("buscar_usados").style.display = "none";
       $('#select_marcas').required = false;
+      document.getElementById("check_usado").value = "no";
+
     }
   }
   if (document.getElementById("buscar_usados").style.display == "none" && document.getElementById("nuevo").style.display == "block") {
     document.getElementById("buscar_usados").style.display = "block";
     document.getElementById("nuevo").style.display = "none";
     $('#select_marcas').required = true;
-    document.getElementById("cancer").value = "buscar";
+    document.getElementById("check_usado").value = "si";
   }
 }
 
@@ -222,6 +279,7 @@ function validar_check_financiera(obj) {
       document.getElementById("modal_cargar0km").style.display = "none";
       document.getElementById("auto_cargado").style.display = "block";
       document.getElementById("valor_auto_vendido").value = precio;
+      document.getElementById("estado_vineta").value = "lista";
       
     }
 
@@ -231,6 +289,28 @@ function validar_check_financiera(obj) {
       $('#modelo').removeAttr("required");
       $('#version').removeAttr("required");
       $('#precio').removeAttr("required");
+      document.getElementById("estado_vineta").value = "stock";
+
+    }
+  }
+
+  function check_lista_0km(valorCaja1) {
+    console.log(valorCaja1);
+    if (obj.checked == true) {
+      var parametros = {
+        "valorCaja1": valorCaja1
+      };
+      $.ajax({
+        data: parametros, //datos que se envian a traves de ajax
+        url: 'ventas.store', //archivo que recibe la peticion
+        type: 'post', //método de envio
+        beforeSend: function () {
+          $("#select_0km").html("Procesando, espere por favor...");
+        },
+        success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+          $("#select_0km").html(response);
+        }
+      });
     }
   }
 

@@ -19,12 +19,12 @@ class CreateConyugesTable extends Migration
             $table->foreign('idconyuge_persona')->references('idpersona')->on('personas');
             $table->string('fecha_nacimiento');
             $table->text('domicilio');
-            $table->text('relacion_dependencia');
-            $table->text('antiguedad');
-            $table->text('ingresos_mesuales');
-            $table->text('ingresos_otros');
-            $table->text('nombre_padre');
-            $table->text('nombre_madre');
+            $table->text('relacion_dependencia')->nullable();
+            $table->text('antiguedad')->nullable();
+            $table->text('ingresos_mesuales')->nullable();
+            $table->text('ingresos_otros')->nullable();
+            $table->text('nombre_padre')->nullable();
+            $table->text('nombre_madre')->nullable();
             $table->boolean('visible');
             $table->timestamps();
         });

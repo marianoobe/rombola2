@@ -8,6 +8,10 @@ use App\Automovile;
 use App\Marca;
 use App\Autosnuevo;
 use App\Autosusado;
+use App\File;
+
+
+
  class AutomovileController extends Controller
 {
     /**
@@ -22,23 +26,12 @@ use App\Autosusado;
        $autos=Automovile::Search($request->name)      
        ->orderBY('id_auto')
        ->paginate(5);
-<<<<<<< HEAD
               
        $files = File::orderBy('created_at','DESC')->paginate(6);   
     
         return view('autos.index')->with('autos',$autos)
                                   ->with('files',$files);
 
-       
-=======
-                   
-              
-  //  dd($request->name);
-        return view('autos.index')->with('autos',$autos);
-       $autos = Automovile::all();
-        
-        return view('autos.index', compact('autos'));
->>>>>>> 66362415a9fd52d70ebd30f2bea40f1f8dbadb6a
     }
       public function usados(Request $request)
     {
