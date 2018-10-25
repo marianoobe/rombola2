@@ -12,6 +12,7 @@ use App\Marca;
 use App\Operaciones;
 use App\Conyuge;
 use App\Autocero;
+use DB;
 
 
 class VentaController extends Controller
@@ -23,7 +24,12 @@ class VentaController extends Controller
      */
     public function index()
     {
-        return view('venta');
+
+      $venta_operac = DB::table('operaciones')
+      ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
+      ->get();
+       //dd($venta_operac);
+        return view('venta',compact('venta_operac'));
     }
 
     /**

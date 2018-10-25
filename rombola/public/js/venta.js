@@ -267,51 +267,33 @@ function validar_check_financiera(obj) {
   }
 
   function viñeta_0km(){
-
     var marca = document.getElementById("marca").value;
     var modelo = document.getElementById("modelo").value;
     var version = document.getElementById("version").value;
     var precio = document.getElementById("precio").value;
 
-    if(marca && modelo && version && precio){
-    var estado = document.getElementById("lista").className;
+    
+    if(modelo!=null){
     
       document.getElementById("modal_cargar0km").style.display = "none";
       document.getElementById("auto_cargado").style.display = "block";
       document.getElementById("valor_auto_vendido").value = precio;
-      document.getElementById("estado_vineta").value = "lista";
+      document.getElementById("estado_toggle").value = "lista";
+      console.log(document.getElementById("estado_toggle").value);
       
     }
 
     var estadostock = document.getElementById("stock").className;
+    console.log(estadostock);
     if (estadostock == "active") {
       $('#marca').removeAttr("required");
       $('#modelo').removeAttr("required");
       $('#version').removeAttr("required");
       $('#precio').removeAttr("required");
-      document.getElementById("estado_vineta").value = "stock";
-
+      document.getElementById("estado_toggle").value = "stock";
     }
-  }
+    console.log(document.getElementById("estado_toggle").value);
 
-  function check_lista_0km(valorCaja1) {
-    console.log(valorCaja1);
-    if (obj.checked == true) {
-      var parametros = {
-        "valorCaja1": valorCaja1
-      };
-      $.ajax({
-        data: parametros, //datos que se envian a traves de ajax
-        url: 'ventas.store', //archivo que recibe la peticion
-        type: 'post', //método de envio
-        beforeSend: function () {
-          $("#select_0km").html("Procesando, espere por favor...");
-        },
-        success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-          $("#select_0km").html(response);
-        }
-      });
-    }
   }
 
   function send_total(valorCaja1) {
@@ -330,4 +312,3 @@ function validar_check_financiera(obj) {
       }
     });
   }
-  

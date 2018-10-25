@@ -2,7 +2,7 @@
 
 
 @section('seccion1')
-<form method="post" action="{{ route('venta.store') }}">
+<form method="post" action="{{ route('ventacontado.store') }}">
     {!! Html::script('js/venta.js') !!}
     <div class="container-fluid spark-screen">
         <div class="row">
@@ -61,7 +61,7 @@
 
                         <input type="text" id="cancer" name="cancer" style="display:none">
                         <input type="text" id="tipodni" name="tipodni" style="display:none">
-                        <input type="text" id="nya_cliente" name="tipodni" style="display:none">
+                        <input type="text" id="nya_cliente" name="nya_cliente" style="display:none">
                         <div class="row margenBoot-25">
                             <div class="col-xs-14 col-lg-6">
                                 <button onclick="enable_buscar()" type="button" class="btn btn-success btn-block" style="margin-bottom: 10%;">Buscar
@@ -400,16 +400,18 @@
                                     </div> -->
                                         </div>
                                     </div>
-                                    <form method="POST" oninput="resultado.value=parseInt(valor_auto_entregado.value) + parseInt(inpefectivo.value) + parseInt(inpcheques.value)">
                                         <div class="row margenBoot-25">
                                             <div class="col-xs-12 col-lg-10">
                                                 <div class="form-group">
                                                     <label><strong>Valor de Auto Vendido</strong></label>
-                                                    <input type="text" id="valor_auto_vendido" name="valor_auto_vendido" maxlength="30">
+                                                    <input type="number" id="valor_auto_vendido" name="valor_auto_vendido" maxlength="30">
+                                                    <input type="number" id="precio_auto_vendido" name="precio_auto_vendido" style="display:none">
                                                 </div>
+                                                <!-- <form method="POST" oninput="resultado.value=parseInt(valor_auto_entregado.value) + parseInt(inpefectivo.value) + parseInt(inpcheques.value)"> -->
+
                                                 <div class="form-group">
                                                     <label><strong>Valor de Auto Entregado</strong></label>
-                                                    <input type="number" id="valor_auto_entregado" name="valor_auto_entregado" maxlength="30" value="0">
+                                                    <input type="number" id="valor_auto_entregado" name="valor_auto_entregado" maxlength="30" >
                                                 </div>
                                             </div>
                                         </div>
@@ -417,7 +419,7 @@
                                             <div class="col-xs-12 col-lg-10">
                                                 <div class="form-group">
                                                     <label><strong>Contado/Efectivo</strong></label>
-                                                    <input type="number" maxlength="30" id="inpefectivo" name="inpefectivo" value="0">
+                                                    <input type="number" maxlength="30" id="inpefectivo" name="inpefectivo">
                                                 </div>
                                             </div>
                                         </div>
@@ -429,7 +431,7 @@
                                                     <input id="check_cheque" name="check_cheque" onchange="validar_check_cheque(this);"
                                                         type="checkbox" data-style="slow" data-toggle="toggle"
                                                         data-size="mini" data-on="Si" data-off="No" value="0">
-                                                    <input id="valor_cheque" type="text" style="display:none;">
+                                                    <input id="valor_cheque" name="valor_cheque" type="text" style="display:none;">
                                                     <br>
                                                     <input type="number" style="display:none;" maxlength="20" class="form-control"
                                                         id="inpcheques" name="inpcheques" value="0">
@@ -441,9 +443,8 @@
                                             <div class="col-xs-12 col-lg-7">
                                                 <div class="form-group">
                                                     <label><strong>Total</strong></label>
-                                                    <output style="border: 2px solid" id="resultado" name="resultado"
-                                                        for="valor_auto_entregado inpefectivo inpcheques"></output>
-                                                    <input type="number" id="restotal" name="restotal" style="display:none">
+                                                    <input type="number" id="restotal" name="restotal"  >
+                                                   <!-- <output style="border: 2px solid" id="resultado" name="resultado" for="valor_auto_entregado inpefectivo inpcheques"></output> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -647,14 +648,14 @@
                                                     <div class="col-xs-12 col-lg-3">
                                                         <div class="form-group">
                                                             <label><strong>Número</strong></label>
-                                                            <input id="numero_cheque" name="numero_cheque" type="text" maxlength="65" class="form-control">
+                                                            <input id="numero_cheque" name="numero_cheque" type="int" maxlength="65" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-12 col-lg-3">
                                                         <div class="form-group">
                                                             <label><strong>Fecha</strong></label>
                                                             <div class="input-group date" name="date-fechaPagCheque[]">
-                                                                <input id="fecha_cheque" name="fecha_cheque" type="text" class="form-control">
+                                                                <input id="fecha_cheque" name="fecha_cheque" type="date" class="form-control">
                                                                 <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span>
                                                                 </span> </div>
                                                         </div>
@@ -728,7 +729,6 @@
                             <ul class="nav nav-tabs">
                                 <li id="stock" class="active"><a data-toggle="tab" href="#home">STOCK/DEPOSITO</a></li>
                                 <li id="lista"><a data-toggle="tab" href="#menu1">LISTA DE AUTOS</a></li>
-                                <div id="estado_vineta" style="display:none;" class="panel panel-default">
                             </ul>
 
                             <div class="tab-content">
@@ -775,12 +775,12 @@
                                             <tbody>
                                                 @foreach($autos as $item)
                                                 <tr>
+                                                    <p></p>
                                                     <td align="center" style="cursor: default;">
                                                     <input class="form-check-input" type="radio"
-                                                    change="check_lista_0km({{$item->id_autocero}})"
-                                                    name="exampleRadios" id="exampleRadios1"
-                                                    value="option1" checked>
-                                                    </td>
+                                                    name="exampleRadios" id="exampleRadios1">
+                                                    <input id="select_cero"name="select_cero" value='{{$item->id_autocero}}' style="display:none">
+                                                </td>
                                                     <td align="center" style="cursor: default;">
                                                         <img src={{url("img/marcas/$item->nombre.jpg")}} alt="..." class="img-circle" style="width: 30px; height: 30px;" />
                                                     </td>                                                
@@ -795,6 +795,8 @@
                                         </table>
                       
                                         {{ $autos->render() }}
+                                        
+                                        <input type="text" id="estado_toggle" name="estado_toggle" style="display:none" >
 
 
                                 </div>
@@ -824,8 +826,8 @@
                                                     <label><strong>*Precio</strong></label>
                                                     <input type="text" class="form-control" id="precio" name="precio">
                                                 </div>
-                                                <button onclick="viñeta_0km()" class="btn btn-primary">Guardar</button>
                                             </section>
+                                            <!--<button onclick="viñeta_0km_cargado();" class="btn btn-primary"> Guardar </button> -->
                                             <section id="auto_cargado" style="display:none">
                                                 <p>Auto Guardado</p>
                                             </section>
@@ -836,7 +838,7 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button onclick="viñeta_0km()" class="btn btn-primary" data-dismiss="modal">Continuar</button>
+                                <button onclick="viñeta_0km();" class="btn btn-primary" data-dismiss="modal">Continuar</button>
                             </div>
                         </div>
 

@@ -34,26 +34,20 @@
 
 					</div>
 					<table class="table table-striped">
-						<thead>
+						<thead> 
 							<tr>
 								<th scope="col">Fecha</th>
-								<th scope="col">Marca</th>
-								<th scope="col">Modelo</th>
-								<th scope="col">Dominio</th>
-								<th scope="col">Cliente</th>
+								<th scope="col">Codigo</th>
 								<th scope="col">Estado</th>
 								<th scope="col"></th>
 							</tr>
 						</thead>
 						<tbody id="myTable">
-
+								@foreach($venta_operac as $item)
 							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+								<td>{{$item->fecha_oper}}</td>
+								<td>{{$item->codigo}}</td>
+								<td>{{$item->estado}}</td>
 								<td style="cursor: default;">
 									@can('vendedor')
 									<a href="" class="btn btn-primary btn-sm">
@@ -73,7 +67,7 @@
 								</td>
 
 							</tr>
-
+							@endforeach()
 						</tbody>
 					</table>
 

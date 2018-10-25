@@ -62,8 +62,9 @@ Route::get('print_venta/{id}', 'PdfController@pdf_venta')->name('print_venta');
 
 Route::get('prueba','VentaController@prueba')->name('prueba');
 
-Route::resource('venta','VentaController');
 Route::resource('ventacontado','VentaContadoController');
+
+Route::resource('venta','VentaController');
 
 Route::resource('financiera', 'FinancieraController');
 

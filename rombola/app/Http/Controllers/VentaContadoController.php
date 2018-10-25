@@ -8,6 +8,13 @@ use App\Persona;
 use App\Automovile;
 use App\Marca;
 use App\Autocero;
+use DB;
+use App\Cliente;
+use App\Telefono;
+use App\Operaciones;
+use App\Conyuge;
+use App\Venta;
+
 
 
 class VentaContadoController extends Controller
@@ -19,7 +26,7 @@ class VentaContadoController extends Controller
      */
     public function index()
     {
-        return view('ventacontado');
+        return view('venta');
     }
 
     /**
@@ -53,7 +60,7 @@ class VentaContadoController extends Controller
      */
     public function store(Request $request)
     {
-        
+      //dd($request->get('version').$request->get('modelo'));
       $nombre = $request->get('nuevo_nombre');
       $apellido = $request->get('nuevo_apellido');
 
@@ -117,37 +124,40 @@ class VentaContadoController extends Controller
       ]);
       $pers = Persona::where("dni","=",$dni)->select("idpersona")->get();
       $operacion->save();
-    }
-    else{
+      }
+      else
+      {
 
         $nya = $request->get('nya_cliente');
+        $idpersona = Persona::where("nombre_apellido","=",$nya)->select("idpersona","dni")->get();
         
-        $idpersona = Persona::where("nombre_apellido","=",$nya)->select("idpersona")->get();
         foreach ($idpersona as $items) {
         }
         $idpersona = $items->idpersona;
+        $dni=$items->dni;
         $fecha_oper=$request->get('fecha_oper');
-       $operacion = new Operaciones([
-      'persona_operacion' => $idpersona,
-      'estado' => "En Negociación",
-      'fecha_oper'=> $fecha_oper,
-      'aviso'=> false,
-      'visible' => true,
-    ]);
-    $operacion->save();
+        $operacion = new Operaciones([
+        'persona_operacion' => $idpersona,
+        'estado' => "En Negociación",
+        'fecha_oper'=> $fecha_oper,
+        'aviso'=> false,
+        'visible' => true,
+        ]);
+       $operacion->save();
 
-    }
+      }
     
-    if($request->get('input_conyuge')=="si"){
+      if($request->get('input_conyuge')=="si")
+      {
      //--insert Persona-Conyuge
 
-    $nombre_conyuge = $request->get('conyuge_nombre');
-    $apellido_conyuge = $request->get('conyuge_apellido');
+       $nombre_conyuge = $request->get('conyuge_nombre');
+       $apellido_conyuge = $request->get('conyuge_apellido');
 
-    $can = $request->get('input_conyuge');
-    if ($can == 'si') {
+       $can = $request->get('input_conyuge');
+       if ($can == 'si') {
 
-      $share = new Persona([
+       $share = new Persona([
           'dni' => $request->get('conyuge_dni'),
           'nombre' => $request->get('conyuge_nombre'),
           'apellido'=> $request->get('conyuge_apellido'),
@@ -238,19 +248,21 @@ class VentaContadoController extends Controller
 
           */
 
-
           /*insert Auto 0 KM -------*/
 
-          if ($request->get('estado_vineta')=="stock") {
+          //dd("salida".$request->get('estado_toggle'));
+          $idauto0km=null;
+          if ($request->get('estado_toggle')=="stock") {
             
-          $idauto0km = $request->get('select_0km');
+          $idauto0km = $request->get('select_cero');
 
           } else {
 
-            if ($request->get('estado_vineta')=="lista") {
+            if ($request->get('estado_toggle')=="lista") {
+      
             $idmarca=$request->get('marca');
-         
-            $marca = Marca::where("idmarca","=",$idmarca)->select("idmarca")->get();
+            
+            $marca = Marca::where("nombre","=",$idmarca)->select("idmarca")->get();
         
             foreach ($marca as $item) {}  
             // dd($marca);        
@@ -267,7 +279,7 @@ class VentaContadoController extends Controller
             // dd($save);
             $share->save();
 
-            $idauto0km = "";
+            $idauto0km = null;
           }
         }
 
@@ -277,7 +289,7 @@ class VentaContadoController extends Controller
           $idusado = Automovile::where("dominio","=",$idusado)->select("id_auto")->get();
           }
           else{
-            $idusado = "";
+            $idusado = null;
           }
 
            /*insert Auto Entregado -------*/
@@ -313,7 +325,6 @@ class VentaContadoController extends Controller
 
             }
 
-
             //insert Venta -------
             $p = DB::table('ventas')
             ->select('codigo','cod_part1','cod_part2')
@@ -343,22 +354,23 @@ class VentaContadoController extends Controller
             $codigo = "V-"."000"."-".$part2 ;
             }
 
-          
-          $dnipers = $request->get('nuevo_dni');
-          $venta_operac = Operacion::select('id_operacion')
-          ->join('personas','personas.idpersona','operaciones.persona_operacion')
-          ->where('personas.dni','=', $dnipers)
-          ->orderBy('created_at','DESC')
+
+          $venta_operac = DB::table('operaciones')
+          ->select('id_operacion')
+          ->join('personas','operaciones.persona_operacion','personas.idpersona')
+          ->where('personas.dni','=', $dni)
+          ->orderBy('id_operacion','DESC')
           ->take(1)
           ->get();
-
+          
           $total = $request->get('restotal');
           $valor_auto = $request->get('valor_auto_vendido');
           $resto = $total - $valor_auto;
-
-
+          
+          foreach ($venta_operac as $item) {}
+            //dd($item->id_operacion);
           $venta = new Venta([
-          'operacion_venta' => $venta_operac,
+          'operacion_venta' => $item->id_operacion,
           'idventa_autousado' => $idusado,
           'idventa_auto0km' => $idauto0km,
           'precio_auto_vendido' => $request->get('valor_auto_vendido'),
@@ -367,6 +379,8 @@ class VentaContadoController extends Controller
           'cod_part2' => $part2,
           'codigo' => $codigo,
           'resto' =>$resto,
+          'visible' =>1,
+          'estado' =>'En Negociacion'
           ]);
           $venta->save();
          
@@ -375,20 +389,19 @@ class VentaContadoController extends Controller
           if ($cheque == 'si') {
 
           }
-          */
+          
 
-          $nomb_marca=$request->get('marca_selec');
-          //dd($request->get('marca'));   
+          $nomb_marca=$request->get('marca_selec'); 
              $marca = Marca::where("nombre","=",$nomb_marca)->select("idmarca")->get();
            
-             foreach ($marca as $item) {
-               //echo "$item->idpersona";
-             }  
-             //dd($marca);        
+             foreach ($marca as $item) {}  
+                  
              $idmarcas=$item->idmarca;
+             dd("HOLA");*/
 
-
+      return redirect('/venta')->with('success', 'Venta Guardada');
     }
+    
 
     /**
      * Display the specified resource.
