@@ -53,7 +53,6 @@
 
 	</div>
 
-
 	<div class="row">
 		<div class="col-md-14 col-md-offset-0">
 			<div class="box box-primary">

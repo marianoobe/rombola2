@@ -54,20 +54,15 @@ class AutoceroController extends Controller
      */
     public function store(Request $request)
     {
-        
-        
-                
-              $idmarca=$request->get('marca');
+        $idmarca=$request->get('marca');
          
-          $marca = Marca::where("idmarca","=",$idmarca)->select("idmarca")->get();
+        $marca = Marca::where("idmarca","=",$idmarca)->select("idmarca")->get();
         
-          foreach ($marca as $item) {
-            //echo "$item->idpersona";
-          }  
+        foreach ($marca as $item) {}  
          // dd($marca);        
           $idmarcas=$item->idmarca;
 
-      $share = new Autocero([
+          $share = new Autocero([
            'idmarca' => $idmarcas, 
             'modelo' => $request->input('modelo'),
             'descripcion'=> $request->input('version'),
