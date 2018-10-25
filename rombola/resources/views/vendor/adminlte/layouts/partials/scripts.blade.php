@@ -5,6 +5,7 @@
 <script src="{{ url (mix('/js/app.js')) }}" type="text/javascript"></script>
 <script src="{{ asset('/js/plusis.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/dropzone.js') }}"></script>
+<script src="{{ asset('js/script.js') }}"></script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
       Both of these plugins are recommended to enhance the
       user experience. Slimscroll is required when using the

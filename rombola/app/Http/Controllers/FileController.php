@@ -17,9 +17,10 @@ class FileController extends Controller
      */
     public function index(Request $request)
     {
-        dd($request);
+         $rutafotos= "storage/fotos/";
         $files = File::orderBy('created_at','DESC')->paginate(30);
-        return view('file.index', ['files' => $files]);
+        return view('file.index')->with('files',$files)
+                                ->with('rutafotos',$rutafotos); 
     }
 
     /**
@@ -35,14 +36,17 @@ class FileController extends Controller
     }
 
     public function dropzone(Request $request){
-
-        //dd($request->input('idauto'));
-         $idauto=$request->input('idauto');
+       
+                 $idauto=$request->input('idauto');
         $file = $request->file('file');
+        $ruta=$file->getClientOriginalName();
+        $r1=Storage::disk('fotos')->put($ruta,\File::get($file));
+       
+		    $rutadelaimagen="storage/fotos/".$ruta;
         File::create([
             'title' => $file->getClientOriginalName(),
             'description' => 'Upload with dropzone.js',
-            'path' => $file->store('public/storage'),
+            'path' => $rutadelaimagen,
             'id_auto'=>$idauto
         ]);
     }
@@ -73,9 +77,13 @@ class FileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        $dl = File::find($id);
-        return Storage::download($dl->path, $dl->title);
+    { 
+        $files = File::where("id_auto","=",$id)
+        ->orderBy('created_at','DESC')
+        ->paginate(6);   
+    
+        return view('usados')->with('files',$files);
+       
     }
 
     /**
@@ -86,14 +94,7 @@ class FileController extends Controller
      */
     public function edit($id)
     {
-        $fl = File::find($id);
-        $data = array('title' => $fl->title, 'path' => $fl->path);
-        Mail::send('emails.attachment', $data, function($message) use($fl){
-            $message->to('myteukughazali@gmail.com', 'Teuku Ghazali')->subject('Laravel file attachment and embed');
-            $message->attach(storage_path('app/'.$fl->path));
-            $message->from('tedirghazali@gmail.com', 'Tedir Ghazali');
-        });
-        return redirect('/file')->with('success','File attachment has been sent to your email');
+        
     }
 
     /**
