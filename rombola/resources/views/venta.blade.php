@@ -38,15 +38,17 @@
 							<tr>
 								<th scope="col">Fecha</th>
 								<th scope="col">Codigo</th>
+								<th scope="col">Cliente</th>
 								<th scope="col">Estado</th>
 								<th scope="col"></th>
 							</tr>
 						</thead>
 						<tbody id="myTable">
-								@foreach($venta_operac_0km as $item)
+								@foreach($venta_operac as $item)
 							<tr>
 								<td>{{$item->fecha_oper}}</td>
 								<td>{{$item->codigo}}</td>
+								<td>{{$item->nombre_apellido}}</td>
 								<td>{{$item->estado}}</td>
 								<td style="cursor: default;">
 									@can('vendedor')

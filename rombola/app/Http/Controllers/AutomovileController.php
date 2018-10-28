@@ -110,6 +110,7 @@ use App\File;
          //
     }
   
+  
      /**
      * Display the specified resource.
      *
@@ -157,7 +158,7 @@ use App\File;
       $value = Marca::where("nombre","=",$marca)->select("id_marca")->get();
       foreach($value as $idmarka){}
       
-$idm= $idmarka->id_marca;
+        $idm= $idmarka->id_marca;
 
         $estado=$request->get('estado');
           $valor = Estadousado::where("nombreEstado","=",$estado)->select("id_estadoUsado")->get();
@@ -189,8 +190,7 @@ $idm= $idmarka->id_marca;
     {
       
         $auto = Automovile::where("id_auto","=",$id)->select("id_auto")->get();
-         foreach ($auto as $item) {
-        //echo "$item->idpersona";
+         foreach ($auto as $item) {   //echo "$item->idpersona";
       }
      
       $idcar=$item->id_auto;
@@ -206,4 +206,5 @@ $idm= $idmarka->id_marca;
     }
 
         
-  }
+  
+}
