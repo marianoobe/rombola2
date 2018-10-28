@@ -25,24 +25,13 @@ class VentaController extends Controller
     public function index()
     {
 
-      $venta_operac_0km = DB::table('operaciones')
+      $venta_operac = DB::table('operaciones')
       ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
       ->join('personas','operaciones.persona_operacion','personas.idpersona')
       ->join('clientes','personas.idpersona','clientes.cliente_persona')
-      ->join('autoceros','ventas.idventa_auto0km','autoceros.id_autocero')
-      ->get();
-      
-      if (count($venta_operac_0km)==0) {
-        dd($venta_operac_0km);
-      }
-      $venta_operac_usado = DB::table('operaciones')
-      ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
-      ->join('personas','operaciones.persona_operacion','personas.idpersona')
-      ->join('clientes','personas.idpersona','clientes.cliente_persona')
-      ->join('autosusados','ventas.idventa_autousado','autosusados.id_autoUsado')
       ->get();
 
-       //dd($venta_operac);
+       dd($venta_operac);
         return view('venta',compact('venta_operac'));
     }
 

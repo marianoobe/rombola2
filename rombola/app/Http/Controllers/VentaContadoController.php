@@ -264,20 +264,35 @@ class VentaContadoController extends Controller
             
             $marca = Marca::where("nombre","=",$idmarca)->select("idmarca")->get();
         
-            foreach ($marca as $item) {}  
+            foreach ($marca as $item) {}   
             // dd($marca);        
             $idmarcas=$item->idmarca;
 
-            $share = new Autocero([
-            'idmarca' => $idmarcas, 
-            'modelo' => $request->input('modelo'),
-            'descripcion'=> $request->input('version'),
-            'color'=> '',        
-            'vin' => '',
-            'visible'=> 1
+            $automovil = new Automovile([
+              'marca_id' => $idmarcas, 
+              'modelo' => $request->input('modelo'),
+              'version'=> $request->input('version'),
+              'color'=> '',        
+              'ficha' => 'Incompleta',
+              'visible'=> 1
+               ]);
+              // dd($save);
+              $automovil->save();
+            
+              $id0km = DB::table('automoviles')
+              ->select('id_auto')
+              ->orderBy('created_at','DESC')
+              ->take(1)
+              ->get();  
+
+            $auto_cero = new Autocero([
+            'id_autocero' => $id0km, 
+            'id_auto' => $idmarcas, 
+            'vin' => $request->input('modelo'),
+            'estadocero_id'=> $request->input('version')
              ]);
             // dd($save);
-            $share->save();
+            $auto_cero->save();
 
             $idauto0km = null;
           }
@@ -287,9 +302,9 @@ class VentaContadoController extends Controller
           $idusado=null;
         if ($request->get('check_usado')=="si") {
           $idusado = $request->get('check_select_usado');
-          $consulta = Automovile::where("dominio","=",$idusado)->select("id_auto")->get();
+          $consulta = Autosusado::where("dominio","=",$idusado)->select("id_autoUsado")->get();
           foreach ($consulta as $item) {}
-          $idusado = $item->id_auto;
+          $idusado = $item->id_autoUsado;
           }
           else{
             $idusado = null;
@@ -309,13 +324,12 @@ class VentaContadoController extends Controller
             $idmarcas=$item->idmarca;
 
             $usado = new Automovile([
-              'idmarca' => $idmarcas, 
+              'marca_id' => $idmarcas, 
               'modelo' => $request->get('modelo_entregado'),
-              'descripcion'=> "",
+              'version'=> $request->get('version_entregado'),
               'color'=> $request->get('color_entregado'),
-              'precio'=>0,         
-              'estado'=> "A Designar",
-              'dominio' => $request->get('dominio_entregado'),
+              'precio'=> 0,         
+              'ficha'=> "Incompleta",
               'visible'=> 1
             ]);
             $usado->save();
@@ -331,8 +345,12 @@ class VentaContadoController extends Controller
               'titular'=> $request->get('nomb_titular_entregado'),
               'anio' => $request->get('anio_entregado'),
               'kilometros' => 0,
+              'dominio' => $request->get('dominio_entregado'),
               'chasis_num'=> $request->get('chasis_num_entregado'),
               'motor_num'=> $request->get('motor_num_entregado'),
+              'id_estadoUsado' => "",
+              'combustible' => "",
+              'fechaingreso' => "",
             ]);
             $nuevo->save(); 
 

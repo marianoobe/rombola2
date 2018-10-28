@@ -507,13 +507,20 @@
                                                                 <input id="marca_selec" name="marca_selec" type="text" style="display:none;">
                                                             </div>
                                                         </div>
-                                                        <div class="col-xs-12 col-lg-6">
+                                                        <div class="col-xs-12 col-lg-3">
                                                             <div class="form-group">
                                                                 <label><strong>Modelo</strong></label>
                                                                 <input type="text" maxlength="150" class="form-control"
                                                                     id="modelo_entregado" name="modelo_entregado">
                                                             </div>
                                                         </div>
+                                                        <div class="col-xs-12 col-lg-3">
+                                                                <div class="form-group">
+                                                                    <label><strong>Versión</strong></label>
+                                                                    <input type="text" maxlength="150" class="form-control"
+                                                                        id="version_entregado" name="version_entregado">
+                                                                </div>
+                                                            </div>
                                                         <div class="col-xs-12 col-lg-2">
                                                             <div class="form-group">
                                                                 <label><strong>Año</strong></label>

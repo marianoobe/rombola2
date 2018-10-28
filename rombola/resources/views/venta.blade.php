@@ -43,7 +43,7 @@
 							</tr>
 						</thead>
 						<tbody id="myTable">
-								@foreach($venta_operac_0km as $item)
+								@foreach($venta_operac as $item)
 							<tr>
 								<td>{{$item->fecha_oper}}</td>
 								<td>{{$item->codigo}}</td>
