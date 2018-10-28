@@ -22,7 +22,7 @@ class ListaprecioController extends Controller
     {
 
         $lista = DB::table('listaprecios')
-        ->join('marcas','marcas.idmarca','listaprecios.idmarca')             
+        ->join('marcas','marcas.id_marca','listaprecios.marca_id')             
         ->paginate(5);
          $rutalista= "storage/listas/";
          $rutaimgmarcas= "../storage/imgmarcas/";
@@ -72,18 +72,18 @@ class ListaprecioController extends Controller
         {
              $idmarca=$request->get('marcas');
           //dd($request->input('fecha'));
-          $marca = Marca::where("idmarca","=",$idmarca)->select("idmarca")->get();
+          $marca = Marca::where("id_marca","=",$idmarca)->select("id_marca")->get();
         
           foreach ($marca as $item) {
             //echo "$item->idpersona";
           }
           //dd($marca);
-          $idmarcas=$item->idmarca;
+          $idmarcas=$item->id_marca;
         $carpeta=$request->input("marcas");
 	      $ruta=$archivo->getClientOriginalName();
 		    $r1=Storage::disk('listas')->put($ruta,\File::get($archivo));
                $lista = new Listaprecio([
-            'idmarca' => $idmarcas,         
+            'marca_id' => $idmarcas,         
           
             'rutalista' => $ruta,
            

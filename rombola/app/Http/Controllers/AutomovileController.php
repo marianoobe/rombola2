@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
  use DB;
+ use App\Estadousado;
 use App\Automovile;
 use App\Marca;
-use App\Autosnuevo;
 use App\Autosusado;
 use App\File;
 
@@ -19,44 +19,27 @@ use App\File;
      */
     public function index()
     {
-        //$name  = $request->get('name'); 
-       $rutalista= "storage/fotos/";
-       $autos=Automovile::Search($request->name)      
-       ->orderBY('id_auto')
-       ->paginate(5);
-              
-       $files = File::orderBy('created_at','DESC')->paginate(6);   
-        
-        dd($rutafotos);
-        return view('autos.index')->with('autos',$autos)
-                                  ->with('files',$files);
+      redirect ('usados');
 
     }
       public function usados(Request $request)
     {
-      
-      
-       
         
-       $autos=Automovile::Search($request->name)   
-          
-      ->orderBY('id_auto')
-      ->paginate(5);
-       
+             
+      $autos = DB::table('automoviles')
+        ->join('marcas','marcas.id_marca','automoviles.marca_id') 
+       ->join('autosusados', 'autosusados.auto_id' ,'automoviles.id_auto')
+      ->get();
+      
+        
        $marcas=Marca::All();
-
-       $todo = DB::table('files')
-        ->join('automoviles', 'automoviles.id_auto' ,'files.id_auto') 
-        ->join('marcas','marcas.idmarca','automoviles.idmarca') 
+    
        
-        ->get();
-
         
-          $files = File::orderBy('created_at','DESC')->paginate(6); 
-        return view('autos/usados')->with('autos',$autos)
-                                      ->with('todo',$todo)
-                                       ->with('files',$files)
-                                    ->with('marcas',$marcas);
+        $files = File::orderBy('created_at','DESC')->paginate(6); 
+        return view('autos/usados')->with('autos',$autos)                                     
+                                   ->with('files',$files)
+                                   ->with('marcas',$marcas);
                                     
     }
     /**
@@ -82,60 +65,44 @@ use App\File;
      */
     public function store(Request $request)
     { 
-        if($request->input("nuevo")=="nuevo"){
-        $share = new Automovile([
-            'modelo' => $request->input('modelo'),
-            'descripcion'=> $request->input('version'),
-            'color'=> $request->input('color'),
-            'estado'=> $request->input('estado'),
-            'vin' => $request->input('vin'),
-        ]);
-        $share->save();
-           //return redirect('/clientes');
-        return redirect('autos')->with('success', 'Stock has been added');
-         }
-        elseif($request->input("usado")=="usado"){
-            $idmarca=$request->get('marca');
-       //dd($request->get('marca'));   
-          $marca = Marca::where("idmarca","=",$idmarca)->select("idmarca")->get();
         
-          foreach ($marca as $item) {
-            //echo "$item->idpersona";
-          }  
-          //dd($marca);        
-          $idmarcas=$item->idmarca;
-              $share = new Automovile([
-            'idmarca' => $idmarcas, 
-            'modelo' => $request->input('modelo'),
-            'descripcion'=> $request->input('version'),
-            'color'=> $request->input('color'),
-              'precio'=>$request->input('precio'),         
-            'estado'=> $request->input('estado'),
-            'dominio' => $request->input('dominio'),
-            'visible'=> 1
-          ]);
-          
-          $share->save();
-           $dominio=$request->get('dominio');
-          
-          $car = Automovile::where("dominio","=",$dominio)->select("id_auto")->get();
-          
-                
-        foreach ($car as $item) {
-            //echo "$item->idpersona";
-          }
-          
-          $idauto=$item->id_auto;
-          $nuevo = new Autosusado([
-            'id_auto' => $idauto,            
-            'titular'=> $request->input('titular'),
-            'anio' => $request->input('anio'),
-            'kilometros' => $request->input('kilometros'),
-            'chasis_num'=> $request->input('chasis_num'),
-            'motor_num'=> $request->input('motor_num'),
-          ]);
-          $nuevo->save();        
-         
+        if($request->input("usado")=="usado"){
+               
+         $marca=$request->get('marca');
+         //dd($request->get('marca'));
+          $value = Marca::where("id_marca","=",$marca)->select("id_marca")->get();
+         // dd($value);
+          foreach($value as $idmarka){}
+
+            $idm= $idmarka->id_marca;
+         $estado=$request->get('estado');
+          $valor = Estadousado::where("nombreEstado","=",$estado)->select("id_estadoUsado")->get();
+          foreach($valor as $item){}
+            $ides=$item->id_estadoUsado;
+
+      $id=DB::table('automoviles')               
+            ->insertGetId([
+                "marca_id" =>$idm,
+                "modelo" => $request->get('modelo'),
+                "version" => $request->get('version'),
+                "color" => $request->get('color'),                         
+                "precio" => $request->get('precio'),              
+                "ficha"=>"incompleta",
+                "visible"=>1
+         ]);
+           
+          DB::table('autosusados')
+          ->insert([
+                "auto_id"=>$id,               
+               "estadoUsado_id" => $ides,
+                "dominio" => $request->get('dominio'),
+                "titular" => $request->get('titular'),
+                "anio" => $request->get('anio'),       
+                "fechaingreso"=>$request->get('fecha'),
+
+         ]);
+
+
          //return redirect('/clientes');
           return redirect('autos/usados')->with('success', 'Stock has been added');
         }
@@ -151,11 +118,7 @@ use App\File;
      */
     public function show($id)
     {
-        $files = File::where("id_auto","=",$id)
-        ->orderBy('created_at','DESC')
-        ->paginate(6);   
-    
-        return view('usados')->with('files',$files);
+       
    
     }
 
@@ -191,24 +154,30 @@ use App\File;
      if($request->input("usado")=="usado"){
       // dd($request);
       $marca=$request->get('marca');
-      $value = Marca::where("nombre","=",$marca)->select("idmarca")->get();
+      $value = Marca::where("nombre","=",$marca)->select("id_marca")->get();
       foreach($value as $idmarka){}
       
-     //dd($idmarka);
+$idm= $idmarka->id_marca;
+
+        $estado=$request->get('estado');
+          $valor = Estadousado::where("nombreEstado","=",$estado)->select("id_estadoUsado")->get();
+          foreach($valor as $item){}
+            $ides=$item->id_estadoUsado;
+    
       DB::table('autosusados')
-        ->join('automoviles', 'automoviles.id_auto' ,'autosusados.id_auto')
+        ->join('automoviles', 'automoviles.id_auto' ,'autosusados.auto_id')
             ->where('automoviles.id_auto',"=",$id)
             ->update([
-                "idmarca" => $idmarka->idmarca,
+                "marca_id" => $idm,
                 "modelo" => $request->get('modelo'),
-                "descripcion" => $request->get('version'),
-                "color" => $request->get('color'),
-                "estado" => $request->get('estado'),
+                "version" => $request->get('version'),
+                "color" => $request->get('color'),                
                 "dominio" => $request->get('dominio'),
                 "titular" => $request->get('titular'),
-                "anio" => $request->get('anio'),
-                "kilometros" => $request->get('kilometros'),
+                "anio" => $request->get('anio'),               
                 "precio" => $request->get('precio'),
+                "fechaingreso"=>$request->get('fecha'),
+                "estadoUsado_id" => $ides,
          ]);
                         
       
@@ -226,8 +195,9 @@ use App\File;
      
       $idcar=$item->id_auto;
        $autos = DB::table('autosusados')
-        ->join('automoviles', 'automoviles.id_auto' ,'autosusados.id_auto') 
-        ->join('marcas','marcas.idmarca','automoviles.idmarca')       
+        ->join('automoviles', 'automoviles.id_auto' ,'autosusados.auto_id') 
+         ->join('estadousados', 'estadousados.id_estadoUsado' ,'autosusados.estadoUsado_id') 
+        ->join('marcas','marcas.id_marca','automoviles.marca_id')       
         ->where('automoviles.id_auto','=', $idcar)
         ->get();
 //dd($autos);

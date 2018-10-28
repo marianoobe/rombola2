@@ -17,6 +17,7 @@ class CreateAutosUsadosTable extends Migration
             $table->increments('id_autoUsado');
             $table->integer('auto_id')->unsigned()->index();
             $table->text('titular');
+             $table->string('dominio',10)->unique();
              $table->date('fechaingreso');
             $table->integer('anio');
              $table->integer('estadoUsado_id')->unsigned()->index();

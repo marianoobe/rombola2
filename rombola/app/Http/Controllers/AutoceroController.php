@@ -11,6 +11,7 @@ use App\Autosnuevo;
 use App\Autosusado;
 use App\Autocero;
 use App\Marca;
+use App\Estadocero;
 class AutoceroController extends Controller
 {
     /**
@@ -56,7 +57,7 @@ class AutoceroController extends Controller
     {
         $idmarca=$request->get('marca');
          
-        $marca = Marca::where("idmarca","=",$idmarca)->select("idmarca")->get();
+        $marca = Marca::where("id_marca","=",$idmarca)->select("id_marca")->get();
         
         foreach ($marca as $item) {}  
          // dd($marca);        
@@ -100,14 +101,20 @@ class AutoceroController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-          $autos = DB::table('autoceros')
-        ->join('marcas','marcas.idmarca','autoceros.idmarca')       
-        ->where('autoceros.id_autocero','=', $id)
-        ->get();
-     //d($autos);
-     
+    {    
 
+       $auto = Automovile::where("id_auto","=",$id)->select("id_auto")->get();
+         foreach ($auto as $item) {
+        //echo "$item->idpersona";
+      }
+     
+      $idcar=$item->id_auto;
+       $autos = DB::table('autoceros')
+        ->join('automoviles', 'automoviles.id_auto' ,'autoceros.auto_id') 
+        ->join('marcas','marcas.id_marca','automoviles.marca_id')       
+        ->where('automoviles.marca_id','=', $idcar)
+        ->get();
+//dd($autos);
       return view('cero.edit', compact('autos',$autos));
     }
  

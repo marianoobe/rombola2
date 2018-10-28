@@ -15,11 +15,12 @@ class CreateListapreciosTable extends Migration
     {
         Schema::create('listaprecios', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idmarca')->unsigned();           
+            $table->integer('marca_id')->unsigned();           
             $table->string('rutalista');
             $table->string('rutaimagen')->nullable();
             $table->string('fechalista',10);
             $table->timestamps();
+            $table->foreign('marca_id')->references('id_marca')->on('marcas');
         });
     }
 

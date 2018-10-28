@@ -55,7 +55,7 @@
 											</div>
 											<div class="form-group">
 												<label for="version"><strong>Version</strong></label>
-												<input type="text" class="form-control" id="version" name="version" value={{ $item->descripcion }} disabled="disabled">
+												<input type="text" class="form-control" id="version" name="version" value={{ $item->version }} disabled="disabled">
 											</div>
 
 											<div class="form-group">
@@ -74,11 +74,7 @@
 										</div>
 										<div class="col-xs-12 col-lg-6">
 
-											<div class="form-group">
-												<label for="kilometros"><strong>kilometros</strong></label>
-												<input type="text" class="form-control" id="kilometros" name="kilometros" value={{ $item->kilometros }}
-												 disabled="disabled">
-											</div>
+											
 
 											<div class="form-group">
 												<label for="color"><strong>Color</strong></label>
@@ -90,19 +86,19 @@
 
 											<div class="form-group">
 												<label for="chasis_num"><strong>Numero de Chasis</strong></label>
-												<input type="text" class="form-control" id="chasis_num" name="chasis_num" value={{ $item->chasis_num }}
-												 disabled="disabled">
+												<input type="text" class="form-control" id="chasis_num" name="chasis_num" 
+												 disabled="disabled" value="{{ $item->chasis_num }}">
 											</div>
 
 											<div class="form-group">
-												<label for="motor_num"><strong>Numero de Motor</strong></label>
-												<input type="text" class="form-control" id="motor_num" name="motor_num" value={{ $item->motor_num }}
+												<label for="motor_num"><strong>Fecha Ingrreso</strong></label>
+												<input type="date" class="form-control" id="fecha" name="fecha" value={{ $item->fechaingreso }}
 												 disabled="disabled">
 											</div>
 											<div class="form-group">
 												<label for="estado"><strong>Estado</strong></label>
-												<input type="text" id="estado" name="estado" class="form-control form-control-sm" value={{ $item->estado }}
-												 disabled="disabled">
+												<input type="text" id="estado" name="estado" class="form-control form-control-sm"  disabled="disabled" value={{ $item->nombreEstado }}
+												>
 
 												</input>
 											</div>

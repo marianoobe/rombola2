@@ -41,7 +41,7 @@
 											 data-style="btn-primary" data-placeholder="Seleccione marca vehiculo..." data-width="100%">
 												<option value="">Seleccionar marca del vehiculo</option>
 												@foreach ($marcas as $item){
-												<option value="{{$item->idmarca}}"> {{ $item->nombre }} </option>
+												<option value="{{$item->id_marca}}"> {{ $item->nombre }} </option>
 												}
 												@endforeach
 
@@ -54,7 +54,7 @@
 											<input type="text" class="form-control" id="modelo" name="modelo" required>
 										</div>
 										<div class="form-group">
-											<label for="version"><strong>Descripcion</strong></label>
+											<label for="version"><strong>Version</strong></label>
 											<input type="text" class="form-control" id="version" name="version" required>
 										</div>
 										<div class="form-group">
@@ -81,28 +81,22 @@
 										</div>
 
 
-										<div class="form-group">
-											<label for="kilometros"><strong>kilometros</strong></label>
-											<input type="number" class="form-control" id="kilometros" name="kilometros" required>
-										</div>
+									
 									</div>
 
 									<div class="col-xs-12 col-lg-6">
 
-										<div class="form-group">
-											<label for="chasis_num"><strong>Numero de Chasis</strong></label>
-											<input type="text" class="form-control" id="chasis_num" name="chasis_num">
-										</div>
+										
 
 										<div class="form-group">
-											<label for="motor_num"><strong>Numero de Motor</strong></label>
-											<input type="text" class="form-control" id="motor_num" name="motor_num">
+											<label for="motor_num"><strong>Fecha de Ingreso</strong></label>
+											<input type="date" class="form-control" id="fecha" name="fecha">
 										</div>
 										<div class="form-group">
 											<label for="estado"><strong>Estado</strong></label>
 											<select id="estado" name="estado" class="form-control form-control-sm" required>
 												<option>Disponible</option>
-												<option>Vendido</option>
+												<option>En Tramite</option>
 												<option>A designar</option>
 
 											</select>

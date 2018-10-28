@@ -20,6 +20,11 @@ class Automovile extends Model
            'visible',
     ];
 
+   /*   public function autosusados()
+    {
+        return $this->hasMany(Automovile::class,'auto_id');
+    }*/
+
 
     public function scopeSearch($query,$name)
      {
@@ -29,7 +34,7 @@ class Automovile extends Model
                     ->orWhere('color','LIKE', '%'.$name.'%')
                     ->orWhere('estado','LIKE', '%'.$name.'%')                                      
                     ->orWhere('dominio','LIKE', '%'.$name.'%')
-                     ->where('marcas.nombre', 'LIKE', '%' . $name . '%')->join('marcas', 'marcas.idmarca', '=', 'automoviles.idmarca');
+                     ->where('marcas.nombre', 'LIKE', '%' . $name . '%')->join('marcas', 'marcas.id_marca', '=', 'automoviles.marca_id');
      
        
         

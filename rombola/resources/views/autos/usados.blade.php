@@ -63,8 +63,9 @@
 								<tbody>
 
 
-
+                                   
 									@foreach($autos as $item)
+									
 									<input type="hidden" name="idauto" value="{{ $item->id_auto }}">
 									<tr>
 										<td align="center" style="cursor: default;">
@@ -73,7 +74,7 @@
 
 										<td>{{$item->nombre}}</td>
 										<td>{{$item->modelo}}</td>
-										<td>{{$item->descripcion}}</td>
+										<td>{{$item->version}}</td>
 										<td>{{$item->dominio}}</td>
 										
 

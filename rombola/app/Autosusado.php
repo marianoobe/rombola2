@@ -10,7 +10,7 @@ class Autosusado extends Model
 
   protected $fillable=[
         'id_autoUsado',
-        'id_auto',
+        'auto_id',
         'titular',
         'anio',
         'kilometros',
@@ -18,8 +18,15 @@ class Autosusado extends Model
         'motor_num',
         'dominio',
         'fechaingreso',
-        'id_estadoUsado',
+        'estadoUsado_id',
         'combustible',
 
    ];
+
+
+
+  /*  public function automovil()
+    {
+        return $this->belongsTo(Autousado::class,'auto_id');
+    }*/
 }
