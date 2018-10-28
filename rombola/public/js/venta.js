@@ -155,6 +155,7 @@ function enable_usado() {
     $('#select_marcas').required = true;
     document.getElementById("check_usado").value = "si";
   }
+  console.log(document.getElementById("check_usado").value);
 }
 
 function obtenervalue() {
@@ -213,6 +214,7 @@ function validar_check_cheque(obj) {
     document.getElementById("detalle_cheque").style.display = "none";
     document.getElementById("valor_cheque").value = "no";
   }
+  
 }
 
 function validar_check_financiera(obj) {
@@ -227,7 +229,6 @@ function validar_check_financiera(obj) {
       document.getElementById("valor_entregado").value = "si";
       document.getElementById("nomb_titular").required = true;
       document.getElementById("dominio").required = true;
-      document.getElementById("conyuge_act_empresa").required = true;
       document.getElementById("modelo").required = true;
       document.getElementById("anio").required = true;
       document.getElementById("color").required = true;
@@ -237,6 +238,7 @@ function validar_check_financiera(obj) {
       document.getElementById("section_usado_entregado").style.display = "none";
       document.getElementById("valor_entregado").value = "no";
     }
+    console.log(document.getElementById("valor_entregado").value);
   }
 
   function obtener_marca_buscada() {
@@ -244,26 +246,6 @@ function validar_check_financiera(obj) {
     console.log(res);
     document.getElementById("marca_selec").value = res;
   
-  }
-
-  function check_lista_usados(valorCaja1) {
-    console.log(valorCaja1);
-    if (obj.checked == true) {
-      var parametros = {
-        "valorCaja1": valorCaja1
-      };
-      $.ajax({
-        data: parametros, //datos que se envian a traves de ajax
-        url: 'ventas.store', //archivo que recibe la peticion
-        type: 'post', //método de envio
-        beforeSend: function () {
-          $("#select_usado").html("Procesando, espere por favor...");
-        },
-        success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-          $("#select_usado").html(response);
-        }
-      });
-    }
   }
 
   function viñeta_0km(){

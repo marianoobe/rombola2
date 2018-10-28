@@ -47,7 +47,23 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('borrar_rol/{idrol}', 'UsuariosController@borrar_rol');
     //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
     #adminlte_routes
-    Route::resource('listaprecios','ListaprecioController');
+    
+
+   Route::resource('listaprecios', 'ListaPrecioController');
+Route::resource('cero', 'AutoceroController');
+
+Route::get('autos/{auto}/updateusado','AutomovileController@editusado')->name('updateusado');
+Route::get('autos/{auto}/editusado','AutomovileController@editusado')->name('editusado');
+Route::get('autos/usados','AutomovileController@usados')->name('usados');
+Route::get('autos/createusados','AutomovileController@createusados')->name('agregarusado');
+
+Route::get('/file','FileController@index')->name('viewfile');
+Route::get('/file/upload/{id}','FileController@create')->name('formfile');
+Route::post('/file/upload','FileController@store')->name('uploadfile');
+Route::delete('/file/{id}','FileController@destroy')->name('deletefile');
+//Route::get('/file/download/{id}','FileController@show')->name('downloadfile');
+//Route::get('/file/email/{id}','FileController@edit')->name('emailfile');
+Route::post('/file/dropzone','FileController@dropzone')->name('dropzone');
 });
 
 Route::resource('clientes','ClienteController');
@@ -69,34 +85,16 @@ Route::resource('venta','VentaController');
 Route::resource('financiera', 'FinancieraController');
 
 
-Route::resource('listaprecio', 'ListaPrecioController');
 
-Route::get('importExcel', 'ExcelController@importExcel');
-
-//Route::get('autos.index','AutomovileController@autos')->name('autos');
-//Route::get('autos.create','AutomovileController@create')->name('create');
-//Route::get('autos/{auto}/edit','AutomovileController@edit')->name('edit');
-Route::get('autos/{auto}/updateusado','AutomovileController@editusado')->name('updateusado');
-Route::get('autos/{auto}/editusado','AutomovileController@editusado')->name('editusado');
-Route::get('autos/usados','AutomovileController@usados')->name('usados');
-Route::get('autos/createusados','AutomovileController@createusados')->name('agregarusado');
 
 
 
 Route::resource('autos', 'AutomovileController');
-Route::resource('cero', 'AutoceroController');
-Route::get('resizeImage', 'ImageController@resizeImage');
-Route::post('resizeImagePost',['as'=>'resizeImagePost','uses'=>'ImageController@resizeImagePost']);
 
 
 
-Route::get('/file','FileController@index')->name('viewfile');
-Route::get('/file/upload/{id}','FileController@create')->name('formfile');
-Route::post('/file/upload','FileController@store')->name('uploadfile');
-Route::delete('/file/{id}','FileController@destroy')->name('deletefile');
-//Route::get('/file/download/{id}','FileController@show')->name('downloadfile');
-//Route::get('/file/email/{id}','FileController@edit')->name('emailfile');
-Route::post('/file/dropzone','FileController@dropzone')->name('dropzone');
 
-Route::get('/file/show/{id}','FileController@store')->name('show');
+
+
+
 ?>

@@ -65,6 +65,24 @@ use App\File;
      */
     public function store(Request $request)
     { 
+<<<<<<< HEAD
+=======
+        if($request->input("nuevo")=="nuevo"){
+        $share = new Automovile([
+            'modelo' => $request->input('modelo'),
+            'descripcion'=> $request->input('version'),
+            'color'=> $request->input('color'),
+            'estado'=> $request->input('estado'),
+            'vin' => $request->input('vin'),
+        ]);
+        $share->save();
+           //return redirect('/clientes');
+        return redirect('autos')->with('success', 'Stock has been added');
+         }
+        elseif($request->input("usado")=="usado"){
+            $idmarca=$request->get('marca');
+          $marca = Marca::where("idmarca","=",$idmarca)->select("idmarca")->get();
+>>>>>>> 94fe38bdfdf6b49b830d1aa5c78998ca18bc8b01
         
         if($request->input("usado")=="usado"){
                

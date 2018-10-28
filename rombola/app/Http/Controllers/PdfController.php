@@ -178,27 +178,41 @@ function convert_html($id)
     }
 
 
-function pdf_venta($id)
+function pdf_venta($idventa)
 {
      $pdf = \App::make('dompdf.wrapper');
-     $pdf->loadHTML($this->convert_html_venta());
+     $pdf->loadHTML($this->convert_html_venta($idventa));
      return $pdf->stream();
 }
 
-function convert_html_venta()
+function convert_html_venta($idventa)
 {
-      /*$dnipers = Persona::where("dni","=",$id)->select("idpersona")->get();
-      foreach ($dnipers as $item) {
-      }
-      $idpers=$item->idpersona;
-      
-      $preventa = DB::table('personas')
-        ->join('operaciones', 'operaciones.persona_operacion' ,'personas.idpersona')
-        ->join('preventas','preventas.preventa_oper','operaciones.id_operacion')
-        ->join('telefonos','telefonos.personas_telefono','personas.idpersona')
-        ->where('personas.idpersona','=', $idpers)
-        ->get();
-*/
+    
+    $venta_con_0km = DB::table('operaciones')
+    ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
+    ->join('personas','operaciones.persona_operacion','personas.idpersona')
+    ->join('clientes','personas.idpersona','clientes.cliente_persona')
+    ->where('idcliente','=',$idventa)  
+    ->where('idventa','=',2)   
+    ->get();
+
+    $venta_con_usado = DB::table('operaciones')
+    ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
+    ->join('personas','operaciones.persona_operacion','personas.idpersona')
+    ->join('clientes','personas.idpersona','clientes.cliente_persona')
+    ->join('autoceros','ventas.idventa_auto0km','autoceros.id_autocero')
+    ->where('idventa','=',$idventa)
+    ->get();
+
+    dd($venta_con_0km);
+    if (count($venta_con_0km)==0) {
+        $venta=$venta_con_0km;
+    }else{
+        $venta=$venta_con_usado;
+    }
+    dd($venta);
+    foreach ($venta as $item) {}
+
      $output = '
      <html>
     <head>
@@ -336,7 +350,7 @@ function convert_html_venta()
         intereses</p>
 
     <div id="derecha">
-    <p><strong>Fecha</strong>: 22/10/2018 </p>
+    <p><strong>Fecha</strong>: '.$item->fecha_oper.' </p>
     </div>
     <br>
     <br>

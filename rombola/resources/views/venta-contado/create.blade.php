@@ -69,6 +69,7 @@
                                 <section id="buscar" style="display:none">
                                     <select id="dnis" onchange="obtener_cliente_buscado()" class="selectpicker"
                                         data-live-search="true" data-width="100%" data-size="2">
+                                        <option>Seleccione nombre</option>
                                         @foreach ($nombapell as $item)
                                         <option value="{{$item}}">{{$item}}</option>
                                         @endforeach
@@ -334,13 +335,12 @@
                                                                     <tr>
                                                                         <td align="center" style="cursor: default;">
                                                                             <input class="form-check-input" type="radio"
-                                                                                change="check_lista_usados({{$item->dominio}})"
-                                                                                name="exampleRadios" id="exampleRadios1"
-                                                                                value="option1" checked>
+                                                                                name="exampleRadios" id="exampleRadios1" >
+                                                                        <input id="check_select_usado" name="check_select_usado" value='{{$item->dominio}}' style="display:none">
                                                                         </td>
                                                                         <td>{{$item->marca}}</td>
                                                                         <td>{{$item->modelo}}</td>
-                                                                        <td>{{$item->version}}</td>
+                                                                        <td>{{$item->descripcion}}</td>
                                                                         <td>{{$item->dominio}}</td>
                                                                         <td>{{$item->color}}</td>
 
@@ -404,14 +404,13 @@
                                             <div class="col-xs-12 col-lg-10">
                                                 <div class="form-group">
                                                     <label><strong>Valor de Auto Vendido</strong></label>
-                                                    <input type="number" id="valor_auto_vendido" name="valor_auto_vendido" maxlength="30">
-                                                    <input type="number" id="precio_auto_vendido" name="precio_auto_vendido" style="display:none">
+                                                    <input type="number" id="valor_auto_vendido" name="valor_auto_vendido" maxlength="30" required>
                                                 </div>
                                                 <!-- <form method="POST" oninput="resultado.value=parseInt(valor_auto_entregado.value) + parseInt(inpefectivo.value) + parseInt(inpcheques.value)"> -->
 
                                                 <div class="form-group">
                                                     <label><strong>Valor de Auto Entregado</strong></label>
-                                                    <input type="number" id="valor_auto_entregado" name="valor_auto_entregado" maxlength="30" >
+                                                    <input type="number" id="valor_auto_entregado" name="valor_auto_entregado" maxlength="30" required value='0' >
                                                 </div>
                                             </div>
                                         </div>
@@ -419,7 +418,7 @@
                                             <div class="col-xs-12 col-lg-10">
                                                 <div class="form-group">
                                                     <label><strong>Contado/Efectivo</strong></label>
-                                                    <input type="number" maxlength="30" id="inpefectivo" name="inpefectivo">
+                                                    <input type="number" maxlength="30" id="inpefectivo" name="inpefectivo" required value='0'>
                                                 </div>
                                             </div>
                                         </div>
@@ -443,7 +442,7 @@
                                             <div class="col-xs-12 col-lg-7">
                                                 <div class="form-group">
                                                     <label><strong>Total</strong></label>
-                                                    <input type="number" id="restotal" name="restotal"  >
+                                                    <input type="number" id="restotal" name="restotal" required value='0'>
                                                    <!-- <output style="border: 2px solid" id="resultado" name="resultado" for="valor_auto_entregado inpefectivo inpcheques"></output> -->
                                                 </div>
                                             </div>
@@ -472,7 +471,7 @@
                                                         <div class="col-xs-12 col-lg-6">
                                                             <div class="form-group">
                                                                 <label><strong>Nombre de Titular</strong></label>
-                                                                <input type="text" class="form-control" id="nomb_titular" name="nomb_titular">
+                                                                <input type="text" class="form-control" id="nomb_titular_entregado" name="nomb_titular_entregado">
                                                             </div>
                                                         </div>
 
@@ -486,7 +485,7 @@
                                                             <div class="form-group">
                                                                 <label><strong>Dominio</strong></label>
                                                                 <input type="text" style="text-transform: uppercase;"
-                                                                    maxlength="10" class="form-control" id="dominio" name="dominio"
+                                                                    maxlength="10" class="form-control" id="dominio_entregado" name="dominio_entregado"
                                                                     name="dominio" placeholder="">
                                                             </div>
                                                         </div>
@@ -496,14 +495,12 @@
                                                         <div class="col-xs-12 col-lg-4">
                                                             <div class="form-group">
                                                                 <label><strong>*Marca</strong></label>
-                                                                <select id="marca" name="marca" class="selectpicker show-tick"
+                                                                <select id="marca_entregado" name="marca_entregado" class="selectpicker show-tick"
                                                                     data-show-subtext="true" data-live-search="true"
                                                                     data-style="btn-default" data-width="100%">
                                                                     <option value="">Seleccionar marca</option>
                                                                     @foreach ($marcas as $item){
-                                                                    <option value="{{ $item->nombre }}"> {{
-                                                                        $item->nombre
-                                                                        }} </option>
+                                                                    <option value="{{ $item->nombre }}">{{$item->nombre}}</option>
                                                                     }
                                                                     @endforeach
                                                                 </select>
@@ -514,14 +511,14 @@
                                                             <div class="form-group">
                                                                 <label><strong>Modelo</strong></label>
                                                                 <input type="text" maxlength="150" class="form-control"
-                                                                    id="modelo" name="modelo">
+                                                                    id="modelo_entregado" name="modelo_entregado">
                                                             </div>
                                                         </div>
                                                         <div class="col-xs-12 col-lg-2">
                                                             <div class="form-group">
                                                                 <label><strong>Año</strong></label>
                                                                 <input type="text" maxlength="65" class="form-control"
-                                                                    id="anio" name="anio">
+                                                                    id="anio_entregado" name="anio_entregado">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -531,21 +528,21 @@
                                                             <div class="form-group">
                                                                 <label><strong>Color</strong></label>
                                                                 <input type="text" maxlength="65" class="form-control"
-                                                                    id="color" name="color">
+                                                                    id="color_entregado" name="color_entregado">
                                                             </div>
                                                         </div>
                                                         <div class="col-xs-12 col-lg-5">
                                                             <div class="form-group">
                                                                 <label><strong>N° Motor</strong></label>
                                                                 <input type="text" maxlength="255" class="form-control"
-                                                                    id="motor_num" name="motor_num">
+                                                                    id="motor_num_entregado" name="motor_num_entregado">
                                                             </div>
                                                         </div>
                                                         <div class="col-xs-12 col-lg-4">
                                                             <div class="form-group">
                                                                 <label><strong>N° Chasis</strong></label>
                                                                 <input type="text" maxlength="255" class="form-control"
-                                                                    id="chasis_num" name="chasis_num">
+                                                                    id="chasis_num_entregado" name="chasis_num_entregado">
                                                             </div>
                                                         </div>
                                                     </div>
