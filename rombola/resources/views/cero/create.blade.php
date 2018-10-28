@@ -12,7 +12,7 @@
 					<!-- Default box -->
 					<div class="box">
 						<div class="box-header with-border">
-							<h3 class="box-title">AUTO 0KM</h3>
+							<h3 class="box-title">AUTO 0KM - STOCK/DEPOSITO</h3>
 
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -62,7 +62,7 @@
 									</div>
 									<div class="col-xs-12 col-lg-6">
 										<div class="form-group">
-											<label for="version"><strong>Version</strong></label>
+											<label for="version"><strong>Versión</strong></label>
 											<input type="text" class="form-control" id="version" name="version" required>
 										</div>
 										<div class="form-group">

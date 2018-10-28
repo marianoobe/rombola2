@@ -9,13 +9,9 @@ use App\Marca;
 use App\Autosnuevo;
 use App\Autosusado;
 use App\File;
-<<<<<<< HEAD
-use Storage;
-=======
 
 
 
->>>>>>> 548b5a13472c2a6b7a6684ab22627830ce671972
  class AutomovileController extends Controller
 {
     /**
@@ -35,14 +31,8 @@ use Storage;
         
         dd($rutafotos);
         return view('autos.index')->with('autos',$autos)
-<<<<<<< HEAD
-                                  ->with('files',$files)
-                                   ->with("rutalista",$rutalista); 
-       
-=======
                                   ->with('files',$files);
 
->>>>>>> 548b5a13472c2a6b7a6684ab22627830ce671972
     }
       public function usados(Request $request)
     {
@@ -108,7 +98,6 @@ use Storage;
          }
         elseif($request->input("usado")=="usado"){
             $idmarca=$request->get('marca');
-       //dd($request->get('marca'));   
           $marca = Marca::where("idmarca","=",$idmarca)->select("idmarca")->get();
         
           foreach ($marca as $item) {
