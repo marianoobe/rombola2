@@ -31,7 +31,6 @@ class VentaController extends Controller
       ->join('clientes','personas.idpersona','clientes.cliente_persona')
       ->get();
 
-       dd($venta_operac);
         return view('venta',compact('venta_operac'));
     }
 

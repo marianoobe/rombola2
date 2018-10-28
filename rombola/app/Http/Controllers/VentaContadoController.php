@@ -39,13 +39,17 @@ class VentaContadoController extends Controller
         $tipo_finan = TipoFinanciera::pluck('nombretipo');
         $nombapell = Persona::pluck('nombre_apellido');
 
-        $autos=Autocero::select("*")   
-       ->join('marcas','marcas.idmarca','autoceros.idmarca')
-       ->paginate(5);
+        $autos=Automovile::select("*")   
+        ->join('marcas','marcas.id_marca','automoviles.marca_id')
+        ->join('autoceros','autoceros.auto_id','automoviles.id_auto')
+        ->paginate(5);
+        
 
        $auto_usado=Automovile::select("*")     
-       ->orderBY('id_auto')
+       ->join('marcas','marcas.id_marca','automoviles.marca_id')
+       ->join('autosusados','autosusados.auto_id','automoviles.id_auto')
        ->paginate(5);
+       
 
        $marcas=Marca::All();
 

@@ -117,6 +117,76 @@ class ClienteController extends Controller
 
     }
 
+    public function store_fast(Request $request)
+    {
+      $nombre= $request->get('nombre');
+      $apellido = $request->get('apellido');
+      $share = new Persona([
+        'dni' => $request->get('dni'),
+        'nombre' => $request->get('nombre'),
+        'apellido'=> $request->get('apellido'),
+        'nombre_apellido'=> $nombre." ".$apellido,
+        'email'=> $request->get('email'),
+        'act_empresa'=> $request->get('act_empresa')
+      ]);
+      $share->save();
+
+      $dni=$request->get('dni');
+      
+      $pers = Persona::where("dni","=",$dni)->select("idpersona")->get();
+    
+      foreach ($pers as $item) {
+        //echo "$item->idpersona";
+      }
+      $idpers=$item->idpersona;
+
+      $cliente = new Cliente([
+        'cliente_persona' => $idpers,
+        'fecha_nacimiento' => $request->get('fecha_nac'),
+        'domicilio'=> $request->get('domicilio'),
+        'estado_civil'=> $request->get('estado_civil'),
+        'estado_ficha'=> "Completa",
+        'visible'=> 1
+      ]);
+      $cliente->save();
+
+      $telef=$request->get('tel_fijo');
+      $cel_1=$request->get('cel_1');
+      $cel_2=$request->get('cel_2');
+
+      if($telef != null)
+      {
+      $tel = new Telefono([
+        'personas_telefono' => $idpers,
+        'num_tel' => $request->get('tel_fijo'),
+        'tipo' => '1'
+      ]);
+      $tel->save();
+    }
+      if($cel_1 != null)
+      {
+      $tel = new Telefono([
+        'personas_telefono' => $idpers,
+        'num_tel' => $request->get('cel_1'),
+        'tipo' => '2'
+      ]);
+      $tel->save();
+    }
+    if($cel_2 != null)
+      {
+      $tel = new Telefono([
+        'personas_telefono' => $idpers,
+        'num_tel' => $request->get('cel_2'),
+        'tipo' => '3'
+      ]);
+      $tel->save();
+    }
+     //return redirect('/clientes');
+      return redirect('/home')->with('success', 'Cliente Guardado');
+    }
+    
+    
+    
     /**
      * Display the specified resource.
      *
