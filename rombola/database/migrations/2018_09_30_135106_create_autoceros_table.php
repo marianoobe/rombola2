@@ -17,14 +17,13 @@ class CreateAutocerosTable extends Migration
            
              $table->increments('id_autocero');           
             $table->string('vin',20)->unique();
-            $table->integer('idmarca')->unsigned()->index();                   
-            $table->string('modelo',60);
-            $table->text('descripcion');
-            $table->string('color',10);        
-         
-            $table->integer('precio')->nullable();
-            $table->boolean('visible');
+            $table->integer('auto_id')->unsigned()->index();          
+                   
+            
+             $table->integer('estadoCero_id')->unsigned()->index();
             $table->timestamps();
+            $table->foreign('auto_id')->references('id_auto')->on('automoviles')->onDelete('cascade');
+             $table->foreign('estadoCero_id')->references('id_estadoCero')->on('estadoCeros')->onDelete('cascade');
         });
     }
 

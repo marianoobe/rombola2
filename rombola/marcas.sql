@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `marcas` (
-  `idmarca` int(10) UNSIGNED NOT NULL,
+  `id_marca` int(10) UNSIGNED NOT NULL,
   `nombre` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -37,7 +37,7 @@ CREATE TABLE `marcas` (
 -- Volcado de datos para la tabla `marcas`
 --
 
-INSERT INTO `marcas` (`idmarca`, `nombre`, `created_at`, `updated_at`) VALUES
+INSERT INTO `marcas` (`id_marca`, `nombre`, `created_at`, `updated_at`) VALUES
 (1, 'Chevrolet', NULL, NULL),
 (2, 'Dodge', NULL, NULL),
 (3, 'Mini', NULL, NULL),
@@ -73,7 +73,7 @@ INSERT INTO `marcas` (`idmarca`, `nombre`, `created_at`, `updated_at`) VALUES
 -- Indices de la tabla `marcas`
 --
 ALTER TABLE `marcas`
-  ADD PRIMARY KEY (`idmarca`);
+  ADD PRIMARY KEY (`id_marca`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -83,7 +83,7 @@ ALTER TABLE `marcas`
 -- AUTO_INCREMENT de la tabla `marcas`
 --
 ALTER TABLE `marcas`
-  MODIFY `idmarca` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_marca` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

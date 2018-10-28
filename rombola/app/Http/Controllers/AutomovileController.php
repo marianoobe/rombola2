@@ -10,8 +10,6 @@ use App\Autosnuevo;
 use App\Autosusado;
 use App\File;
 
-
-
  class AutomovileController extends Controller
 {
     /**

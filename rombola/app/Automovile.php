@@ -9,15 +9,13 @@ class Automovile extends Model
     protected  $primaryKey = 'id_auto';
     protected $fillable=[
            'id_auto',
-           'precio',
-           'vin',
-           'dominio',
-           'idmarca',
+           'precio',      
+           
+           'marca_id',
            'modelo',
-           'descripcion',
-           'color',          
-           'combustible',         
-           'estado',
+           'version',
+           'color',   
+           
            'ficha',
            'visible',
     ];

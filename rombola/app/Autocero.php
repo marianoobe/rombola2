@@ -10,12 +10,9 @@ class Autocero extends Model
     protected $fillable=[
            'id_autocero',
            'vin',
-            'idmarca',
-           'modelo',
-           'descripcion',
-           'color',         
-               'precio', 
-           'visible',
+            'id_auto',
+            'estadocero_id'
+          
     ];
 
 

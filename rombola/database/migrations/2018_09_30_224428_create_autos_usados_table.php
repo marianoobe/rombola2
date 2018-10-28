@@ -15,15 +15,19 @@ class CreateAutosUsadosTable extends Migration
     {
         Schema::create('autosusados', function (Blueprint $table) {
             $table->increments('id_autoUsado');
-            $table->integer('id_auto')->unsigned()->index();
+            $table->integer('auto_id')->unsigned()->index();
             $table->text('titular');
+             $table->date('fechaingreso');
             $table->integer('anio');
+             $table->integer('estadoUsado_id')->unsigned()->index();
             $table->integer('kilometros')->nullable();
             $table->string('chasis_num')->nullable();
             $table->string('motor_num')->nullable(); 
+             $table->string('combustible',10)->nullable();   
             $table->timestamps();
-            $table->foreign('id_auto')->references('id_auto')->on('automoviles')->onDelete('cascade');
-        });
+            $table->foreign('auto_id')->references('id_auto')->on('automoviles')->onDelete('cascade');
+            $table->foreign('estadoUsado_id')->references('id_estadoUsado')->on('estadousados')->onDelete('cascade');
+       });
     }
 
     /**
