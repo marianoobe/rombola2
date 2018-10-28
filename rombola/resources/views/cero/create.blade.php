@@ -24,7 +24,7 @@
 
 
 						</div>
-						
+
 
 						<div class="box-body">
 							<form method="POST" action="{{ route('cero.store') }}" enctype="multipart/form-data">
@@ -41,7 +41,7 @@
 											 data-style="btn-primary" data-placeholder="Seleccione marca vehiculo..." data-width="100%">
 												<option value="">Seleccionar marca del vehiculo</option>
 												@foreach ($marcas as $item){
-												<option value="{{$item->idmarca}}"> {{ $item->nombre }} </option>
+												<option value="{{$item->id_marca}}"> {{ $item->nombre }} </option>
 												}
 												@endforeach
 
@@ -53,14 +53,8 @@
 											<label for="modelo"><strong>Modelo</strong></label>
 											<input type="text" class="form-control" id="modelo" name="modelo" required>
 										</div>
-										
-										<div class="form-group">
-											<label for="vin"><strong>Vin</strong></label>
-											<input type="text" class="form-control" id="vin" name="vin" required>
-										</div>
 
-									</div>
-									<div class="col-xs-12 col-lg-6">
+
 										<div class="form-group">
 											<label for="version"><strong>Versión</strong></label>
 											<input type="text" class="form-control" id="version" name="version" required>
@@ -69,14 +63,35 @@
 											<label for="color"><strong>Color</strong></label>
 											<input type="text" class="form-control" id="color" name="color" required>
 										</div>
+									</div>
+									<div class="col-xs-12 col-lg-6">
+										<div class="form-group">
+											<label for="vin"><strong>Vin</strong></label>
+											<input type="text" class="form-control" id="vin" name="vin" required>
+										</div>
+										<div class="form-group">
+											<label for="inp-montoCuota"><strong>Valor del vehiculo</strong></label>
+											<input type="number" maxlength="65" class="form-control" onblur="darFormato(this);" name="precio" id="precio"
+											 placeholder="">
+										</div>
 
+										<div class="form-group">
+											<label for="estado"><strong>Estado</strong></label>
+											<select id="estado" name="estado" class="form-control form-control-sm" required>
+												<option>Salon</option>
+												<option>Deposito</option>
+											
+
+											</select>
+
+										</div>
 
 
 
 									</div>
 								</div>
-								
-							<div class="success">
+
+								<div class="success">
 
 									<button type="submit" onclick="realizaProceso($('#marca').val())" class="btn btn-primary">
 										Guardar</button>
@@ -109,4 +124,4 @@
 
 
 
-		@endsection
+			@endsection

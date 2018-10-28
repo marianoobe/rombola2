@@ -58,23 +58,36 @@
 												<label for="modelo"><strong>Modelo</strong></label>
 												<input type="text" class="form-control" id="modelo" name="modelo" value={{ $item->modelo }} disabled="disabled">
 											</div>
-											
-										<div class="form-group">
-											<label for="vin"><strong>Vin</strong></label>
-											<input type="text" class="form-control" id="vin" name="vin" value={{ $item->vin }} disabled="disabled">
-										</div>
-
-									</div>
-									<div class="col-xs-12 col-lg-6">
-										<div class="form-group">
+											<div class="form-group">
 												<label for="version"><strong>Version</strong></label>
-												<input type="text" class="form-control" id="version" name="version" value={{ $item->descripcion }} disabled="disabled">
+												<input type="text" class="form-control" id="version" name="version" value={{ $item->version }} disabled="disabled">
 											</div>
 										<div class="form-group">
 											<label for="color"><strong>Color</strong></label>
 											<input type="text" class="form-control" id="color" name="color" value={{ $item->color }} disabled="disabled">
 										</div>
 										
+
+									</div>
+									<div class="col-xs-12 col-lg-6">
+										<div class="form-group">
+											<label for="vin"><strong>Vin</strong></label>
+											<input type="text" class="form-control" id="vin" name="vin" value={{ $item->vin }} disabled="disabled">
+										</div>
+										<div class="form-group">
+												<label for="estado"><strong>Estado</strong></label>
+												<input type="text" id="estado" name="estado" class="form-control form-control-sm"  disabled="disabled" value={{ $item->nombreEstado }}
+												>
+
+												</input>
+											</div>
+											<div class="form-group">
+												<label for="estado"><strong>Precio</strong></label>
+												<input type="number" id="precio" name="precio" class="form-control form-control-sm" value={{ $item->precio }}
+												 disabled="disabled">
+
+												</input>
+											</div>
 									</div>
 									
 								</div>

@@ -70,11 +70,11 @@
 										
 										<td >{{$item->nombre}}</td>
 										<td>{{$item->modelo}}</td>
-										<td>{{$item->descripcion}}</td>
+										<td>{{$item->version}}</td>
 										<td>{{$item->color}}</td>
 										
 										<td style="cursor: default;">
-											<a href="{{ route('cero.edit',$item->id_autocero)}}" class="btn btn-info btn-sm">
+											<a href="{{ route('cero.edit',$item->auto_id)}}" class="btn btn-info btn-sm">
 												<span class="glyphicon glyphicon-search"></span></a>
 
 										</td>
@@ -87,6 +87,6 @@
 								</tbody>
 							</table>
           
-							{{ $autos->render() }}
+							
 
 							@endsection

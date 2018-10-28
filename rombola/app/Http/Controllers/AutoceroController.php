@@ -12,6 +12,7 @@ use App\Autosusado;
 use App\Autocero;
 use App\Marca;
 use App\Estadocero;
+
 class AutoceroController extends Controller
 {
     /**
@@ -22,11 +23,12 @@ class AutoceroController extends Controller
     public function index(Request $request)
     {
         //$name  = $request->get('name'); 
+        $autos = DB::table('automoviles')
+        ->join('marcas','marcas.id_marca','automoviles.marca_id') 
+       ->join('autoceros', 'autoceros.auto_id' ,'automoviles.id_auto')       
+      ->get();
+      
        
-       $autos=Autocero::Search($request->name)   
-          
-       ->orderBY('id_autocero')
-       ->paginate(5);
         
        $marcas=Marca::All();
          
@@ -55,24 +57,38 @@ class AutoceroController extends Controller
      */
     public function store(Request $request)
     {
-        $idmarca=$request->get('marca');
-         
-        $marca = Marca::where("id_marca","=",$idmarca)->select("id_marca")->get();
-        
-        foreach ($marca as $item) {}  
-         // dd($marca);        
-          $idmarcas=$item->idmarca;
+          $marca=$request->get('marca');
+         //dd($request->get('marca'));
+          $value = Marca::where("id_marca","=",$marca)->select("id_marca")->get();
+         // dd($value);
+          foreach($value as $idmarka){}
 
-          $share = new Autocero([
-           'idmarca' => $idmarcas, 
-            'modelo' => $request->input('modelo'),
-            'descripcion'=> $request->input('version'),
-            'color'=> $request->input('color'),        
-            'vin' => $request->input('vin'),
-            'visible'=> 1
-          ]);
-         // dd($save);
-          $share->save();
+            $idm= $idmarka->id_marca;
+         $estado=$request->get('estado');
+          $valor = Estadocero::where("nombreEstado","=",$estado)->select("id_estadoCero")->get();
+         
+          foreach($valor as $item){}
+            $ides=$item->id_estadoCero;
+
+            $id=DB::table('automoviles')               
+            ->insertGetId([
+                "marca_id" =>$idm,
+                "modelo" => $request->get('modelo'),
+                "version" => $request->get('version'),
+                "color" => $request->get('color'),                         
+                "precio" => $request->get('precio'),              
+                "ficha"=>"completa",
+                "visible"=>1
+         ]);
+           
+          DB::table('autoceros')
+          ->insert([
+                "auto_id"=>$id,               
+               "estadoCero_id" => $ides,
+                "vin" => $request->get('vin'),
+               
+
+         ]);
 
           //return redirect('/clientes');
           return redirect('/cero')->with('success', 'Stock has been added');
@@ -103,7 +119,7 @@ class AutoceroController extends Controller
     public function edit($id)
     {    
 
-       $auto = Automovile::where("id_auto","=",$id)->select("id_auto")->get();
+      $auto = Automovile::where("id_auto","=",$id)->select("id_auto")->get();
          foreach ($auto as $item) {
         //echo "$item->idpersona";
       }
@@ -111,8 +127,9 @@ class AutoceroController extends Controller
       $idcar=$item->id_auto;
        $autos = DB::table('autoceros')
         ->join('automoviles', 'automoviles.id_auto' ,'autoceros.auto_id') 
+         ->join('estadoceros', 'estadoceros.id_estadoCero' ,'autoceros.estadoCero_id') 
         ->join('marcas','marcas.id_marca','automoviles.marca_id')       
-        ->where('automoviles.marca_id','=', $idcar)
+        ->where('automoviles.id_auto','=', $idcar)
         ->get();
 //dd($autos);
       return view('cero.edit', compact('autos',$autos));
@@ -129,18 +146,30 @@ class AutoceroController extends Controller
     {
                 
        if($request->input("nuevo")=="nuevo"){
-        $marca=$request->get('marca');
-        $value = Marca::where("nombre","=",$marca)->select("idmarca")->get();
-         foreach($value as $idmarka){}
-                 
-                 $auto = Autocero::find($id);
-                 $auto->idmarca = $idmarka->idmarca;
-                 $auto->modelo =strtoupper($request->input("modelo"));
-                 $auto->DESCRIPCION = strtoupper($request->input("version"));
-                 $auto->color =strtoupper ($request->input("color"));
-                 $auto->vin = strtoupper($request->input("vin"));              
-                  
-        $auto->save();
+         $marca=$request->get('marca');
+      $value = Marca::where("nombre","=",$marca)->select("id_marca")->get();
+      foreach($value as $idmarka){}
+      
+$idm= $idmarka->id_marca;
+
+        $estado=$request->get('estado');
+          $valor = EstadoCero::where("nombreEstado","=",$estado)->select("id_estadoCero")->get();
+          foreach($valor as $item){}
+            $ides=$item->id_estadoCero;
+    
+      DB::table('autoceros')
+        ->join('automoviles', 'automoviles.id_auto' ,'autoceros.auto_id')
+            ->where('automoviles.id_auto',"=",$id)
+            ->update([
+                "marca_id" => $idm,
+                "modelo" => $request->get('modelo'),
+                "version" => $request->get('version'),
+                "color" => $request->get('color'),                
+                "vin" => $request->get('vin'),
+                           
+                "precio" => $request->get('precio'),               
+                "estadoCero_id" => $ides,
+         ]);
              
         
        

@@ -66,11 +66,7 @@ id="empresa-logo" src="/img/logo.png" class="img-circle" width="50" height="50">
             
             <li><a href="{{ url('financiera') }}"><i class='fa fa-university'></i> <span>Financieras</span></a></li>
 
-<<<<<<< HEAD
                  
-=======
-                  
->>>>>>> 94fe38bdfdf6b49b830d1aa5c78998ca18bc8b01
             <li class="treeview">
                 <a href="#"><i class='fa fa-users'></i> <span>USUARIOS</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
