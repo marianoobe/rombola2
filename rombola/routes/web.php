@@ -66,6 +66,7 @@ Route::delete('/file/{id}','FileController@destroy')->name('deletefile');
 Route::post('/file/dropzone','FileController@dropzone')->name('dropzone');
 });
 
+Route::get('clientefast','ClienteController@store_fast')->name('clientefast');
 Route::resource('clientes','ClienteController');
 Route::resource('pre-venta','PreventaController');
 Route::get('pre-venta/cuotas/{id}','PreventaController@getCuotas');
