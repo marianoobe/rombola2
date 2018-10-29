@@ -51,7 +51,9 @@
                     <div class="form-group">
                             <input type="text" name="name" value="{{old ('name')}}" placeholder="Nombres..." class="form-control" id="form-firtsname">
                         </div>
-                     
+                     <div class="form-group">
+                            <input type="text" name="username" value="{{old ('username')}}" placeholder="Username..." class="form-control" id="form-username">
+                        </div>
                         <div class="form-group">
                         <input type="text" name="email" value="{{old ('email')}}" placeholder="Email..." class="form-control" id="form-email">
                             

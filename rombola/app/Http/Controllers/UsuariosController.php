@@ -49,7 +49,8 @@ public function crear_usuario(Request $request){
     //crea un nuevo usuario en el sistema
 
 	$reglas=[  'password' => 'required|min:8',
-	             'email' => 'required|email|unique:users', ];
+                 'email' => 'required|email|unique:users', 
+                ];
 	 
 	$mensajes=[  'password.min' => 'El password debe tener al menos 8 caracteres',
 	             'email.unique' => 'El email ya se encuentra registrado en la base de datos', ];

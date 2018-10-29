@@ -40,9 +40,10 @@
                     <div class="myform-bottom">
                     <form role="form" action="{{url('/login')}}" method="post" class="">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        
                         <div class="form-group">
-                            <input type="text"  name="{{ config('auth.providers.users.field','email') }}"
-                        value="{{old('')}}" placeholder="Correo Electrónico" class="form-control" id="form-username">
+                            <input type="text"  name="{{ config('auth.providers.users.field','username') }}"
+                        value="{{old('')}}" placeholder="Username" class="form-control" id="form-username">
                         </div>
                         <div class="form-group">
                             <input type="password" name="password" placeholder="Contraseña" class="form-control" id="form-password">

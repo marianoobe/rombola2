@@ -40,7 +40,7 @@ CREATE TABLE `estadousados` (
 INSERT INTO `estadousados` (`id_estadoUsado`, `nombreEstado`, `created_at`, `updated_at`) VALUES
 (1, 'Disponible', NULL, NULL),
 (2, 'En tramite', NULL, NULL),
-(3, 'A Designar', NULL, NULL);
+(3, 'Baja', NULL, NULL);
 
 --
 -- Índices para tablas volcadas

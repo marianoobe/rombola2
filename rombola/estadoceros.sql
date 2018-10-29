@@ -39,7 +39,8 @@ CREATE TABLE `estadoceros` (
 
 INSERT INTO `estadoceros` (`id_estadoCero`, `nombreEstado`, `created_at`, `updated_at`) VALUES
 (1, 'Salon', NULL, NULL),
-(2, 'Deposito', NULL, NULL);
+(2, 'Deposito', NULL, NULL),
+(3, 'Baja', NULL, NULL);
 
 --
 -- Índices para tablas volcadas

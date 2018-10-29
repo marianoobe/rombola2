@@ -81,11 +81,10 @@ class RegisterController extends Controller
         $fields = [
             'name'     => $data['name'],
             'email'    => $data['email'],
+            'username' => $data['username'],
             'password' => bcrypt($data['password']),
         ];
-        if (config('auth.providers.users.field','email') === 'username' && isset($data['username'])) {
-            $fields['username'] = $data['username'];
-        }
+       
         return User::create($fields);
     }
 }

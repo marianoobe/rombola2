@@ -80,13 +80,17 @@
 											<select id="estado" name="estado" class="form-control form-control-sm" required>
 												<option>Salon</option>
 												<option>Deposito</option>
-											
+
 
 											</select>
 
 										</div>
 
-
+										<div class="form-group">
+											<label for="inp-montoCuota"><strong>Valor del vehiculo</strong></label>
+											<input type="number" maxlength="65" class="form-control" onblur="darFormato(this);" name="precio" id="precio"
+											 placeholder="">
+										</div>
 
 									</div>
 								</div>
