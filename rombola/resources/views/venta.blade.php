@@ -50,6 +50,7 @@
 								<td>{{$item->codigo}}</td>
 								<td>{{$item->nombre_apellido}}</td>
 								<td>{{$item->estado}}</td>
+								<td>{{$item->idventa}}</td>
 								<td style="cursor: default;">
 									@can('vendedor')
 									<a href="" class="btn btn-primary btn-sm">
@@ -58,7 +59,8 @@
 									@can('admin')
 									<a href="" class="btn btn-primary btn-sm">
 										<span class="glyphicon glyphicon-search"></span></a>
-									<a href="" class="btn btn-primary btn-sm">
+
+									<a href="{{ route('print_venta', ['id1' => $item->idventa,'id2' => $item->idcliente])}}" class="btn btn-primary btn-sm">
 										<span class="glyphicon glyphicon-print"></span></a>
 
 									<a onclick="$('#modal-estado').modal('show');" class="btn btn-warning btn-sm">

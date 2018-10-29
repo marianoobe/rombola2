@@ -15,7 +15,8 @@ class ProfessionSeeder extends Seeder
         $estado_cero = array(
             '0' => "Salón",
             '1' => "Depósito",
-            '2' => "Baja",
+            '2' => "En camino",
+            '3' => "Baja",
          );
          
          $i=0;

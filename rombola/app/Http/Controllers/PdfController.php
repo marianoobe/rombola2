@@ -8,6 +8,7 @@ use App;
 use DB;
 use PDF;
 use App\Persona;
+use App\Venta;
 use View;
 
 class PdfController extends Controller
@@ -178,40 +179,105 @@ function convert_html($id)
     }
 
 
-function pdf_venta($idventa)
+function pdf_venta($idventa,$idcliente)
 {
+   
      $pdf = \App::make('dompdf.wrapper');
-     $pdf->loadHTML($this->convert_html_venta($idventa));
+     $pdf->loadHTML($this->convert_html_venta($idventa,$idcliente));
      return $pdf->stream();
 }
 
-function convert_html_venta($idventa)
+function convert_html_venta($idventa,$idcliente)
 {
     
-    $venta_con_0km = DB::table('operaciones')
-    ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
-    ->join('personas','operaciones.persona_operacion','personas.idpersona')
-    ->join('clientes','personas.idpersona','clientes.cliente_persona')
-    ->where('idcliente','=',$idventa)  
-    ->where('idventa','=',2)   
-    ->get();
+    $ids = Venta::where("idventa","=",$idventa)
+            ->select("idventa_autousado","idventa_auto0km","idventa_autoentregado")
+            ->get();
 
-    $venta_con_usado = DB::table('operaciones')
-    ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
-    ->join('personas','operaciones.persona_operacion','personas.idpersona')
-    ->join('clientes','personas.idpersona','clientes.cliente_persona')
-    ->join('autoceros','ventas.idventa_auto0km','autoceros.id_autocero')
-    ->where('idventa','=',$idventa)
-    ->get();
+    foreach ($ids as $item) {}
+        //dd($item->idventa_auto0km.$item->idventa_autousado.$item->idventa_autoentregado);
+        
+        if ($item->idventa_auto0km != null) {
+        $venta_con_0km = DB::table('operaciones')
+        ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
+        ->join('personas','operaciones.persona_operacion','personas.idpersona')
+        ->join('clientes','personas.idpersona','clientes.cliente_persona')
+        ->join('autoceros','ventas.idventa_auto0km','autoceros.id_autocero')
+        ->where('idcliente','=',$idcliente)  
+        ->where('idventa','=',$idventa)   
+        ->get();
+        
+        if ($item->idventa_autoentregado) {
+            $venta_entregado = DB::table('operaciones')
+                ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
+                ->join('personas','operaciones.persona_operacion','personas.idpersona')
+                ->join('clientes','personas.idpersona','clientes.cliente_persona')
+                ->join('autosusados','ventas.idventa_autousado','autosusados.id_autoUsado')
+                ->where('idventa','=',$idventa)
+                ->get();
+        }
+        else {
+            $venta_entregado = array('0' => 0,'1' => 1,'2' => 2 );
+        }
+        $venta_usado=array('0' => 0,'1' => 1,'2' => 2 );
 
-    dd($venta_con_0km);
-    if (count($venta_con_0km)==0) {
-        $venta=$venta_con_0km;
-    }else{
-        $venta=$venta_con_usado;
+    } else {
+        if ($item->idventa_autousado != null) {
+
+            $venta_usado = DB::table('operaciones')
+            ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
+            ->join('personas','operaciones.persona_operacion','personas.idpersona')
+            ->join('clientes','personas.idpersona','clientes.cliente_persona')
+            ->join('autosusados','ventas.idventa_autousado','autoceros.id_autoUsado')
+            ->where('idcliente','=',$idcliente) 
+            ->where('idventa','=',$idventa)
+            ->get();
+
+            if ($item->idventa_autoentregado) {
+                $venta_entregado = DB::table('operaciones')
+                ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
+                ->join('personas','operaciones.persona_operacion','personas.idpersona')
+                ->join('clientes','personas.idpersona','clientes.cliente_persona')
+                ->join('autosusados','ventas.idventa_autousado','autoceros.id_autoUsado')
+                ->where('idventa','=',$idventa)
+                ->get();
+            }
+            else {
+                $venta_entregado = array('0' => 0,'1' => 1,'2' => 2 );
+            }
+            $venta_con_0km =array('0' => 0,'1' => 1,'2' => 2 );
+        }
     }
-    dd($venta);
-    foreach ($venta as $item) {}
+
+    $c="disable";
+    $g="disable";
+
+    if (count($venta_con_0km)==3) {
+        $compro_0km = "disable";
+    }else{
+        $compro_0km="enable";
+        foreach ($venta_con_0km as $item0km) {}
+        if($item0km->idconyuge!=null){ $c="enable"; }
+        if($item0km->idgarante!=null){ $g="enable"; }
+    }
+
+    if (count($venta_usado)==3) {
+        $compro_usado = "disable";
+    } else {
+        $compro_usado = "enable";
+        foreach ($venta_usado as $itemusado) {}
+        if($itemusado->idconyuge!=null){ $c="enable"; }
+        if($item0km->idgarante!=null){ $g="enable"; }
+    }
+
+    if (count($venta_entregado)==3) {
+        $auto_entregado = "disable";
+    } else {
+        $auto_entregado = "enable";
+        foreach ($venta_entregado as $itementregado) {}
+    }
+    
+    //dd($compro_0km.$compro_usado.$auto_entregado);
 
      $output = '
      <html>
@@ -278,6 +344,47 @@ function convert_html_venta($idventa)
         #financiado.a {
             visibility: visible;
         }
+ 
+        #conyuge.enable {
+            visibility: visible;
+        }
+
+        #conyuge.disable {
+            visibility: hidden;
+        }
+
+        #garante.enable {
+            visibility: visible;
+        }
+
+        #garante.disable {
+            visibility: hidden;
+        }
+
+        #cero.enable {
+            visibility: visible;
+        }
+
+        #cero.disable {
+            visibility: hidden;
+        }
+
+        #usado.enable {
+            visibility: visible;
+        }
+
+        #usado.disable {
+            visibility: hidden;
+        }
+
+        #entregado.enable {
+            visibility: visible;
+        }
+
+        #entregado.disable {
+            visibility: hidden;
+        }
+
 
 
         #contenedor1{
@@ -356,30 +463,50 @@ function convert_html_venta($idventa)
     <br>
      <div id="contenedor1">
 
-        <p> <strong>Comprador</strong>: Fabricio Andrés Carrio &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DNI</strong>: 35852537 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <p> <strong>Comprador</strong>:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DNI</strong>: 35852537 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Fecha de Nacimiento: 21/12/1991&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Domicilio: Rioja 2512 (sur) Barrio Libertad - Rawson &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
         Estado Civil: Soltero&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Teléfono: 154054675</p>
         <br>
-        <div id="conyuge">
+        ';
+
+
+        $output .= '
+        <div id="conyuge" class="'.$c.'">
         <p><strong>Conyuge</strong>: Paula Rodriguez&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha de Nacimiento: 14/05/1996 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Teléfono: 155786932 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </p>
-        </div>
+        </div>';
         
-        <div id="garante">
+
+
+        $output .= '
+
+        <div id="garante" class="'.$g.'">
         <p><strong>Garante</strong>: Gladys Esther Rodriguez&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DNI: 17879922 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Fecha de Nacimiento: 05/03/1986 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Domicilio: Libertador 34 (oeste) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Estado Civil: Casada  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Teléfono: 154984461</p>
-        </div>
-        
-        <section id="usado" class=" ">
+        </div>';
+
+
+        $output .= '
+        <section id="usado" class="'.$compro_0km.'">
+            <p><strong>Marca</strong>: Ford &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modelo: Ká &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Versión: Ká &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            
+        </section>';
+
+        $output .= '
+        <section id="usado" class="'.$compro_usado.'">
             <p><strong>Marca</strong>: Ford &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modelo: Ká &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             Motor N°: 32156165 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Chasis: 6516164 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
             Dominio: ASD 458 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Titular: Alberto Gomez&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
             DNI (titular): 19632456</p>
             
-        </section>
+        </section>';
 
-                <section id="usado_entregado" class=" ">
+
+
+           $output .= '
+                <section id="entregado" class="'.$venta_entregado.'">
                     <p><strong>Marca de auto entregado</strong>: Chevrolet&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     Modelo: Corsa &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dominio: SDF 332&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
                     Motor N°: 1212445&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Chasis: 4514245 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -396,6 +523,12 @@ function convert_html_venta($idventa)
 
             <p></p>
             <p> <strong>Efectivo entregado</strong>: $50000</p>
+            ';
+            
+            
+            
+            
+            $output .= '
             
 <section id="cheques" class="   ">
 <table style="width:100%">
@@ -422,6 +555,13 @@ function convert_html_venta($idventa)
 <p></p>
 <p> <strong>Totales</strong>: $415000</p>
 <hr>
+';
+
+
+
+$output .= '
+
+
 <section id="financiacion" class=" ">
 <div ALIGN="center" class="box-header with-border">
 <p ALIGN="center" style="font-size:10px;"><strong>FINANCIACION</strong></p>

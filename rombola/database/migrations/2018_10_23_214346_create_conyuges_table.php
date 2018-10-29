@@ -14,7 +14,7 @@ class CreateConyugesTable extends Migration
     public function up()
     {
         Schema::create('conyuges', function (Blueprint $table) {
-            $table->increments('idgarante');
+            $table->increments('idconyuge');
             $table->integer('idconyuge_persona')->unsigned();
             $table->foreign('idconyuge_persona')->references('idpersona')->on('personas');
             $table->string('fecha_nacimiento');

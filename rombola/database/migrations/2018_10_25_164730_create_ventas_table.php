@@ -19,6 +19,8 @@ class CreateVentasTable extends Migration
             $table->foreign('operacion_venta')->references('id_operacion')->on('operaciones');
             $table->integer('idventa_autousado')->unsigned()->nullable();
             $table->foreign('idventa_autousado')->references('id_autoUsado')->on('autosusados');
+            $table->integer('idventa_autoentregado')->unsigned()->nullable();
+            $table->foreign('idventa_autoentregado')->references('id_autoUsado')->on('autosusados');
             $table->integer('idventa_auto0km')->unsigned()->nullable();
             $table->foreign('idventa_auto0km')->references('id_autocero')->on('autoceros');
             $table->text('codigo',11);

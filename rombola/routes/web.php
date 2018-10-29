@@ -75,7 +75,7 @@ Route::get('pre-venta/financiera/{id}','PreventaController@getFinanciera');
 //Route::get('pdf','PdfController@index')->name('pdf');
 //Route::get('generate-pdf', 'PdfController@index')->name('generate-pdf');
 Route::get('print/{id}', 'PdfController@pdf')->name('print');
-Route::get('print_venta/{id}', 'PdfController@pdf_venta')->name('print_venta');
+Route::get('print_venta/{id1}/{id2}', 'PdfController@pdf_venta')->name('print_venta');
 
 Route::get('prueba','VentaController@prueba')->name('prueba');
 

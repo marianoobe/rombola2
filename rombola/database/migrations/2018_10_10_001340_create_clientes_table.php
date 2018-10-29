@@ -17,6 +17,8 @@ class CreateClientesTable extends Migration
             $table->increments('idcliente');
             $table->integer('cliente_persona')->unsigned();
             $table->foreign('cliente_persona')->references('idpersona')->on('personas');
+            $table->integer('idconyuge')->nullable();
+            $table->integer('idgarante')->nullable();
             $table->string('fecha_nacimiento');
             $table->string('domicilio', 50);
             $table->text('estado_civil');

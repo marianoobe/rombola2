@@ -15,6 +15,9 @@ use App\Operaciones;
 use App\Conyuge;
 use App\Venta;
 use App\Autosusado;
+use App\Estadocero;
+use App\Estadousado;
+
 
 
 class VentaContadoController extends Controller
@@ -118,6 +121,8 @@ class VentaContadoController extends Controller
       $tel->save();
       }
 
+      $idcliente= Cliente::where('cliente_persona','=',$idpers)->select('idcliente')->get();
+
       $fecha_oper=$request->get('fecha_oper');
       $operacion = new Operaciones([
         'persona_operacion' => $idpers,
@@ -135,10 +140,14 @@ class VentaContadoController extends Controller
         $nya = $request->get('nya_cliente');
         $idpersona = Persona::where("nombre_apellido","=",$nya)->select("idpersona","dni")->get();
         
-        foreach ($idpersona as $items) {
-        }
-        $idpersona = $items->idpersona;
-        $dni=$items->dni;
+        
+        foreach ($idpersona as $items) {}
+          $idpersona = $items->idpersona;
+          $dni=$items->dni;
+        
+        $idcliente = Cliente::where("cliente_persona","=",$idpersona)->select('idcliente')->get();
+
+        
         $fecha_oper=$request->get('fecha_oper');
         $operacion = new Operaciones([
         'persona_operacion' => $idpersona,
@@ -182,6 +191,8 @@ class VentaContadoController extends Controller
         }
         $idpers=$item->idpersona;
         //insert Persona-Conyuge
+ 
+        
         $conyuge = new Conyuge([
           'idconyuge_persona' => $idpers,
           'fecha_nacimiento' => $request->get('conyuge_fecha_nac'),
@@ -190,6 +201,15 @@ class VentaContadoController extends Controller
           'visible'=> 1,
         ]);
         $conyuge->save();
+
+        $idconyuge = Conyuge::where("idconyuge_persona","=",$idpers)->select("idconyuge")->get();
+
+        foreach ($idconyuge as $item1) {}
+        foreach ($idcliente as $item2) {}
+
+        DB::table('clientes')
+        ->where('idcliente','=',$item2->idcliente)
+        ->update(['idconyuge'=>$item1->idconyuge]);
 
         if($request->get('conyuge_cel_1') != null)
         {
@@ -265,22 +285,24 @@ class VentaContadoController extends Controller
             if ($request->get('estado_toggle')=="lista") {
       
             $idmarca=$request->get('marca');
+                  
+
+            $marca = Marca::where("nombre","=",$idmarca)->select("id_marca")->get();
             
-            $marca = Marca::where("nombre","=",$idmarca)->select("idmarca")->get();
-        
             foreach ($marca as $item) {}   
-            // dd($marca);        
-            $idmarcas=$item->idmarca;
+                  
+            $idmarcas=$item->id_marca;
 
             $automovil = new Automovile([
               'marca_id' => $idmarcas, 
               'modelo' => $request->input('modelo'),
               'version'=> $request->input('version'),
-              'color'=> '',        
+              'color'=> '',      
+              'precio'=> 0,  
               'ficha' => 'Incompleta',
               'visible'=> 1
                ]);
-              // dd($save);
+              
               $automovil->save();
             
               $id0km = DB::table('automoviles')
@@ -289,16 +311,20 @@ class VentaContadoController extends Controller
               ->take(1)
               ->get();  
 
-            $auto_cero = new Autocero([
-            'id_autocero' => $id0km, 
-            'id_auto' => $idmarcas, 
-            'vin' => $request->input('modelo'),
-            'estadocero_id'=> $request->input('version')
+            foreach ($id0km as $key) {}
+
+            $marca = Estadocero::where("nombreEstado","=","En Camino")->select("id_estadoCero")->get();
+            foreach ($marca as $marc) {}
+            
+            $auto_cero = DB::table('autoceros')
+            ->insertGetId([
+            'vin' => null,
+            'auto_id' => $key->id_auto, 
+            'estadoCero_id'=> $marc->id_estadoCero
              ]);
             // dd($save);
-            $auto_cero->save();
 
-            $idauto0km = null;
+            $idauto0km = $auto_cero;
           }
         }
 
@@ -322,12 +348,13 @@ class VentaContadoController extends Controller
 
             $marca_entregado=$request->get('marca_entregado');
             
-            $idmarca = Marca::where("nombre","=",$marca_entregado)->select("idmarca")->get();
+            $idmarca = Marca::where("nombre","=",$marca_entregado)->select("id_marca")->get();
         
             foreach ($idmarca as $item) {}         
-            $idmarcas=$item->idmarca;
+            $idmarcas=$item->id_marca;
 
-            $usado = new Automovile([
+            $usado = DB::table('automoviles')
+            ->insertGetId([
               'marca_id' => $idmarcas, 
               'modelo' => $request->get('modelo_entregado'),
               'version'=> $request->get('version_entregado'),
@@ -336,28 +363,34 @@ class VentaContadoController extends Controller
               'ficha'=> "Incompleta",
               'visible'=> 1
             ]);
-            $usado->save();
+            
+            $estado_usado = Estadousado::where("nombreEstado","=","En Trámite")->select("id_estadoUsado")->get();
+            foreach ($estado_usado as $key) {}
 
-          $dominio=$request->get('dominio');
-          $car = Automovile::where("dominio","=",$dominio)->select("id_auto")->get();
-                       
-          foreach ($car as $item) {}
+            $fecha_ingreso = date("d-m-Y");
             
             $idauto=$item->id_auto;
-            $nuevo = new Autosusado([
-              'id_auto' => $idauto,            
+            
+            $nuevo = DB::table('autosusados')
+            ->insertGetId([
+              'auto_id' => $usado,            
               'titular'=> $request->get('nomb_titular_entregado'),
               'anio' => $request->get('anio_entregado'),
               'kilometros' => 0,
               'dominio' => $request->get('dominio_entregado'),
               'chasis_num'=> $request->get('chasis_num_entregado'),
               'motor_num'=> $request->get('motor_num_entregado'),
-              'id_estadoUsado' => "",
+              'estadoUsado_id' => $key->id_estadoUsado,
               'combustible' => "",
-              'fechaingreso' => "",
+              'fechaingreso' => $fecha_ingreso,
             ]);
-            $nuevo->save(); 
+            //$nuevo->save(); 
 
+            $id_autoentragado = $nuevo;
+
+            }
+            else{
+              $id_autoentragado=null;
             }
 
             //insert Venta -------
@@ -408,6 +441,7 @@ class VentaContadoController extends Controller
           'operacion_venta' => $item->id_operacion,
           'idventa_autousado' => $idusado,
           'idventa_auto0km' => $idauto0km,
+          'idventa_autoentregado' => $id_autoentragado,
           'precio_auto_vendido' => $request->get('valor_auto_vendido'),
           'efectivo' => $request->get('inpefectivo'),
           'cod_part1' => $part1,

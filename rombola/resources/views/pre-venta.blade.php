@@ -70,7 +70,7 @@
 									<input type="hidden" name="_token" value="{{csrf_token()}}" style="display:none">
 									<a href="#" onclick="document.getElementById('myform').submit()" class="btn btn-danger btn-sm">
 										<span class="glyphicon glyphicon-trash"></span></a>
-								</form>
+								</form> 
 
 
 								@endcan
