@@ -158,6 +158,14 @@ function enable_usado() {
   console.log(document.getElementById("check_usado").value);
 }
 
+function enable_0km(){
+  if (document.getElementById("buscar_usados").style.display == "block") {
+    document.getElementById("buscar_usados").style.display = "none";
+    $('#select_marcas').required = false;
+
+  }
+}
+
 function obtenervalue() {
   var res = document.getElementById("buscar_usados").value;
   console.log(res);

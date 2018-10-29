@@ -437,7 +437,9 @@ class VentaContadoController extends Controller
           
           foreach ($venta_operac as $item) {}
             //dd($item->id_operacion);
-          $venta = new Venta([
+          
+          $venta = DB::table('ventas')
+          ->insertGetId([
           'operacion_venta' => $item->id_operacion,
           'idventa_autousado' => $idusado,
           'idventa_auto0km' => $idauto0km,
@@ -451,24 +453,20 @@ class VentaContadoController extends Controller
           'visible' =>1,
           'estado' =>'En Negociacion'
           ]);
-          $venta->save();
          
           //insert Cheque -------
           $cheque = $request->get('valor_cheque');
           if ($cheque == 'si') {
-            $venta_cheque = Venta::where("codigo","=",$codigo)->select("idventa")->get();
-          foreach ($venta_cheque as $item) {}
 
-            $venta = new Venta([
-              'cheque_venta' => $item->idventa,
+            $chequenuevo = DB::table('cheques')
+            ->insertGetId([
+              'cheque_venta' => $venta,
               'numero' => $request->get('numero_cheque'),
               'fecha' => $request->get('fecha_cheque'),
               'banco' => $request->get('banco'),
               'importe' => $request->get('importe_cheque'),
               'estado' => "",
               ]);
-              $venta->save();
-
           }
           /*   dd("HOLA");*/
 

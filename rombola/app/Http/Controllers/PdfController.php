@@ -10,6 +10,10 @@ use PDF;
 use App\Persona;
 use App\Venta;
 use View;
+use App\Autocero;
+use App\Autosusado;
+use App\Cheque;
+
 
 class PdfController extends Controller
 {
@@ -206,7 +210,7 @@ function convert_html_venta($idventa,$idcliente)
         ->where('idcliente','=',$idcliente)  
         ->where('idventa','=',$idventa)   
         ->get();
-        
+    
         if ($item->idventa_autoentregado) {
             $venta_entregado = DB::table('operaciones')
                 ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
@@ -228,7 +232,7 @@ function convert_html_venta($idventa,$idcliente)
             ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
             ->join('personas','operaciones.persona_operacion','personas.idpersona')
             ->join('clientes','personas.idpersona','clientes.cliente_persona')
-            ->join('autosusados','ventas.idventa_autousado','autoceros.id_autoUsado')
+            ->join('autosusados','ventas.idventa_autousado','autosusados.id_autoUsado')
             ->where('idcliente','=',$idcliente) 
             ->where('idventa','=',$idventa)
             ->get();
@@ -238,7 +242,7 @@ function convert_html_venta($idventa,$idcliente)
                 ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
                 ->join('personas','operaciones.persona_operacion','personas.idpersona')
                 ->join('clientes','personas.idpersona','clientes.cliente_persona')
-                ->join('autosusados','ventas.idventa_autousado','autoceros.id_autoUsado')
+                ->join('autosusados','ventas.idventa_autousado','autosusados.id_autoUsado')
                 ->where('idventa','=',$idventa)
                 ->get();
             }
@@ -252,11 +256,14 @@ function convert_html_venta($idventa,$idcliente)
     $c="disable";
     $g="disable";
 
+    foreach ($venta_con_0km as $item0km) {}
+
+
     if (count($venta_con_0km)==3) {
         $compro_0km = "disable";
     }else{
         $compro_0km="enable";
-        foreach ($venta_con_0km as $item0km) {}
+        
         if($item0km->idconyuge!=null){ $c="enable"; }
         if($item0km->idgarante!=null){ $g="enable"; }
     }
@@ -267,7 +274,7 @@ function convert_html_venta($idventa,$idcliente)
         $compro_usado = "enable";
         foreach ($venta_usado as $itemusado) {}
         if($itemusado->idconyuge!=null){ $c="enable"; }
-        if($item0km->idgarante!=null){ $g="enable"; }
+        if($itemusado->idgarante!=null){ $g="enable"; }
     }
 
     if (count($venta_entregado)==3) {
@@ -276,7 +283,17 @@ function convert_html_venta($idventa,$idcliente)
         $auto_entregado = "enable";
         foreach ($venta_entregado as $itementregado) {}
     }
+
+    $consulta_cheques = Cheque::where('cheque_venta','=',$idventa)->get();
     
+    $cheques = "disable";
+
+    if ($consulta_cheques!=null) {
+        $cheques = "enable";
+    }
+
+   
+    $financiacion = "disable";
     //dd($compro_0km.$compro_usado.$auto_entregado);
 
      $output = '
@@ -441,14 +458,14 @@ function convert_html_venta($idventa,$idcliente)
             $h="b";
            }*/
     $output .= '
-    <div id="cabecera">
+    <div align="right" id="cabecera">
     <img src="C:\xampp\htdocs\rombolaagencia\rombola\public\img\logogrande.png" width="160" height="50" />
-    <div id="pepe"><p style="font-size:8px;">Direccion Telefono</p>
+    <div id="pepe"><p style="font-size:8px;">Dirección: AV. Rioja Teléfono: 4220892</p>
     <p style="font-size:8px;">info@ragroup.com.ar</p></div>
     <hr>
         <p ALIGN="center" style="font-size:10px;"><strong>SOLICITUD DE RESERVA</strong></p>
-    <p style="font-size:8px;">De mi consideración</p>
-    <p style="font-size:8px;">Por la presenta solicito a Ustedes la RESERVA de
+    <p align="left" style="font-size:8px;">De mi consideración</p>
+    <p align="left" style="font-size:8px;">Por la presenta solicito a Ustedes la RESERVA de
         la unidad seguidamente detallada en un todo de acuerdo a las condiciones generales
         impresas en esta solicitud. Las que declaro conocer y aceptar por ser ellas de clara
         comprensión y formar parte de esta petición, a las que voluntariamente adhiero, no significando
@@ -463,74 +480,119 @@ function convert_html_venta($idventa,$idcliente)
     <br>
      <div id="contenedor1">
 
-        <p> <strong>Comprador</strong>:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DNI</strong>: 35852537 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Fecha de Nacimiento: 21/12/1991&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Domicilio: Rioja 2512 (sur) Barrio Libertad - Rawson &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-        Estado Civil: Soltero&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Teléfono: 154054675</p>
+        <p> <strong>Comprador</strong>:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>DNI</strong>: 35852537 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <strong>Fecha de Nacimiento</strong>: 21/12/1991&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Domicilio</strong>: Rioja 2512 (sur) Barrio Libertad - Rawson &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        <strong>Estado Civil</strong>: Soltero&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Teléfono</strong>: 154054675</p>
         <br>
         ';
 
-
+        if($c=="enable"){
         $output .= '
         <div id="conyuge" class="'.$c.'">
-        <p><strong>Conyuge</strong>: Paula Rodriguez&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha de Nacimiento: 14/05/1996 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Teléfono: 155786932 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </p>
+        <p><strong>Conyuge</strong>: Paula Rodriguez&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Fecha de Nacimiento</strong>: 14/05/1996 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <strong>Teléfono</strong>: 155786932 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </p>
         </div>';
+        }
+
+        if($g=="enable"){
+        $output .= '
+        <div id="garante" class="enable">
+        <p><strong>Garante</strong>: Gladys Esther Rodriguez&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>DNI</strong>: 17879922 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <strong>Fecha de Nacimiento</strong>: 05/03/1986 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Domicilio</strong>: Libertador 34 (oeste) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <strong>Estado Civil</strong>: Casada  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Teléfono</strong>: 154984461</p>
+        </div>';
+        }
+
+        if($compro_0km=="enable"){
+        foreach ($venta_con_0km as $item0km) {}
+           
+        $info_cero= DB::table('automoviles')
+        ->join('autoceros','automoviles.id_auto','autoceros.auto_id')
+        ->join('marcas','automoviles.id_auto','marcas.id_marca')
+        ->where('id_autocero','=',$item0km->idventa_auto0km)
+        ->get();
+        foreach ($info_cero as $cerokm) {}
         
-
-
         $output .= '
-
-        <div id="garante" class="'.$g.'">
-        <p><strong>Garante</strong>: Gladys Esther Rodriguez&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DNI: 17879922 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Fecha de Nacimiento: 05/03/1986 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Domicilio: Libertador 34 (oeste) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Estado Civil: Casada  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Teléfono: 154984461</p>
-        </div>';
-
-
-        $output .= '
-        <section id="usado" class="'.$compro_0km.'">
-            <p><strong>Marca</strong>: Ford &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modelo: Ká &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Versión: Ká &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+        <section id="cerokm" class="enable">
+            <p><strong>Marca Auto 0KM</strong>: '.$cerokm->nombre.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Modelo</strong>: '.$cerokm->modelo.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <strong>Versión</strong>: '.$cerokm->version.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
             
         </section>';
+        }
 
+        if($compro_usado=="enable"){
+            foreach ($venta_usado as $item_usado) {}
+           
+                $info_usado= DB::table('automoviles')
+                ->join('autosusados','automoviles.id_auto','autosusados.auto_id')
+                ->join('marcas','automoviles.id_auto','marcas.id_marca')
+                ->where('id_autoUsado','=',$item_usado->idventa_autousado)
+                ->get();
+                foreach ($info_usado as $usado) {}
+                
         $output .= '
-        <section id="usado" class="'.$compro_usado.'">
-            <p><strong>Marca</strong>: Ford &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modelo: Ká &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Motor N°: 32156165 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Chasis: 6516164 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-            Dominio: ASD 458 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Titular: Alberto Gomez&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-            DNI (titular): 19632456</p>
+        <section id="usado" class="enable">
+            <p><strong>Marca</strong>: '.$usado->nombre.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modelo: '.$usado->modelo.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Versión: '.$usado->version.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Motor N°: '.$usado->motor_num.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            Chasis: '.$usado->chasis_num.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dominio: '.$usado->dominio.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            Titular: '.$usado->titular.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            </p>
             
         </section>';
+        }
 
+        if($auto_entregado=="enable"){
 
-
+            foreach ($venta_entregado as $item_entregado) {}
+           
+                $info_entregado= DB::table('automoviles')
+                ->join('autosusados','automoviles.id_auto','autosusados.auto_id')
+                ->join('marcas','automoviles.id_auto','marcas.id_marca')
+                ->where('id_autoUsado','=',$item_entregado->idventa_autoentregado)
+                ->get();
+                foreach ($info_entregado as $entregado) {}
+              
            $output .= '
-                <section id="entregado" class="'.$venta_entregado.'">
-                    <p><strong>Marca de auto entregado</strong>: Chevrolet&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    Modelo: Corsa &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dominio: SDF 332&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                    Motor N°: 1212445&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Chasis: 4514245 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    Titular: Aldo Rombola&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Documentación que entrega: Tarjeta verde, Manual oficial, Titulo, RTO</p>
+                <section id="entregado" class="enable">
+                    <p><strong>Marca de auto entregado</strong>: '.$entregado->nombre.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>Modelo</strong>: '.$entregado->modelo.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    Versión: '.$entregado->version.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>Dominio</strong>: '.$entregado->dominio.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    <strong>Motor N°</strong>: '.$entregado->motor_num.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    <strong>Chasis</strong>:'.$entregado->chasis_num.'  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>Titular</strong>: '.$entregado->titular.' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    <strong>Documentación que entrega</strong>: Tarjeta verde, Manual oficial, Titulo, RTO</p>
                     <hr>
-                </section>
+                </section>';
+        }
 
-                <p ALIGN="center" style="font-size:10px;"><strong>DETALLE DE LA OPERACION</strong></p>
-            <p></p>
-            <p>Precio de Auto reservado</strong>: $400000</p>
-
-            <p></p>
-            <p>Precio de Auto entregado</strong>: $300000</p>
-
-            <p></p>
-            <p> <strong>Efectivo entregado</strong>: $50000</p>
-            ';
-            
-            
-            
-            
+            $info_venta= DB::table('ventas')
+            ->where('idventa','=',$idventa)
+            ->get();
+            foreach ($info_venta as $venta) {}
             $output .= '
-            
-<section id="cheques" class="   ">
+            <p ALIGN="center" style="font-size:10px;"><strong>DETALLE DE LA OPERACION</strong></p>
+            <p></p>
+            <p><strong>Precio de Auto vendido</strong>: $'.$venta->precio_auto_vendido.'</p>
+
+            <p></p>
+            <p><strong>Precio de Auto entregado</strong>: $</p>
+
+            <p></p>
+            <p> <strong>Efectivo entregado</strong>: $'.$venta->efectivo.'</p>
+            ';
+        
+        if($cheques=="enable"){
+           
+                $info_cheque= DB::table('ventas')
+                ->join('cheques','ventas.idventa','cheques.cheque_venta') 
+                ->where('idventa','=',$idventa)
+                ->get();
+                foreach ($info_cheque as $cheque) {}
+        
+            $output .= '
+<section id="cheques" class="enable">
 <table style="width:100%">
   <tr>
     <th>Cheque N°</th>
@@ -540,37 +602,37 @@ function convert_html_venta($idventa,$idcliente)
     
   </tr>
   <tr>
-    <td>2321312</td>
-    <td>21/12/2018</td>
-    <td>Banco Nacion</td>
-    <td>$30000</td>
+    <td>'.$cheque->numero.'</td>
+    <td>'.$cheque->fecha.'</td>
+    <td>'.$cheque->banco.'</td>
+    <td>'.$cheque->importe.'</td>
     
   </tr>
   
 </table>
 </section>
          
-<br>
-<p>Gastos: $15000</p>
+<br>';
+        }
+$output .= '
+<p><strong>Gastos</strong>: $15000</p>
 <p></p>
 <p> <strong>Totales</strong>: $415000</p>
 <hr>
 ';
 
-
-
+if($financiacion=="enable"){
 $output .= '
-
-
-<section id="financiacion" class=" ">
+<section id="financiacion" class="enable">
 <div ALIGN="center" class="box-header with-border">
 <p ALIGN="center" style="font-size:10px;"><strong>FINANCIACION</strong></p>
 </div>
 <p>
  Cuotas de: $ 5000   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Vencimiento 1°: 22/12/2018
  </p>
-</section>
-
+</section>';
+}
+$output .= '
 <div>
     <h5>Firmas</h5>
 </div>

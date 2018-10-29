@@ -281,7 +281,7 @@
                     <div class="box-body">
                         <div class="row margenBoot-25">
                             <div class="col-xs-14 col-lg-6">
-                                <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modal-0km"
+                                <button onclick="enable_0km()" type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modal-0km"
                                     style="margin-bottom: 10%;">0 KM</button>
                             </div>
                             <div class="col-xs-14 col-lg-6">
@@ -404,7 +404,7 @@
                                             <div class="col-xs-12 col-lg-10">
                                                 <div class="form-group">
                                                     <label><strong>Valor de Auto Vendido</strong></label>
-                                                    <input type="number" id="valor_auto_vendido" name="valor_auto_vendido" maxlength="30" required>
+                                                    <input type="number" id="valor_auto_vendido" name="valor_auto_vendido" maxlength="30" required value="0">
                                                 </div>
                                                 <!-- <form method="POST" oninput="resultado.value=parseInt(valor_auto_entregado.value) + parseInt(inpefectivo.value) + parseInt(inpcheques.value)"> -->
 
@@ -672,11 +672,11 @@
                                                     </div>
                                                     <div class="col-xs-12 col-lg-1" style="padding:0;">
                                                         <div class="form-group">
-                                                            <button type="button" onclick="cheques();" name="btn-NuevoCheque"
+                                                            <!--<button type="button" onclick="cheques();" name="btn-NuevoCheque"
                                                                 class="btn btn-primary" style="margin-top:25px;">
                                                                 <span class="glyphicon glyphicon glyphicon-plus"
                                                                     aria-hidden="true"></span>
-                                                            </button>
+                                                            </button> -->
                                                         </div>
                                                     </div>
                                                 </div>
