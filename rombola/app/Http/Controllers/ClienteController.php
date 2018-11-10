@@ -119,7 +119,6 @@ class ClienteController extends Controller
 
     public function store_fast(Request $request)
     {
-      dd("aa".$request->input('nombre').$request->get('apellido').$request->get('email').$request->get('cel_1'));
 
       if ($request->get('email')==null) {
         $email = "";
@@ -129,7 +128,8 @@ class ClienteController extends Controller
 
       $nombre= $request->get('nombre');
       $apellido = $request->get('apellido');
-      $share = new Persona([
+      $share = DB::table('personas')
+      ->insertGetId([
         'dni' => 0,
         'nombre' => $request->get('nombre'),
         'apellido'=> $request->get('apellido'),
@@ -137,19 +137,9 @@ class ClienteController extends Controller
         'email'=> $email,
         'act_empresa'=> ""
       ]);
-      $share->save();
-
-      $nya=$request->get('nombre_apellido');
-      
-      $pers = Persona::where("nombre_apellido","=",$nya)->select("idpersona")->get();
-    
-      foreach ($pers as $item) {
-        //echo "$item->idpersona";
-      }
-      $idpers=$item->idpersona;
 
       $cliente = new Cliente([
-        'cliente_persona' => $idpers,
+        'cliente_persona' => $share,
         'fecha_nacimiento' => "",
         'domicilio'=> "",
         'estado_civil'=> "",
@@ -163,13 +153,12 @@ class ClienteController extends Controller
       if($cel_1 != null)
       {
       $tel = new Telefono([
-        'personas_telefono' => $idpers,
+        'personas_telefono' => $share,
         'num_tel' => $request->get('cel_1'),
         'tipo' => '2'
       ]);
       $tel->save();
     }
-dd("HOL");
      //return redirect('/clientes');
       return redirect('/home')->with('success', 'Cliente Guardado');
     }

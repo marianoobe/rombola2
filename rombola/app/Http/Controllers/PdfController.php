@@ -287,8 +287,8 @@ function convert_html_venta($idventa,$idcliente)
     $consulta_cheques = Cheque::where('cheque_venta','=',$idventa)->get();
     
     $cheques = "disable";
-
-    if ($consulta_cheques!=null) {
+     
+    if (count($consulta_cheques)==100) {
         $cheques = "enable";
     }
 
@@ -309,6 +309,7 @@ function convert_html_venta($idventa,$idcliente)
             padding: 0px;
             height: 170px;
             margin: 0px;
+            font-family: arial, sans-serif;
         }
 
         #comprador {
@@ -317,89 +318,109 @@ function convert_html_venta($idventa,$idcliente)
             height: 200px;
             margin: 0px;
             background-color: #CCCCCC;
+            font-family: arial, sans-serif;
         }
 
         h1 {
             text-align: center;
+            font-family: arial, sans-serif;
         }
         
         p {
             font-size:10px;
+            font-family: arial, sans-serif;
         }
 
         #pepe{
             line-height: 50%;
+            font-family: arial, sans-serif;
         }
 
         #garante{
             line-height: 80%;
+            font-family: arial, sans-serif;
         }
 
         #usado, #usado_entregado{
             line-height: 80%;
+            font-family: arial, sans-serif;
         }
         #izquierda{ width: 280px;
             }
 
         #derecha {
             margin-left:310px;
-            
+            font-family: arial, sans-serif;
         }
 
         #izquierda {
             float: left;
+            font-family: arial, sans-serif;
         }
 
         #derecha {
             float: right;
+            font-family: arial, sans-serif;
         }
 
         #financiado.b {
             visibility: hidden;
+            font-family: arial, sans-serif;
         }
 
         #financiado.a {
             visibility: visible;
+            font-family: arial, sans-serif;
         }
  
         #conyuge.enable {
             visibility: visible;
+            font-family: arial, sans-serif;
         }
 
         #conyuge.disable {
             visibility: hidden;
+            font-family: arial, sans-serif;
         }
 
         #garante.enable {
             visibility: visible;
+            font-family: arial, sans-serif;
         }
 
         #garante.disable {
             visibility: hidden;
+            font-family: arial, sans-serif;
         }
 
         #cero.enable {
             visibility: visible;
+            font-family: arial, sans-serif;
         }
 
         #cero.disable {
             visibility: hidden;
+            font-family: arial, sans-serif;
         }
 
         #usado.enable {
             visibility: visible;
+            font-family: arial, sans-serif;
         }
 
         #usado.disable {
             visibility: hidden;
+            font-family: arial, sans-serif;
         }
 
         #entregado.enable {
             visibility: visible;
+            font-family: arial, sans-serif;
         }
 
         #entregado.disable {
             visibility: hidden;
+            font-family: arial, sans-serif;
         }
 
 
@@ -413,12 +434,14 @@ function convert_html_venta($idventa,$idcliente)
             line-height: 80%;
             width: 350px;  /*Este será el ancho que tendrá tu columna*/
             float:left; /*Aqui determinas de lado quieres quede esta "columna" */
+            font-family: arial, sans-serif;
             }
             
             #principal1{
             line-height: 80%;
             margin-left:370px; /*Este margen hace que no se encime el contenido en tu menúlateral, es     importante que pongas un pocos pixeles más que el ancho  de tu columna lateral*/
             font-size:11px;
+            font-family: arial, sans-serif;
             //border:#000000 1px solid; /*ponemos un dorde para que se vea bonito*/
             }
 
@@ -428,6 +451,7 @@ function convert_html_venta($idventa,$idcliente)
                 //margin: 8px 0;
                 //box-sizing: border-box;
                 border: 1px solid black;
+                font-family: arial, sans-serif;
             }
 
             table {
@@ -441,6 +465,7 @@ function convert_html_venta($idventa,$idcliente)
                 border: 1px solid #dddddd;
                 text-align: left;
                 padding: 8px;
+                font-family: arial, sans-serif;
             }
             
 
@@ -460,12 +485,12 @@ function convert_html_venta($idventa,$idcliente)
     $output .= '
     <div align="right" id="cabecera">
     <img src="C:\xampp\htdocs\rombolaagencia\rombola\public\img\logogrande.png" width="160" height="50" />
-    <div id="pepe"><p style="font-size:8px;">Dirección: AV. Rioja Teléfono: 4220892</p>
+    <div id="pepe"><p style="font-size:8px;">Dirección: Av. Rioja y B. De OHiggins Teléfono: 4220892</p>
     <p style="font-size:8px;">info@ragroup.com.ar</p></div>
     <hr>
-        <p ALIGN="center" style="font-size:10px;"><strong>SOLICITUD DE RESERVA</strong></p>
+        <p ALIGN="center" style="font-size:10px;"><strong>SOLICITUD DE VENTA</strong></p>
     <p align="left" style="font-size:8px;">De mi consideración</p>
-    <p align="left" style="font-size:8px;">Por la presenta solicito a Ustedes la RESERVA de
+    <p align="left" style="font-size:8px;">Por la presenta solicito a Ustedes la VENTA de
         la unidad seguidamente detallada en un todo de acuerdo a las condiciones generales
         impresas en esta solicitud. Las que declaro conocer y aceptar por ser ellas de clara
         comprensión y formar parte de esta petición, a las que voluntariamente adhiero, no significando

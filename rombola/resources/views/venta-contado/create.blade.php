@@ -432,7 +432,7 @@
                                                         data-size="mini" data-on="Si" data-off="No" value="0">
                                                     <input id="valor_cheque" name="valor_cheque" type="text" style="display:none;">
                                                     <br>
-                                                    <input type="number" style="display:none;" maxlength="20" class="form-control"
+                                                    <input type="number" style="display:none;"
                                                         id="inpcheques" name="inpcheques" value="0">
                                                 </div>
                                             </div>

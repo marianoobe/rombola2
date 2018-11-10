@@ -111,7 +111,7 @@ $(document).ready(function () {
                 $("#nombfinanciera").append(`<option value=${element.idfinanciera}>${element.nomb_financ}</option>`);
             });
 
-        });
+        }); 
     });
 
     $('#nombfinanciera').change(function (event) {
