@@ -14,7 +14,10 @@ class Cliente extends Model
     'domicilio', 
     'estado_civil',
     'estado_ficha',
-    'visible'];
+    'visible',
+    'id_user',
+    'interes',
+    'fecha']; 
 
 
 }

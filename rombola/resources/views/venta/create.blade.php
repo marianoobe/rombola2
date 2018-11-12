@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="box-body">
-
+                    <input type="text" id="id_user" name="id_user" style="display:none" value="{{ Auth::user()->id }}">
                     <input type="text" id="cancer" name="cancer" style="display:none">
                     <input type="text" id="tipodni" name="tipodni" style="display:none">
                     <div class="row margenBoot-25">

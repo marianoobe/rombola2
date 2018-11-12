@@ -90,6 +90,7 @@
 											</font>
 										</span></button>
 									<h4 class="modal-title">
+										<input type="text" id="id_user" name="id_user" style="display:none" value="{{ Auth::user()->id }}">
 										<font style="vertical-align: inherit;">
 											<font style="vertical-align: inherit;">NUEVO CLIENTE</font>
 											<h6 style="vertical-align: inherit;">*campos obligatorios</h6>

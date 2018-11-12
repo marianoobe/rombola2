@@ -1,12 +1,18 @@
-$(document).ready(function () {
-    $('#btn_prueba').onclick(function (event) {
-        //document.getElementById("box-financiera").style.display = "block";
-        $.get(`prueba`, function (response, tipofinanciera) {
-            $("#nombfinanciera").empty();
-            response.forEach(element => {
-                $("#nombfinanciera").append(`<option value=${element.idfinanciera}>${element.nomb_financ}</option>`);
-            });
 
-        }); 
-    });
-});
+var f=1;
+function offbell() {
+    if (f==1) {
+        animacion = function(){
+  
+            $("#campana").fadeTo(500, .1)
+                            .fadeTo(500, 1);
+        }
+        setInterval(animacion, 1000);
+        f=2;
+    }
+    if (f==2) {
+        $("#campana").fadeTo(0, 0)
+                            .fadeTo(0, 0);
+    }
+    
+}

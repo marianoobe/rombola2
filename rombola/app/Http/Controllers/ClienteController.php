@@ -77,7 +77,9 @@ class ClienteController extends Controller
             'domicilio'=> $request->get('domicilio'),
             'estado_civil'=> $request->get('estado_civil'),
             'estado_ficha'=> "Completa",
-            'visible'=> 1
+            'visible'=> 1 ,
+            'id_user'=> $request->get('id_user'),
+            'fecha'=> date("d-m-Y")
           ]);
           $cliente->save();
 
@@ -119,7 +121,6 @@ class ClienteController extends Controller
 
     public function store_fast(Request $request)
     {
-
       if ($request->get('email')==null) {
         $email = "";
       }else{
@@ -144,7 +145,9 @@ class ClienteController extends Controller
         'domicilio'=> "",
         'estado_civil'=> "",
         'estado_ficha'=> "Incompleta",
-        'visible'=> 1
+        'visible'=> 1,
+        'id_user'=>$request->get('id_user'),
+        'fecha'=> date("d-m-Y")
       ]);
       $cliente->save();
 

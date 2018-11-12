@@ -27,6 +27,7 @@
                                         @php
                                         $fecha = date("d-m-Y");
                                         @endphp
+                                        <input type="text" id="id_user" name="id_user" style="display:none" value="{{ Auth::user()->id }}">
                                         <input type="text" class="form-control" id="fecha_oper" name="fecha_oper" value="{{$fecha}}"
                                             disabled>
                                         <input id="fecha_oper"name="fecha_oper" value="{{$fecha}}" style="display:none">

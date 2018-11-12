@@ -125,7 +125,7 @@
 										<!-- /.box-body -->
 									  </div>
 							
-						
+									  
 							</div>
 							<div class="col-md-8">
 									<div class="box box-solid">
@@ -207,6 +207,7 @@
 						<input type="hidden" name="_token" value="{{csrf_token()}}">
 						<div class="row margenBoot-25">
 							<div class="col-xs-12 col-lg-12">
+								<input type="number" id="id_user" name="id_user" style="display:none" value="{{ Auth::user()->id }}">
 								<div class="form-group">
 									<label><strong>*Nombres</strong></label>
 									<input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -222,6 +223,10 @@
 								<div class="form-group">
 									<label><strong>*Celular</strong></label>
 									<input type="text" class="form-control" id="cel_1" name="cel_1" required>
+								</div>
+								<div class="form-group">
+										<label><strong>*Automovil de Interes</strong></label>
+										<input type="text" class="form-control" id="interes" name="interes" required>
 								</div>
 							</div>
 						</div><!-- /.modal-dialog -->

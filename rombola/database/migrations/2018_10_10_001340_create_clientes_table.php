@@ -30,6 +30,9 @@ class CreateClientesTable extends Migration
             $table->text('nombre_madre')->nullable();
             $table->text('estado_ficha');
             $table->boolean('visible');
+            $table->integer('id_user');
+            $table->integer('interes')->nullable();
+            $table->text('fecha')->nullable();
             $table->timestamps();
         });
 
