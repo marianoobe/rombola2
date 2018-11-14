@@ -4,10 +4,20 @@
 {{ trans('adminlte_lang::message.home') }}
 @endsection
 
-
 @section('main-content')
-{!! Html::style('css/estilo-home.css') !!}
+@if(session()->has('success'))
+<div id="algo" class="alert alert-success" role="alert">{{session('success')}}</div>
+<script>
+	$("#algo").fadeTo(2000, 500).slideUp(500, function(){
+			$("#algo").slideUp(500);
+			 });
+</script>
+@endif
+@if(session()->has('danger'))
+<div class="alert alert-danger" role="alert">{{session('success')}}</div>
+@endif
 
+{!! Html::style('css/estilo-home.css') !!}
 <div class="container-fluid spark-screen">
 	<div class="row">
 		<div class="col-md-12 col-md-offset-0">
@@ -76,16 +86,63 @@
 								</div>
 							</div>
 							@endcan
-
-							<div class="col-md-4">
-									<div class="box box-primary">
-											<div class="box-header with-border">
-											  <h3 class="box-title">Lista de Tareas</h3>
-											  <div class="box-tools pull-right">
-											  </div>
-											  <!-- /.box-tools -->
+							<div class="col-md-8">
+									<div class="box box-solid">
+	
+										<!-- /.box-header -->
+										<div class="box-body">
+											<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+												<ol class="carousel-indicators">
+													<li data-target="#carousel-example-generic" data-slide-to="0" class=""></li>
+													<li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+													<li data-target="#carousel-example-generic" data-slide-to="2" class="active"></li>
+												</ol>
+												<div class="carousel-inner">
+													<div class="item">
+														<img src="http://placehold.it/900x500/39CCCC/ffffff&amp;text=I+Love+Bootstrap" alt="First slide">
+	
+														<div class="carousel-caption">
+															First Slide
+														</div>
+													</div>
+													<div class="item">
+														<img src="http://placehold.it/900x500/3c8dbc/ffffff&amp;text=I+Love+Bootstrap" alt="Second slide">
+	
+														<div class="carousel-caption">
+															Second Slide
+														</div>
+													</div>
+													<div class="item active">
+														<img src="http://placehold.it/900x500/f39c12/ffffff&amp;text=I+Love+Bootstrap" alt="Third slide">
+	
+														<div class="carousel-caption">
+															Third Slide
+														</div>
+													</div>
+												</div>
+												<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+													<span class="fa fa-angle-left"></span>
+												</a>
+												<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+													<span class="fa fa-angle-right"></span>
+												</a>
 											</div>
-											<!-- /.box-header -->
+										</div>
+										<!-- /.box-body -->
+									</div>
+	
+	
+	
+								</div>
+							<div class="col-md-4">
+								<div class="box box-primary">
+									<div class="box-header with-border">
+										<h3 class="box-title">Lista de Tareas</h3>
+										<div class="box-tools pull-right">
+										</div>
+										<!-- /.box-tools -->
+									</div>
+									<!-- /.box-header -->
 									<div class="box-body">
 										<!--
 										<div class="alert alert-danger alert-dismissible">
@@ -103,78 +160,33 @@
 											This is a danger alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
 										</div>
 									-->
-										<h4><span class="label label-danger btn">Comunicarse con Mariano Benitez. </span></h4>
-										<h4><span class="label label-danger btn">Comunicarse con Mariano Benitez. </span></h4>
+										<h4><span class="label label-danger btn" data-toggle="modal" data-target="#modal-tarea">Comunicarse con
+												Mariano Benitez. </span></h4>
+										<h4><span class="label label-danger btn" data-toggle="modal" data-target="#modalLoginForm">Comunicarse con
+												Mariano Benitez. </span></h4>
 										<h4><span class="label label-danger btn">Comunicarse con Mariano Benitez. </span></h4>
 										<!-- /.box-body -->
 									</div>
 									<!-- /.box -->
 								</div>
-							
+
 								<div class="box box-primary">
-										<div class="box-header with-border">
-										  <h3 class="box-title">Promociones</h3>
-										  <div class="box-tools pull-right">
-										  </div>
-										  <!-- /.box-tools -->
+									<div class="box-header with-border">
+										<h3 class="box-title">Promociones</h3>
+										<div class="box-tools pull-right">
 										</div>
-										<!-- /.box-header -->
-										<div class="box-body">
-										 Chevrolet S10 LB $1400000
-										</div>
-										<!-- /.box-body -->
-									  </div>
-							
-									  
+										<!-- /.box-tools -->
+									</div>
+									<!-- /.box-header -->
+									<div class="box-body">
+										Chevrolet S10 LB $1400000
+									</div>
+									<!-- /.box-body -->
+								</div>
+
+
 							</div>
-							<div class="col-md-8">
-									<div class="box box-solid">
-											
-											<!-- /.box-header -->
-											<div class="box-body">
-											  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-												<ol class="carousel-indicators">
-												  <li data-target="#carousel-example-generic" data-slide-to="0" class=""></li>
-												  <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-												  <li data-target="#carousel-example-generic" data-slide-to="2" class="active"></li>
-												</ol>
-												<div class="carousel-inner">
-												  <div class="item">
-													<img src="http://placehold.it/900x500/39CCCC/ffffff&amp;text=I+Love+Bootstrap" alt="First slide">
-								
-													<div class="carousel-caption">
-													  First Slide
-													</div>
-												  </div>
-												  <div class="item">
-													<img src="http://placehold.it/900x500/3c8dbc/ffffff&amp;text=I+Love+Bootstrap" alt="Second slide">
-								
-													<div class="carousel-caption">
-													  Second Slide
-													</div>
-												  </div>
-												  <div class="item active">
-													<img src="http://placehold.it/900x500/f39c12/ffffff&amp;text=I+Love+Bootstrap" alt="Third slide">
-								
-													<div class="carousel-caption">
-													  Third Slide
-													</div>
-												  </div>
-												</div>
-												<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-												  <span class="fa fa-angle-left"></span>
-												</a>
-												<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-												  <span class="fa fa-angle-right"></span>
-												</a>
-											  </div>
-											</div>
-											<!-- /.box-body -->
-										  </div>
-
-
-
-						    </div>
+							
 						</div>
 					</div>
 					<!-- /.box-body -->
@@ -225,8 +237,8 @@
 									<input type="text" class="form-control" id="cel_1" name="cel_1" required>
 								</div>
 								<div class="form-group">
-										<label><strong>*Automovil de Interes</strong></label>
-										<input type="text" class="form-control" id="interes" name="interes" required>
+									<label><strong>*Automovil de Interes</strong></label>
+									<input type="text" class="form-control" id="interes" name="interes" required>
 								</div>
 							</div>
 						</div><!-- /.modal-dialog -->
@@ -275,49 +287,117 @@
 	</div>
 
 	<!-- Fin Modal Acceso de estado -->
-	<script>
-		$(function ($) {
-			$("#cel_1").mask("(999) 999-9999");
+
+	<!-- Modal Tareas -->
+	<!--Modal -->
+	<div class="modal fade" id="modal-tare" tabindex="-1" role="dialog" aria-labelledby="modal-tarea" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+							<font style="vertical-align: inherit;">
+								<font style="vertical-align: inherit;">×</font>
+							</font>
+						</span></button>
+				</div>
+				<div class="modal-body">
+
+					<div class="form-group">
+						<label><strong>Cliente:</strong> Mariano Benitez </label>
+					</div>
+					<div class="form-group">
+						<label><strong>Automóvil de Interes:</strong> Fiat Palio </label>
+					</div>
+					<div class="form-group">
+						<label><strong>Teléfono:</strong> 02645749807 </label>
+					</div>
+					<div class="form-group">
+						<textarea name="motivo" id="motivo" cols="20" rows="4"></textarea>
+					</div>
+
+				</div><!-- /.modal-dialog -->
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Fin Modal Tarea -->
+
+<!-- Modal -->
+<div id="modal-tarea" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="panel panel-danger">
+					<div class="panel-heading">Comunicarse con cliente</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label><strong>Cliente:</strong> Mariano Benitez </label>
+						</div>
+						<div class="form-group">
+							<label><strong>Automóvil de Interes:</strong> Fiat Palio </label>
+						</div>
+						<div class="form-group">
+							<label><strong>Teléfono:</strong> 02645749807 </label>
+						</div>
+						<div class="form-group">
+							<textarea name="motivo" id="motivo" cols="30" rows="5" placeholder="¿Qué dijo el cliente?"></textarea>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+						<button class="btn btn-primary">Guardar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(function ($) {
+		$("#cel_1").mask("(999) 999-9999");
+	});
+
+	$(document).ready(function () {
+
+		setInterval(loadClima, 60000);
+
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
 		});
 
-		$(document).ready(function () {
+		$('#btn_prueba').click(function (e) {
+			e.preventDefault();
+			var name = "PEPE";
+			$.ajax({
+				type: 'POST',
+				url: '/prueba',
+				data: {
+					name: name
+				},
+				success: function (data) {
 
-			setInterval(loadClima, 60000);
-
-			$.ajaxSetup({
-				headers: {
-					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					setInterval($('#tabla_act').load('prueba1'), 36000);
 				}
 			});
-
-			$('#btn_prueba').click(function (e) {
-				e.preventDefault();
-				var name = "PEPE";
-				$.ajax({
-					type: 'POST',
-					url: '/prueba',
-					data: {
-						name: name
-					},
-					success: function (data) {
-
-						setInterval($('#tabla_act').load('prueba1'), 36000);
-					}
-				});
-			});
-
 		});
 
-		function loadClima() {
-			$('#tabla_act').empty().load('prueba1')
-		}
+	});
 
-		/* $(document).ready(function(){
+	function loadClima() {
+		$('#tabla_act').empty().load('prueba1')
+	}
+
+	/* $(document).ready(function(){
         setInterval(loadClima,2000);
         });
         
         function loadClima(){
         $("#clima").empty().append("Hola");
         }*/
-	</script>
-	@endsection
+</script>
+@endsection

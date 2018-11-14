@@ -114,8 +114,12 @@ class ClienteController extends Controller
           ]);
           $tel->save();
         }
-         //return redirect('/clientes');
+        if($cliente->save()){
           return redirect('/clientes')->with('success', 'Cliente Guardado');
+        }
+        else{
+          return redirect('/clientes')->with('danger', 'Error al Guardar');
+        }
 
     }
 
@@ -149,7 +153,6 @@ class ClienteController extends Controller
         'id_user'=>$request->get('id_user'),
         'fecha'=> date("d-m-Y")
       ]);
-      $cliente->save();
 
       $cel_1=$request->get('cel_1');
       
@@ -163,8 +166,13 @@ class ClienteController extends Controller
       $tel->save();
     }
      //return redirect('/clientes');
+     if($cliente->save()){
       return redirect('/home')->with('success', 'Cliente Guardado');
     }
+    else{
+      return redirect('/home')->with('danger', 'Error al Guardar');
+    }
+  }
     
     
     

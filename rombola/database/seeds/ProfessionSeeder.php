@@ -20,13 +20,7 @@ class ProfessionSeeder extends Seeder
 
         ]);
 
-        DB::table('users')->insert([
-            'name' => "Mariano Benitez",
-            'username' => "mariano",
-            'email' => "mariano@gmail.com",
-            'password' => "mariano12",
-
-        ]);
+       
 
         $estado_cero = array(
             '0' => "Salón",

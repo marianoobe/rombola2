@@ -26,7 +26,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="skin-black sidebar-mini">
+<body class="skin-red sidebar-mini">
     <div style="display: none;" id="cargador_empresa" align="center">
         <br>
          <label style="color:#FFF; background-color:#ABB6BA; text-align:center">&nbsp;&nbsp;&nbsp;Espere... &nbsp;&nbsp;&nbsp;</label>
