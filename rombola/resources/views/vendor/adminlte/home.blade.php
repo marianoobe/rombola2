@@ -99,21 +99,21 @@
 												</ol>
 												<div class="carousel-inner">
 													<div class="item">
-														<img src="http://placehold.it/900x500/39CCCC/ffffff&amp;text=I+Love+Bootstrap" alt="First slide">
+														<img src="https://www.chevrolet.com.ar/content/dam/chevrolet/mercosur/argentina/espanol/index/index-sub-content/01-images/2019-cruze-bretail-masthead.jpg?imwidth=1200" alt="First slide">
 	
 														<div class="carousel-caption">
 															First Slide
 														</div>
 													</div>
 													<div class="item">
-														<img src="http://placehold.it/900x500/3c8dbc/ffffff&amp;text=I+Love+Bootstrap" alt="Second slide">
+														<img src="http://www.fiat-giama.com.ar/img/mobi-01.jpg" alt="Second slide">
 	
 														<div class="carousel-caption">
 															Second Slide
 														</div>
 													</div>
 													<div class="item active">
-														<img src="http://placehold.it/900x500/f39c12/ffffff&amp;text=I+Love+Bootstrap" alt="Third slide">
+														<img src="https://www.ford.com.ar/content/ford/ar/es_ar/site-wide-content/billboard-carousels/homepage-carousel-2/_jcr_content/par/billboard_1745049527/imageComponent/image.imgs.full.high.jpg" alt="Third slide">
 	
 														<div class="carousel-caption">
 															Third Slide
