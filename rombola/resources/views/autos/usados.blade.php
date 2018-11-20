@@ -99,11 +99,7 @@
 									@endforeach()
 								</tbody>
 							</table>
-							<div class="row thumbs">
-								<div class="col-md-2 col-sm-4 col-xs-6">
-									<a id="firstlink" class="venobox vbox-item" data-gall="gall1" data-title="Breakfast Recipe - Basik" href="img/sinimagen.jpg">
-								</div>
-							</div>
+							
 								<!-- Modal form to show a post -->
 
 								<!--Modal -->
@@ -135,7 +131,7 @@
 															<div class="col-md-4">
 																<div class="card">
 																	 <a href={{ url("$file->path")}} data-lightbox="roadtrip" data-title="My caption">
-																	<img class="card-img-top" src={{ url("$file->path")}} class="img-circle" style="width: 120px; height: 120px;">
+																	<img class="card-img-top" src={{ url("$file->path")}}  style="width: 120px; height: 120px;">
 																	<div class="card-body">
 																		<strong class="card-title">{{ $file->title }}</strong>
 																		<p class="card-text">{{ $file->created_at->diffForHumans() }}</p>
