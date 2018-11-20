@@ -105,24 +105,24 @@ function enable_nuevo() {
   } else {
     if (document.getElementById("nuevo").style.display == "block") {
       document.getElementById("nuevo").style.display = "none";
-    $('#nuevo_dni').removeAttr("required");
-    $('#nuevo_nombre').removeAttr("required");
-    $('#nuevo_apellido').removeAttr("required");
-    $('#nuevo_fecha_nac').removeAttr("required");
-    $('#nuevo_estado_civil').removeAttr("required");
-    $('#nuevo_email').removeAttr("required");
-    $('#nuevo_cel_1').removeAttr("required");
-    $('#nuevo_domicilio').removeAttr("required");
-    $('#nuevo_act_empresa').removeAttr("required");
+      $('#nuevo_dni').removeAttr("required");
+      $('#nuevo_nombre').removeAttr("required");
+      $('#nuevo_apellido').removeAttr("required");
+      $('#nuevo_fecha_nac').removeAttr("required");
+      $('#nuevo_estado_civil').removeAttr("required");
+      $('#nuevo_email').removeAttr("required");
+      $('#nuevo_cel_1').removeAttr("required");
+      $('#nuevo_domicilio').removeAttr("required");
+      $('#nuevo_act_empresa').removeAttr("required");
 
-    document.getElementById("dnis").required = true; 
+      document.getElementById("dnis").required = true;
     }
   }
 
   if (document.getElementById("nuevo").style.display == "none" && document.getElementById("buscar").style.display == "block") {
     document.getElementById("nuevo").style.display = "block";
     document.getElementById("buscar").style.display = "none";
-    
+
     document.getElementById("nuevo_dni").required = true;
     document.getElementById("nuevo_nombre").required = true;
     document.getElementById("nuevo_apellido").required = true;
@@ -132,7 +132,7 @@ function enable_nuevo() {
     document.getElementById("nuevo_cel_1").required = true;
     document.getElementById("nuevo_domicilio").required = true;
     document.getElementById("nuevo_act_empresa").required = true;
-    
+
   }
 }
 
@@ -158,7 +158,7 @@ function enable_usado() {
   console.log(document.getElementById("check_usado").value);
 }
 
-function enable_0km(){
+function enable_0km() {
   if (document.getElementById("buscar_usados").style.display == "block") {
     document.getElementById("buscar_usados").style.display = "none";
     $('#select_marcas').required = false;
@@ -175,8 +175,73 @@ function obtenervalue() {
 
 function obtener_cliente_buscado() {
   var res = document.getElementById("dnis").value;
-  console.log(res);
+
   document.getElementById("nya_cliente").value = res;
+
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  $("#cargando").css("display", "inline");
+  //e.preventDefault();
+  var name = res;
+  $.ajax({
+    type: 'PUT',
+    url: '/estado',
+    data: {
+      name: name
+    },
+    success: function (data) {
+      var valor = JSON.parse(data);
+      $("#cargando").css("display", "none");
+      var salida = valor[0].estado_ficha;
+
+
+      if (salida == "Completa") {
+        if (document.getElementById('alert_incompleta').style.display == "block") {
+          $("#alert_incompleta").css("display", "none");
+        }
+        $("#alert_completa").css("display", "block");
+        $('#salida').text("Ficha ".concat(salida));
+      } else {
+        if (document.getElementById('alert_completa').style.display == "block") {
+          $("#alert_completa").css("display", "none");
+        }
+        $("#alert_incompleta").css("display", "block");
+        $('#salida_danger').text("Ficha ".concat(salida));
+      }
+
+      console.log(salida);
+    }
+  });
+
+}
+
+function modal_edit() {
+  
+  var res = document.getElementById("dnis").value;
+  
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  var name = res;
+  $.ajax({
+    type: 'POST',
+    url: '/modal',
+    data: {
+      name: name
+    },
+    success: function (data) {
+      var valor = JSON.parse(data);
+
+      console.log(valor);
+    }
+  });
 
 }
 
@@ -222,7 +287,7 @@ function validar_check_cheque(obj) {
     document.getElementById("detalle_cheque").style.display = "none";
     document.getElementById("valor_cheque").value = "no";
   }
-  
+
 }
 
 function validar_check_financiera(obj) {
@@ -231,76 +296,74 @@ function validar_check_financiera(obj) {
   }
 }
 
-  function validar_entregado(obj) {
-    if (obj.checked == true) {
-      document.getElementById("section_usado_entregado").style.display = "block";
-      document.getElementById("valor_entregado").value = "si";
-      document.getElementById("nomb_titular").required = true;
-      document.getElementById("dominio").required = true;
-      document.getElementById("modelo").required = true;
-      document.getElementById("anio").required = true;
-      document.getElementById("color").required = true;
-      document.getElementById("chasis_num").required = true;
-      document.getElementById("motor_num").required = true;
-    } else {
-      document.getElementById("section_usado_entregado").style.display = "none";
-      document.getElementById("valor_entregado").value = "no";
-    }
-    console.log(document.getElementById("valor_entregado").value);
+function validar_entregado(obj) {
+  if (obj.checked == true) {
+    document.getElementById("section_usado_entregado").style.display = "block";
+    document.getElementById("valor_entregado").value = "si";
+    document.getElementById("nomb_titular").required = true;
+    document.getElementById("dominio").required = true;
+    document.getElementById("modelo").required = true;
+    document.getElementById("anio").required = true;
+    document.getElementById("color").required = true;
+    document.getElementById("chasis_num").required = true;
+    document.getElementById("motor_num").required = true;
+  } else {
+    document.getElementById("section_usado_entregado").style.display = "none";
+    document.getElementById("valor_entregado").value = "no";
   }
+  console.log(document.getElementById("valor_entregado").value);
+}
 
-  function obtener_marca_buscada() {
-    var res = document.getElementById("marca").value;
-    console.log(res);
-    document.getElementById("marca_selec").value = res;
-  
-  }
+function obtener_marca_buscada() {
+  var res = document.getElementById("marca").value;
+  console.log(res);
+  document.getElementById("marca_selec").value = res;
 
-  function viñeta_0km(){
-    var marca = document.getElementById("marca").value;
-    var modelo = document.getElementById("modelo").value;
-    var version = document.getElementById("version").value;
-    var precio = document.getElementById("precio").value;
+}
 
-    
-    if(modelo!=null){
-    
-      document.getElementById("modal_cargar0km").style.display = "none";
-      document.getElementById("auto_cargado").style.display = "block";
-      document.getElementById("valor_auto_vendido").value = precio;
-      document.getElementById("estado_toggle").value = "lista";
-      console.log(document.getElementById("estado_toggle").value);
-      
-    }
+function viñeta_0km() {
+  var marca = document.getElementById("marca").value;
+  var modelo = document.getElementById("modelo").value;
+  var version = document.getElementById("version").value;
+  var precio = document.getElementById("precio").value;
 
-    var estadostock = document.getElementById("stock").className;
-    console.log(estadostock);
-    if (estadostock == "active") {
-      $('#marca').removeAttr("required");
-      $('#modelo').removeAttr("required");
-      $('#version').removeAttr("required");
-      $('#precio').removeAttr("required");
-      document.getElementById("estado_toggle").value = "stock";
-    }
+
+  if (modelo != null) {
+
+    document.getElementById("modal_cargar0km").style.display = "none";
+    document.getElementById("auto_cargado").style.display = "block";
+    document.getElementById("valor_auto_vendido").value = precio;
+    document.getElementById("estado_toggle").value = "lista";
     console.log(document.getElementById("estado_toggle").value);
 
   }
 
-  function send_total(valorCaja1) {
-    var parametros = {
-      "valorCaja1": valorCaja1
-    };
-    $.ajax({
-      data: parametros, //datos que se envian a traves de ajax
-      url: 'ventas.store', //archivo que recibe la peticion
-      type: 'post', //método de envio
-      beforeSend: function () {
-        $("#total").html("Procesando, espere por favor...");
-      },
-      success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-        $("#total").html(response);
-      }
-    });
+  var estadostock = document.getElementById("stock").className;
+  console.log(estadostock);
+  if (estadostock == "active") {
+    $('#marca').removeAttr("required");
+    $('#modelo').removeAttr("required");
+    $('#version').removeAttr("required");
+    $('#precio').removeAttr("required");
+    document.getElementById("estado_toggle").value = "stock";
   }
+  console.log(document.getElementById("estado_toggle").value);
 
-  
+}
+
+function send_total(valorCaja1) {
+  var parametros = {
+    "valorCaja1": valorCaja1
+  };
+  $.ajax({
+    data: parametros, //datos que se envian a traves de ajax
+    url: 'ventas.store', //archivo que recibe la peticion
+    type: 'post', //método de envio
+    beforeSend: function () {
+      $("#total").html("Procesando, espere por favor...");
+    },
+    success: function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+      $("#total").html(response);
+    }
+  });
+}

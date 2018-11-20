@@ -475,6 +475,28 @@ class VentaContadoController extends Controller
       return redirect('/venta')->with('success', 'Venta Guardada');
     }
     
+    public function estado_cliente(Request $request){
+      
+      $estado_ficha= Cliente::select('estado_ficha')
+      ->join('personas','personas.idpersona','clientes.cliente_persona')
+      ->where('nombre_apellido','=',$request->name)
+      ->get();
+      
+      $wizards = json_encode($estado_ficha);
+      return response()->json($wizards); 
+    }
+
+    public function modal(Request $request){
+      dd("HOLA");
+      $client = DB::table('clientes')
+        ->join('personas', 'personas.idpersona' ,'clientes.cliente_persona')
+        ->join('telefonos','telefonos.personas_telefono','personas.idpersona')
+        ->where('personas.nombre_apellido','=', $request->name)
+        ->get();
+      dd($client);
+      $wizards = json_encode($estado_ficha);
+      return response()->json($wizards);
+    }
 
     /**
      * Display the specified resource.

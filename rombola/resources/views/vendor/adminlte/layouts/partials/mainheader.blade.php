@@ -32,7 +32,9 @@
             <ul class="nav navbar-nav">
 
                 <li class="dropdown notifications-menu">
-                    <a id="campana" onclick="offbell()" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <!--<a id="campana" onclick="offbell()" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    -->
+                            <a id="campana" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-bell"></i>
                         <span class="label label-danger">2</span>
                     </a>
@@ -43,19 +45,19 @@
                             <ul class="menu">
 
                                 <li>
-                                    <a href="#">
-                                        <i class="fa fa-warning text-yellow"></i> Comunicarse con Cliente
+                                    <a href="#" data-toggle="modal" data-target="#modal-tarea">
+                                        <i class="fas fa-phone text-red"></i> Comunicarse con Cliente
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <i class="fa fa-warning text-yellow"></i> Comunicarse con Cliente
+                                        <i class="fas fa-phone text-red"></i> Comunicarse con Cliente
                                     </a>
                                 </li>
 
                             </ul>
                         </li>
-                        <li class="footer"><a href="#">View all</a></li>
+                        <li class="footer"><a href="#">Ver Todas</a></li>
                     </ul>
                 </li>
 

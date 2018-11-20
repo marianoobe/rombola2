@@ -5,8 +5,8 @@
 @endforeach()
 <form method="post" action="{{ route('clientes.update',$item->idpersona) }}">
 		<input name="_method" type="hidden" value="PATCH">
-								<input type="hidden" name="_method" value="PUT">
-								<input type="hidden" name="_token" value="{{csrf_token()}}">
+		<input type="hidden" name="_method" value="PUT">
+		<input type="hidden" name="_token" value="{{csrf_token()}}">
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="box box-primary">

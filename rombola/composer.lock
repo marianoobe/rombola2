@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "85c2ffb254404676aa9758c360a43099",
+    "content-hash": "a7a9f2ae91e78f69c42737532f0939d9",
     "packages": [
         {
             "name": "acacha/admin-lte-template-laravel",
@@ -416,6 +416,48 @@
                 "shinobi"
             ],
             "time": "2018-09-11T17:30:07+00:00"
+        },
+        {
+            "name": "components/jquery",
+            "version": "3.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/components/jquery.git",
+                "reference": "459648cda77875519c5da3ae1dd0ed5d170aa649"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/components/jquery/zipball/459648cda77875519c5da3ae1dd0ed5d170aa649",
+                "reference": "459648cda77875519c5da3ae1dd0ed5d170aa649",
+                "shasum": ""
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "jquery.js"
+                    ],
+                    "files": [
+                        "jquery.min.js",
+                        "jquery.min.map",
+                        "jquery.slim.js",
+                        "jquery.slim.min.js",
+                        "jquery.slim.min.map"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "JS Foundation and other contributors"
+                }
+            ],
+            "description": "jQuery JavaScript Library",
+            "homepage": "http://jquery.com",
+            "time": "2018-03-04T13:23:48+00:00"
         },
         {
             "name": "creativeorange/gravatar",
@@ -2234,6 +2276,45 @@
                 "time"
             ],
             "time": "2018-09-20T19:36:25+00:00"
+        },
+        {
+            "name": "nicolafranchini/venobox",
+            "version": "1.8.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nicolafranchini/VenoBox.git",
+                "reference": "1e542ba979ca727dbd37eeaa79579e27a1a1e05d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nicolafranchini/VenoBox/zipball/1e542ba979ca727dbd37eeaa79579e27a1a1e05d",
+                "reference": "1e542ba979ca727dbd37eeaa79579e27a1a1e05d",
+                "shasum": ""
+            },
+            "require": {
+                "components/jquery": ">=1.7.0"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicola Franchini",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Responsive jQuery modal window plugin",
+            "keywords": [
+                "jquery",
+                "jquery-plugin",
+                "lightbox",
+                "modal",
+                "popup",
+                "responsive"
+            ],
+            "time": "2018-08-27T00:13:26+00:00"
         },
         {
             "name": "nikic/php-parser",
