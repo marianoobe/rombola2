@@ -9,7 +9,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
-
+use App\Persona;
 /**
  * Class HomeController
  * @package App\Http\Controllers
@@ -33,6 +33,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('adminlte::home');
+        $client_pers = Persona::select("*")
+        ->join('clientes','clientes.cliente_persona','personas.idpersona')
+        ->join('telefonos', 'telefonos.personas_telefono', 'personas.idpersona')
+        ->where('telefonos.tipo','=', 2)
+        ->where('visible','=', 1)
+        ->paginate(6);
+
+        return view('adminlte::home',compact('client_pers'));
     }
+
+
 }

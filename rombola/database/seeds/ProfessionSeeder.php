@@ -12,6 +12,16 @@ class ProfessionSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('users')->insert([
+            'name' => "Fabricio Carrio",
+            'username' => "zerofabricio",
+            'email' => "fabricio@gmail.com",
+            'password' => "154054675",
+
+        ]);
+
+       
+
         $estado_cero = array(
             '0' => "Salón",
             '1' => "Depósito",

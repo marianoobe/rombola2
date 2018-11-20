@@ -3,7 +3,6 @@
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-
         <!-- Sidebar user panel (optional) -->
         @if (! Auth::guest())
         <div class="user-panel">
@@ -40,7 +39,7 @@ id="empresa-logo" src="/img/logo.png" class="img-circle" width="50" height="50">
             <li class="treeview"><a href="{{ url('home') }}"><i class='glyphicon glyphicon-home'></i> <span>{{
                         trans('adminlte_lang::message.home') }}</span></a></li>
             <li class="treeview">
-                <a href=""><i class='fa fa-user-circle-o '></i> <span>{{ trans('adminlte_lang::message.client') }}</span></a>
+                <a href=""><i class='fas fa-user-alt '></i> <span>{{ trans('adminlte_lang::message.client') }}</span></a>
                 <ul class="treeview-menu">
                     <li><a href="{{ url('clientes') }}">{{ trans('adminlte_lang::message.list-client') }}</a></li>
                 </ul>

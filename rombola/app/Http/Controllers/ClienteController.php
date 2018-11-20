@@ -77,7 +77,9 @@ class ClienteController extends Controller
             'domicilio'=> $request->get('domicilio'),
             'estado_civil'=> $request->get('estado_civil'),
             'estado_ficha'=> "Completa",
-            'visible'=> 1
+            'visible'=> 1 ,
+            'id_user'=> $request->get('id_user'),
+            'fecha'=> date("d-m-Y")
           ]);
           $cliente->save();
 
@@ -112,15 +114,17 @@ class ClienteController extends Controller
           ]);
           $tel->save();
         }
-         //return redirect('/clientes');
+        if($cliente->save()){
           return redirect('/clientes')->with('success', 'Cliente Guardado');
+        }
+        else{
+          return redirect('/clientes')->with('danger', 'Error al Guardar');
+        }
 
     }
 
     public function store_fast(Request $request)
     {
-      dd("aa".$request->input('nombre').$request->get('apellido').$request->get('email').$request->get('cel_1'));
-
       if ($request->get('email')==null) {
         $email = "";
       }else{
@@ -129,7 +133,8 @@ class ClienteController extends Controller
 
       $nombre= $request->get('nombre');
       $apellido = $request->get('apellido');
-      $share = new Persona([
+      $share = DB::table('personas')
+      ->insertGetId([
         'dni' => 0,
         'nombre' => $request->get('nombre'),
         'apellido'=> $request->get('apellido'),
@@ -137,42 +142,37 @@ class ClienteController extends Controller
         'email'=> $email,
         'act_empresa'=> ""
       ]);
-      $share->save();
-
-      $nya=$request->get('nombre_apellido');
-      
-      $pers = Persona::where("nombre_apellido","=",$nya)->select("idpersona")->get();
-    
-      foreach ($pers as $item) {
-        //echo "$item->idpersona";
-      }
-      $idpers=$item->idpersona;
 
       $cliente = new Cliente([
-        'cliente_persona' => $idpers,
+        'cliente_persona' => $share,
         'fecha_nacimiento' => "",
         'domicilio'=> "",
         'estado_civil'=> "",
         'estado_ficha'=> "Incompleta",
-        'visible'=> 1
+        'visible'=> 1,
+        'id_user'=>$request->get('id_user'),
+        'fecha'=> date("d-m-Y")
       ]);
-      $cliente->save();
 
       $cel_1=$request->get('cel_1');
       
       if($cel_1 != null)
       {
       $tel = new Telefono([
-        'personas_telefono' => $idpers,
+        'personas_telefono' => $share,
         'num_tel' => $request->get('cel_1'),
         'tipo' => '2'
       ]);
       $tel->save();
     }
-dd("HOL");
      //return redirect('/clientes');
+     if($cliente->save()){
       return redirect('/home')->with('success', 'Cliente Guardado');
     }
+    else{
+      return redirect('/home')->with('danger', 'Error al Guardar');
+    }
+  }
     
     
     

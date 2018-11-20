@@ -107,6 +107,8 @@ class VentaController extends Controller
         'nombre_madre'=> $request->get('nuevo_nombre_madre'),
         'estado_ficha'=> "Completa",
         'visible'=> true,
+        'id_user'=> $request->get('id_user'),
+        'fecha'=> date("d-m-Y")
       ]);
       $cliente->save();
       //--/insert Persona-Cliente

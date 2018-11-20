@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="box-body">
-
+                    <input type="text" id="id_user" name="id_user" style="display:none" value="{{ Auth::user()->id }}">
                     <input type="text" id="cancer" name="cancer" style="display:none">
                     <input type="text" id="tipodni" name="tipodni" style="display:none">
                     <div class="row margenBoot-25">
@@ -114,75 +114,75 @@
                                 </div>
 
                                 <div class="form-group">
-                                        <label><strong>*Correo Electrónico</strong></label>
-                                        <input type="email" placeholder="email@gmail.com" class="form-control" id="nuevo_email"
-                                            name="nuevo_email" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label><strong>*Celular</strong></label>
-                                        <input type="text" class="form-control" id="nuevo_cel_1" name="nuevo_cel_1"
-                                            required>
-                                    </div>
-                                    
-    
-                                    <div class="form-group">
-                                        <label><strong>*Domicilio </strong>(Calle - N° - Departamento)</label>
-                                        <input type="text" class="form-control" id="nuevo_domicilio" name="nuevo_domicilio">
-                                    </div>
-                                    <div class="form-group">
-                                            <label><strong>*Actividad/Empresa</strong></label>
-                                            <input type="text" class="form-control" id="nuevo_act_empresa" name="nuevo_act_empresa"
-                                                required>
-                                        </div>
-                                   
+                                    <label><strong>*Correo Electrónico</strong></label>
+                                    <input type="email" placeholder="email@gmail.com" class="form-control" id="nuevo_email"
+                                        name="nuevo_email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>*Celular</strong></label>
+                                    <input type="text" class="form-control" id="nuevo_cel_1" name="nuevo_cel_1"
+                                        required>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label><strong>*Domicilio </strong>(Calle - N° - Departamento)</label>
+                                    <input type="text" class="form-control" id="nuevo_domicilio" name="nuevo_domicilio">
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>*Actividad/Empresa</strong></label>
+                                    <input type="text" class="form-control" id="nuevo_act_empresa" name="nuevo_act_empresa"
+                                        required>
+                                </div>
+
                             </div>
                             <div class="col-xs-12 col-lg-6">
-                               
-                                        <div class="form-group">
-                                                <label><strong>Teléfono Laboral</strong>(tel. fijo o celular)</label>
-                                                <input type="text" class="form-control" id="nuevo_cel_2" name="nuevo_cel_2">
-                                            </div>
-    
-                                    <div class="form-group">
-                                            <label><strong>*Profesión</strong></label>
-                                            <input type="text" class="form-control" id="nuevo_profesion" name="nuevo_profesion"
-                                                required>
-                                    </div>
-                                    <div class="form-group">
-                                            <label><strong>*Relación de dependencia</strong></label>
-                                            <br>
-                                            <input id="check_dependencia" onchange="validar_dependencia(this);" type="checkbox"
-                                    data-style="slow" data-toggle="toggle" data-size="normal" data-on="Si" data-off="No">
+
+                                <div class="form-group">
+                                    <label><strong>Teléfono Laboral</strong>(tel. fijo o celular)</label>
+                                    <input type="text" class="form-control" id="nuevo_cel_2" name="nuevo_cel_2">
+                                </div>
+
+                                <div class="form-group">
+                                    <label><strong>*Profesión</strong></label>
+                                    <input type="text" class="form-control" id="nuevo_profesion" name="nuevo_profesion"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>*Relación de dependencia</strong></label>
+                                    <br>
+                                    <input id="check_dependencia" onchange="validar_dependencia(this);" type="checkbox"
+                                        data-style="slow" data-toggle="toggle" data-size="normal" data-on="Si" data-off="No">
                                     <br>
                                 </div>
-                                    <div class="form-group">
-                                            <label><strong>*Domicilio de Empleo</strong>(Calle - N° - Departamento)</label>
-                                            <input type="text" class="form-control" id="nuevo_domicilio_empleo" name="nuevo_domicilio_empleo">
-                                        </div>
-                                        <div class="form-group">
-                                                <label><strong>*Teléfono del Empleo</strong>(Celular o fijo)</label>
-                                                <input type="number" class="form-control" id="nuevo_domicilio_empleo" name="nuevo_domicilio_empleo">
-                                            </div>
-                                    <div class="form-group">
-                                            <label><strong>*Antiguedad</strong></label>
-                                            <input type="number" class="form-control" id="nuevo_antiguedad" name="nuevo_antiguedad"
-                                                required>
-                                        </div>
-                                        <div class="form-group">
-                                                <label><strong>*Ingreso Mensual</strong></label>
-                                                <input type="number" class="form-control" id="nuevo_ingresos_mesuales" name="nuevo_ingresos_mesuales"
-                                                    required>
-                                            </div>
-                                            <div class="form-group">
-                                                    <label><strong>*Nombre de Padre</strong></label>
-                                                    <input type="text" class="form-control" id="nuevo_nombre_padre" name="nuevo_nombre_padre"
-                                                        required>
-                                                </div>
-                                                <div class="form-group">
-                                                        <label><strong>*Nombre de Madre</strong></label>
-                                                        <input type="text" class="form-control" id="nuevo_nombre_madre" name="nuevo_nombre_madre"
-                                                            required>
-                                                    </div>
+                                <div class="form-group">
+                                    <label><strong>*Domicilio de Empleo</strong>(Calle - N° - Departamento)</label>
+                                    <input type="text" class="form-control" id="nuevo_domicilio_empleo" name="nuevo_domicilio_empleo">
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>*Teléfono del Empleo</strong>(Celular o fijo)</label>
+                                    <input type="number" class="form-control" id="nuevo_domicilio_empleo" name="nuevo_domicilio_empleo">
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>*Antiguedad</strong></label>
+                                    <input type="number" class="form-control" id="nuevo_antiguedad" name="nuevo_antiguedad"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>*Ingreso Mensual</strong></label>
+                                    <input type="number" class="form-control" id="nuevo_ingresos_mesuales" name="nuevo_ingresos_mesuales"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>*Nombre de Padre</strong></label>
+                                    <input type="text" class="form-control" id="nuevo_nombre_padre" name="nuevo_nombre_padre"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>*Nombre de Madre</strong></label>
+                                    <input type="text" class="form-control" id="nuevo_nombre_madre" name="nuevo_nombre_madre"
+                                        required>
+                                </div>
                             </div>
                         </div>
 
@@ -217,65 +217,66 @@
                                         <input type="date" class="form-control" id="conyuge_fecha_nac" name="conyuge_fecha_nac">
                                     </div>
                                     <div class="form-group">
-                                            <label><strong>*Celular</strong></label>
-                                            <input type="text" class="form-control" id="conyuge_cel_1" name="conyuge_cel_1">
-                                        </div>
-                                        
-                                            <div class="form-group">
-                                                <label><strong>*Domicilio</strong></label>
-                                                <input type="text" class="form-control" id="conyuge_domicilio" name="conyuge_domicilio">
-                                            </div>
-                                            <div class="form-group">
-                                                <label><strong>*Actividad/Empresa</strong></label>
-                                                <input type="text" class="form-control" id="conyuge_act_empresa" name="conyuge_act_empresa">
-                                            </div>
-                                            <div class="form-group">
-                                                    <label><strong>Teléfono Laboral</strong>(tel. fijo o celular)</label>
-                                                    <input type="text" class="form-control" id="conyuge_cel_2" name="conyuge_cel_2">
-                                                </div>
+                                        <label><strong>*Celular</strong></label>
+                                        <input type="text" class="form-control" id="conyuge_cel_1" name="conyuge_cel_1">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label><strong>*Domicilio</strong></label>
+                                        <input type="text" class="form-control" id="conyuge_domicilio" name="conyuge_domicilio">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>*Actividad/Empresa</strong></label>
+                                        <input type="text" class="form-control" id="conyuge_act_empresa" name="conyuge_act_empresa">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>Teléfono Laboral</strong>(tel. fijo o celular)</label>
+                                        <input type="text" class="form-control" id="conyuge_cel_2" name="conyuge_cel_2">
+                                    </div>
                                 </div>
                                 <div class="col-xs-12 col-lg-6">
 
                                     <div class="form-group">
-                                            <label><strong>*Profesión</strong></label>
-                                            <input type="text" class="form-control" id="conyuge_profesion" name="conyuge_profesion"
-                                                required>
+                                        <label><strong>*Profesión</strong></label>
+                                        <input type="text" class="form-control" id="conyuge_profesion" name="conyuge_profesion"
+                                            required>
                                     </div>
                                     <div class="form-group">
-                                            <label><strong>*Relación de dependencia</strong></label>
-                                            <br>
-                                            <input id="check_dependencia" onchange="validar_dependencia(this);" type="checkbox"
-                                    data-style="slow" data-toggle="toggle" data-size="normal" data-on="Si" data-off="No">
-                                    <br>
-                                
-                                    <div class="form-group">
+                                        <label><strong>*Relación de dependencia</strong></label>
+                                        <br>
+                                        <input id="check_dependencia" onchange="validar_dependencia(this);" type="checkbox"
+                                            data-style="slow" data-toggle="toggle" data-size="normal" data-on="Si"
+                                            data-off="No">
+                                        <br>
+
+                                        <div class="form-group">
                                             <label><strong>*Domicilio de Empleo</strong>(Calle - N° - Departamento)</label>
                                             <input type="text" class="form-control" id="conyuge_domicilio_empleo" name="conyuge_domicilio_empleo">
                                         </div>
                                         <div class="form-group">
-                                                <label><strong>*Teléfono del Empleo</strong>(Celular o fijo)</label>
-                                                <input type="number" class="form-control" id="conyuge_telefono_empleo" name="conyuge_telefono_empleo">
-                                            </div>
-                                    <div class="form-group">
+                                            <label><strong>*Teléfono del Empleo</strong>(Celular o fijo)</label>
+                                            <input type="number" class="form-control" id="conyuge_telefono_empleo" name="conyuge_telefono_empleo">
+                                        </div>
+                                        <div class="form-group">
                                             <label><strong>*Antiguedad</strong></label>
                                             <input type="number" class="form-control" id="conyuge_antiguedad" name="conyuge_antiguedad"
                                                 required>
                                         </div>
                                         <div class="form-group">
-                                                <label><strong>*Ingreso Mensual</strong></label>
-                                                <input type="number" class="form-control" id="conyuge_ingresos_mesuales" name="nuevo_ingresos_mesuales"
-                                                    required>
-                                            </div>
-                                            <div class="form-group">
-                                                    <label><strong>*Nombre de Padre</strong></label>
-                                                    <input type="text" class="form-control" id="conyuge_nombre_padre" name="conyuge_nombre_padre"
-                                                        required>
-                                                </div>
-                                                <div class="form-group">
-                                                        <label><strong>*Nombre de Madre</strong></label>
-                                                        <input type="text" class="form-control" id="conyuge_nombre_madre" name="conyuge_nombre_madre"
-                                                            required>
-                                                    </div>
+                                            <label><strong>*Ingreso Mensual</strong></label>
+                                            <input type="number" class="form-control" id="conyuge_ingresos_mesuales"
+                                                name="nuevo_ingresos_mesuales" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label><strong>*Nombre de Padre</strong></label>
+                                            <input type="text" class="form-control" id="conyuge_nombre_padre" name="conyuge_nombre_padre"
+                                                required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label><strong>*Nombre de Madre</strong></label>
+                                            <input type="text" class="form-control" id="conyuge_nombre_madre" name="conyuge_nombre_madre"
+                                                required>
+                                        </div>
 
 
                                     </div>
@@ -383,60 +384,63 @@
                                         <div class="col-md-14 col-md-offset-0">
                                             <div class="box">
                                                 <div class="box-header with-border">
-                                                        <div class="box-header">
-                                                        </div>
-                                                        <div class="box-body">
-                                                            <form method="GET" action="{{ route('usados') }}" class="navbar-form pull-right"
-                                                                role="search">
-                                                                {{ csrf_field() }}
-                                                                <div class="input-group">
-                                                                    <input type="hidden" id="usado" name="usado" value="2">
-                                                                    <!-- <input type="text" class="form-control" name="name" placeholder="Busqueda"> 
+                                                    <div class="box-header">
+                                                    </div>
+                                                    <div class="box-body">
+                                                        <form method="GET" action="{{ route('usados') }}" class="navbar-form pull-right"
+                                                            role="search">
+                                                            {{ csrf_field() }}
+                                                            <div class="input-group">
+                                                                <input type="hidden" id="usado" name="usado" value="2">
+                                                                <!-- <input type="text" class="form-control" name="name" placeholder="Busqueda"> 
                                                                                 <span class="input-group-btn">
                                                                                     <button type="submit" class="btn btn-default">
                                                                                         <span class="glyphicon glyphicon-search"></span>
                                                                                     </button>
                                                                                 </span>
                                                                             -->
-                                                                </div>
-                                                            </form>
-                                                        </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
 
-                                                        <div>
-                                                            <table class="table table-striped">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th class="sorting" tabindex="0" aria-controls="example"
-                                                                            rowspan="1" colspan="1" aria-label=" : activate to sort column ascending"
-                                                                            style="width: 58px;" />
-                                                                        <th scope="col">ID</th>
-                                                                        <th scope="col">MARCA</th>
-                                                                        <th scope="col">MODELO</th>
-                                                                        <th scope="col">VERSION</th>
-                                                                        <th scope="col">DOMINIO</th>
-                                                                        <th scope="col">COLOR</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    @foreach($autos as $item)
-                                                                    <tr>
-                                                                        <td align="center" style="cursor: default;">
-                                                                        <input class="form-check-input" type="radio" onclick="check_lista_usados('{{$item->dominio}}')" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                                                        </td>
-                                                                        <td>{{$item->id_auto}}</td>
-                                                                        <td>{{$item->marca}}</td>
-                                                                        <td>{{$item->modelo}}</td>
-                                                                        <td>{{$item->version}}</td>
-                                                                        <td>{{$item->dominio}}</td>
-                                                                        <td>{{$item->color}}</td>
+                                                    <div>
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="sorting" tabindex="0" aria-controls="example"
+                                                                        rowspan="1" colspan="1" aria-label=" : activate to sort column ascending"
+                                                                        style="width: 58px;" />
+                                                                    <th scope="col">ID</th>
+                                                                    <th scope="col">MARCA</th>
+                                                                    <th scope="col">MODELO</th>
+                                                                    <th scope="col">VERSION</th>
+                                                                    <th scope="col">DOMINIO</th>
+                                                                    <th scope="col">COLOR</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach($autos as $item)
+                                                                <tr>
+                                                                    <td align="center" style="cursor: default;">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            onclick="check_lista_usados('{{$item->dominio}}')"
+                                                                            name="exampleRadios" id="exampleRadios1"
+                                                                            value="option1" checked>
+                                                                    </td>
+                                                                    <td>{{$item->id_auto}}</td>
+                                                                    <td>{{$item->marca}}</td>
+                                                                    <td>{{$item->modelo}}</td>
+                                                                    <td>{{$item->version}}</td>
+                                                                    <td>{{$item->dominio}}</td>
+                                                                    <td>{{$item->color}}</td>
 
-                                                                        </td>
-                                                                    </tr>
-                                                                    @endforeach()
-                                                                </tbody>
-                                                            </table>
+                                                                    </td>
+                                                                </tr>
+                                                                @endforeach()
+                                                            </tbody>
+                                                        </table>
 
-                                                            {{ $autos->render() }}
+                                                        {{ $autos->render() }}
                             </section>
 
                             <!--
@@ -453,11 +457,7 @@
                                         </section>
                                         -->
                         </div>
-
-
-
                     </div>
-
                 </div>
             </div>
             <!-- /.col -->
@@ -479,14 +479,14 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col-xs-12 col-lg-4">
-                                
+
                                 <div class="row margenBoot-25">
                                     <div class="col-xs-12 col-lg-10">
-                                            <div class="form-group">
-                                                    <label><strong>Valor de Auto Vendido</strong></label>
-                                                    <input id="valor_auto_vendido" type="text" maxlength="150" class="form-control" id="inp-vehiculo"
-                                                        placeholder="">
-                                                </div>
+                                        <div class="form-group">
+                                            <label><strong>Valor de Auto Vendido</strong></label>
+                                            <input id="valor_auto_vendido" type="text" maxlength="150" class="form-control"
+                                                id="inp-vehiculo" placeholder="">
+                                        </div>
                                         <div class="form-group">
                                             <label><strong>Valor de Auto Entregado</strong></label>
                                             <input type="text" maxlength="150" class="form-control" id="inp-vehiculo"
@@ -828,36 +828,23 @@
                         </h4>
                     </div>
                     <div class="modal-body">
-                        <!--<div class="row margenBoot-25">
-											<div class="col-xs-12 col-lg-12">
-                                                <div class="form-group">
-                                                            <label><strong>*Marca</strong></label>
-                                                            <select id="marca" name="marca" class="form-control form-control-sm">
-                                                                <option>Soltero</option>
-                                                                <option>Convive</option>
-                                                                <option>Casado</option>
-                                                                <option>Divorciado</option>
-                                                                <option>Viudo</option>
-                                                            </select>
-                                                        </div>
-												<div class="form-group">
-													<label><strong>*Modelo</strong></label>
-													<input type="text" class="form-control" id="modelo" name="modelo" required>
-                                                </div>
-                                                <div class="form-group">
-                                                        <label><strong>*Versión</strong></label>
-                                                        <input type="text" class="form-control" id="version" name="version" required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                            <label><strong>*Precio</strong></label>
-                                                            <input type="text" class="form-control" id="precio" name="precio" required>
-                                                        </div>
-											</div>
-											
-										</div><!-- /.modal-dialog -->
+
+                        <div class="form-group">
+                            <label><strong>Cantidad de Cuotas</strong></label>
+                            <input type="number" class="form-control" id="cant_cuotas" name="cant_cuotas">
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Monto</strong></label>
+                            <input type="number" class="form-control" id="monto" name="monto">
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Resto</strong></label>
+                            <input type="number" class="form-control" id="resto" name="resto">
+                        </div>
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" onclick="realizaProceso($('#estado_civil').val())" class="btn btn-primary">Continuar</button>
+                            <button type="submit" onclick="" class="btn btn-primary">Continuar</button>
                         </div>
 
                     </div>
@@ -867,116 +854,118 @@
         </div>
 
         <!--Modal 0KM-->
-    <div class="modal fade" id="modal-0km" tabindex="-1" role="dialog" aria-labelledby="modal-0km" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+        <div class="modal fade" id="modal-0km" tabindex="-1" role="dialog" aria-labelledby="modal-0km" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">×</font>
+                                </font>
+                            </span></button>
+                        <h4 class="modal-title">
                             <font style="vertical-align: inherit;">
-                                <font style="vertical-align: inherit;">×</font>
+                                <font style="vertical-align: inherit;">Cargar 0 KM </font>
                             </font>
-                        </span></button>
-                    <h4 class="modal-title">
-                        <font style="vertical-align: inherit;">
-                            <font style="vertical-align: inherit;">Cargar 0 KM </font>
-                        </font>
-                    </h4>
-                </div>
-                <div class="modal-body">
+                        </h4>
+                    </div>
+                    <div class="modal-body">
 
                         <ul class="nav nav-tabs">
-                                <li id="stock" class="active"><a data-toggle="tab" href="#home">STOCK/DEPOSITO</a></li>
-                                <li id="lista"><a data-toggle="tab" href="#menu1">LISTA DE AUTOS</a></li>
-                              </ul>
-                              
-                              <div class="tab-content">
-                                <div id="home" class="tab-pane fade in active">
-                                  <br>
-                                        <table class="table table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="sorting" tabindex="0" aria-controls="example"
-                                                            rowspan="1" colspan="1" aria-label=" : activate to sort column ascending"
-                                                            style="width: 58px;" />
-                                                        <th scope="col">ID</th>
-                                                        <th scope="col">MARCA</th>
-                                                        <th scope="col">MODELO</th>
-                                                        <th scope="col">VERSION</th>
-                                                        <th scope="col">DOMINIO</th>
-                                                        <th scope="col">COLOR</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach($autos as $item)
-                                                    <tr>
-                                                        <td align="center" style="cursor: default;"> 
-                                                            <input class="form-check-input" type="radio" onclick="check_lista_usados('{{$item->dominio}}');"
-                                                                name="exampleRadios" id="exampleRadios1" value="option1"
-                                                                checked>
-                                                        </td>
-                                                        <td>{{$item->id_auto}}</td>
-                                                        <td>{{$item->marca}}</td>
-                                                        <td>{{$item->modelo}}</td>
-                                                        <td>{{$item->version}}</td>
-                                                        <td>{{$item->dominio}}</td>
-                                                        <td>{{$item->color}}</td>
+                            <li id="stock" class="active"><a data-toggle="tab" href="#home">STOCK/DEPOSITO</a></li>
+                            <li id="lista"><a data-toggle="tab" href="#menu1">LISTA DE AUTOS</a></li>
+                        </ul>
 
-                                                        </td>
-                                                    </tr>
-                                                    @endforeach()
-                                                </tbody>
-                                            </table>
+                        <div class="tab-content">
+                            <div id="home" class="tab-pane fade in active">
+                                <br>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
+                                                colspan="1" aria-label=" : activate to sort column ascending" style="width: 58px;" />
+                                            <th scope="col">ID</th>
+                                            <th scope="col">MARCA</th>
+                                            <th scope="col">MODELO</th>
+                                            <th scope="col">VERSION</th>
+                                            <th scope="col">DOMINIO</th>
+                                            <th scope="col">COLOR</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($autos as $item)
+                                        <tr>
+                                            <td align="center" style="cursor: default;">
+                                                <input class="form-check-input" type="radio" onclick="check_lista_usados('{{$item->dominio}}');"
+                                                    name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                            </td>
+                                            <td>{{$item->id_auto}}</td>
+                                            <td>{{$item->marca}}</td>
+                                            <td>{{$item->modelo}}</td>
+                                            <td>{{$item->version}}</td>
+                                            <td>{{$item->dominio}}</td>
+                                            <td>{{$item->color}}</td>
 
-                                            {{ $autos->render() }}
+                                            </td>
+                                        </tr>
+                                        @endforeach()
+                                    </tbody>
+                                </table>
+
+                                {{ $autos->render() }}
 
 
-                                </div>
-                                <div id="menu1" class="tab-pane fade">
-                                    <br>
-                                        <div class="row margenBoot-25">
-                                                <div class="col-xs-12 col-lg-12">
-                                                   <section id="modal_cargar0km" style="display:block">
-                                                        <a href="url">Ver Listas</a>       
-                                                        <div class="form-group">
-                                                                <br>  
-                                                        <select id="marca" name="marca" class="form-control form-control-sm" required>
-                                                            @foreach ($marcas as $item)
-                                                            <option value="{{$item->nombre}}">{{$item->nombre}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label><strong>*Modelo</strong></label>
-                                                        <input type="text" class="form-control" id="modelo" name="modelo" required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label><strong>*Versión</strong></label>
-                                                        <input type="text" class="form-control" id="version" name="version" required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label><strong>*Precio</strong></label>
-                                                        <input type="number" class="form-control" id="precio" name="precio" required>
-                                                    </div>
-                                                    <button onclick="viñeta_0km()" class="btn btn-primary">Guardar</button>
-                                                </section>
-                                                <section id="auto_cargado" style="display:none">
-                                                    <p>Auto Guardado</p>
-                                                </section>
-                                                </div>
-                                        
-                                            </div><!-- /.modal-dialog -->
-                                </div>
-                              </div>
+                            </div>
+                            <div id="menu1" class="tab-pane fade">
+                                <br>
+                                <div class="row margenBoot-25">
+                                    <div class="col-xs-12 col-lg-12">
+                                        <section id="modal_cargar0km" style="display:block">
+                                            <a href="url">Ver Listas</a>
+                                            <div class="form-group">
+                                                <br>
+                                                <select id="marca" name="marca" class="form-control form-control-sm"
+                                                    required>
+                                                    @foreach ($marcas as $item)
+                                                    <option value="{{$item->nombre}}">{{$item->nombre}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label><strong>*Modelo</strong></label>
+                                                <input type="text" class="form-control" id="modelo" name="modelo"
+                                                    required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label><strong>*Versión</strong></label>
+                                                <input type="text" class="form-control" id="version" name="version"
+                                                    required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label><strong>*Precio</strong></label>
+                                                <input type="number" class="form-control" id="precio" name="precio"
+                                                    required>
+                                            </div>
+                                            <button onclick="viñeta_0km()" class="btn btn-primary">Guardar</button>
+                                        </section>
+                                        <section id="auto_cargado" style="display:none">
+                                            <p>Auto Guardado</p>
+                                        </section>
+                                    </div>
 
-                    <div class="modal-footer">
-                        <button onclick="viñeta_0km()" class="btn btn-primary" data-dismiss="modal">Continuar</button>
+                                </div><!-- /.modal-dialog -->
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button onclick="viñeta_0km()" class="btn btn-primary" data-dismiss="modal">Continuar</button>
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Fin Modal 0KM-->
+        <!-- Fin Modal 0KM-->
 
         {!! Form::close() !!}
 

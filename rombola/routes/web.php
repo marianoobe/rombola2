@@ -21,7 +21,8 @@ Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
 //        // Uses Auth Middleware
 //    });
-   Route::get('/home', 'HomeController@index');
+    Route::get('/home', 'HomeController@index');
+    Route::get('prueba', 'HomeController@prueba')->name('pepe');
     Route::get('/listado_usuarios', 'UsuariosController@listado_usuarios');
     Route::post('crear_usuario', 'UsuariosController@crear_usuario');
     Route::post('editar_usuario', 'UsuariosController@editar_usuario');
@@ -64,9 +65,8 @@ Route::delete('/file/{id}','FileController@destroy')->name('deletefile');
 //Route::get('/file/download/{id}','FileController@show')->name('downloadfile');
 //Route::get('/file/email/{id}','FileController@edit')->name('emailfile');
 Route::post('/file/dropzone','FileController@dropzone')->name('dropzone');
-});
 
-Route::get('clientefast','ClienteController@store_fast')->name('clientefast');
+Route::post('clientefast','ClienteController@store_fast')->name('clientefast');
 Route::resource('clientes','ClienteController');
 Route::resource('pre-venta','PreventaController');
 Route::get('pre-venta/cuotas/{id}','PreventaController@getCuotas');
@@ -91,11 +91,11 @@ Route::get('imagen','ImageController@index')->name('imagen');
 
 
 Route::resource('autos', 'AutomovileController');
+});
+Route::post('prueba', 'HomeController@prueba')->name('prueba');
 
-
-
-
-
-
+Route::get('/prueba1', function() {
+    return View::make('adminlte::home-table');
+});
 
 ?>

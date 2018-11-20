@@ -50,7 +50,6 @@
 								<td>{{$item->codigo}}</td>
 								<td>{{$item->nombre_apellido}}</td>
 								<td>{{$item->estado}}</td>
-								<td>{{$item->idventa}}</td>
 								<td style="cursor: default;">
 									@can('vendedor')
 									<a href="" class="btn btn-primary btn-sm">
@@ -128,7 +127,7 @@
 											</div>
 											<div class="col-xs-12 col-lg-6">
 												<div class="col-6">
-													<a id="boton" href="{{ route('venta.create') }}" class="btn btn-success btn-block">
+													<a id="boton" href="{{ route('venta.create') }}" class="btn btn-success btn-block" disable="disable">
 														<span class="fa fa-university"> FINANCIACION</span></a>
 											</div>
 											</div><!-- /.modal-content -->

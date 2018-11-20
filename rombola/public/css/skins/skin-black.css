@@ -60,8 +60,8 @@
 }
 @media (max-width: 767px) {
   .skin-black .main-header > .logo {
-    background-color: #222222;
-    color: #ffffff;
+    background-color: #e41414;
+    color: #e41414;
     border-bottom: 0 solid transparent;
     border-right: none;
   }

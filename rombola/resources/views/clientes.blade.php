@@ -1,6 +1,19 @@
 @extends('adminlte::layouts.app')
 
 @section('seccion')
+@if(session()->has('success'))
+<div class="container-fluid">
+<div id="algo" class="alert alert-success" role="alert" >{{session('success')}}</div>
+</div>
+<script>
+		$("#algo").fadeTo(2000, 500).slideUp(500, function(){
+			$("#algo").slideUp(500);
+			 });
+</script>
+@endif
+@if(session()->has('danger'))
+	<div class="alert alert-danger" role="alert">{{session('danger')}}</div>
+@endif
 <div class="container-fluid spark-screen">
 	<div class="row">
 		<div class="col-md-14 col-md-offset-0">
@@ -13,7 +26,7 @@
 
 					<div class="row">
 						<div class="col-sm-4 pull-left">
-							<button type="button" class="btn btn-success btn-block" id="btn-nuevaFicha" data-toggle="modal" data-target="#modal-clienteNuevo"
+							<button type="button" class="btn btn-primary btn-block" id="btn-nuevaFicha" data-toggle="modal" data-target="#modal-clienteNuevo"
 							 style="margin-bottom:10%;">NUEVO CLIENTE</button>
 
 						</div>
@@ -99,6 +112,7 @@
 								<div class="modal-body">
 									<form method="POST" action="{{ route('clientes.store') }}" enctype="multipart/form-data">
 										<input type="hidden" name="_token" value="{{csrf_token()}}">
+										<input type="number" id="id_user" name="id_user" style="display:none" value="{{ Auth::user()->id }}">
 										<div class="row margenBoot-25">
 											<div class="col-xs-12 col-lg-6">
 												<div class="form-group">

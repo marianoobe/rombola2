@@ -47,7 +47,7 @@ class PreventaController extends Controller
     public function getFinanciera(Request $request, $id){
         if($request->ajax()){
             $financ= Financiera::financieras($id);
-            return response()->json($financ);
+            return response()->json($financ); 
         }
     }
 
