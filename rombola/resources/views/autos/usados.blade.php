@@ -63,9 +63,9 @@
 								<tbody>
 
 
-                                   
+
 									@foreach($autos as $item)
-									
+
 									<input type="hidden" name="idauto" value="{{ $item->id_auto }}">
 									<tr>
 										<td align="center" style="cursor: default;">
@@ -76,7 +76,7 @@
 										<td>{{$item->modelo}}</td>
 										<td>{{$item->version}}</td>
 										<td>{{$item->dominio}}</td>
-										
+
 
 
 										<td style="cursor: default;">
@@ -99,70 +99,64 @@
 									@endforeach()
 								</tbody>
 							</table>
-							<!-- Modal form to show a post -->
+							
+								<!-- Modal form to show a post -->
 
-							<!--Modal -->
-							<div class="modal fade" id="modal-listaNuevo" tabindex="-1" role="dialog" aria-labelledby="modal-listaNuevo"
-							 aria-hidden="true">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+								<!--Modal -->
+								<div class="modal fade" id="modal-listaNuevo" tabindex="-1" role="dialog" aria-labelledby="modal-listaNuevo"
+								 aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+														<font style="vertical-align: inherit;">
+															<font style="vertical-align: inherit;">×</font>
+														</font>
+													</span></button>
+												<h4 class="modal-title">
 													<font style="vertical-align: inherit;">
-														<font style="vertical-align: inherit;">×</font>
+														<font style="vertical-align: inherit;">FOTOS</font>
+
 													</font>
-												</span></button>
-											<h4 class="modal-title">
-												<font style="vertical-align: inherit;">
-													<font style="vertical-align: inherit;">FOTOS</font>
+												</h4>
+											</div>
+											<div class="modal-body">
+												<form method="POST" action="" enctype="multipart/form-data">
 
-												</font>
-											</h4>
-										</div>
-										<div class="modal-body">
-											<form method="POST" action="" enctype="multipart/form-data">
+													<input type="hidden" name="_token" value="{{csrf_token()}}">
+													<div class="box-body">
+														<div class="row">
 
-												<input type="hidden" name="_token" value="{{csrf_token()}}">
-												<div class="box-body">
-													<div class="row">
-
-														@foreach($files as $file)
-														<div class="col-md-4">
-															<div class="card">
-																<img class="card-img-top" src={{ url("$file->path")}} class="img-circle" style="width: 120px; height: 120px;">
-																<div class="card-body">
-																	<strong class="card-title">{{ $file->title }}</strong>
-																	<p class="card-text">{{ $file->created_at->diffForHumans() }}</p>
-																	<form action="{{ route('deletefile', $file->id) }}" method="post">
-																		<input type="hidden" name="_token" value="{{csrf_token()}}">
-																		<input type="hidden" name="_method" value="DELETE">
+															@foreach($files as $file)
+															<div class="col-md-4">
+																<div class="card">
+																	 <a href={{ url("$file->path")}} data-lightbox="roadtrip" data-title="My caption">
+																	<img class="card-img-top" src={{ url("$file->path")}}  style="width: 120px; height: 120px;">
+																	<div class="card-body">
+																		<strong class="card-title">{{ $file->title }}</strong>
+																		<p class="card-text">{{ $file->created_at->diffForHumans() }}</p>
+																		<form action="{{ route('deletefile', $file->id) }}" method="post">
+																			<input type="hidden" name="_token" value="{{csrf_token()}}">
+																			<input type="hidden" name="_method" value="DELETE">
 
 
 
-																	</form>
+																		</form>
+																	</div>
 																</div>
 															</div>
+															@endforeach
 														</div>
-														@endforeach
+
 													</div>
 
-												</div>
-
-												<div class="success">
-
-													<br>
-													<div class="modal-footer">
-														<div class="row margenBoot-25" style="margin-top:25px;">
-															<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-														</div>
-													</div>
-												</div>
+													
+											</div>
+											</form>
 										</div>
-										</form>
 									</div>
 								</div>
-							</div>
 
 
 
-							@endsection
+								@endsection

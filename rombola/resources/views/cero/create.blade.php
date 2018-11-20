@@ -69,11 +69,7 @@
 											<label for="vin"><strong>Vin</strong></label>
 											<input type="text" class="form-control" id="vin" name="vin" required>
 										</div>
-										<div class="form-group">
-											<label for="inp-montoCuota"><strong>Valor del vehiculo</strong></label>
-											<input type="number" maxlength="65" class="form-control" onblur="darFormato(this);" name="precio" id="precio"
-											 placeholder="">
-										</div>
+								
 
 										<div class="form-group">
 											<label for="estado"><strong>Estado</strong></label>

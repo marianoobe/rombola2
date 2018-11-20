@@ -16,18 +16,25 @@
 
 					<div class="box">
 						<div class="box-header with-border">
-							<h3 class="box-title">MODIFICAR AUTOS USADOS</h3>
-
+							<h3 class="box-title">Editar Informacion</h3>
+							<div class="box-tools pull-right">
+								<a class="btn btn-xs btn-success" onclick="history.back(1);">
+									<i class="fa fa-chevron-left"></i> VOLVER</a>
+								<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+								</button>
+							</div>
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
 									<i class="fa fa-minus"></i></button>
 
 							</div>
 						</div>
+
 						<!-- Default box -->
 						<div class="box-tools pull-right">
-							<button type="button" onclick="habilitarEdicion();" class="btn btn-xl btn-success">Modificar</button>
+							<button type="button" onclick="habilitarEdicion();" class="btn btn-xl btn-primary">Modificar</button>
 						</div>
+
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
@@ -40,8 +47,8 @@
 
 								<form method="POST" action="{{ route('autos.update',$item->id_auto) }}">
 									<input name="_method" type="hidden" value="PATCH">
-								<input type="hidden" name="_method" value="PUT">
-								<input type="hidden" name="_token" value="{{csrf_token()}}">
+									<input type="hidden" name="_method" value="PUT">
+									<input type="hidden" name="_token" value="{{csrf_token()}}">
 									<input type="hidden" id="usado" name="usado" value="usado">
 									<div class="row margenBoot-25">
 										<div class="col-xs-12 col-lg-6">
@@ -74,7 +81,7 @@
 										</div>
 										<div class="col-xs-12 col-lg-6">
 
-											
+
 
 											<div class="form-group">
 												<label for="color"><strong>Color</strong></label>
@@ -84,21 +91,15 @@
 										</div>
 										<div class="col-xs-12 col-lg-6">
 
-											<div class="form-group">
-												<label for="chasis_num"><strong>Numero de Chasis</strong></label>
-												<input type="text" class="form-control" id="chasis_num" name="chasis_num" 
-												 disabled="disabled" value="{{ $item->chasis_num }}">
-											</div>
+
 
 											<div class="form-group">
 												<label for="motor_num"><strong>Fecha Ingrreso</strong></label>
-												<input type="date" class="form-control" id="fecha" name="fecha" value={{ $item->fechaingreso }}
-												 disabled="disabled">
+												<input type="date" class="form-control" id="fecha" name="fecha" value={{ $item->fechaingreso }} disabled="disabled">
 											</div>
 											<div class="form-group">
 												<label for="estado"><strong>Estado</strong></label>
-												<input type="text" id="estado" name="estado" class="form-control form-control-sm"  disabled="disabled" value={{ $item->nombreEstado }}
-												>
+												<input type="text" id="estado" name="estado" class="form-control form-control-sm" disabled="disabled" value={{ $item->nombreEstado }}>
 
 												</input>
 											</div>
