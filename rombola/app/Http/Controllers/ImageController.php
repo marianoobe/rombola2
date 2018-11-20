@@ -15,7 +15,11 @@ class ImageController extends Controller
     {
     	return view('resizeImage');
     }
+public function index(){
+ #endregion
+     return view('imagen');
 
+}
 
     /**
      * Show the form for creating a new resource.

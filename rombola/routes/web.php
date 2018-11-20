@@ -49,10 +49,10 @@ Route::group(['middleware' => 'auth'], function () {
     #adminlte_routes
     
 
-   Route::resource('listaprecios', 'ListaPrecioController');
+   Route::resource('listaprecios', 'ListaprecioController');
 Route::resource('cero', 'AutoceroController');
 
-Route::get('autos/{auto}/updateusado','AutomovileController@editusado')->name('updateusado');
+Route::get('autos/{auto}/updateusado','AutomovileController@updateusado')->name('updateusado');
 Route::get('autos/{auto}/editusado','AutomovileController@editusado')->name('editusado');
 Route::get('autos/usados','AutomovileController@usados')->name('usados');
 Route::get('autos/createusados','AutomovileController@createusados')->name('agregarusado');
@@ -85,7 +85,7 @@ Route::resource('venta','VentaController');
 
 Route::resource('financiera', 'FinancieraController');
 
-
+Route::get('imagen','ImageController@index')->name('imagen');
 
 
 
