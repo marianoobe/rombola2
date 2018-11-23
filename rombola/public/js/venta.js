@@ -59,11 +59,20 @@ function enable_buscar() {
     $('#nuevo_cel_1').removeAttr("required");
     $('#nuevo_domicilio').removeAttr("required");
     $('#nuevo_act_empresa').removeAttr("required");
+    $("#alert_incompleta").css("display", "none");
+    $("#alert_completa").css("display", "none");
+    $("#panel_financ").css("display", "none");
+
 
   } else {
     if (document.getElementById("buscar").style.display == "block") {
       document.getElementById("buscar").style.display = "none";
       $('#dnis').removeAttr("required");
+      $("#alert_incompleta").css("display", "none");
+      $("#alert_completa").css("display", "none");
+    $("#panel_financ").css("display", "none");
+
+
     }
   }
 
@@ -81,6 +90,11 @@ function enable_buscar() {
     $('#nuevo_domicilio').removeAttr("required");
     $('#nuevo_act_empresa').removeAttr("required");
     document.getElementById("cancer").value = "buscar";
+    $("#alert_incompleta").css("display", "none");
+    $("#alert_completa").css("display", "none");
+    $("#panel_financ").css("display", "none");
+
+
   }
 }
 
@@ -98,6 +112,9 @@ function enable_nuevo() {
     document.getElementById("nuevo_cel_1").required = true;
     document.getElementById("nuevo_domicilio").required = true;
     document.getElementById("nuevo_act_empresa").required = true;
+    $("#alert_incompleta").css("display", "none");
+    $("#alert_completa").css("display", "none");
+    $("#panel_financ").css("display", "none");
 
     $('#dnis').removeAttr("required");
 
@@ -114,6 +131,9 @@ function enable_nuevo() {
       $('#nuevo_cel_1').removeAttr("required");
       $('#nuevo_domicilio').removeAttr("required");
       $('#nuevo_act_empresa').removeAttr("required");
+      $("#alert_incompleta").css("display", "none");
+      $("#alert_completa").css("display", "none");
+      $("#panel_financ").css("display", "none");
 
       document.getElementById("dnis").required = true;
     }
@@ -132,6 +152,9 @@ function enable_nuevo() {
     document.getElementById("nuevo_cel_1").required = true;
     document.getElementById("nuevo_domicilio").required = true;
     document.getElementById("nuevo_act_empresa").required = true;
+    $("#alert_incompleta").css("display", "none");
+    $("#alert_completa").css("display", "none");
+    $("#panel_financ").css("display", "none");
 
   }
 }
@@ -184,7 +207,6 @@ function obtener_cliente_buscado() {
     }
   });
 
-  $("#cargando").css("display", "inline");
   //e.preventDefault();
   var name = res;
   $.ajax({
@@ -231,15 +253,66 @@ function modal_edit() {
 
   var name = res;
   $.ajax({
-    type: 'POST',
-    url: '/modal',
+    type: 'PUT',
+    url: '/modales',
     data: {
       name: name
     },
     success: function (data) {
       var valor = JSON.parse(data);
-
+      document.getElementById('dni').value = (valor[0].dni);
+      document.getElementById('nombre').value = (valor[0].nombre);
+      document.getElementById('apellido').value = (valor[0].apellido);
+      document.getElementById('cel_1').value = (valor[0].num_tel);
+      document.getElementById('email').value = (valor[0].email);
       console.log(valor);
+    }
+  });
+
+}
+
+function update_modal(){
+
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $("#cargando").css("display", "inline");
+  
+  var dni = document.getElementById("dni").value;;
+  var nombre = document.getElementById("nombre").value;;
+  var apellido = document.getElementById("apellido").value;;
+  var email = document.getElementById("email").value;;
+  var cel_1 = document.getElementById("cel_1").value;;
+  var act_empresa = document.getElementById("act_empresa").value;;
+  var fecha_nac = document.getElementById("fecha_nac").value;;
+  var domicilio = document.getElementById("domicilio").value;;
+  var estado_civil = document.getElementById("estado_civil").value;;
+
+  $.ajax({
+    type: 'POST',
+    url: '/updatemodal',
+    data: {
+      dni: dni,
+      nombre: nombre,
+      apellido: apellido,
+      email: email,
+      cel_1: cel_1,
+      act_empresa: act_empresa,
+      fecha_nac: fecha_nac,
+      domicilio: domicilio,
+      estado_civil: estado_civil
+
+    },
+    success: function (data) {
+      $("#cargando").css("display", "none");
+      $("#alert_completa").css("display", "block");
+      $("#alert_incompleta").css("display", "none");
+      $('#modal-clienteNuevo').modal('hide');
+      $('#salida').text("Ficha Actualizada");
+      console.log(data);
+
     }
   });
 

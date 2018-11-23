@@ -66,8 +66,12 @@
 								<td>{{$item->email}}</td>
 								<td>{{$item->domicilio}}</td>
 								<td>{{$item->num_tel}}</td>
-
-								<td> <span><strong>{{$item->estado_ficha}}</strong></span></td>
+								@php
+									if($item->estado_ficha == "Completa"){$clase="label-success";}
+									else{$clase="label-danger";}
+								@endphp
+                                
+								<td> <span id="estado_ficha" class={{$clase}}><strong>{{$item->estado_ficha}}</strong></span></td>
 								<td style="cursor: default;">
 									@can('vendedor')
 									<a href="{{ route('clientes.edit',$item->dni)}}" class="btn btn-primary btn-sm">
@@ -199,6 +203,11 @@
 						}
 
 						$(document).ready(function () {
+							console.log(document.getElementById("estado_ficha").value);
+
+							if(document.getElementById("estado_ficha").value == "Completa"){
+							$("#estado_ficha").addClass("label label-success");
+							}
 
 							$("#myInput").on("keyup", function () {
 								var value = $(this).val().toLowerCase();

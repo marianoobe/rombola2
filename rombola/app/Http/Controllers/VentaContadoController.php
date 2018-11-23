@@ -67,7 +67,7 @@ class VentaContadoController extends Controller
      */
     public function store(Request $request)
     {
-      
+  
       $nombre = $request->get('nuevo_nombre');
       $apellido = $request->get('nuevo_apellido');
 
@@ -453,7 +453,8 @@ class VentaContadoController extends Controller
           'codigo' => $codigo,
           'resto' =>$resto,
           'visible' =>1,
-          'estado' =>'En Negociacion'
+          'estado' =>'En Negociacion',
+          'id_user'=> $request->get('id_user')
           ]);
          
           //insert Cheque -------
@@ -476,7 +477,6 @@ class VentaContadoController extends Controller
     }
     
     public function estado_cliente(Request $request){
-      
       $estado_ficha= Cliente::select('estado_ficha')
       ->join('personas','personas.idpersona','clientes.cliente_persona')
       ->where('nombre_apellido','=',$request->name)
@@ -486,15 +486,15 @@ class VentaContadoController extends Controller
       return response()->json($wizards); 
     }
 
-    public function modal(Request $request){
-      dd("HOLA");
+    public function edit_cliente(Request $request){
       $client = DB::table('clientes')
         ->join('personas', 'personas.idpersona' ,'clientes.cliente_persona')
         ->join('telefonos','telefonos.personas_telefono','personas.idpersona')
         ->where('personas.nombre_apellido','=', $request->name)
         ->get();
-      dd($client);
-      $wizards = json_encode($estado_ficha);
+
+      $wizards = json_encode($client);
+  
       return response()->json($wizards);
     }
 

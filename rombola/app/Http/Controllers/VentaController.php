@@ -41,20 +41,24 @@ class VentaController extends Controller
      */
     public function create()
     {
-        $tipo_finan = TipoFinanciera::pluck('nombretipo');
-        $nombapell = Persona::pluck('nombre_apellido');
-        
-        $autos=Autocero::select("*")   
-       ->orderBY('id_autocero')
-       ->paginate(5);
+      $tipo_finan = TipoFinanciera::pluck('nombretipo');
+      $nombapell = Persona::pluck('nombre_apellido');
 
-       $auto_usado=Automovile::select("*")      
-       ->orderBY('id_auto')
-       ->paginate(5);
+      $autos=Automovile::select("*")   
+      ->join('marcas','marcas.id_marca','automoviles.marca_id')
+      ->join('autoceros','autoceros.auto_id','automoviles.id_auto')
+      ->paginate(5);
+      
 
-        $marcas=Marca::All();
+     $auto_usado=Automovile::select("*")     
+     ->join('marcas','marcas.id_marca','automoviles.marca_id')
+     ->join('autosusados','autosusados.auto_id','automoviles.id_auto')
+     ->paginate(5);
+     
 
-        return view('venta.create',compact('tipo_finan','nombapell','autos','marcas','auto_usado'));
+     $marcas=Marca::All();
+
+      return view('venta.create',compact('tipo_finan','nombapell','autos','marcas','auto_usado'));
     }
 
     /**
@@ -66,7 +70,7 @@ class VentaController extends Controller
     
       public function store(Request $request)
     {
-      //dd($request->get('valor_cheque').$request->get('banco').$request->get('numero_cheque').$request->get('fecha_cheque'));
+      dd("ENTE");
       $nombre = $request->get('nuevo_nombre');
       $apellido = $request->get('nuevo_apellido');
 
@@ -118,7 +122,7 @@ class VentaController extends Controller
         'personas_telefono' => $idpers,
         'num_tel' => $request->get('nuevo_cel_1'),
         'tipo' => '2'
-      ]);
+      ]); 
       $tel->save();
       }
 
@@ -208,7 +212,7 @@ class VentaController extends Controller
         }
       }
       //--/insert Persona-Garante
-      /*
+      
       $nombre_garante = $request->get('garante_nombre');
       $apellido_garante = $request->get('garante_apellido');
 
@@ -254,11 +258,8 @@ class VentaController extends Controller
 
           }
 
-          */
-
           /*insert Auto 0 KM -------*/
 
-          //dd("salida".$request->get('estado_toggle'));
           $idauto0km=null;
           if ($request->get('estado_toggle')=="stock") {
             
@@ -388,37 +389,37 @@ class VentaController extends Controller
           
           foreach ($venta_operac as $item) {}
             //dd($item->id_operacion);
-          $venta = new Venta([
-          'operacion_venta' => $item->id_operacion,
-          'idventa_autousado' => $idusado,
-          'idventa_auto0km' => $idauto0km,
-          'precio_auto_vendido' => $request->get('valor_auto_vendido'),
-          'efectivo' => $request->get('inpefectivo'),
-          'cod_part1' => $part1,
-          'cod_part2' => $part2,
-          'codigo' => $codigo,
-          'resto' =>$resto,
-          'visible' =>1,
-          'estado' =>'En Negociacion'
-          ]);
-          $venta->save();
+            
+            $venta = DB::table('ventas')
+            ->insertGetId([
+            'operacion_venta' => $item->id_operacion,
+            'idventa_autousado' => $idusado,
+            'idventa_auto0km' => $idauto0km,
+            'idventa_autoentregado' => $id_autoentragado,
+            'precio_auto_vendido' => $request->get('valor_auto_vendido'),
+            'efectivo' => $request->get('inpefectivo'),
+            'cod_part1' => $part1,
+            'cod_part2' => $part2,
+            'codigo' => $codigo,
+            'resto' =>$resto,
+            'visible' =>1,
+            'estado' =>'En Negociacion',
+            'id_user'=> $request->get('id_user')
+            ]);
          
           //insert Cheque -------
           $cheque = $request->get('valor_cheque');
           if ($cheque == 'si') {
-            $venta_cheque = Venta::where("codigo","=",$codigo)->select("idventa")->get();
-          foreach ($venta_cheque as $item) {}
 
-            $venta = new Venta([
-              'cheque_venta' => $item->idventa,
+            $chequenuevo = DB::table('cheques')
+            ->insertGetId([
+              'cheque_venta' => $venta,
               'numero' => $request->get('numero_cheque'),
               'fecha' => $request->get('fecha_cheque'),
               'banco' => $request->get('banco'),
               'importe' => $request->get('importe_cheque'),
               'estado' => "",
               ]);
-              $venta->save();
-
           }
           /*   dd("HOLA");*/
 

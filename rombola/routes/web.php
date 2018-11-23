@@ -66,7 +66,7 @@ Route::delete('/file/{id}','FileController@destroy')->name('deletefile');
 Route::post('/file/dropzone','FileController@dropzone')->name('dropzone');
 });
 
-Route::get('clientefast','ClienteController@store_fast')->name('clientefast');
+Route::post('clientefast','ClienteController@store_fast')->name('clientefast');
 Route::resource('clientes','ClienteController');
 Route::resource('pre-venta','PreventaController');
 Route::get('pre-venta/cuotas/{id}','PreventaController@getCuotas');
@@ -88,14 +88,17 @@ Route::resource('financiera', 'FinancieraController');
 Route::get('imagen','ImageController@index')->name('imagen');
 
 
-
-
 Route::resource('autos', 'AutomovileController');
 
+Route::post('prueba', 'HomeController@prueba')->name('prueba');
+Route::put('estado', 'VentaContadoController@estado_cliente')->name('estado');
+Route::put('modales', 'VentaContadoController@edit_cliente')->name('modales');
+Route::post('updatemodal','ClienteController@update_modal')->name('updatemodal');
 
 
-
-
+Route::get('/prueba1', function() {
+    return View::make('adminlte::home-table');
+});
 
 
 ?>

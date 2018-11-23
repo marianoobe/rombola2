@@ -242,6 +242,35 @@ class ClienteController extends Controller
       return redirect('/clientes')->with('success', 'Stock has been updated');   
     }
 
+    public function update_modal(Request $request)
+    {
+      
+      $nombre= $request->get('nombre');
+      $apellido = $request->get('apellido');
+      DB::table('clientes')
+        ->join('personas', 'personas.idpersona' ,'clientes.cliente_persona')
+        ->join('telefonos','telefonos.personas_telefono','personas.idpersona')
+            ->where('nombre_apellido',"=",$nombre." ".$apellido)
+            ->update([
+                "dni" => $request->get('dni'),
+                "nombre" => $request->get('nombre'),
+                "apellido" => $request->get('apellido'),
+                "nombre_apellido" => $nombre." ".$apellido,
+                "email" => $request->get('email'),
+                "domicilio" => $request->get('domicilio'),
+                "act_empresa" => $request->get('act_empresa'),
+                "num_tel" => $request->get('cel_1'),
+                "fecha_nacimiento" => $request->get('fecha_nac'),
+                "estado_civil" => $request->get('estado_civil'),
+                "estado_ficha" => "Completa",
+
+        ]);
+
+        //$wizards = json_encode($client);
+        $wizards="Actualizado";
+        return response()->json($wizards);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
