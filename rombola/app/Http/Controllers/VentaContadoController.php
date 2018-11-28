@@ -454,7 +454,8 @@ class VentaContadoController extends Controller
           'resto' =>$resto,
           'visible' =>1,
           'estado' =>'En Negociacion',
-          'id_user'=> $request->get('id_user')
+          'id_user'=> $request->get('id_user'),
+          'tipo'=> "contado"
           ]);
          
           //insert Cheque -------

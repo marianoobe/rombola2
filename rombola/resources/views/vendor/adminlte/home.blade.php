@@ -18,6 +18,7 @@
 @endif
 
 {!! Html::style('css/estilo-home.css') !!}
+{!! Html::script('js/home.js') !!}
 <div class="container-fluid spark-screen">
 	<div class="row">
 		<div class="col-md-12 col-md-offset-0">
@@ -86,6 +87,7 @@
 								</div>
 							</div>
 							@endcan
+							@can('vendedor')
 							<div class="col-md-8">
 									<div class="box box-solid">
 	
@@ -186,7 +188,8 @@
 
 
 							</div>
-							
+							@endcan
+
 						</div>
 					</div>
 					<!-- /.box-body -->

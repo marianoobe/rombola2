@@ -29,8 +29,9 @@
                                         @php
                                         $fecha = date("d-m-Y");
                                         @endphp
-                                        <input type="text" class="form-control" id="fecha_oper" name="fecha_oper" value="{{$fecha}}"
-                                            disabled>
+                                        <input type="text" class="form-control" value="{{$fecha}}" disabled>
+                                        <input type="text" class="form-control" style="display:none" id="fecha_oper"
+                                            name="fecha_oper" value="{{$fecha}}" />
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
@@ -94,67 +95,10 @@
                                 <div class="col-xs-12 col-lg-4">
                                 </div>
 
-                                <div id="panel_financ" style="display:none;" class="panel panel-default">
-                                        <div class="panel-body">
-                                <div class="col-xs-12 col-lg-12">
-                                    <div class="col-xs-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label><strong>Teléfono Laboral</strong>(tel. fijo o celular)</label>
-                                            <input type="text" class="form-control" id="nuevo_cel_2" name="nuevo_cel_2">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label><strong>*Profesión</strong></label>
-                                            <input type="text" class="form-control" id="nuevo_profesion" name="nuevo_profesion"
-                                                required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label><strong>*Relación de dependencia</strong></label>
-                                            <br>
-                                            <input id="check_dependencia" onchange="validar_dependencia(this);" type="checkbox"
-                                                data-style="slow" data-toggle="toggle" data-size="normal" data-on="Si"
-                                                data-off="No">
-                                            <br>
-                                        </div>
-                                        <div class="form-group">
-                                            <label><strong>*Domicilio de Empleo</strong>(Calle - N° - Departamento)</label>
-                                            <input type="text" class="form-control" id="nuevo_domicilio_empleo" name="nuevo_domicilio_empleo">
-                                        </div>
-                                        <div class="form-group">
-                                            <label><strong>*Teléfono del Empleo</strong>(Celular o fijo)</label>
-                                            <input type="number" class="form-control" id="nuevo_domicilio_empleo" name="nuevo_domicilio_empleo">
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label><strong>*Antiguedad</strong></label>
-                                            <input type="number" class="form-control" id="nuevo_antiguedad" name="nuevo_antiguedad"
-                                                required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label><strong>*Ingreso Mensual</strong></label>
-                                            <input type="number" class="form-control" id="nuevo_ingresos_mesuales" name="nuevo_ingresos_mesuales"
-                                                required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label><strong>*Nombre de Padre</strong></label>
-                                            <input type="text" class="form-control" id="nuevo_nombre_padre" name="nuevo_nombre_padre"
-                                                required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label><strong>*Nombre de Madre</strong></label>
-                                            <input type="text" class="form-control" id="nuevo_nombre_madre" name="nuevo_nombre_madre"
-                                                required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-
-                            
                             </div>
                             <div class="col-xs-14 col-lg-6">
-                                <button onclick="enable_nuevo()" type="button" class="btn btn-success btn-block" style="margin-bottom: 10%;">Nuevo
+                                <button onclick="enable_nuevo_financ();" type="button" class="btn btn-success btn-block"
+                                    style="margin-bottom: 10%;">Nuevo
                                     Cliente</button>
                             </div>
                         </div>
@@ -163,17 +107,15 @@
                                 <div class="col-xs-12 col-lg-6">
                                     <div class="form-group">
                                         <label><strong>*DNI</strong></label>
-                                        <input type="number" class="form-control" id="nuevo_dni" name="dni" required>
+                                        <input type="number" class="form-control" id="nuevo_dni" name="nuevo_dni">
                                     </div>
                                     <div class="form-group">
                                         <label><strong>*Nombres</strong></label>
-                                        <input type="text" class="form-control" id="nuevo_nombre" name="nombre"
-                                            required>
+                                        <input type="text" class="form-control" id="nuevo_nombre" name="nuevo_nombre">
                                     </div>
                                     <div class="form-group">
                                         <label><strong>*Apellidos</strong></label>
-                                        <input type="text" class="form-control" id="nuevo_apellido" name="apellido"
-                                            required>
+                                        <input type="text" class="form-control" id="nuevo_apellido" name="nuevo_apellido">
                                     </div>
                                     <div class="form-group">
                                         <label><strong>*Fecha de Nacimiento</strong></label>
@@ -193,14 +135,12 @@
                                     <div class="form-group">
                                         <label><strong>*Correo Electrónico</strong></label>
                                         <input type="email" placeholder="email@gmail.com" class="form-control" id="nuevo_email"
-                                            name="nuevo_email" required>
+                                            name="nuevo_email">
                                     </div>
                                     <div class="form-group">
                                         <label><strong>*Celular</strong></label>
-                                        <input type="text" class="form-control" id="nuevo_cel_1" name="nuevo_cel_1"
-                                            required>
+                                        <input type="text" class="form-control" id="nuevo_cel_1" name="nuevo_cel_1">
                                     </div>
-
 
                                     <div class="form-group">
                                         <label><strong>*Domicilio </strong>(Calle - N° - Departamento)</label>
@@ -208,8 +148,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label><strong>*Actividad/Empresa</strong></label>
-                                        <input type="text" class="form-control" id="nuevo_act_empresa" name="nuevo_act_empresa"
-                                            required>
+                                        <input type="text" class="form-control" id="nuevo_act_empresa" name="nuevo_act_empresa">
                                     </div>
 
                                 </div>
@@ -217,13 +156,12 @@
 
                                     <div class="form-group">
                                         <label><strong>Teléfono Laboral</strong>(tel. fijo o celular)</label>
-                                        <input type="text" class="form-control" id="nuevo_cel_2" name="nuevo_cel_2">
+                                        <input type="text" class="form-control" id="telefono_laboral" name="telefono_laboral">
                                     </div>
 
                                     <div class="form-group">
                                         <label><strong>*Profesión</strong></label>
-                                        <input type="text" class="form-control" id="nuevo_profesion" name="nuevo_profesion"
-                                            required>
+                                        <input type="text" class="form-control" id="nuevo_profesion" name="nuevo_profesion">
                                     </div>
                                     <div class="form-group">
                                         <label><strong>*Relación de dependencia</strong></label>
@@ -231,6 +169,9 @@
                                         <input id="check_dependencia" onchange="validar_dependencia(this);" type="checkbox"
                                             data-style="slow" data-toggle="toggle" data-size="normal" data-on="Si"
                                             data-off="No">
+                                        <input id="check_dependencia" name="check_dependencia" type="number" style="display:none;"
+                                            value="0">
+
                                         <br>
                                     </div>
                                     <div class="form-group">
@@ -243,23 +184,23 @@
                                     </div>
                                     <div class="form-group">
                                         <label><strong>*Antiguedad</strong></label>
-                                        <input type="number" class="form-control" id="nuevo_antiguedad" name="nuevo_antiguedad"
-                                            required>
+                                        <input type="number" class="form-control" id="nuevo_antiguedad" name="nuevo_antiguedad">
                                     </div>
                                     <div class="form-group">
                                         <label><strong>*Ingreso Mensual</strong></label>
-                                        <input type="number" class="form-control" id="nuevo_ingresos_mesuales" name="nuevo_ingresos_mesuales"
-                                            required>
+                                        <input type="number" class="form-control" id="nuevo_ingresos_mesuales" name="nuevo_ingresos_mesuales">
+                                    </div>
+                                    <div class="input-group">
+                                        <label><strong>*Otros ingresos</strong></label>
+                                        <input type="number" class="form-control" id="otros_ingresos" name="nuevo_otros_ingresos">
                                     </div>
                                     <div class="form-group">
                                         <label><strong>*Nombre de Padre</strong></label>
-                                        <input type="text" class="form-control" id="nuevo_nombre_padre" name="nuevo_nombre_padre"
-                                            required>
+                                        <input type="text" class="form-control" id="nuevo_nombre_padre" name="nuevo_nombre_padre">
                                     </div>
                                     <div class="form-group">
                                         <label><strong>*Nombre de Madre</strong></label>
-                                        <input type="text" class="form-control" id="nuevo_nombre_madre" name="nuevo_nombre_madre"
-                                            required>
+                                        <input type="text" class="form-control" id="nuevo_nombre_madre" name="nuevo_nombre_madre">
                                     </div>
                                 </div>
                             </div>
@@ -271,8 +212,10 @@
                         <div class="box box-default">
                             <div ALIGN="left" class="box-header with-border">
                                 <h4 class="box-title">¿Convive? </h4>
-                                <input id="check_conyuge" onchange="validar_check_conyuge(this);" type="checkbox"
+                                <input id="check_conyuge" onchange="validar_check_conyuge_financ(this);" type="checkbox"
                                     data-style="slow" data-toggle="toggle" data-size="mini" data-on="Si" data-off="No">
+                                <input id="input_conyuge" name="input_conyuge" type="text" style="display:none" value="no">
+
                             </div>
                             <section id="conyuge" style="display:none" class="box box-primary">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -307,24 +250,23 @@
                                             <label><strong>*Actividad/Empresa</strong></label>
                                             <input type="text" class="form-control" id="conyuge_act_empresa" name="conyuge_act_empresa">
                                         </div>
-                                        <div class="form-group">
-                                            <label><strong>Teléfono Laboral</strong>(tel. fijo o celular)</label>
-                                            <input type="text" class="form-control" id="conyuge_cel_2" name="conyuge_cel_2">
-                                        </div>
+
                                     </div>
                                     <div class="col-xs-12 col-lg-6">
 
                                         <div class="form-group">
                                             <label><strong>*Profesión</strong></label>
-                                            <input type="text" class="form-control" id="conyuge_profesion" name="conyuge_profesion"
-                                                required>
+                                            <input type="text" class="form-control" id="conyuge_profesion" name="conyuge_profesion">
                                         </div>
-                                        <div class="form-group">
+                                          <div class="form-group">
                                             <label><strong>*Relación de dependencia</strong></label>
                                             <br>
                                             <input id="check_dependencia" onchange="validar_dependencia(this);" type="checkbox"
                                                 data-style="slow" data-toggle="toggle" data-size="normal" data-on="Si"
                                                 data-off="No">
+                                            <input id="check_dependencia" name="check_dependencia" type="number" style="display:none;"
+                                                value="0">
+
                                             <br>
 
                                             <div class="form-group">
@@ -332,35 +274,34 @@
                                                 <input type="text" class="form-control" id="conyuge_domicilio_empleo"
                                                     name="conyuge_domicilio_empleo">
                                             </div>
+                                            
                                             <div class="form-group">
                                                 <label><strong>*Teléfono del Empleo</strong>(Celular o fijo)</label>
-                                                <input type="number" class="form-control" id="conyuge_telefono_empleo"
-                                                    name="conyuge_telefono_empleo">
+                                                <input type="number" class="form-control" id="conyuge_telefono_trabajo" name="conyuge_telefono_trabajo">
                                             </div>
+                                        
+                                            
                                             <div class="form-group">
                                                 <label><strong>*Antiguedad</strong></label>
-                                                <input type="number" class="form-control" id="conyuge_antiguedad" name="conyuge_antiguedad"
-                                                    required>
+                                                <input type="number" class="form-control" id="conyuge_antiguedad" name="conyuge_antiguedad">
                                             </div>
+                                            
                                             <div class="form-group">
                                                 <label><strong>*Ingreso Mensual</strong></label>
-                                                <input type="number" class="form-control" id="conyuge_ingresos_mesuales"
-                                                    name="nuevo_ingresos_mesuales" required>
+                                                <input type="number" class="form-control" id="conyuge_ingresos_mensuales"
+                                                    name="conyuge_ingresos_mensuales">
                                             </div>
+                                            
                                             <div class="form-group">
                                                 <label><strong>*Nombre de Padre</strong></label>
-                                                <input type="text" class="form-control" id="conyuge_nombre_padre" name="conyuge_nombre_padre"
-                                                    required>
+                                                <input type="text" class="form-control" id="conyuge_nombre_padre" name="conyuge_nombre_padre">
                                             </div>
                                             <div class="form-group">
                                                 <label><strong>*Nombre de Madre</strong></label>
-                                                <input type="text" class="form-control" id="conyuge_nombre_madre" name="conyuge_nombre_madre"
-                                                    required>
+                                                <input type="text" class="form-control" id="conyuge_nombre_madre" name="conyuge_nombre_madre">
                                             </div>
-
-
-                                        </div>
-                                    </div><!-- /.modal-content -->
+                                        </div>                                  
+                                    </div> 
                                 </div>
                             </section>
                         </div>
@@ -371,7 +312,7 @@
                                 <h4 class="box-title">Información del Garante</h4>
                                 <input id="ingarante" onchange="validar_check_garante(this);" type="checkbox"
                                     data-style="slow" data-toggle="toggle" data-size="mini" data-on="Si" data-off="No">
-
+                                <input id="input_garante" name="input_garante" type="text" style="display:none" value="no">
 
                             </div>
                             <section id="garante" style="display:none" class="box box-primary">
@@ -562,25 +503,26 @@
 
                                     <div class="row margenBoot-25">
                                         <div class="col-xs-12 col-lg-10">
-                                            <div class="form-group">
-                                                <label><strong>Valor de Auto Vendido</strong></label>
-                                                <input id="valor_auto_vendido" type="text" maxlength="150" class="form-control"
-                                                    id="inp-vehiculo" placeholder="">
-                                            </div>
-                                            <div class="form-group">
-                                                <label><strong>Valor de Auto Entregado</strong></label>
-                                                <input type="text" maxlength="150" class="form-control" id="inp-vehiculo"
-                                                    placeholder="">
-                                            </div>
+                                                <div class="form-group">
+                                                        <label><strong>Valor de Auto Vendido</strong></label>
+                                                        <input type="number" id="valor_auto_vendido" name="valor_auto_vendido"
+                                                            maxlength="30" required value="0">
+                                                    </div>
+        
+                                                    <div class="form-group">
+                                                        <label><strong>Valor de Auto Entregado</strong></label>
+                                                        <input type="number" id="valor_auto_entregado" name="valor_auto_entregado"
+                                                            maxlength="30" required value='0'>
+                                                    </div>
                                         </div>
                                     </div>
                                     <div class="row margenBoot-25">
                                         <div class="col-xs-12 col-lg-10">
-                                            <div class="form-group">
-                                                <label><strong>Contado</strong></label>
-                                                <input type="text" maxlength="150" class="form-control" id="inp-contado"
-                                                    placeholder="">
-                                            </div>
+                                                <div class="form-group">
+                                                        <label><strong>Contado/Efectivo</strong></label>
+                                                        <input type="number" maxlength="30" id="inpefectivo" name="inpefectivo"
+                                                            required value='0'>
+                                                    </div>
                                         </div>
                                     </div>
                                     <div class="row margenBoot-25">
@@ -606,6 +548,8 @@
                                                 <input id="check_conyuge" onchange="validar_check_financiera(this);"
                                                     type="checkbox" data-style="slow" data-toggle="toggle" data-size="mini"
                                                     data-on="Si" data-off="No">
+                                                <input type="text" style="display:none;" id="check_financ" name="check_financ"
+                                                    value="0">
                                             </div>
                                         </div>
                                     </div>
@@ -874,16 +818,15 @@
 
                             <div class="form-group">
                                 <label><strong>Cantidad de Cuotas</strong></label>
-                                <input type="number" class="form-control" id="cant_cuotas" name="cant_cuotas" required>
+                                <input type="number" class="form-control" id="cant_cuotas" name="cant_cuotas">
                             </div>
                             <div class="form-group">
                                 <label><strong>Monto de Cuota</strong></label>
-                                <input type="number" class="form-control" id="monto" name="monto" required>
+                                <input type="number" class="form-control" id="monto" name="monto">
                             </div>
                             <div class="form-group">
                                 <label><strong>Resto</strong></label>
-                                <input type="number" class="form-control" id="resto_financ" name="resto_financ"
-                                    required>
+                                <input type="number" class="form-control" id="resto_financ" name="resto_financ">
                             </div>
 
                             <div class="modal-footer">
@@ -1038,6 +981,143 @@
                 </div>
             </div>
             <!-- Fin Modal 0KM-->
+
+            <!--Modal -->
+            <div class="modal fade" id="modal-clienteNuevo" tabindex="-1" role="dialog" aria-labelledby="modal-clienteNuevo"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">×</font>
+                                    </font>
+                                </span></button>
+                            <h4 class="modal-title">
+
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row margenBoot-25">
+
+                                <div class="col-xs-12 col-lg-6">
+                                    <div class="form-group">
+                                        <label><strong>*DNI</strong></label>
+                                        <input type="number" class="form-control" id="dni" name="dni">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>*Nombres</strong></label>
+                                        <input type="text" class="form-control" id="nombre" name="nombre">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>*Apellidos</strong></label>
+                                        <input type="text" class="form-control" id="apellido" name="apellido">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>*Correo Electrónico</strong></label>
+                                        <input type="email" placeholder="email@gmail.com" class="form-control" id="email"
+                                            name="email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>*Celular</strong></label>
+                                        <input type="text" class="form-control" id="cel_1" name="cel_1">
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <label><strong>*Profesión</strong></label>
+                                        <input type="text" class="form-control" id="profesion" name="profesion">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>*Relación de dependencia</strong></label>
+                                        <br>
+                                        <input id="check_depen" onchange="validar_dependencia(this);" type="checkbox"
+                                            data-style="slow" data-toggle="toggle" data-size="" data-on="Si" data-off="No">
+                                        <input id="check_dependencia" name="check_dependencia" type="number" style="display:none;"
+                                            value="0">
+                                        <br>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <label><strong>*Ingresos Mensuales</strong></label>
+                                        <input type="text" class="form-control" id="ingresos" name="ingresos">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label><strong>*Nombre de Padre</strong></label>
+                                        <input type="text" class="form-control" id="nombre_padre" name="nombre_padre">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>*Nombre de Madre</strong></label>
+                                        <input type="text" class="form-control" id="nombre_madre" name="nombre_madre">
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12 col-lg-6">
+                                    <div class="form-group">
+                                        <label><strong>Otro (opcional)</strong></label>
+                                        <input type="text" class="form-control" id="cel_2" name="cel_2">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label><strong>*Fecha de Nacimiento</strong></label>
+                                        <input type="date" class="form-control" id="fecha_nac" name="fecha_nac">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label><strong>*Domicilio</strong></label>
+                                            <input type="text" class="form-control" id="domicilio" name="domicilio">
+                                        </div>
+                                        <div class="form-group">
+                                            <label><strong>*Estado Civil</strong></label>
+                                            <select id="estado_civil" name="estado_civil" class="form-control form-control-sm">
+                                                <option>Soltero</option>
+                                                <option>Convive</option>
+                                                <option>Casado</option>
+                                                <option>Divorciado</option>
+                                                <option>Viudo</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>*Actividad/Empresa</strong></label>
+                                        <input type="text" class="form-control" id="act_empresa" name="act_empresa">
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <label><strong>Teléfono Laboral</strong>(tel. fijo o celular)</label>
+                                        <input type="text" class="form-control" id="telefono_empleo" name="telefono_empleo">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label><strong>*Domicilio de Empleo</strong></label>
+                                        <input type="text" placeholder="Calle - N° - Departamento" class="form-control"
+                                            id="domicilio_empleo" name="domicilio_empleo">
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <label><strong>*Antiguedad</strong></label>
+                                        <input type="number" class="form-control" id="antiguedad" name="antiguedad">
+                                    </div>
+                                    <div class="input-group">
+                                        <label><strong>*Otros ingresos</strong></label>
+                                        <input type="number" class="form-control" id="otros_ingresos" name="otros_ingresos">
+                                    </div>
+
+                                </div>
+
+                                <div class="col-xs-12 col-lg-12">
+
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <a href="#" onclick="update_modal_financ();" class="btn btn-primary">Guardar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
     </form>
 

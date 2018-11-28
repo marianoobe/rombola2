@@ -11,7 +11,11 @@ use App\Automovile;
 use App\Marca;
 use App\Operaciones;
 use App\Conyuge;
+use App\Garante;
 use App\Autocero;
+use App\Autosusado;
+use App\Estadocero;
+use App\Estadousado;
 use DB;
 
 
@@ -70,7 +74,7 @@ class VentaController extends Controller
     
       public function store(Request $request)
     {
-      dd("ENTE");
+      
       $nombre = $request->get('nuevo_nombre');
       $apellido = $request->get('nuevo_apellido');
 
@@ -98,15 +102,20 @@ class VentaController extends Controller
     
       foreach ($pers as $item) {}
 
+      $relacion= $request->get('check_dependencia');
+      if ($request->get('check_dependencia') == "on") {
+        $relacion = 0;
+      }
+
       $idpers=$item->idpersona;
       $cliente = new Cliente([
         'cliente_persona' => $idpers,
         'fecha_nacimiento' => $request->get('nuevo_fecha_nac'),
         'domicilio'=> $request->get('nuevo_domicilio'),
         'estado_civil'=> $request->get('nuevo_estado_civil'),
-        'relacion_dependencia'=> $request->get('relacion_dependencia'),
+        'relacion_dependencia'=> $request->get('check_dependencia'),
         'antiguedad'=> $request->get('nuevo_antiguedad'),
-        'ingresos_mesuales'=> $request->get('nuevo_ingresos_mesuales'),
+        'ingresos_mensuales'=> $request->get('nuevo_ingresos_mensuales'),
         'nombre_padre'=> $request->get('nuevo_nombre_padre'),
         'nombre_madre'=> $request->get('nuevo_nombre_madre'),
         'estado_ficha'=> "Completa",
@@ -125,7 +134,7 @@ class VentaController extends Controller
       ]); 
       $tel->save();
       }
-
+     
       $fecha_oper=$request->get('fecha_oper');
       $operacion = new Operaciones([
         'persona_operacion' => $idpers,
@@ -147,6 +156,7 @@ class VentaController extends Controller
         }
         $idpersona = $items->idpersona;
         $dni=$items->dni;
+
         $fecha_oper=$request->get('fecha_oper');
         $operacion = new Operaciones([
         'persona_operacion' => $idpersona,
@@ -159,8 +169,7 @@ class VentaController extends Controller
 
       }
     
-      if($request->get('input_conyuge')=="si")
-      {
+      
      //--insert Persona-Conyuge
 
        $nombre_conyuge = $request->get('conyuge_nombre');
@@ -199,24 +208,24 @@ class VentaController extends Controller
         ]);
         $conyuge->save();
 
-        if($request->get('conyuge_cel_1') != null)
+        if($request->get('conyuge_telefono_trabajo') != null)
         {
         $tel = new Telefono([
           'personas_telefono' => $idpers,
-          'num_tel' => $request->get('conyuge_cel_1'),
-          'tipo' => '2'
+          'num_tel' => $request->get('conyuge_telefono_trabajo'),
+          'tipo' => '3'
         ]);
         $tel->save();
         }
 
-        }
       }
+      
       //--/insert Persona-Garante
       
       $nombre_garante = $request->get('garante_nombre');
       $apellido_garante = $request->get('garante_apellido');
 
-      $can = $request->get('check_garante');
+      $can = $request->get('input_garante');
       if ($can == 'si') {
 
         $share = new Persona([
@@ -239,10 +248,11 @@ class VentaController extends Controller
           $idpers=$item->idpersona;
           //insert Persona-Garante
           $garante = new Garante([
-            'idpersona' => $idpers,
+            'idgarante_persona' => $idpers,
             'fecha_nacimiento' => $request->get('garante_fecha_nac'),
             'domicilio'=> $request->get('garante_domicilio'),
-            'estado_civil'=> $request->get('garante_estado_civil')
+            'estado_civil'=> $request->get('garante_estado_civil'),
+            'visible'=> 1
           ]);
           $garante->save();
 
@@ -270,25 +280,46 @@ class VentaController extends Controller
             if ($request->get('estado_toggle')=="lista") {
       
             $idmarca=$request->get('marca');
-            
-            $marca = Marca::where("nombre","=",$idmarca)->select("idmarca")->get();
-        
-            foreach ($marca as $item) {}  
-            // dd($marca);        
-            $idmarcas=$item->idmarca;
+                  
 
-            $share = new Autocero([
-            'idmarca' => $idmarcas, 
-            'modelo' => $request->input('modelo'),
-            'descripcion'=> $request->input('version'),
-            'color'=> '',        
-            'vin' => '',
-            'visible'=> 1
+            $marca = Marca::where("nombre","=",$idmarca)->select("id_marca")->get();
+            
+            foreach ($marca as $item) {}   
+                  
+            $idmarcas=$item->id_marca;
+
+            $automovil = new Automovile([
+              'marca_id' => $idmarcas, 
+              'modelo' => $request->input('modelo'),
+              'version'=> $request->input('version'),
+              'color'=> '',      
+              'precio'=> 0,  
+              'ficha' => 'Incompleta',
+              'visible'=> 1
+               ]);
+              
+              $automovil->save();
+            
+              $id0km = DB::table('automoviles')
+              ->select('id_auto')
+              ->orderBy('created_at','DESC')
+              ->take(1)
+              ->get();  
+
+            foreach ($id0km as $key) {}
+
+            $marca = Estadocero::where("nombreEstado","=","En Camino")->select("id_estadoCero")->get();
+            foreach ($marca as $marc) {}
+            
+            $auto_cero = DB::table('autoceros')
+            ->insertGetId([
+            'vin' => null,
+            'auto_id' => $key->id_auto, 
+            'estadoCero_id'=> $marc->id_estadoCero
              ]);
             // dd($save);
-            $share->save();
 
-            $idauto0km = null;
+            $idauto0km = $auto_cero;
           }
         }
 
@@ -343,6 +374,11 @@ class VentaController extends Controller
             ]);
             $nuevo->save(); 
 
+            $id_autoentragado = $nuevo;
+
+            }
+            else{
+              $id_autoentragado=null;
             }
 
             //insert Venta -------
@@ -374,7 +410,7 @@ class VentaController extends Controller
             $codigo = "V-"."000"."-".$part2 ;
             }
 
-
+          
           $venta_operac = DB::table('operaciones')
           ->select('id_operacion')
           ->join('personas','operaciones.persona_operacion','personas.idpersona')
@@ -388,7 +424,6 @@ class VentaController extends Controller
           $resto = $total - $valor_auto;
           
           foreach ($venta_operac as $item) {}
-            //dd($item->id_operacion);
             
             $venta = DB::table('ventas')
             ->insertGetId([
@@ -402,9 +437,13 @@ class VentaController extends Controller
             'cod_part2' => $part2,
             'codigo' => $codigo,
             'resto' =>$resto,
+            'resto_financ' =>$request->get('resto_financ'),
+            'cant_cuotas' =>$request->get('cant_cuotas'),
+            'monto_cuota' =>$request->get('monto'),
             'visible' =>1,
             'estado' =>'En Negociacion',
-            'id_user'=> $request->get('id_user')
+            'id_user'=> $request->get('id_user'),
+            'tipo'=>"financiacion"
             ]);
          
           //insert Cheque -------
@@ -434,9 +473,19 @@ class VentaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function changeEstado(Request $request)
     {
-        //
+      $idventa= $request->get('state');
+      $estado = $request->get('estado');
+dd($idventa);
+      DB::table('ventas')
+            ->where('idventa',"=",$idventa)
+            ->update([
+                'estado'=>$estado
+        ]);
+      
+      return response()->json("Tdo bien");
+
     }
 
     /**

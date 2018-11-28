@@ -427,7 +427,6 @@
                                                 <input type="number" id="valor_auto_vendido" name="valor_auto_vendido"
                                                     maxlength="30" required value="0">
                                             </div>
-                                            <!-- <form method="POST" oninput="resultado.value=parseInt(valor_auto_entregado.value) + parseInt(inpefectivo.value) + parseInt(inpcheques.value)"> -->
 
                                             <div class="form-group">
                                                 <label><strong>Valor de Auto Entregado</strong></label>
@@ -670,30 +669,31 @@
                                 </div>
                             </div>
 
-<!-- /.row -->
-</div>
-<!-- ./box-body -->
-<div class="box-footer">
-    <div style="margin-top:25px;">
-        <div class="col-sm-12 col-lg-12">
-            <div id="alerta" style="display:none;" class="alert alert-success" role="alert"><strong>Operacion
-                    Guardada Correctamente!</strong></div>
-        </div>
-    </div>
-    <div class="row margenBoot-25" style="margin-top:25px;">
-        <div class="col-xs-12 col-lg-12" style="text-align:center;">
-            <button type="submit" id="btn-guardar" data-loading-text="GUARDANDO..." class="btn btn-success" onclick="">GENERAR
-                VENTA</button>
-        </div>
-    </div>
-    <!-- /.row -->
-</div>
-<!-- /.box-footer -->
-</div>
-<!-- /.box -->
-</div>
-<!-- /.col -->
-</div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- ./box-body -->
+                        <div class="box-footer">
+                            <div style="margin-top:25px;">
+                                <div class="col-sm-12 col-lg-12">
+                                    <div id="alerta" style="display:none;" class="alert alert-success" role="alert"><strong>Operacion
+                                            Guardada Correctamente!</strong></div>
+                                </div>
+                            </div>
+                            <div class="row margenBoot-25" style="margin-top:25px;">
+                                <div class="col-xs-12 col-lg-12" style="text-align:center;">
+                                    <button type="submit" id="btn-guardar" data-loading-text="GUARDANDO..." class="btn btn-success"
+                                        onclick="">GENERAR
+                                        VENTA</button>
+                                </div>
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <!-- /.box-footer -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
 </form>
 <!--Modal 0KM-->
 <div class="modal fade" id="modal-0km" tabindex="-1" role="dialog" aria-labelledby="modal-0km" aria-hidden="true">
@@ -975,6 +975,7 @@
         </div>
     </div>
 </div>
+
 </div>
 
 

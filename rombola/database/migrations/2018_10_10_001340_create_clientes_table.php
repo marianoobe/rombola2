@@ -24,14 +24,14 @@ class CreateClientesTable extends Migration
             $table->text('estado_civil');
             $table->boolean('relacion_dependencia')->nullable();
             $table->text('antiguedad')->nullable();
-            $table->text('ingresos_mesuales')->nullable();
+            $table->text('ingresos_mensuales')->nullable();
             $table->text('ingresos_otros')->nullable();
             $table->text('nombre_padre')->nullable();
             $table->text('nombre_madre')->nullable();
             $table->text('estado_ficha');
             $table->boolean('visible');
             $table->integer('id_user');
-            $table->integer('interes')->nullable();
+            $table->text('interes')->nullable();
             $table->text('fecha')->nullable();
             $table->timestamps();
         });

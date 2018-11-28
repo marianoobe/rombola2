@@ -46,10 +46,7 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-         /*$request->validate([
-            'domicilio'=> 'required|text',
-            'estado_civil' => 'required|text'
-          ]);*/
+      
           $nombre= $request->get('nombre');
           $apellido = $request->get('apellido');
           $share = new Persona([
@@ -151,7 +148,8 @@ class ClienteController extends Controller
         'estado_ficha'=> "Incompleta",
         'visible'=> 1,
         'id_user'=>$request->get('id_user'),
-        'fecha'=> date("d-m-Y")
+        'fecha'=> date("d-m-Y"),
+        'interes'=>$request->get('interes')
       ]);
 
       $cel_1=$request->get('cel_1');
@@ -244,6 +242,35 @@ class ClienteController extends Controller
 
     public function update_modal(Request $request)
     {
+      $nombre= $request->get('nombre');
+      $apellido = $request->get('apellido');
+      DB::table('clientes')
+        ->join('personas', 'personas.idpersona' ,'clientes.cliente_persona')
+        ->join('telefonos','telefonos.personas_telefono','personas.idpersona')
+            ->where('nombre_apellido',"=",$nombre." ".$apellido)
+            ->update([
+                "dni" => $request->get('dni'),
+                "nombre" => $request->get('nombre'),
+                "apellido" => $request->get('apellido'),
+                "nombre_apellido" => $nombre." ".$apellido,
+                "email" => $request->get('email'),
+                "domicilio" => $request->get('domicilio'),
+                "act_empresa" => $request->get('act_empresa'),
+                "num_tel" => $request->get('cel_1'),
+                "tipo" => 1,
+                "fecha_nacimiento" => $request->get('fecha_nac'),
+                "estado_civil" => $request->get('estado_civil'),
+                "estado_ficha" => "Completa",
+
+        ]);
+
+        //$wizards = json_encode($client);
+        $wizards="Actualizado";
+        return response()->json($wizards);
+    }
+
+    public function update_modal_financ(Request $request)
+    {
       
       $nombre= $request->get('nombre');
       $apellido = $request->get('apellido');
@@ -263,6 +290,16 @@ class ClienteController extends Controller
                 "fecha_nacimiento" => $request->get('fecha_nac'),
                 "estado_civil" => $request->get('estado_civil'),
                 "estado_ficha" => "Completa",
+                "profesion" => $request->get('nuevo_profesion'),
+                "relacion_dependencia" => $request->get('check_dependencia'),
+                //"num_tel" => $request->get('telefono_empleo'),
+                //"tipo" => 3,
+                "ingresos_mensuales" => $request->get('ingresos'),
+                "nombre_padre" => $request->get('nombre_padre'),
+                "nombre_madre" => $request->get('nombre_madre'),
+                "domicilio_empleo" => $request->get('nuevo_domicilio_empleo'),
+                "antiguedad" => $request->get('nuevo_antiguedad'),
+                "ingresos_otros" => $request->get('otros_ingresos'),
 
         ]);
 

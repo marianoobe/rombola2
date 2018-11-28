@@ -31,6 +31,7 @@ class CreateVentasTable extends Migration
             $table->integer('resto');
             $table->boolean('visible');
             $table->text('estado');
+            $table->text('tipo');
             $table->integer('id_user');
             $table->integer('cant_cuotas')->nullable();
             $table->integer('monto_cuota')->nullable();

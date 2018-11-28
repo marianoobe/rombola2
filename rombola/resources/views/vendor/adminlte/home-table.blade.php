@@ -5,6 +5,8 @@ join('ventas','operaciones.id_operacion','ventas.operacion_venta')
 ->join('personas','operaciones.persona_operacion','personas.idpersona')
 ->join('clientes','personas.idpersona','clientes.cliente_persona')
 ->paginate(10);
+
+$arreglo[] = array();
         
 @endphp
 <br>
@@ -34,6 +36,9 @@ join('ventas','operaciones.id_operacion','ventas.operacion_venta')
         </tr>
     </thead>
     <tbody id="myTable">
+        @php
+            $i=0;
+        @endphp
         @foreach($venta_operac as $item)
         
         <tr>
@@ -43,6 +48,9 @@ join('ventas','operaciones.id_operacion','ventas.operacion_venta')
 			<td><span class="label label-success">{{$item->estado}}</span></td>
             <td style="cursor: default;">
             </td>
+            @php
+            array_push ( $arreglo , $item->idventa );
+            @endphp
             <td style="cursor: default;">
                 @can('admin')
                 <a href="" class="btn btn-primary btn-sm">
@@ -50,23 +58,27 @@ join('ventas','operaciones.id_operacion','ventas.operacion_venta')
 
                 <a href="{{ route('print_venta', ['id1' => $item->idventa,'id2' => $item->idcliente])}}" class="btn btn-primary btn-sm">
                     <span class="glyphicon glyphicon-print"></span></a>
-
+            
                 <a onclick="$('#modal-estado').modal('show');" class="btn btn-warning btn-sm">
                     <span class="glyphicon glyphicon-refresh"></span></a>
+                    
                 <a href="{{ route('venta.destroy',"")}}" class="btn btn-danger btn-sm">
                     <span class="glyphicon glyphicon-trash"></span></a>
                 @endcan
             </td>
         </tr>
+
         @endforeach()
         
     </tbody>
+
 </table>
 {{$venta_operac->render()}}
 
+
 <!-- Modal Cambio de estado -->
-					<div id="modal-estado" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-					 style="display: none;">
+					<div id="modal-estado" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="modal-estado"
+                     style="display: none;">
 						<div class="modal-dialog modal-sm">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -74,12 +86,16 @@ join('ventas','operaciones.id_operacion','ventas.operacion_venta')
 									<h4 class="modal-title">Cambio de Estado</h4>
 								</div>
 								<div class="modal-body">
+                                    <img id="cargando" style="display:none;" src="/img/cargando.gif"></img>
+                                    <section id="cambio_estado">
 									<label>Estado de la Negociación:</label>
-									<select class="form-control" id="sel-estadonegociacion">
+									<select id="select_estado" class="form-control" id="sel-estadonegociacion">
 										<option value="EN NEGOCIACIÓN">EN NEGOCIACIÓN</option>
 										<option value="COMPLETADA">COMPLETADA</option>
 										<option value="DADO DE BAJA">DADO DE BAJA</option>
-									</select>
+                                    </select>
+                                </section>
+                                                                        
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-danger" data-dismiss="modal">CERRAR</button>

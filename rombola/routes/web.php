@@ -90,10 +90,12 @@ Route::get('imagen','ImageController@index')->name('imagen');
 
 Route::resource('autos', 'AutomovileController');
 
-Route::post('prueba', 'HomeController@prueba')->name('prueba');
 Route::put('estado', 'VentaContadoController@estado_cliente')->name('estado');
 Route::put('modales', 'VentaContadoController@edit_cliente')->name('modales');
 Route::post('updatemodal','ClienteController@update_modal')->name('updatemodal');
+Route::post('updatemodalfinanc','ClienteController@update_modal_financ')->name('updatemodalfinanc');
+
+Route::post('changeEstado','VentaController@changeEstado')->name('changeEstado');
 
 
 Route::get('/prueba1', function() {
