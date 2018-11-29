@@ -33,8 +33,9 @@
 						</form>
 
 					</div>
+					<div id="tabla_act" name="tabla_act">
 					<table class="table table-striped">
-						<thead> 
+						<thead>
 							<tr>
 								<th scope="col">Fecha</th>
 								<th scope="col">Codigo</th>
@@ -43,37 +44,45 @@
 								<th scope="col"></th>
 							</tr>
 						</thead>
-						<tbody id="myTable">
+						
+							<tbody id="myTable">
 								@foreach($venta_operac as $item)
-							<tr>
-								<td>{{$item->fecha_oper}}</td>
-								<td>{{$item->codigo}}</td>
-								<td>{{$item->nombre_apellido}}</td>
-								<td>{{$item->estado}}</td>
-								<td style="cursor: default;">
-									@can('vendedor')
-									<a href="" class="btn btn-primary btn-sm">
-										<span class="glyphicon glyphicon-search"></span></a>
-									@endcan
-									@can('admin')
-									<a href="" class="btn btn-primary btn-sm">
-										<span class="glyphicon glyphicon-search"></span></a>
+								<tr>
+									<td>{{$item->fecha_oper}}</td>
+									<td>{{$item->codigo}}</td>
+									<td>{{$item->nombre_apellido}}</td>
+									@php
+									if($item->estado == "EN NEGOCIACIÓN"){$clase="label-success";}
+									if($item->estado == "COMPLETADA"){$clase="label-primary";}
+									if($item->estado == "DADO DE BAJA"){$clase="label-danger";}
+								    @endphp
+									<td><span id="estado_label" name="estado_label" class={{$clase}}>{{$item->estado}}</span></td>
+									<td style="cursor: default;">
+										@can('vendedor')
+										<a onclick="" class="btn btn-primary btn-xs">
+											<span class="glyphicon glyphicon-search"></span></a>
+										@endcan
+										@can('admin')
+										<a onclick="" class="btn btn-primary btn-xs">
+											<span class="glyphicon glyphicon-search"></span></a>
 
-									<a href="{{ route('print_venta', ['id1' => $item->idventa,'id2' => $item->idcliente])}}" class="btn btn-primary btn-sm">
-										<span class="glyphicon glyphicon-print"></span></a>
+										<a href="{{ route('print_venta', ['id1' => $item->idventa,'id2' => $item->idcliente])}}" class="btn btn-primary btn-xs">
+											<span class="glyphicon glyphicon-print"></span></a>
 
-									<a onclick="$('#modal-estado').modal('show');" class="btn btn-warning btn-sm">
-										<span class="glyphicon glyphicon-refresh"></span></a>
-									<a href="{{ route('venta.destroy',"")}}" class="btn btn-danger btn-sm">
-										<span class="glyphicon glyphicon-trash"></span></a>
-									@endcan
-								</td>
+										<a onclick="valor_idventa({{$item->idventa}});" data-toggle="modal" data-target="#modal-estado" class="btn btn-warning btn-xs">
+											<span class="glyphicon glyphicon-refresh"></span></a>
+										<a href="{{ route('venta.destroy',"")}}" class="btn btn-danger btn-xs">
+											<span class="glyphicon glyphicon-trash"></span></a>
+										@endcan
+									</td>
 
-							</tr>
-							@endforeach()
-						</tbody>
+								</tr>
+								@endforeach()
+
+							</tbody>
+						
 					</table>
-
+				</div>
 				</div>
 			</div>
 		</div>
@@ -81,66 +90,64 @@
 </div>
 
 <!-- Modal Cambio de estado -->
-					<div id="modal-estado" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-					 style="display: none;">
-						<div class="modal-dialog modal-sm">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-									<h4 class="modal-title">Cambio de Estado</h4>
-								</div>
-								<div class="modal-body">
-									<label>Estado de la Negociación:</label>
-									<select class="form-control" id="sel-estadonegociacion">
-										<option value="EN NEGOCIACIÓN">EN NEGOCIACIÓN</option>
-										<option value="COMPLETADA">COMPLETADA</option>
-										<option value="DADO DE BAJA">DADO DE BAJA</option>
-									</select>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-danger" data-dismiss="modal">CERRAR</button>
-									<button type="button" onclick="changeEstado();" class="btn btn-success">GUARDAR</button>
-								</div>
-							</div>
-						</div>
+<div id="modal-estado" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+ style="display: none;">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<h4 class="modal-title">Cambio de Estado</h4>
+			</div>
+			<div class="modal-body">
+				<label>Estado de la Negociación:</label>
+				<select id="select_estado" class="form-control" id="sel-estadonegociacion">
+					<option value="EN NEGOCIACIÓN">EN NEGOCIACIÓN</option>
+					<option value="COMPLETADA">COMPLETADA</option>
+					<option value="DADO DE BAJA">DADO DE BAJA</option>
+				</select>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">CERRAR</button>
+				<button type="button" onclick="changeEstado();" class="btn btn-success">GUARDAR</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Fin Modal Cambio de estado -->
+
+<!-- Modal Acceso de estado -->
+<!--Modal -->
+<div class="modal fade" id="modal-menu" tabindex="-1" role="dialog" aria-labelledby="modal-clienteNuevo" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+						<font style="vertical-align: inherit;">
+							<font style="vertical-align: inherit;">×</font>
+						</font>
+					</span></button>
+			</div>
+			<div class="modal-body">
+				<div class="row margenBoot-25">
+					<div class="col-xs-12 col-lg-6">
+						<a id="boton" href="{{ route('ventacontado.create') }}" class="btn btn-success btn-block">
+							<span class="fa fa-money"> CONTADO</span></a>
 					</div>
-					<!-- Fin Modal Cambio de estado -->
-
-					<!-- Modal Acceso de estado -->
-					<!--Modal -->
-					<div class="modal fade" id="modal-menu" tabindex="-1" role="dialog" aria-labelledby="modal-clienteNuevo"
-					 aria-hidden="true">
-						<div class="modal-dialog modal-lg" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
-											<font style="vertical-align: inherit;">
-												<font style="vertical-align: inherit;">×</font>
-											</font>
-										</span></button>
-								</div>
-								<div class="modal-body">
-										<div class="row margenBoot-25">
-											<div class="col-xs-12 col-lg-6">
-												<a id="boton" href="{{ route('ventacontado.create') }}" class="btn btn-success btn-block">
-													<span class="fa fa-money"> CONTADO</span></a>
-											</div>
-											<div class="col-xs-12 col-lg-6">
-												<div class="col-6">
-													<a id="boton" href="{{ route('venta.create') }}" class="btn btn-success btn-block" disable="disable">
-														<span class="fa fa-university"> FINANCIACION</span></a>
-											</div>
-											</div><!-- /.modal-content -->
-										</div><!-- /.modal-dialog -->
-										<div class="modal-footer">
-
-										</div>
-								</div>
-							</div>
+					<div class="col-xs-12 col-lg-6">
+						<div class="col-6">
+							<a id="boton" href="{{ route('venta.create') }}" class="btn btn-success btn-block" disable="disable">
+								<span class="fa fa-university"> FINANCIACION</span></a>
 						</div>
-					</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+				<div class="modal-footer">
 
-					<!-- Fin Modal Acceso de estado -->
-					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-					@endsection
+<!-- Fin Modal Acceso de estado -->
+
+@endsection

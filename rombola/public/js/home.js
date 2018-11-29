@@ -16,10 +16,20 @@ function offbell() {
     
 }
 
+
+var idventa;
+
+function valor_idventa(valor_idventa){
+    idventa = valor_idventa;
+    
+}
+
 function changeEstado(){
 
+    $('#modal-estado').modal('show');
+
     var estado = document.getElementById("select_estado").value;
-    var state = document.getElementById("venta_id").value;
+    console.log(idventa);
 
     $.ajaxSetup({
         headers: {
@@ -35,12 +45,18 @@ function changeEstado(){
         url: '/changeEstado',
         data: {
          estado: estado,
-         state: state
+         state: idventa
         },
     success: function (data) {
+        
       $('#modal-estado').modal('hide');
       $("#cargando").css("display", "none");
-      setInterval($('#tabla_act').load('prueba1'), 0);
+      $('#tabla_act').load(" #tabla_act");
+
+      if (estado=="EN NEGOCIACIÓN") {
+        $('#estado_label').addClass("label label-warning");
+        console.log(estado);
+    }
       console.log(data);
 
     }

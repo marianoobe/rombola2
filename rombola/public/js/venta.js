@@ -678,3 +678,43 @@ function send_total(valorCaja1) {
   });
 }
 
+var idventa;
+
+function valor_idventa(valor_idventa){
+    idventa = valor_idventa;
+    
+}
+
+function changeEstado(){
+
+    $('#modal-estado').modal('show');
+
+    var estado = document.getElementById("select_estado").value;
+    console.log(idventa);
+
+    $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
+      $("#cambio_estado").css("display", "none");
+      $("#cargando").css("display", "inline");
+
+      $.ajax({
+        type: 'POST',
+        url: '/changeEstado',
+        data: {
+         estado: estado,
+         state: idventa
+        },
+    success: function (data) {
+      $('#modal-estado').modal('hide');
+      $("#cargando").css("display", "none");
+      $('#tabla_act').load(" #tabla_act");
+      console.log(data);
+
+    }
+  });
+
+  }

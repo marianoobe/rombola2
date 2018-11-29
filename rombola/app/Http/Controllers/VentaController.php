@@ -477,14 +477,15 @@ class VentaController extends Controller
     {
       $idventa= $request->get('state');
       $estado = $request->get('estado');
-dd($idventa);
+
       DB::table('ventas')
             ->where('idventa',"=",$idventa)
             ->update([
                 'estado'=>$estado
         ]);
       
-      return response()->json("Tdo bien");
+      $resultado= "cargado";
+      return response()->json($resultado);
 
     }
 

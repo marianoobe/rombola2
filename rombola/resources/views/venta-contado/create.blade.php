@@ -6,7 +6,10 @@
 
 <form method="post" action="{{ route('ventacontado.store') }}">
     {!! Html::script('js/venta.js') !!}
-    <input type="number" id="id_user" name="id_user" style="display:none" value="{{ Auth::user()->id }}">
+    @php
+        echo  Auth::user()->name ;
+    @endphp
+    <input type="number" id="id_user" name="id_user" style="display:none" value="{{ Auth::user()->name }}">
     <div class="container-fluid spark-screen">
         <div class="row">
             <div class="col-md-14 col-md-offset-0">
