@@ -54,24 +54,24 @@
 										<div class="col-xs-12 col-lg-6">
 											<div class="form-group">
 												<label for="marca"><strong>Marca</strong></label>
-												<input type="text" class="form-control" id="marca" name="marca" value={{ $item->nombre }} disabled="disabled">
+												<input type="text" class="form-control" id="marca" name="marca" value='{{ $item->nombre }}' disabled="disabled">
 											</div>
 											<div class="form-group">
 												<label for="modelo"><strong>Modelo</strong></label>
-												<input type="text" class="form-control" id="modelo" name="modelo" value={{ $item->modelo }} disabled="disabled">
+												<input type="text" class="form-control" id="modelo" name="modelo" value='{{ $item->modelo }}' disabled="disabled">
 											</div>
 											<div class="form-group">
 												<label for="version"><strong>Version</strong></label>
-												<input type="text" class="form-control" id="version" name="version" value={{ $item->version }} disabled="disabled">
+												<input type="text" class="form-control" id="version" name="version" value='{{ $item->version }}' disabled="disabled">
 											</div>
 
 											<div class="form-group">
 												<label for="titular"><strong>Titular</strong></label>
-												<input type="text" class="form-control" id="titular" name="titular" value={{ $item->titular }} disabled="disabled">
+												<input type="text" class="form-control" id="titular" name="titular" value='{{ $item->titular }}' disabled="disabled">
 											</div>
 											<div class="form-group">
 												<label for="anio"><strong>Año</strong></label>
-												<input type="number" class="form-control" id="anio" name="anio" value={{ $item->anio}} disabled="disabled">
+												<input type="number" class="form-control" id="anio" name="anio" value='{{ $item->anio}}' disabled="disabled">
 											</div>
 											<div class="form-group">
 												<label for="anio"><strong>Dominio</strong></label>
@@ -85,7 +85,7 @@
 
 											<div class="form-group">
 												<label for="color"><strong>Color</strong></label>
-												<input type="text" class="form-control" id="color" name="color" value={{ $item->color }} disabled="disabled">
+												<input type="text" class="form-control" id="color" name="color" value='{{ $item->color }}' disabled="disabled">
 											</div>
 
 										</div>
@@ -95,17 +95,16 @@
 
 											<div class="form-group">
 												<label for="motor_num"><strong>Fecha Ingrreso</strong></label>
-												<input type="date" class="form-control" id="fecha" name="fecha" value={{ $item->fechaingreso }} disabled="disabled">
+												<input type="date" class="form-control" id="fecha" name="fecha" value='{{ $item->fechaingreso }}' disabled="disabled">
 											</div>
 											<div class="form-group">
 												<label for="estado"><strong>Estado</strong></label>
-												<input type="text" id="estado" name="estado" class="form-control form-control-sm" disabled="disabled" value={{ $item->nombreEstado }}>
-
+												<input type="text" id="estado" name="estado" class="form-control form-control-sm" disabled="disabled" value='{{ $item->nombreEstado }}'>
 												</input>
 											</div>
 											<div class="form-group">
 												<label for="estado"><strong>Precio</strong></label>
-												<input type="number" id="precio" name="precio" class="form-control form-control-sm" value={{ $item->precio }}
+												<input type="number" id="precio" name="precio" class="form-control form-control-sm" value='{{ $item->precio }}'
 												 disabled="disabled">
 
 												</input>

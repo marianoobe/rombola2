@@ -65,7 +65,7 @@
 									@foreach($autos as $item)
 									<tr>
 										<td align="center" style="cursor: default;">
-											<img src={{url("img/marcas/$item->nombre.jpg")}} alt="..." class="img-circle" style="width: 80px; height: 80px;" />
+											<img src={{url("img/marcas/$item->nombre.jpg")}} alt="..." class="img-circle" style="width: 50px; height: 50px;" />
 										</td>
 										
 										<td >{{$item->nombre}}</td>
@@ -74,7 +74,7 @@
 										<td>{{$item->color}}</td>
 										
 										<td style="cursor: default;">
-											<a href="{{ route('cero.edit',$item->auto_id)}}" class="btn btn-info btn-sm">
+											<a href="{{ route('cero.edit',$item->auto_id)}}" class="btn btn-info btn-xs">
 												<span class="glyphicon glyphicon-search"></span></a>
 
 										</td>

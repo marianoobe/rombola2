@@ -190,8 +190,8 @@ use App\File;
     {
       
         $auto = Automovile::where("id_auto","=",$id)->select("id_auto")->get();
-         foreach ($auto as $item) {   //echo "$item->idpersona";
-      }
+
+        foreach ($auto as $item) {}
      
       $idcar=$item->id_auto;
        $autos = DB::table('autosusados')
@@ -200,9 +200,9 @@ use App\File;
         ->join('marcas','marcas.id_marca','automoviles.marca_id')       
         ->where('automoviles.id_auto','=', $idcar)
         ->get();
-//dd($autos);
+        
       return view('autos/editusado', compact('autos'));
-        //
+        
     }
 
         

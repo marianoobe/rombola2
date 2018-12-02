@@ -1,7 +1,7 @@
 @extends('adminlte::layouts.app')
 
 @section('seccion1')
-{!! Html::style('js/estilos.css') !!}
+{!! Html::script('js/venta.js') !!}
 
 <div class="container-fluid spark-screen">
 	<div class="row">
@@ -34,36 +34,37 @@
 
 					</div>
 					<div id="tabla_act" name="tabla_act">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th scope="col">Fecha</th>
-								<th scope="col">Codigo</th>
-								<th scope="col">Cliente</th>
-								<th scope="col">Estado</th>
-								<th scope="col"></th>
-							</tr>
-						</thead>
-						
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th scope="col">Fecha</th>
+									<th scope="col">Codigo</th>
+									<th scope="col">Cliente</th>
+									<th scope="col">Estado</th>
+									<th scope="col"></th>
+								</tr>
+							</thead>
+
 							<tbody id="myTable">
 								@foreach($venta_operac as $item)
 								<tr>
 									<td>{{$item->fecha_oper}}</td>
 									<td>{{$item->codigo}}</td>
 									<td>{{$item->nombre_apellido}}</td>
+									<td>{{$item->idventa}}</td>
 									@php
 									if($item->estado == "EN NEGOCIACIÓN"){$clase="label-success";}
 									if($item->estado == "COMPLETADA"){$clase="label-primary";}
 									if($item->estado == "DADO DE BAJA"){$clase="label-danger";}
-								    @endphp
+									@endphp
 									<td><span id="estado_label" name="estado_label" class={{$clase}}>{{$item->estado}}</span></td>
 									<td style="cursor: default;">
 										@can('vendedor')
-										<a onclick="" class="btn btn-primary btn-xs">
+										<a onclick="show_venta({{$item->idventa}});" data-toggle="modal" data-target="#modal-showventa" class="btn btn-primary btn-xs">
 											<span class="glyphicon glyphicon-search"></span></a>
 										@endcan
 										@can('admin')
-										<a onclick="" class="btn btn-primary btn-xs">
+										<a onclick="show_venta({{$item->idventa}});" data-toggle="modal" data-target="#modal-showventa" class="btn btn-primary btn-xs">
 											<span class="glyphicon glyphicon-search"></span></a>
 
 										<a href="{{ route('print_venta', ['id1' => $item->idventa,'id2' => $item->idcliente])}}" class="btn btn-primary btn-xs">
@@ -80,9 +81,9 @@
 								@endforeach()
 
 							</tbody>
-						
-					</table>
-				</div>
+
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -149,5 +150,201 @@
 </div>
 
 <!-- Fin Modal Acceso de estado -->
+
+<!-- Modal Ver Venta-->
+<div class="modal" id="modal-showventa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+					
+				<div class="panel panel-default">
+					<div class="panel-heading">Cliente</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label><strong>Nombre y Apellido: </strong></label>
+							<label id="show_cliente"></label>
+						</div>
+						<div class="form-group">
+							<label><strong>DNI: </strong></label>
+							<label id="show_dni"></label>
+						</div>
+						<div class="form-group">
+							<label><strong>Domicilio: </strong></label>
+							<label id="show_domicilio"></label>
+						</div>
+						<div class="form-group">
+							<label><strong>Estado Civil: </strong></label>
+							<label id="show_estado_civil"></label>
+						</div>
+						<div class="form-group">
+							<label><strong>Celular: </strong></label>
+							<label id="show_celular"></label>
+						</div>
+						<div class="form-group">
+							<label><strong>Actividad/Empresa: </strong></label>
+							<label id="show_act_empresa"></label>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">Auto Vendido</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label><strong>Marca: </strong></label>
+							<label id="show_marca"></label>
+						</div>
+						<div class="form-group">
+							<label><strong>Modelo: </strong></label>
+							<label id="show_modelo"></label>
+						</div>
+						<div class="form-group">
+							<label><strong>Version: </strong></label>
+							<label id="show_version"></label>
+						</div>
+
+						<section id="section_usado" style="display:none">
+							<div class="form-group">
+								<label><strong>Dominio: </strong></label>
+								<label id="show_dominio"></label>
+							</div>
+							<div class="form-group">
+								<label><strong>N° Chasis: </strong></label>
+								<label id="show_numchasis"></label>
+							</div>
+							<div class="form-group">
+								<label><strong>N° Motor: </strong></label>
+								<label id="show_nummotor"></label>
+							</div>
+							<div class="form-group">
+								<label><strong>Año: </strong></label>
+								<label id="show_anio"></label>
+							</div>
+						</section>
+
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">Operación</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label><strong>Valor Auto Vendido: $</strong></label>
+							<label id="show_precio_auto_vendido"></label>
+						</div>
+						<div class="form-group">
+							<label><strong>Contado: $</strong></label>
+							<label id="show_efectivo"></label>
+						</div>
+						<div id="section_usado_entregado" class="panel-body" style="display:none">
+						<div class="form-group">
+							<label><strong>Valor Auto Entregado: $</strong></label>
+							<label id="show_valor_entregado"></label>
+						</div>
+						<ul>
+								<li>
+									<div class="form-group">
+										<label><strong>Nombre de titular: </strong></label>
+										<label id="show_nombre_titular"></label>
+									</div>
+								</li>
+								<li>
+									<div class="form-group">
+										<label><strong>Dominio: </strong></label>
+										<label id="show_dominio_entregado"></label>
+									</div>
+								</li>
+								<li>
+									<div class="form-group">
+										<label><strong>Marca: </strong></label>
+										<label id="show_marca_entregado"></label>
+									</div>
+								</li>
+								<li>
+									<div class="form-group">
+										<label><strong>Modelo: </strong></label>
+										<label id="show_modelo_entregado"></label>
+									</div>
+								</li>
+								<li>
+									<div class="form-group">
+										<label><strong>Version: </strong></label>
+										<label id="show_version_entregado"></label>
+									</div>
+								</li>
+								<li>
+									<div class="form-group">
+										<label><strong>N° Motor: </strong></label>
+										<label id="show_nummotor_entregado"></label>
+									</div>
+								</li>
+								<li>
+									<div class="form-group">
+										<label><strong>N° Chasis: </strong></label>
+										<label id="show_numchasis_entregado"></label>
+									</div>
+								</li>
+								<li>
+									<div class="form-group">
+										<label><strong>Color: </strong></label>
+										<label id="show_color_entregado"></label>
+									</div>
+								</li>
+							</div>
+						</ul>
+						<div id="section_cheque" class="panel-body" style="display:none">
+						<div class="form-group">
+							<label><strong>Total en cheques: $</strong></label>
+							<label id="show_total_cheque"></label>
+						</div>
+						<ul>
+							<li>
+								<div class="form-group">
+									<label><strong>Banco: </strong></label>
+									<label id="show_banco"></label>
+								</div>
+							</li>
+							<li>
+								<div class="form-group">
+									<label><strong>Número: </strong></label>
+									<label id="show_numero"></label>
+								</div>
+							</li>
+							<li>
+								<div class="form-group">
+									<label><strong>Fecha: </strong></label>
+									<label id="show_fecha"></label>
+								</div>
+							</li>
+							<li>
+							<div class="form-group">
+								<label><strong>Importe: </strong></label>
+								<label id="show_importe"></label>
+							</div>
+							</li>
+						</div>
+					</ul>
+						<div class="form-group">
+							<label><strong>Total : $</strong></label>
+							<label id="show_total"></label>
+						</div>
+					</div>
+				</div>
+
+
+
+				<label id="show_precio_auto_vendido"></label>
+				<label id="show_modelo"></label>
+
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Fin Modal Ver Venta-->
 
 @endsection

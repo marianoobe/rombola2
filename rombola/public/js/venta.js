@@ -65,7 +65,7 @@ function validar_check_conyuge_financ(obj) {
 function validar_dependencia(obj) {
   if (obj.checked == true) {
     document.getElementById("check_dependencia").value = 1;
-  }else{
+  } else {
     document.getElementById("check_dependencia").value = 0;
   }
 }
@@ -110,14 +110,14 @@ function enable_buscar() {
     $('#nuevo_domicilio').removeAttr("required");
     $('#nuevo_act_empresa').removeAttr("required");
 
-      $('#nuevo_profesion').removeAttr("required");
-      $('#telefono_laboral').removeAttr("required");
-      $('#nuevo_domicilio_empleo').removeAttr("required");
-      $('#nuevo_antiguedad').removeAttr("required");
-      $('#nuevo_ingresos_mesuales').removeAttr("required");
-      $('#nuevo_nombre_padre').removeAttr("required");
-      $('#nuevo_nombre_madre').removeAttr("required");
-      $('#nuevo_otros_ingresos').removeAttr("required");
+    $('#nuevo_profesion').removeAttr("required");
+    $('#telefono_laboral').removeAttr("required");
+    $('#nuevo_domicilio_empleo').removeAttr("required");
+    $('#nuevo_antiguedad').removeAttr("required");
+    $('#nuevo_ingresos_mesuales').removeAttr("required");
+    $('#nuevo_nombre_padre').removeAttr("required");
+    $('#nuevo_nombre_madre').removeAttr("required");
+    $('#nuevo_otros_ingresos').removeAttr("required");
 
     $("#alert_incompleta").css("display", "none");
     $("#alert_completa").css("display", "none");
@@ -130,7 +130,7 @@ function enable_buscar() {
       $('#dnis').removeAttr("required");
       $("#alert_incompleta").css("display", "none");
       $("#alert_completa").css("display", "none");
-    $("#panel_financ").css("display", "none");
+      $("#panel_financ").css("display", "none");
 
 
     }
@@ -151,13 +151,13 @@ function enable_buscar() {
     $('#nuevo_act_empresa').removeAttr("required");
 
     $('#nuevo_profesion').removeAttr("required");
-      $('#telefono_laboral').removeAttr("required");
-      $('#nuevo_domicilio_empleo').removeAttr("required");
-      $('#nuevo_antiguedad').removeAttr("required");
-      $('#nuevo_ingresos_mesuales').removeAttr("required");
-      $('#nuevo_nombre_padre').removeAttr("required");
-      $('#nuevo_nombre_madre').removeAttr("required");
-      $('#nuevo_otros_ingresos').removeAttr("required");
+    $('#telefono_laboral').removeAttr("required");
+    $('#nuevo_domicilio_empleo').removeAttr("required");
+    $('#nuevo_antiguedad').removeAttr("required");
+    $('#nuevo_ingresos_mesuales').removeAttr("required");
+    $('#nuevo_nombre_padre').removeAttr("required");
+    $('#nuevo_nombre_madre').removeAttr("required");
+    $('#nuevo_otros_ingresos').removeAttr("required");
     document.getElementById("cancer").value = "buscar";
     $("#alert_incompleta").css("display", "none");
     $("#alert_completa").css("display", "none");
@@ -404,9 +404,9 @@ function obtener_cliente_buscado() {
 }
 
 function modal_edit() {
-  
+
   var res = document.getElementById("dnis").value;
-  
+
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -433,7 +433,7 @@ function modal_edit() {
 
 }
 
-function update_modal(){
+function update_modal() {
 
   $.ajaxSetup({
     headers: {
@@ -441,7 +441,7 @@ function update_modal(){
     }
   });
   $("#cargando").css("display", "inline");
-  
+
   var dni = document.getElementById("dni").value;
   var nombre = document.getElementById("nombre").value;
   var apellido = document.getElementById("apellido").value;
@@ -472,7 +472,8 @@ function update_modal(){
       $("#alert_completa").css("display", "block");
       $("#alert_incompleta").css("display", "none");
       $('#modal-clienteNuevo').modal('hide');
-      $('#salida').text("Ficha Actualizada");console.log("salida de cccaaaaaa");
+      $('#salida').text("Ficha Actualizada");
+      console.log("salida de cccaaaaaa");
       console.log(data);
 
     }
@@ -481,7 +482,7 @@ function update_modal(){
 }
 
 
-function update_modal_financ(){
+function update_modal_financ() {
 
   $.ajaxSetup({
     headers: {
@@ -489,7 +490,7 @@ function update_modal_financ(){
     }
   });
   $("#cargando").css("display", "inline");
-  
+
   var dni = document.getElementById("dni").value;
   var nombre = document.getElementById("nombre").value;
   var apellido = document.getElementById("apellido").value;
@@ -511,8 +512,8 @@ function update_modal_financ(){
   var otros_ingresos = document.getElementById("otros_ingresos").value;
 
 
-  if (check_dependencia=="on") {
-    check_dependencia=0;
+  if (check_dependencia == "on") {
+    check_dependencia = 0;
   }
 
   $.ajax({
@@ -680,34 +681,34 @@ function send_total(valorCaja1) {
 
 var idventa;
 
-function valor_idventa(valor_idventa){
-    idventa = valor_idventa;
-    
+function valor_idventa(valor_idventa) {
+  idventa = valor_idventa;
+
 }
 
-function changeEstado(){
+function changeEstado() {
 
-    $('#modal-estado').modal('show');
+  $('#modal-estado').modal('show');
 
-    var estado = document.getElementById("select_estado").value;
-    console.log(idventa);
+  var estado = document.getElementById("select_estado").value;
+  console.log(idventa);
 
-    $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
 
-      $("#cambio_estado").css("display", "none");
-      $("#cargando").css("display", "inline");
+  $("#cambio_estado").css("display", "none");
+  $("#cargando").css("display", "inline");
 
-      $.ajax({
-        type: 'POST',
-        url: '/changeEstado',
-        data: {
-         estado: estado,
-         state: idventa
-        },
+  $.ajax({
+    type: 'POST',
+    url: '/changeEstado',
+    data: {
+      estado: estado,
+      state: idventa
+    },
     success: function (data) {
       $('#modal-estado').modal('hide');
       $("#cargando").css("display", "none");
@@ -717,4 +718,142 @@ function changeEstado(){
     }
   });
 
-  }
+}
+
+var precio_auto_vendido = 0;
+var efectivo = 0;
+var total = 0;
+var precio = 0;
+
+function show_venta(valor) {
+
+  valor_idventa(valor);
+
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  $("#cambio_estado").css("display", "none");
+  $("#cargando").css("display", "inline");
+
+  $.ajax({
+    type: 'POST',
+    url: '/show_venta',
+    data: {
+      state: idventa
+    },
+    success: function (data) {
+
+      var array_select = 0;
+      if (data[0].length != 0) {
+        array_select = 0;
+      } else {
+        if (data[1].length != 0) {
+          array_select = 1;
+        }else {
+          array_select = 2;
+        }
+      }
+
+      var array_datos_cliente=data[array_select];
+
+      var nombre_apellido = array_datos_cliente[0].nombre_apellido;
+        var domicilio = array_datos_cliente[0].domicilio;
+        var estado_civil = array_datos_cliente[0].estado_civil;
+        var dni = array_datos_cliente[0].dni;
+        var celular = array_datos_cliente[0].num_tel;
+        var act_empresa = array_datos_cliente[0].act_empresa;
+
+        document.querySelector("#show_cliente").innerText = nombre_apellido;
+        document.querySelector("#show_domicilio").innerText = domicilio;
+        document.querySelector("#show_estado_civil").innerText = estado_civil;
+        document.querySelector("#show_dni").innerText = dni;
+        document.querySelector("#show_celular").innerText = celular;
+        document.querySelector("#show_act_empresa").innerText = act_empresa;
+
+      if (data[0].length != 0) {
+
+        var array_0km = data[0];
+        var marca = array_0km[0].nombre;
+        var modelo = array_0km[0].modelo;
+        var version = array_0km[0].version;
+        precio_auto_vendido = array_0km[0].precio_auto_vendido;
+        efectivo = array_0km[0].efectivo;
+        total = array_0km[0].total;
+
+        document.querySelector("#show_modelo").innerText = modelo;
+        document.querySelector("#show_version").innerText = version;
+        document.querySelector("#show_marca").innerText = marca;
+       
+      }
+
+      if (data[1].length !== 0) {
+
+        var array_entregado = data[1];
+        var nomb_titular = array_entregado[0].titular;
+        var marca = array_entregado[0].nombre;
+        var modelo = array_entregado[0].modelo;
+        var version = array_entregado[0].version;
+        var dominio = array_entregado[0].dominio;
+        var chasis_num = array_entregado[0].chasis_num;
+        var motor_num = array_entregado[0].motor_num;
+        var color = array_entregado[0].color;
+        precio_auto_vendido = array_entregado[0].precio;
+        efectivo = array_entregado[0].efectivo;
+        total = array_entregado[0].total;
+        precio = array_entregado[0].precio;
+
+        $("#section_usado_entregado").css("display", "inline");
+
+        document.querySelector("#show_nombre_titular").innerText = nomb_titular;
+        document.querySelector("#show_marca_entregado").innerText = marca;
+        document.querySelector("#show_modelo_entregado").innerText = modelo;
+        document.querySelector("#show_version_entregado").innerText = version;
+        document.querySelector("#show_dominio_entregado").innerText = dominio;
+        document.querySelector("#show_nummotor_entregado").innerText = motor_num;
+        document.querySelector("#show_numchasis_entregado").innerText = chasis_num;
+        document.querySelector("#show_color_entregado").innerText = color;
+    
+      }
+
+      if (data[2].length != 0) {
+
+        var array_usado = data[2];
+        var marca = array_usado[0].nombre;
+        var modelo = array_usado[0].modelo;
+        var version = array_usado[0].version;
+        var dominio = array_usado[0].dominio;
+        var num_motor = array_usado[0].motor_num;
+        var anio = array_usado[0].anio;
+        var num_chasis = array_usado[0].chasis_num;
+        precio_auto_vendido = array_usado[0].precio_auto_vendido;
+        efectivo = array_usado[0].efectivo;
+        total = array_usado[0].total;
+
+        $("#section_usado").css("display", "inline");
+        
+        document.querySelector("#show_modelo").innerText = modelo;
+        document.querySelector("#show_version").innerText = version;
+        document.querySelector("#show_marca").innerText = marca;
+        document.querySelector("#show_dominio").innerText = dominio;
+        document.querySelector("#show_nummotor").innerText = num_motor;
+        document.querySelector("#show_numchasis").innerText = num_chasis;
+        document.querySelector("#show_anio").innerText = anio;
+
+      }
+
+      document.querySelector("#show_precio_auto_vendido").innerText = precio_auto_vendido;
+      document.querySelector("#show_efectivo").innerText = efectivo;
+      document.querySelector("#show_valor_entregado").innerText = precio;
+      document.querySelector("#show_total").innerText = total;
+
+      console.log(precio_auto_vendido + efectivo + precio);
+      console.log(precio_auto_vendido);
+      console.log(efectivo);
+      console.log(precio);
+    }
+  });
+
+}

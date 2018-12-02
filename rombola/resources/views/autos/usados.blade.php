@@ -69,7 +69,7 @@
 									<input type="hidden" name="idauto" value="{{ $item->id_auto }}">
 									<tr>
 										<td align="center" style="cursor: default;">
-											<img src={{url("img/marcas/$item->nombre.jpg")}} alt="..." class="img-circle" style="width: 80px; height: 80px;" />
+											<img src={{url("img/marcas/$item->nombre.jpg")}} alt="..." class="img-circle" style="width: 50px; height: 50px;" />
 										</td>
 
 										<td>{{$item->nombre}}</td>
@@ -80,16 +80,16 @@
 
 
 										<td style="cursor: default;">
-											<a href="{{ route('editusado',$item->id_auto)}}" class="edit-modal btn btn-info">
+											<a href="{{ route('editusado',$item->id_auto)}}" class="edit-modal btn btn-info btn-xs">
 												<span class="glyphicon glyphicon-edit"></span></a>
 
 										</td>
 										<td>
-											<button type="button" class="btn btn-info" id="btn-foto" data-toggle="modal" data-target="#modal-listaNuevo"
+											<button type="button" class="btn btn-info btn-xs" id="btn-foto" data-toggle="modal" data-target="#modal-listaNuevo"
 											 style="margin-bottom:10%;"><span class="glyphicon glyphicon-picture"></span></button>
 										</td>
 										<td>
-											<a href="{{ route('formfile',$item->id_auto)}}" class="btn btn-info">
+											<a href="{{ route('formfile',$item->id_auto)}}" class="btn btn-info btn-xs">
 												<span class="glyphicon glyphicon-camera"></span> Camera
 												</button>
 										</td>

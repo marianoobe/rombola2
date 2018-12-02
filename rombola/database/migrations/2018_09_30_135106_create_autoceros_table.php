@@ -18,8 +18,6 @@ class CreateAutocerosTable extends Migration
             $table->increments('id_autocero');           
             $table->string('vin',20)->unique()->nullable();
             $table->integer('auto_id')->unsigned()->index();          
-                   
-            
             $table->integer('estadoCero_id')->unsigned()->index();
             $table->timestamps();
             $table->foreign('auto_id')->references('id_auto')->on('automoviles')->onDelete('cascade');

@@ -6,9 +6,7 @@
 
 <form method="post" action="{{ route('ventacontado.store') }}">
     {!! Html::script('js/venta.js') !!}
-    @php
-        echo  Auth::user()->name ;
-    @endphp
+    
     <input type="number" id="id_user" name="id_user" style="display:none" value="{{ Auth::user()->name }}">
     <div class="container-fluid spark-screen">
         <div class="row">
@@ -345,6 +343,7 @@
                                                                         <th class="sorting" tabindex="0" aria-controls="example"
                                                                             rowspan="1" colspan="1" aria-label=" : activate to sort column ascending"
                                                                             style="width: 58px;" />
+                                                                        <th scope="col"></th>
                                                                         <th scope="col">MARCA</th>
                                                                         <th scope="col">MODELO</th>
                                                                         <th scope="col">VERSION</th>
@@ -361,9 +360,13 @@
                                                                             <input id="check_select_usado" name="check_select_usado"
                                                                                 value='{{$item->dominio}}' style="display:none">
                                                                         </td>
-                                                                        <td>{{$item->marca}}</td>
+                                                                        <td align="center" style="cursor: default;">
+                                                                            <img src={{url("img/marcas/$item->nombre.jpg")}} alt="..." class="img-circle"
+                                                                                style="width: 30px; height: 30px;" />
+                                                                        </td>
+                                                                        <td>{{$item->nombre}}</td>
                                                                         <td>{{$item->modelo}}</td>
-                                                                        <td>{{$item->descripcion}}</td>
+                                                                        <td>{{$item->version}}</td>
                                                                         <td>{{$item->dominio}}</td>
                                                                         <td>{{$item->color}}</td>
 
@@ -773,9 +776,10 @@
                                         <img src={{url("img/marcas/$item->nombre.jpg")}} alt="..." class="img-circle"
                                             style="width: 30px; height: 30px;" />
                                     </td>
+                                    
                                     <td>{{$item->nombre}}</td>
                                     <td>{{$item->modelo}}</td>
-                                    <td>{{$item->descripcion}}</td>
+                                    <td>{{$item->version}}</td>
                                     <td>{{$item->color}}</td>
 
                                 </tr>

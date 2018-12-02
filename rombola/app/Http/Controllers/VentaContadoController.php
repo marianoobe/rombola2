@@ -47,7 +47,6 @@ class VentaContadoController extends Controller
         ->join('autoceros','autoceros.auto_id','automoviles.id_auto')
         ->paginate(5);
         
-
        $auto_usado=Automovile::select("*")     
        ->join('marcas','marcas.id_marca','automoviles.marca_id')
        ->join('autosusados','autosusados.auto_id','automoviles.id_auto')
@@ -361,7 +360,7 @@ class VentaContadoController extends Controller
               'modelo' => $request->get('modelo_entregado'),
               'version'=> $request->get('version_entregado'),
               'color'=> $request->get('color_entregado'),
-              'precio'=> 0,         
+              'precio'=> $request->get('valor_auto_entregado'),                
               'ficha'=> "Incompleta",
               'visible'=> 1
             ]);
@@ -373,7 +372,7 @@ class VentaContadoController extends Controller
             
             $idauto=$item->id_auto;
             
-            $nuevo = DB::table('autosusados')
+            $nuevo_usado = DB::table('autosusados')
             ->insertGetId([
               'auto_id' => $usado,            
               'titular'=> $request->get('nomb_titular_entregado'),
@@ -386,9 +385,9 @@ class VentaContadoController extends Controller
               'combustible' => "",
               'fechaingreso' => $fecha_ingreso,
             ]);
-            //$nuevo->save(); 
+            //$nuevo_usado->save(); 
 
-            $id_autoentragado = $nuevo;
+            $id_autoentragado = $nuevo_usado;
 
             }
             else{
@@ -453,7 +452,7 @@ class VentaContadoController extends Controller
           'codigo' => $codigo,
           'resto' =>$resto,
           'visible' =>1,
-          'estado' =>'En Negociacion',
+          'estado' =>'EN NEGOCIACIÓN',
           'id_user'=> $request->get('id_user'),
           'tipo'=> "contado"
           ]);

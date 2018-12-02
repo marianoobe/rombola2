@@ -138,7 +138,7 @@ class VentaController extends Controller
       $fecha_oper=$request->get('fecha_oper');
       $operacion = new Operaciones([
         'persona_operacion' => $idpers,
-        'estado' => "En Negociación",
+        'estado' => "EN NEGOCIACIÓN",
         'fecha_oper'=> $fecha_oper,
         'aviso'=> 0,
         'visible' => 1,
@@ -160,7 +160,7 @@ class VentaController extends Controller
         $fecha_oper=$request->get('fecha_oper');
         $operacion = new Operaciones([
         'persona_operacion' => $idpersona,
-        'estado' => "En Negociación",
+        'estado' => "EN NEGOCIACIÓN",
         'fecha_oper'=> $fecha_oper,
         'aviso'=> false,
         'visible' => true,
@@ -346,35 +346,35 @@ class VentaController extends Controller
             foreach ($idmarca as $item) {}         
             $idmarcas=$item->idmarca;
 
-            $usado = new Automovile([
-              'idmarca' => $idmarcas, 
+            $usado = DB::table('automoviles')
+            ->insertGetId([
+              'marca_id' => $idmarcas, 
               'modelo' => $request->get('modelo_entregado'),
-              'descripcion'=> "",
+              'version'=> $request->get('version_entregado'),
               'color'=> $request->get('color_entregado'),
-              'precio'=>0,         
-              'estado'=> "A Designar",
-              'dominio' => $request->get('dominio_entregado'),
+              'precio'=> $request->get('valor_auto_entregado'),         
+              'ficha'=> "Incompleta",
               'visible'=> 1
             ]);
-            $usado->save();
-
-          $dominio=$request->get('dominio');
-          $car = Automovile::where("dominio","=",$dominio)->select("id_auto")->get();
-                       
-          foreach ($car as $item) {}
             
-            $idauto=$item->id_auto;
-            $nuevo = new Autosusado([
-              'id_auto' => $idauto,            
-              'titular'=> $request->get('nomb_titular_entregado'),
-              'anio' => $request->get('anio_entregado'),
-              'kilometros' => 0,
-              'chasis_num'=> $request->get('chasis_num_entregado'),
-              'motor_num'=> $request->get('motor_num_entregado'),
-            ]);
-            $nuevo->save(); 
+            $estado_usado = Estadousado::where("nombreEstado","=","En Trámite")->select("id_estadoUsado")->get();
+            foreach ($estado_usado as $key) {}
 
-            $id_autoentragado = $nuevo;
+              $nuevo_usado = DB::table('autosusados')
+              ->insertGetId([
+                'auto_id' => $usado,            
+                'titular'=> $request->get('nomb_titular_entregado'),
+                'anio' => $request->get('anio_entregado'),
+                'kilometros' => 0,
+                'dominio' => $request->get('dominio_entregado'),
+                'chasis_num'=> $request->get('chasis_num_entregado'),
+                'motor_num'=> $request->get('motor_num_entregado'),
+                'estadoUsado_id' => $key->id_estadoUsado,
+                'combustible' => "",
+                'fechaingreso' => $fecha_ingreso,
+              ]);
+  
+              $id_autoentragado = $nuevo_usado;
 
             }
             else{
@@ -441,7 +441,7 @@ class VentaController extends Controller
             'cant_cuotas' =>$request->get('cant_cuotas'),
             'monto_cuota' =>$request->get('monto'),
             'visible' =>1,
-            'estado' =>'En Negociacion',
+            'estado' =>'EN NEGOCIACIÓN',
             'id_user'=> $request->get('id_user'),
             'tipo'=>"financiacion"
             ]);
@@ -487,6 +487,74 @@ class VentaController extends Controller
       $resultado= "cargado";
       return response()->json($resultado);
 
+    }
+
+    public function show_venta(Request $request){
+
+      $arreglo = array();
+      $resultado_entregado = array();
+      $resultado_autousado = array();
+      $resultado_0km = array();
+
+      $idventa= $request->get('state');
+
+      $consulta= DB:: table('ventas')
+      ->select("idventa_autousado","idventa_autoentregado","idventa_auto0km")
+      ->where("idventa","=",$idventa)
+      ->get();
+
+      foreach ($consulta as $key) {}
+
+      if ($key->idventa_autoentregado != null) {
+
+        $resultado_entregado= DB:: table('operaciones')
+      ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
+      ->join('personas','operaciones.persona_operacion','personas.idpersona')
+      ->join('telefonos','personas.idpersona','telefonos.personas_telefono')
+      ->join('clientes','personas.idpersona','clientes.cliente_persona')
+      ->join('autosusados','ventas.idventa_autoentregado','autosusados.id_autoUsado')
+      ->join('estadousados','autosusados.estadoUsado_id','estadousados.id_estadoUsado')
+      ->join('automoviles','autosusados.auto_id','automoviles.id_auto')
+      ->join('marcas','automoviles.marca_id','marcas.id_marca')
+      ->where("idventa","=",$idventa)
+      ->get();
+      }
+
+      if ($key->idventa_autousado != null) {
+
+        $resultado_autousado= DB:: table('operaciones')
+      ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
+      ->join('personas','operaciones.persona_operacion','personas.idpersona')
+      ->join('telefonos','personas.idpersona','telefonos.personas_telefono')
+      ->join('clientes','personas.idpersona','clientes.cliente_persona')
+      ->join('autosusados','ventas.idventa_autousado','autosusados.id_autoUsado')
+      ->join('automoviles','autosusados.auto_id','automoviles.id_auto')
+      ->join('marcas','automoviles.marca_id','marcas.id_marca')
+      ->where("idventa","=",$idventa)
+      ->get();
+
+      }
+
+      if ($key->idventa_auto0km != null) {
+        
+        $resultado_0km= DB:: table('operaciones')
+      ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
+      ->join('personas','operaciones.persona_operacion','personas.idpersona')
+      ->join('telefonos','personas.idpersona','telefonos.personas_telefono')
+      ->join('clientes','personas.idpersona','clientes.cliente_persona')
+      ->join('autoceros','ventas.idventa_auto0km','autoceros.id_autocero')
+      ->join('automoviles','autoceros.auto_id','automoviles.id_auto')
+      ->join('marcas','automoviles.marca_id','marcas.id_marca')
+      ->where("idventa","=",$idventa)
+      ->get();
+
+      }
+
+      array_push($arreglo,$resultado_0km);
+      array_push($arreglo,$resultado_autousado);
+      array_push($arreglo,$resultado_entregado);
+      
+      return response()->json($arreglo);
     }
 
     /**

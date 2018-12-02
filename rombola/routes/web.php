@@ -64,6 +64,7 @@ Route::delete('/file/{id}','FileController@destroy')->name('deletefile');
 //Route::get('/file/download/{id}','FileController@show')->name('downloadfile');
 //Route::get('/file/email/{id}','FileController@edit')->name('emailfile');
 Route::post('/file/dropzone','FileController@dropzone')->name('dropzone');
+
 });
 
 Route::post('clientefast','ClienteController@store_fast')->name('clientefast');
@@ -96,6 +97,7 @@ Route::post('updatemodal','ClienteController@update_modal')->name('updatemodal')
 Route::post('updatemodalfinanc','ClienteController@update_modal_financ')->name('updatemodalfinanc');
 
 Route::post('changeEstado','VentaController@changeEstado')->name('changeEstado');
+Route::post('show_venta','VentaController@show_venta')->name('show_venta');
 
 
 Route::get('/prueba1', function() {
