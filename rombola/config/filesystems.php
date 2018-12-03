@@ -60,7 +60,7 @@ return [
         ],
         'fotos' => [
             'driver' => 'local',
-            'root'   => public_path('storage/fotos'),
+            'root'   =>  public_path('fotos'),
         ],
 
         's3' => [

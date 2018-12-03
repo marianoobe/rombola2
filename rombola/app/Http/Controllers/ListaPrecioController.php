@@ -79,7 +79,7 @@ class ListaprecioController extends Controller
           }
           //dd($marca);
           $idmarcas=$item->id_marca;
-        $carpeta=$request->input("marcas");
+         $carpeta=$request->input("marcas");
 	      $ruta=$archivo->getClientOriginalName();
 		    $r1=Storage::disk('listas')->put($ruta,\File::get($archivo));
                $lista = new Listaprecio([

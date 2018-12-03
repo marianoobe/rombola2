@@ -17,7 +17,7 @@ class FileController extends Controller
      */
     public function index(Request $request)
     {
-         $rutafotos= "storage/fotos/";
+         $rutafotos= public_path().'/images/fotos/';
         $files = File::orderBy('created_at','DESC')->paginate(30);
         return view('file.index')->with('files',$files)
                                 ->with('rutafotos',$rutafotos); 
@@ -37,12 +37,13 @@ class FileController extends Controller
 
     public function dropzone(Request $request){
        
-                 $idauto=$request->input('idauto');
+         $idauto=$request->input('idauto');
         $file = $request->file('file');
-        $ruta=$file->getClientOriginalName();
-        $r1=Storage::disk('fotos')->put($ruta,\File::get($file));
-       
-		    $rutadelaimagen="storage/fotos/".$ruta;
+        $name=$file->getClientOriginalName();
+       // $r1=Storage::disk('fotos')->put($ruta,\File::get($file));//mueve a la carpeta las imagenes
+       $file->move(public_path('images/fotos'),$name);
+
+		    $rutadelaimagen='images/fotos/'.$name;// ruta bd de la imagen
         File::create([
             'title' => $file->getClientOriginalName(),
             'description' => 'Upload with dropzone.js',

@@ -97,8 +97,7 @@
 											<select id="estado" name="estado" class="form-control form-control-sm" required>
 												<option>Disponible</option>
 												<option>En Tramite</option>
-												<option>A designar</option>
-
+												
 											</select>
 
 										</div>
