@@ -132,7 +132,7 @@ class AutoceroController extends Controller
         ->where('automoviles.id_auto','=', $idcar)
         ->get();
 //dd($autos);
-      return view('cero.edit', compact('autos',$autos));
+      return view('cero.edit', compact('autos'));
     }
  
     /**

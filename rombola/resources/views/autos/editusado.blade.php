@@ -75,7 +75,7 @@
 											</div>
 											<div class="form-group">
 												<label for="anio"><strong>Dominio</strong></label>
-												<input type="text" class="form-control" id="dominio" name="dominio" value="{{ $item->dominio}}" disabled="disabled">
+												<input type="text" class="form-control" id="dominio" name="dominio" value='{{ $item->dominio}}' disabled="disabled">
 											</div>
 
 										</div>
