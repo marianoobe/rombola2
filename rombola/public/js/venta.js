@@ -691,7 +691,6 @@ function changeEstado() {
   $('#modal-estado').modal('show');
 
   var estado = document.getElementById("select_estado").value;
-  console.log(idventa);
 
   $.ajaxSetup({
     headers: {

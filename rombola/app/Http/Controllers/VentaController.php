@@ -16,6 +16,7 @@ use App\Autocero;
 use App\Autosusado;
 use App\Estadocero;
 use App\Estadousado;
+use App\Estado;
 use DB;
 
 
@@ -33,9 +34,13 @@ class VentaController extends Controller
       ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
       ->join('personas','operaciones.persona_operacion','personas.idpersona')
       ->join('clientes','personas.idpersona','clientes.cliente_persona')
+      ->join('estados','operaciones.estado','estados.id_estado')
       ->get();
 
-        return view('venta',compact('venta_operac'));
+      
+      $estado=Estado::All();
+
+      return view('venta',compact('venta_operac','estado'));
     }
 
     /**
@@ -135,10 +140,12 @@ class VentaController extends Controller
       $tel->save();
       }
      
+      $id_estado = Estado::where("nomb_estado","=","Administración")->select("id_estado")->get();
+
       $fecha_oper=$request->get('fecha_oper');
       $operacion = new Operaciones([
         'persona_operacion' => $idpers,
-        'estado' => "EN NEGOCIACIÓN",
+        'estado' => $id_estado,
         'fecha_oper'=> $fecha_oper,
         'aviso'=> 0,
         'visible' => 1,
@@ -157,10 +164,12 @@ class VentaController extends Controller
         $idpersona = $items->idpersona;
         $dni=$items->dni;
 
+        $id_estado = Estado::where("nomb_estado","=","Administración")->select("id_estado")->get();
+
         $fecha_oper=$request->get('fecha_oper');
         $operacion = new Operaciones([
         'persona_operacion' => $idpersona,
-        'estado' => "EN NEGOCIACIÓN",
+        'estado' => $id_estado,
         'fecha_oper'=> $fecha_oper,
         'aviso'=> false,
         'visible' => true,
@@ -441,7 +450,6 @@ class VentaController extends Controller
             'cant_cuotas' =>$request->get('cant_cuotas'),
             'monto_cuota' =>$request->get('monto'),
             'visible' =>1,
-            'estado' =>'EN NEGOCIACIÓN',
             'id_user'=> $request->get('id_user'),
             'tipo'=>"financiacion"
             ]);
@@ -478,8 +486,16 @@ class VentaController extends Controller
       $idventa= $request->get('state');
       $estado = $request->get('estado');
 
-      DB::table('ventas')
-            ->where('idventa',"=",$idventa)
+      $venta_oper_q= DB::table('operaciones')
+      ->select('persona_operacion')
+      ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
+      ->get();
+
+      foreach ($venta_oper_q as $item) {}
+      $venta_oper=$item->persona_operacion;
+
+      DB::table('operaciones')
+            ->where('id_operacion',"=",$venta_oper)
             ->update([
                 'estado'=>$estado
         ]);

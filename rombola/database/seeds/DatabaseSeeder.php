@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
             $this->truncateTables([
                 'estadoceros',
                 'estadousados',
-                'marcas'
+                'marcas',
+                'estados'
             ]);
       
             // Ejecutar los seeders:

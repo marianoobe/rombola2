@@ -58,16 +58,22 @@
 							</div>							
 							<div class="form-group">
 								<label>Fecha de Nacimiento:</label>
-								<input type="text" class="form-control" name="fecha_nacimiento" value="{{ $item->fecha_nacimiento }}" disabled="disabled" />
+								<input type="date" class="form-control" name="fecha_nacimiento" value="{{ $item->fecha_nacimiento }}" disabled="disabled" />
 							</div>
 							<div class="form-group">
+								<input id="inputestado" type="text" value="{{ $item->estado_civil }}" style="display:none">
 								<label>Estado Civil:</label>
-								<input type="text" class="form-control" name="estado_civil" value="{{ $item->estado_civil }}" disabled="disabled" />
+								<select id="estado_civil" name="estado_civil" class="form-control form-control-sm" disabled >
+										
+								</select>
 							</div>
+							
 						</div>
 
 						<!-- /.row -->
 					</div>
+
+				</form>
 					<!-- ./box-body -->
 					<div class="box-footer">
 						<div class="row margenBoot-25" style="margin-top:25px;">
@@ -76,7 +82,7 @@
 							</div>
 						</div>
 					</div>
-</form>
+
 <!-- /.box-footer -->
 </div>
 <!-- /.box -->
@@ -86,6 +92,24 @@
 </div>
 
 <script>
+		$(document).ready(function () {
+
+			var array = ["Soltero", "Convive", "Casado", "Divorciado", "Viudo"];
+			
+	       var select = document.getElementsByName(estado_civil)[0];
+   
+	       for (value in array) {
+		   var option = document.createElement("option");
+		   console.log(option);
+		   option.text = array[value];
+		   $(option).appendTo("#estado_civil");
+
+		   var estadocivil = document.getElementById("inputestado").value;
+		   $("#estado_civil").val(estadocivil);
+	       }
+           
+		});
+
 	function realizaProceso(valorCaja1) {
 		this.style.display = 'none';
 		var parametros = {
@@ -108,6 +132,7 @@
 		document.getElementById("actualizar").style.display = "block";
 		document.getElementById("actualizar").style.textAlign = "center";
 		$('input').prop('disabled', false);
+		$('input').prop('required', true);
 		$('select').prop('disabled', false);
 
 	}

@@ -51,6 +51,22 @@ class ProfessionSeeder extends Seeder
         $j++;
         }
 
+        $estado_venta = array(
+            '0' => "Administración",
+            '1' => "Crédito",
+            '2' => "Gestoría",
+            '3' => "Concretada",
+            '4' => "Dada de Baja",
+         );
+
+         $j=0;
+         while ($j < count($estado_venta)) {
+        DB::table('estados')->insert([
+            'nomb_estado' => $estado_venta[$j],
+        ]);
+        $j++;
+        }
+
         $marcas = array(
             '0' => "Audi",
             '1' => "BMW",

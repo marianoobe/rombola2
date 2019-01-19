@@ -50,7 +50,7 @@ class PreventaController extends Controller
             return response()->json($financ); 
         }
     }
-
+ 
     public function getCuotas(Request $request, $id){
         if($request->ajax()){
             $cuotas= CantidadCuotas::cantidad_cuotas($id);

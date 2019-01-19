@@ -14,14 +14,15 @@ class CreateOperacionesTable extends Migration
     public function up()
     {
         Schema::create('operaciones', function (Blueprint $table) {
-            $table->increments('id_operacion');
-            $table->integer('persona_operacion')->unsigned();
-            $table->foreign('persona_operacion')->references('idpersona')->on('personas');
-            $table->text('fecha_oper');
-            $table->text('estado');
-            $table->boolean('aviso');
-            $table->boolean('visible');
-            $table->timestamps();
+                $table->increments('id_operacion');
+                $table->integer('persona_operacion')->unsigned();
+                $table->foreign('persona_operacion')->references('idpersona')->on('personas');
+                $table->text('fecha_oper');
+                $table->integer('estado')->unsigned();
+                $table->foreign('estado')->references('id_estado')->on('estados');
+                $table->boolean('aviso');
+                $table->boolean('visible');
+                $table->timestamps();
         });
     }
 

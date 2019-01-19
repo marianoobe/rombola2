@@ -543,7 +543,7 @@
                                                 <input type="number" style="display:none;" id="inpcheques" name="inpcheques"
                                                     value="0">
                                             </div>
-                                        </div>
+                                        </div> 
                                     </div>
                                     <br>
                                     <div class="row margenBoot-25">

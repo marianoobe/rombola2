@@ -187,7 +187,7 @@
 									{!! Form::select('tipofinanciera',$tipo_finan,null,['class'=>'form-control','id'=>'tipofinanciera']) !!}
 								</div>
 								<p></p>
-							</div>
+							</div> 
 							<section id="box-financiera" style="display:none" class="box box-default">
 								<div class="form-group">
 									<label><strong>*Financieras</strong></label>

@@ -23,7 +23,6 @@ class CreateChequesTable extends Migration
             $table->integer('importe');
             $table->text('estado');
             $table->timestamps();
-
         });
     }
 

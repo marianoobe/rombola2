@@ -10,6 +10,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Persona;
+use App\Operaciones;
+use App\Estado;
+use DB;
 /**
  * Class HomeController
  * @package App\Http\Controllers
@@ -40,7 +43,17 @@ class HomeController extends Controller
         ->where('visible','=', 1)
         ->paginate(6);
 
-        return view('adminlte::home',compact('client_pers'));
+
+        $venta_operac = DB::table('operaciones')
+      ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
+      ->join('personas','operaciones.persona_operacion','personas.idpersona')
+      ->join('clientes','personas.idpersona','clientes.cliente_persona')
+      ->join('estados','operaciones.estado','estados.id_estado')
+      ->paginate(10);
+
+        $estado=Estado::All();
+
+        return view('adminlte::home',compact('client_pers','estado','venta_operac'));
     }
 
 

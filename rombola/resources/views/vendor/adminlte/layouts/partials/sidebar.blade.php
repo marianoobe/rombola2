@@ -38,10 +38,15 @@ id="empresa-logo" src="/img/logo.png" class="img-circle" width="50" height="50">
             <!-- Optionally, you can add icons to the links -->
             <li class="treeview"><a href="{{ url('home') }}"><i class='glyphicon glyphicon-home'></i> <span>{{
                         trans('adminlte_lang::message.home') }}</span></a></li>
-            <li class="treeview">
-                <a href=""><i class='fas fa-user-alt '></i> <span>{{ trans('adminlte_lang::message.client') }}</span></a>
+            <li>
+                <a href="{{ url('clientes') }}">
+                    <i class='fas fa-user-alt '></i> 
+                    <span>{{ trans('adminlte_lang::message.client') }}</span>
+                </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ url('clientes') }}">{{ trans('adminlte_lang::message.list-client') }}</a></li>
+                    <li>
+                        <a href="{{ url('clientes') }}">{{ trans('adminlte_lang::message.list-client') }}</a>
+                    </li>
                 </ul>
             </li>
             <li class="treeview">
@@ -63,13 +68,20 @@ id="empresa-logo" src="/img/logo.png" class="img-circle" width="50" height="50">
                         trans('adminlte_lang::message.presales') }}</span></a></li>
             -->
             
-            <li><a href="{{ url('venta') }}"><i class='fa fa-handshake-o'></i> <span>{{ trans('adminlte_lang::message.sales') }}</span></a></li>
+            <li><a href="{{ url('venta') }}">
+                <i class='fa fa-handshake-o'></i> 
+                <span>{{ trans('adminlte_lang::message.sales') }}</span>
+            </a>
+        </li>
             
             <!--<li><a href="{{ url('financiera') }}"><i class='fa fa-university'></i> <span>Financieras</span></a></li>
             -->
                  
             <li class="treeview">
-                <a href="#"><i class='fa fa-users'></i> <span>USUARIOS</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class='fa fa-users'></i> 
+                    <span>USUARIOS</span> 
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ url('listado_usuarios') }}">Listado Usuarios</a></li>
                     <li><a href="#"></a></li>

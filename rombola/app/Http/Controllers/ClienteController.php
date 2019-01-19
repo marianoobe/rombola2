@@ -21,7 +21,7 @@ class ClienteController extends Controller
         $client_pers = Persona::Search($request->name)
         ->join('clientes','clientes.cliente_persona','personas.idpersona')
         ->join('telefonos', 'telefonos.personas_telefono', 'personas.idpersona')
-        ->where('telefonos.tipo','=', 2)
+        ->where('telefonos.tipo','=', 1)
         ->where('visible','=', 1)
         ->paginate(6);
 
@@ -89,7 +89,7 @@ class ClienteController extends Controller
           $tel = new Telefono([
             'personas_telefono' => $idpers,
             'num_tel' => $request->get('tel_fijo'),
-            'tipo' => '1'
+            'tipo' => 'celular'
           ]);
           $tel->save();
         }
@@ -98,10 +98,11 @@ class ClienteController extends Controller
           $tel = new Telefono([
             'personas_telefono' => $idpers,
             'num_tel' => $request->get('cel_1'),
-            'tipo' => '2'
+            'tipo' => 'fijo'
           ]);
           $tel->save();
         }
+        /* ++++++++++++++++++++++++++++++++++++++++++++ revisar
         if($cel_2 != null)
           {
           $tel = new Telefono([
@@ -111,6 +112,8 @@ class ClienteController extends Controller
           ]);
           $tel->save();
         }
+        */ //**********************************
+        
         if($cliente->save()){
           return redirect('/clientes')->with('success', 'Cliente Guardado');
         }
@@ -159,7 +162,7 @@ class ClienteController extends Controller
       $tel = new Telefono([
         'personas_telefono' => $share,
         'num_tel' => $request->get('cel_1'),
-        'tipo' => '2'
+        'tipo' => 'celular'
       ]);
       $tel->save();
     }

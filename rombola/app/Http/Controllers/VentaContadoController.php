@@ -17,6 +17,7 @@ use App\Venta;
 use App\Autosusado;
 use App\Estadocero;
 use App\Estadousado;
+use App\Estado;
 
 
 
@@ -74,7 +75,8 @@ class VentaContadoController extends Controller
 
       if ($can == 'nuevo') {
         
-      //insert Persona-Cliente
+      //insert Persona-Cliente ******************************************
+
       $share = new Persona([
         'dni' => $request->get('nuevo_dni'),
         'nombre' => $request->get('nuevo_nombre'),
@@ -111,7 +113,9 @@ class VentaContadoController extends Controller
         'fecha'=> date("d-m-Y")
       ]);
       $cliente->save();
-      //--/insert Persona-Cliente
+
+      //--/insert Persona-Cliente ******************************************
+
       if($request->get('nuevo_cel_1') != null)
       {
       $tel = new Telefono([
@@ -124,10 +128,12 @@ class VentaContadoController extends Controller
 
       $idcliente= Cliente::where('cliente_persona','=',$idpers)->select('idcliente')->get();
 
+      $id_estado = Estado::where("nomb_estado","=","Administración")->select("id_estado")->get();
+
       $fecha_oper=$request->get('fecha_oper');
       $operacion = new Operaciones([
         'persona_operacion' => $idpers,
-        'estado' => "En Negociación",
+        'estado' => $id_estado,
         'fecha_oper'=> $fecha_oper,
         'aviso'=> 0,
         'visible' => 1,
@@ -146,13 +152,15 @@ class VentaContadoController extends Controller
           $idpersona = $items->idpersona;
           $dni=$items->dni;
         
-        $idcliente = Cliente::where("cliente_persona","=",$idpersona)->select('idcliente')->get();
+        //$idcliente = Cliente::where("cliente_persona","=",$idpersona)->select('idcliente')->get();
 
-        
+        $id_estado = Estado::where("nomb_estado","=","Administración")->select("id_estado")->get();
+        foreach ($id_estado as $item_estado) {}
+
         $fecha_oper=$request->get('fecha_oper');
         $operacion = new Operaciones([
         'persona_operacion' => $idpersona,
-        'estado' => "En Negociación",
+        'estado' => $item_estado->id_estado,
         'fecha_oper'=> $fecha_oper,
         'aviso'=> false,
         'visible' => true,
@@ -163,7 +171,8 @@ class VentaContadoController extends Controller
     
       if($request->get('input_conyuge')=="si")
       {
-     //--insert Persona-Conyuge
+
+     //insert Persona-Conyuge ******************************************
 
        $nombre_conyuge = $request->get('conyuge_nombre');
        $apellido_conyuge = $request->get('conyuge_apellido');
@@ -191,9 +200,8 @@ class VentaContadoController extends Controller
           //echo "$item->idpersona";
         }
         $idpers=$item->idpersona;
-        //insert Persona-Conyuge
+        //--insert Persona-Conyuge  ******************************************
  
-        
         $conyuge = new Conyuge([
           'idconyuge_persona' => $idpers,
           'fecha_nacimiento' => $request->get('conyuge_fecha_nac'),
@@ -329,7 +337,7 @@ class VentaContadoController extends Controller
           }
         }
 
-          /*insert Auto Usado -------*/
+          //insert Auto Usado -------******************************************
           $idusado=null;
         if ($request->get('check_usado')=="si") {
           $idusado = $request->get('check_select_usado');
@@ -341,9 +349,7 @@ class VentaContadoController extends Controller
             $idusado = null;
           }
 
-           /*insert Auto Entregado -------*/
-
-           
+                      
 
            if($request->get('valor_entregado')=="si"){
 
@@ -386,6 +392,9 @@ class VentaContadoController extends Controller
               'fechaingreso' => $fecha_ingreso,
             ]);
             //$nuevo_usado->save(); 
+
+
+            //insert Auto Entregado -------****************************************** 
 
             $id_autoentragado = $nuevo_usado;
 
@@ -452,12 +461,12 @@ class VentaContadoController extends Controller
           'codigo' => $codigo,
           'resto' =>$resto,
           'visible' =>1,
-          'estado' =>'EN NEGOCIACIÓN',
           'id_user'=> $request->get('id_user'),
           'tipo'=> "contado"
           ]);
+
          
-          //insert Cheque -------
+          //insert Cheque -------****************************************** 
           $cheque = $request->get('valor_cheque');
           if ($cheque == 'si') {
 
@@ -471,7 +480,8 @@ class VentaContadoController extends Controller
               'estado' => "",
               ]);
           }
-          /*   dd("HOLA");*/
+         //--insert Cheque -------****************************************** 
+
 
       return redirect('/venta')->with('success', 'Venta Guardada');
     }

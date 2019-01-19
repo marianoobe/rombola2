@@ -1,17 +1,20 @@
 @php
-use App\Operaciones;
-$venta_operac = Operaciones::
-join('ventas','operaciones.id_operacion','ventas.operacion_venta')
+
+use App\Estado;
+
+$venta_operac = DB::table('operaciones')
+->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
 ->join('personas','operaciones.persona_operacion','personas.idpersona')
 ->join('clientes','personas.idpersona','clientes.cliente_persona')
+->join('estados','operaciones.estado','estados.id_estado')
 ->paginate(10);
 
-$arreglo[] = array();
+$estado=Estado::All();
 
 @endphp
 <br>
 {!! Html::script('js/venta.js') !!}
-
+ 
 <div class="col-sm-4 pull-right">
     <form method="GET" action="{{ route('venta.index') }}" class="navbar-form pull-right" role="search">
         <!--<div class="input-group">
@@ -39,17 +42,23 @@ $arreglo[] = array();
     </thead>
     <tbody id="myTable">
         @foreach($venta_operac as $item)
-
+        
         <tr>
             <td>{{$item->fecha_oper}}</td>
             <td>{{$item->codigo}}</td>
-            <td>{{$item->nombre_apellido}}</td>
-            @php
-            if($item->estado == "EN NEGOCIACIÓN"){$clase="label-success";}
-            if($item->estado == "COMPLETADA"){$clase="label-primary";}
-            if($item->estado == "DADO DE BAJA"){$clase="label-danger";}
-            @endphp
-            <td><span id="estado_label" name="estado_label" class={{$clase}}>{{$item->estado}}</span></td>
+			<td>{{$item->nombre_apellido}}</td>
+			
+			@php
+			
+			if($item->nomb_estado == "Administración"){$clase="label-success"; }
+			if($item->nomb_estado == "Crédito"){$clase="label-info";}
+			if($item->nomb_estado == "Gestoría"){$clase="label-secondary";}
+			if($item->nomb_estado == "Concretada"){$clase="label-primary";}
+			if($item->nomb_estado == "Dada de Baja"){$clase="label-danger";}
+		
+			@endphp
+			
+            <td><span id="estado_label" name="estado_label" class={{$clase}}>{{$item->nomb_estado}}</span></td>
             <td style="cursor: default;">
             </td>
             <td style="cursor: default;">
@@ -91,9 +100,10 @@ $arreglo[] = array();
                 <section id="cambio_estado">
                     <label>Estado de la Negociación:</label>
                     <select id="select_estado" class="form-control" id="sel-estadonegociacion">
-                        <option value="EN NEGOCIACIÓN">EN NEGOCIACIÓN</option>
-                        <option value="COMPLETADA">COMPLETADA</option>
-                        <option value="DADO DE BAJA">DADO DE BAJA</option>
+							@foreach ($estado as $item){
+								<option value="{{ $item->id_estado }}">{{$item->nomb_estado}}</option>
+								}
+								@endforeach
                     </select>
                 </section>
 

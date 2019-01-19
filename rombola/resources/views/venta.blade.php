@@ -47,17 +47,25 @@
 
 							<tbody id="myTable">
 								@foreach($venta_operac as $item)
+
+								@php	
+												
+								if($item->nomb_estado == "Administración"){$clase="label-success"; }
+								if($item->nomb_estado == "Crédito"){$clase="label-info";}
+								if($item->nomb_estado == "Gestoría"){$clase="label-secondary";}
+								if($item->nomb_estado == "Concretada"){$clase="label-primary";}
+								if($item->nomb_estado == "Dada de Baja"){$clase="label-danger";}
+
+								@endphp
+
 								<tr>
 									<td>{{$item->fecha_oper}}</td>
 									<td>{{$item->codigo}}</td>
 									<td>{{$item->nombre_apellido}}</td>
 									<td>{{$item->idventa}}</td>
-									@php
-									if($item->estado == "EN NEGOCIACIÓN"){$clase="label-success";}
-									if($item->estado == "COMPLETADA"){$clase="label-primary";}
-									if($item->estado == "DADO DE BAJA"){$clase="label-danger";}
-									@endphp
-									<td><span id="estado_label" name="estado_label" class={{$clase}}>{{$item->estado}}</span></td>
+                        							
+									<td><span id="estado_label" name="estado_label" class={{$clase}}>{{$item->nomb_estado}}</span></td>
+
 									<td style="cursor: default;">
 										@can('vendedor')
 										<a onclick="show_venta({{$item->idventa}});" data-toggle="modal" data-target="#modal-showventa" class="btn btn-primary btn-xs">
@@ -102,9 +110,10 @@
 			<div class="modal-body">
 				<label>Estado de la Negociación:</label>
 				<select id="select_estado" class="form-control" id="sel-estadonegociacion">
-					<option value="EN NEGOCIACIÓN">EN NEGOCIACIÓN</option>
-					<option value="COMPLETADA">COMPLETADA</option>
-					<option value="DADO DE BAJA">DADO DE BAJA</option>
+						@foreach ($estado as $item){
+							<option value="{{ $item->id_estado }}">{{$item->nomb_estado}}</option>
+							}
+							@endforeach
 				</select>
 			</div>
 			<div class="modal-footer">
