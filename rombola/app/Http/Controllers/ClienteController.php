@@ -21,7 +21,7 @@ class ClienteController extends Controller
         $client_pers = Persona::Search($request->name)
         ->join('clientes','clientes.cliente_persona','personas.idpersona')
         ->join('telefonos', 'telefonos.personas_telefono', 'personas.idpersona')
-        ->where('telefonos.tipo','=', 1)
+        ->where('telefonos.tipo','=', "celular")
         ->where('visible','=', 1)
         ->paginate(6);
 
@@ -113,7 +113,7 @@ class ClienteController extends Controller
           $tel->save();
         }
         */ //**********************************
-        
+
         if($cliente->save()){
           return redirect('/clientes')->with('success', 'Cliente Guardado');
         }
@@ -135,7 +135,7 @@ class ClienteController extends Controller
       $apellido = $request->get('apellido');
       $share = DB::table('personas')
       ->insertGetId([
-        'dni' => 0,
+        'dni' => "---",
         'nombre' => $request->get('nombre'),
         'apellido'=> $request->get('apellido'),
         'nombre_apellido'=> $nombre." ".$apellido,
@@ -152,7 +152,8 @@ class ClienteController extends Controller
         'visible'=> 1,
         'id_user'=>$request->get('id_user'),
         'fecha'=> date("d-m-Y"),
-        'interes'=>$request->get('interes')
+        'interes'=>$request->get('interes'),
+        'tipo_auto'=>$request->get('input_tipo_auto')
       ]);
 
       $cel_1=$request->get('cel_1');
@@ -207,8 +208,42 @@ class ClienteController extends Controller
         ->join('telefonos','telefonos.personas_telefono','personas.idpersona')
         ->where('personas.idpersona','=', $idpers)
         ->get();
+
+        $client_venta_0km = DB::table('clientes')
+        ->join('personas', 'personas.idpersona' ,'clientes.cliente_persona')
+        ->join('operaciones','operaciones.persona_operacion','personas.idpersona')
+        ->join('ventas','ventas.operacion_venta','operaciones.id_operacion')
+        ->join('autoceros','autoceros.id_autocero','ventas.idventa_auto0km')
+        ->join('automoviles','automoviles.id_auto','autoceros.auto_id')
+        ->join('marcas','marcas.id_marca','automoviles.marca_id') 
+        ->where('personas.idpersona','=', $idpers)
+        ->get();
+
+        $client_venta_usado = DB::table('clientes')
+        ->join('personas', 'personas.idpersona' ,'clientes.cliente_persona')
+        ->join('operaciones','operaciones.persona_operacion','personas.idpersona')
+        ->join('ventas','ventas.operacion_venta','operaciones.id_operacion')
+        ->join('autosusados','autosusados.id_autoUsado','ventas.idventa_autousado')
+        ->join('automoviles','automoviles.id_auto','autosusados.auto_id')
+        ->join('marcas','marcas.id_marca','automoviles.marca_id') 
+        ->where('personas.idpersona','=', $idpers)
+        ->get();
+
+        if (count($client_venta_0km)!=0) {
+          $auto_comprado = $client_venta_0km;
+          return view('shares.edit', compact('client','auto_comprado')); 
+        }
+        else {
+          if (count($client_venta_usado)!=0){
+            $auto_comprado = $client_venta_usado;
+            return view('shares.edit', compact('client','auto_comprado')); 
+          }
+          else {
+            $auto_comprado = $client_venta_0km;
+            return view('shares.edit', compact('client','auto_comprado'));
+          }
+        }     
       
-      return view('shares.edit', compact('client'));
     }
     
     /**
@@ -220,6 +255,7 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
+     
       $nombre= $request->get('nombre');
       $apellido = $request->get('apellido');
 
@@ -240,7 +276,7 @@ class ClienteController extends Controller
                 "estado_civil" => $request->get('estado_civil'),
 
         ]);
-      return redirect('/clientes')->with('success', 'Stock has been updated');   
+      return redirect('/clientes')->with('success', 'Cliente Actualizado');   
     }
 
     public function update_modal(Request $request)
@@ -260,7 +296,7 @@ class ClienteController extends Controller
                 "domicilio" => $request->get('domicilio'),
                 "act_empresa" => $request->get('act_empresa'),
                 "num_tel" => $request->get('cel_1'),
-                "tipo" => 1,
+                "tipo" => "celular",
                 "fecha_nacimiento" => $request->get('fecha_nac'),
                 "estado_civil" => $request->get('estado_civil'),
                 "estado_ficha" => "Completa",

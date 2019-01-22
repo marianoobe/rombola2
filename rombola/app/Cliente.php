@@ -23,6 +23,7 @@ class Cliente extends Model
     'visible',
     'id_user',
     'interes',
+    'tipo_auto',
     'fecha']; 
 
 

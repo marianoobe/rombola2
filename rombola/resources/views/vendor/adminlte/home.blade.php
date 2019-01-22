@@ -243,6 +243,14 @@
 									<label><strong>*Automovil de Interes</strong></label>
 									<input type="text" class="form-control" id="interes" name="interes" required>
 								</div>
+								<div class="form-group">
+									<br>
+										<input type="checkbox" data-toggle="toggle" onchange="validar_tipo_auto(this);" data-on="Nuevo" data-off="Usado" data-width="100">
+										<input type="text" id="input_tipo_auto" name="input_tipo_auto" value="Usado" style="display:none">
+										<br>
+								</div>				
+								
+                              	
 							</div>
 						</div><!-- /.modal-dialog -->
 						<div class="modal-footer">
@@ -359,6 +367,22 @@
 </div>
 
 <script>
+
+		function validar_tipo_auto(obj) {
+			if (obj.checked == true) {		  
+			  document.getElementById("input_tipo_auto").value = "Nuevo";
+			} else {
+			  document.getElementById("input_tipo_auto").value = "Usado";
+			}
+		  }
+
+		$(function() {
+			$('#toggle-two').bootstrapToggle({
+			  on: 'Nuevo',
+			  off: 'Usado'
+			});
+		  })
+
 	$(function ($) {
 		$("#cel_1").mask("(999) 999-9999");
 	});

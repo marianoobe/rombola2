@@ -121,7 +121,7 @@
 											<div class="col-xs-12 col-lg-6">
 												<div class="form-group">
 													<label><strong>*DNI</strong></label>
-													<input type="number" class="form-control" id="dni" name="dni" required>
+													<input type="text" class="form-control" id="dni" name="dni" required>
 												</div>
 												<div class="form-group">
 													<label><strong>*Nombres</strong></label>

@@ -62,7 +62,6 @@
 									<td>{{$item->fecha_oper}}</td>
 									<td>{{$item->codigo}}</td>
 									<td>{{$item->nombre_apellido}}</td>
-									<td>{{$item->idventa}}</td>
                         							
 									<td><span id="estado_label" name="estado_label" class={{$clase}}>{{$item->nomb_estado}}</span></td>
 

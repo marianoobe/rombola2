@@ -40,46 +40,42 @@ id="empresa-logo" src="/img/logo.png" class="img-circle" width="50" height="50">
                         trans('adminlte_lang::message.home') }}</span></a></li>
             <li>
                 <a href="{{ url('clientes') }}">
-                    <i class='fas fa-user-alt '></i> 
+                    <i class='fas fa-user-alt '></i>
                     <span>{{ trans('adminlte_lang::message.client') }}</span>
                 </a>
-                <ul class="treeview-menu">
-                    <li>
-                        <a href="{{ url('clientes') }}">{{ trans('adminlte_lang::message.list-client') }}</a>
-                    </li>
-                </ul>
+                
             </li>
             <li class="treeview">
                 <a href="{{ url('home') }}"><i class='fa fa-car'></i> <span>{{
-                        trans('adminlte_lang::message.car') }}</span>  <i class="fa fa-angle-left pull-right"></i></a>
+                        trans('adminlte_lang::message.car') }}</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
 
                     <li><a href="{{url('listaprecios')}}">Listas de Precios</a></li>
                     <li><a href="{{url('autos/usados')}}">{{ trans('adminlte_lang::message.list-used') }}</a></li>
-                   <li><a href="{{url('autos/createusados')}}">{{ trans('adminlte_lang::message.agregate used') }}</a></li>
-                      <li><a href="{{url('cero/create')}}">{{ trans('adminlte_lang::message.new-car') }}</a></li>   
-                       <li><a href="{{url('cero')}}">{{ trans('adminlte_lang::message.list-0km') }}</a></li>
-                   <!-- <li><a href="{{url('autos/create')}}">{{ trans('adminlte_lang::message.new-car') }}</a></li> !-->
-                   
-                   
+                    <li><a href="{{url('autos/createusados')}}">{{ trans('adminlte_lang::message.agregate used') }}</a></li>
+                    <li><a href="{{url('cero/create')}}">{{ trans('adminlte_lang::message.new-car') }}</a></li>
+                    <li><a href="{{url('cero')}}">{{ trans('adminlte_lang::message.list-0km') }}</a></li>
+                    <!-- <li><a href="{{url('autos/create')}}">{{ trans('adminlte_lang::message.new-car') }}</a></li> !-->
+
+
                 </ul>
             </li>
             <!--<li class="treeview"><a href="{{ url('pre-venta') }}"><i class='fa fa-bars'></i> <span>{{
                         trans('adminlte_lang::message.presales') }}</span></a></li>
             -->
-            
+
             <li><a href="{{ url('venta') }}">
-                <i class='fa fa-handshake-o'></i> 
-                <span>{{ trans('adminlte_lang::message.sales') }}</span>
-            </a>
-        </li>
-            
+                    <i class='fa fa-handshake-o'></i>
+                    <span>{{ trans('adminlte_lang::message.sales') }}</span>
+                </a>
+            </li>
+
             <!--<li><a href="{{ url('financiera') }}"><i class='fa fa-university'></i> <span>Financieras</span></a></li>
             -->
-                 
+
             <li class="treeview">
-                <a href="#"><i class='fa fa-users'></i> 
-                    <span>USUARIOS</span> 
+                <a href="#"><i class='fa fa-users'></i>
+                    <span>USUARIOS</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
@@ -87,7 +83,7 @@ id="empresa-logo" src="/img/logo.png" class="img-circle" width="50" height="50">
                     <li><a href="#"></a></li>
                 </ul>
             </li>
-           
+
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
