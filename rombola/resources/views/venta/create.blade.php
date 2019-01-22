@@ -155,14 +155,10 @@
                                 <div class="col-xs-12 col-lg-6">
 
                                     <div class="form-group">
-                                        <label><strong>Teléfono Laboral</strong>(tel. fijo o celular)</label>
-                                        <input type="text" class="form-control" id="telefono_laboral" name="telefono_laboral">
-                                    </div>
-
-                                    <div class="form-group">
                                         <label><strong>*Profesión</strong></label>
                                         <input type="text" class="form-control" id="nuevo_profesion" name="nuevo_profesion">
                                     </div>
+                                    <br>
                                     <div class="form-group">
                                         <label><strong>*Relación de dependencia</strong></label>
                                         <br>
@@ -179,8 +175,8 @@
                                         <input type="text" class="form-control" id="nuevo_domicilio_empleo" name="nuevo_domicilio_empleo">
                                     </div>
                                     <div class="form-group">
-                                        <label><strong>*Teléfono del Empleo</strong>(Celular o fijo)</label>
-                                        <input type="number" class="form-control" id="nuevo_domicilio_empleo" name="nuevo_domicilio_empleo">
+                                        <label><strong>*Teléfono del Empleo</strong>(celular o fijo)</label>
+                                        <input type="number" class="form-control" id="telefono_laboral" name="telefono_laboral">
                                     </div>
                                     <div class="form-group">
                                         <label><strong>*Antiguedad</strong></label>

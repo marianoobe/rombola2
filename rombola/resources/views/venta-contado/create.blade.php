@@ -145,7 +145,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label><strong>Otro</strong>(tel. fijo o celular)</label>
-                                        <input type="text" class="form-control" id="nuevo_cel_2" name="nuevo_cel_2">
+                                        <input type="text" class="form-control" id="nuevo_otro" name="nuevo_otro">
                                     </div>
                                     <div class="form-group">
                                         <label><strong>*Domicilio </strong>(Calle - N° - Departamento)</label>

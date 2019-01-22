@@ -121,7 +121,17 @@ class VentaContadoController extends Controller
       $tel = new Telefono([
         'personas_telefono' => $idpers,
         'num_tel' => $request->get('nuevo_cel_1'),
-        'tipo' => '2'
+        'tipo' => 'celular'
+      ]);
+      $tel->save();
+      }
+
+      if($request->get('nuevo_otro') != null)
+      {
+      $tel = new Telefono([
+        'personas_telefono' => $idpers,
+        'num_tel' => $request->get('nuevo_otro'),
+        'tipo' => 'fijo'
       ]);
       $tel->save();
       }
@@ -462,7 +472,7 @@ class VentaContadoController extends Controller
           'resto' =>$resto,
           'visible' =>1,
           'id_user'=> $request->get('id_user'),
-          'tipo'=> "contado"
+          'tipo'=> "Contado"
           ]);
 
          

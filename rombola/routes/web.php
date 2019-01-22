@@ -70,6 +70,7 @@ Route::post('/file/dropzone','FileController@dropzone')->name('dropzone');
 Route::post('clientefast','ClienteController@store_fast')->name('clientefast');
 Route::resource('clientes','ClienteController');
 Route::resource('pre-venta','PreventaController');
+Route::post('delete','ClienteController@delete')->name('delete');
 Route::get('pre-venta/cuotas/{id}','PreventaController@getCuotas');
 Route::get('pre-venta/financiera/{id}','PreventaController@getFinanciera');
 

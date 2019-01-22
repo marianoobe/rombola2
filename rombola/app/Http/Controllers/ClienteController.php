@@ -8,6 +8,7 @@ use DB;
 use App\Cliente;
 use App\Persona;
 use App\Telefono;
+use App\Estado;
 
 class ClienteController extends Controller
 {
@@ -89,7 +90,7 @@ class ClienteController extends Controller
           $tel = new Telefono([
             'personas_telefono' => $idpers,
             'num_tel' => $request->get('tel_fijo'),
-            'tipo' => 'celular'
+            'tipo' => 'fijo'
           ]);
           $tel->save();
         }
@@ -98,7 +99,7 @@ class ClienteController extends Controller
           $tel = new Telefono([
             'personas_telefono' => $idpers,
             'num_tel' => $request->get('cel_1'),
-            'tipo' => 'fijo'
+            'tipo' => 'celular'
           ]);
           $tel->save();
         }
@@ -135,7 +136,7 @@ class ClienteController extends Controller
       $apellido = $request->get('apellido');
       $share = DB::table('personas')
       ->insertGetId([
-        'dni' => "---",
+        'dni' => " ",
         'nombre' => $request->get('nombre'),
         'apellido'=> $request->get('apellido'),
         'nombre_apellido'=> $nombre." ".$apellido,
@@ -274,6 +275,7 @@ class ClienteController extends Controller
                 "num_tel" => $request->get('num_tel'),
                 "fecha_nacimiento" => $request->get('fecha_nacimiento'),
                 "estado_civil" => $request->get('estado_civil'),
+                "estado_ficha" => "Completa",
 
         ]);
       return redirect('/clientes')->with('success', 'Cliente Actualizado');   
@@ -353,15 +355,17 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($dni)
-    {
+
+    public function delete(Request $request)
+    { 
       DB::table('clientes')
       ->join('personas', 'personas.idpersona' ,'clientes.cliente_persona')
-      ->where('dni','=',$dni)
+      ->where('idcliente','=',$request->idcliente)
       ->update([
         "visible"=> 0
       ]);
-
-      return redirect('/clientes')->with('success', 'Cliente Eliminado');
+      $wizards="Eliminado";
+      return response()->json($wizards);
+      //return redirect('/clientes')->with('success', 'Cliente Eliminado');
     }
 }

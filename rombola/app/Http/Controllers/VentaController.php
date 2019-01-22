@@ -29,15 +29,16 @@ class VentaController extends Controller
      */
     public function index()
     {
-
       $venta_operac = DB::table('operaciones')
       ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
       ->join('personas','operaciones.persona_operacion','personas.idpersona')
       ->join('clientes','personas.idpersona','clientes.cliente_persona')
       ->join('estados','operaciones.estado','estados.id_estado')
+      ->join('users','ventas.id_user','users.id')
+      ->join('automoviles','ventas.idventa_auto0km','automoviles.id_auto')
+      ->join('marcas','marcas.id_marca','automoviles.marca_id')
       ->get();
 
-      
       $estado=Estado::All();
 
       return view('venta',compact('venta_operac','estado'));
@@ -135,7 +136,17 @@ class VentaController extends Controller
       $tel = new Telefono([
         'personas_telefono' => $idpers,
         'num_tel' => $request->get('nuevo_cel_1'),
-        'tipo' => '2'
+        'tipo' => 'celular'
+      ]); 
+      $tel->save();
+      }
+
+      if($request->get('telefono_laboral') != null)
+      {
+      $tel = new Telefono([
+        'personas_telefono' => $idpers,
+        'num_tel' => $request->get('telefono_laboral'),
+        'tipo' => 'tel_laboral'
       ]); 
       $tel->save();
       }
@@ -217,12 +228,22 @@ class VentaController extends Controller
         ]);
         $conyuge->save();
 
+        if($request->get('conyuge_cel_1') != null)
+        {
+        $tel = new Telefono([
+          'personas_telefono' => $idpers,
+          'num_tel' => $request->get('conyuge_cel_1'),
+          'tipo' => 'tel_laboral'
+        ]);
+        $tel->save();
+        }
+
         if($request->get('conyuge_telefono_trabajo') != null)
         {
         $tel = new Telefono([
           'personas_telefono' => $idpers,
           'num_tel' => $request->get('conyuge_telefono_trabajo'),
-          'tipo' => '3'
+          'tipo' => 'tel_laboral'
         ]);
         $tel->save();
         }
@@ -451,7 +472,7 @@ class VentaController extends Controller
             'monto_cuota' =>$request->get('monto'),
             'visible' =>1,
             'id_user'=> $request->get('id_user'),
-            'tipo'=>"financiacion"
+            'tipo'=>"Financiación"
             ]);
          
           //insert Cheque -------

@@ -38,8 +38,11 @@
 							<thead>
 								<tr>
 									<th scope="col">Fecha</th>
-									<th scope="col">Codigo</th>
 									<th scope="col">Cliente</th>
+									<th scope="col">Vendedor</th>
+									<th scope="col">Tipo</th>
+									<th scope="col">Marca</th>
+									<th scope="col">Modelo</th>
 									<th scope="col">Estado</th>
 									<th scope="col"></th>
 								</tr>
@@ -60,8 +63,11 @@
 
 								<tr>
 									<td>{{$item->fecha_oper}}</td>
-									<td>{{$item->codigo}}</td>
 									<td>{{$item->nombre_apellido}}</td>
+									<td>{{$item->name}}</td>
+									<td>{{$item->tipo}}</td>
+									<td>{{$item->nombre}}</td>
+									<td>{{$item->modelo}}</td>
                         							
 									<td><span id="estado_label" name="estado_label" class={{$clase}}>{{$item->nomb_estado}}</span></td>
 
@@ -74,7 +80,7 @@
 										<a onclick="show_venta({{$item->idventa}});" data-toggle="modal" data-target="#modal-showventa" class="btn btn-primary btn-xs">
 											<span class="glyphicon glyphicon-search"></span></a>
 
-										<a href="{{ route('print_venta', ['id1' => $item->idventa,'id2' => $item->idcliente])}}" class="btn btn-primary btn-xs">
+										<a href="{{ route('print_venta', ['id1' => $item->idventa,'id2' => $item->idcliente])}}" target="_blank" class="btn btn-primary btn-xs">
 											<span class="glyphicon glyphicon-print"></span></a>
 
 										<a onclick="valor_idventa({{$item->idventa}});" data-toggle="modal" data-target="#modal-estado" class="btn btn-warning btn-xs">

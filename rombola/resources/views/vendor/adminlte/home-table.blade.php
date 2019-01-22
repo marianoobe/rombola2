@@ -3,11 +3,14 @@
 use App\Estado;
 
 $venta_operac = DB::table('operaciones')
-->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
-->join('personas','operaciones.persona_operacion','personas.idpersona')
-->join('clientes','personas.idpersona','clientes.cliente_persona')
-->join('estados','operaciones.estado','estados.id_estado')
-->paginate(10);
+      ->join('ventas','operaciones.id_operacion','ventas.operacion_venta')
+      ->join('personas','operaciones.persona_operacion','personas.idpersona')
+      ->join('clientes','personas.idpersona','clientes.cliente_persona')
+      ->join('estados','operaciones.estado','estados.id_estado')
+      ->join('users','ventas.id_user','users.id')
+      ->join('automoviles','ventas.idventa_auto0km','automoviles.id_auto')
+      ->join('marcas','marcas.id_marca','automoviles.marca_id')
+      ->paginate(10);
 
 $estado=Estado::All();
 
@@ -33,20 +36,25 @@ $estado=Estado::All();
 <table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col">Fecha</th>
-            <th scope="col">Codigo</th>
-            <th scope="col">Cliente</th>
-            <th scope="col">Estado</th>
-            <th scope="col"></th>
+				<th scope="col">Fecha</th>
+				<th scope="col">Cliente</th>
+				<th scope="col">Vendedor</th>
+				<th scope="col">Tipo</th>
+				<th scope="col">Marca</th>
+				<th scope="col">Modelo</th>
+				<th scope="col">Estado</th>
+				<th scope="col"></th>
         </tr>
     </thead>
     <tbody id="myTable">
         @foreach($venta_operac as $item)
-        
         <tr>
-            <td>{{$item->fecha_oper}}</td>
-            <td>{{$item->codigo}}</td>
-			<td>{{$item->nombre_apellido}}</td>
+				<td>{{$item->fecha_oper}}</td>
+				<td>{{$item->nombre_apellido}}</td>
+				<td>{{$item->name}}</td>
+				<td>{{$item->tipo}}</td>
+				<td>{{$item->nombre}}</td>
+				<td>{{$item->modelo}}</td>
 			
 			@php
 			
@@ -66,7 +74,7 @@ $estado=Estado::All();
                 <a onclick="show_venta({{$item->idventa}});" data-toggle="modal" data-target="#modal-showventa" class="btn btn-primary btn-xs">
                     <span class="glyphicon glyphicon-search"></span></a>
 
-                <a href="{{ route('print_venta', ['id1' => $item->idventa,'id2' => $item->idcliente])}}" class="btn btn-primary btn-xs">
+                <a href="{{ route('print_venta', ['id1' => $item->idventa,'id2' => $item->idcliente])}}" target="_blank" class="btn btn-primary btn-xs">
                     <span class="glyphicon glyphicon-print"></span></a>
 
                 <a onclick="valor_idventa({{$item->idventa}});" data-toggle="modal" data-target="#modal-estado" class="btn btn-warning btn-xs">
@@ -116,6 +124,8 @@ $estado=Estado::All();
     </div>
 </div>
 <!-- Fin Modal Cambio de estado -->
+
+
 
 <!-- Modal Ver Venta-->
 <div class="modal" id="modal-showventa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

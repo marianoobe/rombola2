@@ -1,18 +1,21 @@
 @extends('adminlte::layouts.app')
 
 @section('seccion')
+<meta name="csrf-token" content="<?= csrf_token() ?>">
+</meta>
+
 @if(session()->has('success'))
 <div class="container-fluid">
-<div id="algo" class="alert alert-success" role="alert" >{{session('success')}}</div>
+	<div id="algo" class="alert alert-success" role="alert">{{session('success')}}</div>
 </div>
 <script>
-		$("#algo").fadeTo(2000, 500).slideUp(500, function(){
+	$("#algo").fadeTo(2000, 500).slideUp(500, function(){
 			$("#algo").slideUp(500);
 			 });
 </script>
 @endif
 @if(session()->has('danger'))
-	<div class="alert alert-danger" role="alert">{{session('danger')}}</div>
+<div class="alert alert-danger" role="alert">{{session('danger')}}</div>
 @endif
 <div class="container-fluid spark-screen">
 	<div class="row">
@@ -67,10 +70,10 @@
 								<td>{{$item->domicilio}}</td>
 								<td>{{$item->num_tel}}</td>
 								@php
-									if($item->estado_ficha == "Completa"){$clase="label-success";}
-									else{$clase="label-danger";}
+								if($item->estado_ficha == "Completa"){$clase="label-success";}
+								else{$clase="label-danger";}
 								@endphp
-                                
+
 								<td> <span id="estado_ficha" class={{$clase}}><strong>{{$item->estado_ficha}}</strong></span></td>
 								<td style="cursor: default;">
 									@can('vendedor')
@@ -83,8 +86,9 @@
 										<input type="hidden" name="_token" value="{{csrf_token()}}" style="display:none">
 										<a href="{{ route('clientes.edit',$item->dni)}}" class="btn btn-primary btn-sm">
 											<span class="glyphicon glyphicon-search"></span></a>
-										<a href="#" onclick="document.getElementById('myform').submit()" class="btn btn-danger btn-sm">
+										<a data-toggle="modal" data-target="#modal-confirm" class="btn btn-danger btn-sm">
 											<span class="glyphicon glyphicon-trash"></span></a>
+
 									</form>
 									@endcan
 								</td>
@@ -150,7 +154,7 @@
 													<label><strong>*Actividad/Empresa</strong></label>
 													<input type="text" class="form-control" id="act_empresa" name="act_empresa" required>
 												</div>
-												
+
 												<div class="form-group">
 													<label><strong>*Fecha de Nacimiento</strong></label>
 													<input type="date" class="form-control" id="fecha_nac" name="fecha_nac" required>
@@ -170,7 +174,7 @@
 															<option>Viudo</option>
 														</select>
 													</div>
-													
+
 												</div>
 											</div><!-- /.modal-content -->
 										</div><!-- /.modal-dialog -->
@@ -184,7 +188,58 @@
 							</div>
 						</div>
 					</div>
+
+					<!-- Modal Confirmacion -->
+					<div id="modal-confirm" class="modal fade bs-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="modal-confirm"
+					 style="display: none;">
+						<div class="modal-dialog modal-md">
+							<div class="modal-content">
+								<div class="modal-body">
+									<img id="cargando" style="display:none;" src="/img/cargando.gif"></img>
+									<h4>¿Está seguro de eliminar este cliente?</h4>
+
+								</div>
+								<div class="modal-footer">
+									<input name="_method" type="hidden" value="DELETE" style="display:none">
+									<input type="hidden" name="_token" value="{{csrf_token()}}" style="display:none">
+
+									<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+									<button type="button" onclick="delete_client( {{$item->idcliente}} );" class="btn btn-default">Aceptar</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Fin Modal Confirmacion -->
+
+
 					<script>
+						function delete_client(idcliente) {
+
+							$.ajaxSetup({
+								headers: {
+									'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+								}
+							});
+
+							$("#cambio_estado").css("display", "none");
+							$("#cargando").css("display", "inline");
+
+							$.ajax({
+								type: 'POST',
+								url: '/delete',
+								data: {
+									idcliente: idcliente
+								},
+								success: function (data) {
+									$('#modal-confirm').modal('hide');
+									$("#cargando").css("display", "none");
+									location.reload();
+									console.log(data);
+
+								}
+							});
+						}
+
 						function realizaProceso(valorCaja1) {
 							var parametros = {
 								"valorCaja1": valorCaja1
@@ -205,8 +260,8 @@
 						$(document).ready(function () {
 							console.log(document.getElementById("estado_ficha").value);
 
-							if(document.getElementById("estado_ficha").value == "Completa"){
-							$("#estado_ficha").addClass("label label-success");
+							if (document.getElementById("estado_ficha").value == "Completa") {
+								$("#estado_ficha").addClass("label label-success");
 							}
 
 							$("#myInput").on("keyup", function () {
