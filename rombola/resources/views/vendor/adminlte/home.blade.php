@@ -82,6 +82,8 @@
 						<div class="row">
 							@can('admin')
 							<div class="col-md-10 col-md-offset-0">
+									<a onclick="reset_table();" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Actualiza tabla de ventas">
+											<span class="glyphicon glyphicon-refresh"></span>Actualizar</a>
 								<div id="tabla_act" name="tabla_act">
 									@include('adminlte::home-table')
 								</div>
@@ -383,48 +385,19 @@
 			});
 		  })
 
-	$(function ($) {
-		$("#cel_1").mask("(999) 999-9999");
-	});
+		function reset_table() {
+			$('#tabla_act').empty().load('prueba1')
+		}
 
-	$(document).ready(function () {
-
-		setInterval(loadClima, 60000);
-
-		$.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}
-		});
-
-		$('#btn_prueba').click(function (e) {
-			e.preventDefault();
-			var name = "PEPE";
-			$.ajax({
-				type: 'POST',
-				url: '/prueba',
-				data: {
-					name: name
-				},
-				success: function (data) {
-
-					setInterval($('#tabla_act').load('prueba1'), 36000);
-				}
-			});
-		});
-
-	});
-
-	function loadClima() {
-		$('#tabla_act').empty().load('prueba1')
-	}
 
 	/* $(document).ready(function(){
-        setInterval(loadClima,2000);
+        setInterval(loadClima,6000);
         });
         
-        function loadClima(){
-        $("#clima").empty().append("Hola");
-        }*/
+        function loadClima() {
+		$('#tabla_act').empty().load('prueba1')
+	}
+	*/
+    
 </script>
 @endsection

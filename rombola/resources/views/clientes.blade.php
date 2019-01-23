@@ -93,9 +93,34 @@
 									@endcan
 								</td>
 							</tr>
+							
+					<!-- Modal Confirmacion -->
+					<div id="modal-confirm" class="modal fade bs-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="modal-confirm"
+					 style="display: none;">
+						<div class="modal-dialog modal-md">
+							<div class="modal-content">
+								<div class="modal-body">
+									<img id="cargando" style="display:none;" src="/img/cargando.gif"></img>
+									<h4>¿Está seguro de eliminar este cliente?</h4>
+
+								</div>
+								<div class="modal-footer">
+									<input name="_method" type="hidden" value="DELETE" style="display:none">
+									<input type="hidden" name="_token" value="{{csrf_token()}}" style="display:none">
+
+									<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+									<button type="button" onclick="delete_client( {{$item->idcliente}} );" class="btn btn-default">Aceptar</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Fin Modal Confirmacion -->
 							@endforeach()
 						</tbody>
 					</table>
+
+
+
 					{{$client_pers->render()}}
 
 
@@ -189,28 +214,6 @@
 						</div>
 					</div>
 
-					<!-- Modal Confirmacion -->
-					<div id="modal-confirm" class="modal fade bs-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="modal-confirm"
-					 style="display: none;">
-						<div class="modal-dialog modal-md">
-							<div class="modal-content">
-								<div class="modal-body">
-									<img id="cargando" style="display:none;" src="/img/cargando.gif"></img>
-									<h4>¿Está seguro de eliminar este cliente?</h4>
-
-								</div>
-								<div class="modal-footer">
-									<input name="_method" type="hidden" value="DELETE" style="display:none">
-									<input type="hidden" name="_token" value="{{csrf_token()}}" style="display:none">
-
-									<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-									<button type="button" onclick="delete_client( {{$item->idcliente}} );" class="btn btn-default">Aceptar</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- Fin Modal Confirmacion -->
-
 
 					<script>
 						function delete_client(idcliente) {
@@ -234,7 +237,6 @@
 									$('#modal-confirm').modal('hide');
 									$("#cargando").css("display", "none");
 									location.reload();
-									console.log(data);
 
 								}
 							});

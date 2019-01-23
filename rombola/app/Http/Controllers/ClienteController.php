@@ -25,7 +25,7 @@ class ClienteController extends Controller
         ->where('telefonos.tipo','=', "celular")
         ->where('visible','=', 1)
         ->paginate(6);
-
+        
         return view('clientes',compact('client_pers'));
         
     }

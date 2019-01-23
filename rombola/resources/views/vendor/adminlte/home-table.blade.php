@@ -71,16 +71,16 @@ $estado=Estado::All();
             </td>
             <td style="cursor: default;">
                 @can('admin')
-                <a onclick="show_venta({{$item->idventa}});" data-toggle="modal" data-target="#modal-showventa" class="btn btn-primary btn-xs">
+                <a onclick="show_venta({{$item->idventa}});" data-toggle="modal" data-target="#modal-showventa" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Ver venta">
                     <span class="glyphicon glyphicon-search"></span></a>
 
-                <a href="{{ route('print_venta', ['id1' => $item->idventa,'id2' => $item->idcliente])}}" target="_blank" class="btn btn-primary btn-xs">
+                <a href="{{ route('print_venta', ['id1' => $item->idventa,'id2' => $item->idcliente])}}" target="_blank" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Imprimir">
                     <span class="glyphicon glyphicon-print"></span></a>
 
-                <a onclick="valor_idventa({{$item->idventa}});" data-toggle="modal" data-target="#modal-estado" class="btn btn-warning btn-xs">
-                    <span class="glyphicon glyphicon-refresh"></span></a>
+                <a onclick="valor_idventa({{$item->idventa}});" data-toggle="modal" data-target="#modal-estado" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Cambiar Estado">
+                    <span class="glyphicon glyphicon-retweet"></span></a>
 
-                <a href="{{ route('venta.destroy',"")}}" class="btn btn-danger btn-xs">
+                <a href="{{ route('venta.destroy',"")}}" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Eliminar venta">
                     <span class="glyphicon glyphicon-trash"></span></a>
                 @endcan
             </td>
