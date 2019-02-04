@@ -37,7 +37,7 @@
 										<div class="form-group">
 
 											<label><strong>*MARCA DE VEHICULO</strong></label>
-											<select id="marca" name="marca" class="selectpicker show-tick" data-show-subtext="true" data-live-search="true"
+											<select id="marca" name="marca" class="selectpicker show-tick" color data-show-subtext="true" data-live-search="true"
 											 data-style="btn-primary" data-placeholder="Seleccione marca vehiculo..." data-width="100%">
 												<option value="">Seleccionar marca del vehiculo</option>
 												@foreach ($marcas as $item){
