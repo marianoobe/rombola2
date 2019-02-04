@@ -78,7 +78,7 @@
 										<td>{{$item->color}}</td>
 
 										<td style="cursor: default;">
-											<a href="{{ route('cero.edit',$item->auto_id)}}" class="btn btn-info btn-xs">
+											<a href="{{ route('cero.edit',$item->auto_id)}}" class="btn btn-info btn-sm">
 												 <span class="glyphicon glyphicon-edit"data-original-title="Editar auto" tooltip-glyph="glyph-tooltip-demo"></span></a>
 
 										</td>

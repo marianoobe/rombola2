@@ -14,7 +14,7 @@
 							<h3 class="box-title">AUTOS USADOS</h3>
 
 							<div class="box-tools pull-right">
-								
+
 								<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
 									<i class="fa fa-minus"></i></button>
 
@@ -26,7 +26,11 @@
 						</div>
 
 						<div class="box-body">
+							<div class="col-sm-4 pull-left">
+								<a class="btn btn-primary" a href="{{ route('agregarusado')}}">
+									AGREGAR USADO</a>
 
+							</div>
 							<form method="GET" action="{{ route('usados') }}" class="navbar-form pull-right" role="search">
 								{{ csrf_field() }}
 								<div class="input-group">
@@ -55,9 +59,8 @@
 										<th scope="col">MODELO</th>
 										<th scope="col">DESCRIPCION</th>
 										<th scope="col">DOMINIO</th>
-										<th scope="col">EDITAR</th>
-										<th scope="col">VER FOTO</th>
-										<th scope="col">CARGAR FOTO</th>
+										<th scope="col"></th>
+										
 
 									</tr>
 								</thead>
@@ -81,18 +84,17 @@
 
 
 										<td style="cursor: default;">
-											<a href="{{ route('editusado',$item->id_auto)}}" class="edit-modal btn btn-info btn-xs">
-												<span class="glyphicon glyphicon-edit"></span></a>
+											<a href="{{ route('editusado',$item->id_auto)}}" class="edit-modal btn btn-info btn-sm">
+												<span class="glyphicon glyphicon-edit" data-original-title="Editar auto" tooltip-glyph="glyph-tooltip-demo"></span></a>
 
-										</td>
-										<td>
-											<button type="button" class="btn btn-info btn-xs" id="btn-foto" data-toggle="modal" data-target="#modal-listaNuevo"
-											 style="margin-bottom:10%;"><span class="glyphicon glyphicon-picture"></span></button>
-										</td>
-										<td>
-											<a href="{{ route('formfile',$item->id_auto)}}" class="btn btn-info btn-xs">
+											<a data-toggle="modal" data-target="#modal-listaNuevo" class="btn btn-danger btn-sm">
+											 <span class="glyphicon glyphicon-picture" data-original-title="ver fotos del auto" tooltip-glyph="glyph-tooltip-demo"></span></a>
+											
+											
+									
+											<a href="{{ route('formfile',$item->id_auto)}}" class="btn btn-info btn-sm">
 												<span class="glyphicon glyphicon-camera"></span> Camera
-												</button>
+											</a>
 										</td>
 
 										</td>
@@ -100,39 +102,39 @@
 									@endforeach()
 								</tbody>
 							</table>
-							
-								<!-- Modal form to show a post -->
 
-								<!--Modal -->
-								<div class="modal fade" id="modal-listaNuevo" tabindex="-1" role="dialog" aria-labelledby="modal-listaNuevo"
-								 aria-hidden="true">
-									<div class="modal-dialog" >
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
-														<font style="vertical-align: inherit;">
-															<font style="vertical-align: inherit;">×</font>
-														</font>
-													</span></button>
-												<h4 class="modal-title">
+							<!-- Modal form to show a post -->
+
+							<!--Modal -->
+							<div class="modal fade" id="modal-listaNuevo" tabindex="-1" role="dialog" aria-labelledby="modal-listaNuevo"
+							 aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
 													<font style="vertical-align: inherit;">
-														<font style="vertical-align: inherit;">FOTOS</font>
-
+														<font style="vertical-align: inherit;">×</font>
 													</font>
-												</h4>
-											</div>
-											<div class="modal-body">
-												<form method="POST" action="" enctype="multipart/form-data">
+												</span></button>
+											<h4 class="modal-title">
+												<font style="vertical-align: inherit;">
+													<font style="vertical-align: inherit;">FOTOS</font>
 
-													<input type="hidden" name="_token" value="{{csrf_token()}}">
-													<div class="box-body">
-														<div class="row">
+												</font>
+											</h4>
+										</div>
+										<div class="modal-body">
+											<form method="POST" action="" enctype="multipart/form-data">
 
-															@foreach($files as $file)
-															<div class="col-md-4">
-																<div class="card">
-																	 <a href={{ url("$file->path")}} data-lightbox="roadtrip" data-title="My caption">
-																	<img class="card-img-top" src={{ url("$file->path")}}  style="width: 120px; height: 120px;">
+												<input type="hidden" name="_token" value="{{csrf_token()}}">
+												<div class="box-body">
+													<div class="row">
+
+														@foreach($files as $file)
+														<div class="col-md-4">
+															<div class="card">
+																<a href={{ url("$file->path")}} data-lightbox="roadtrip" data-title="My caption">
+																	<img class="card-img-top" src={{ url("$file->path")}} style="width: 120px; height: 120px;">
 																	<div class="card-body">
 																		<strong class="card-title">{{ $file->title }}</strong>
 																		<p class="card-text">{{ $file->created_at->diffForHumans() }}</p>
@@ -144,20 +146,20 @@
 
 																		</form>
 																	</div>
-																</div>
 															</div>
-															@endforeach
 														</div>
-
+														@endforeach
 													</div>
 
-													
-											</div>
-											</form>
+												</div>
+
+
 										</div>
+										</form>
 									</div>
 								</div>
+							</div>
 
 
 
-								@endsection
+							@endsection

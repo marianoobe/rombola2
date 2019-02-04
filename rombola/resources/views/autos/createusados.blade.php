@@ -15,6 +15,8 @@
 							<h3 class="box-title">AGREGAR AUTO USADO</h3>
 
 							<div class="box-tools pull-right">
+									<a class="btn btn-xs btn-success" onclick="history.back(1);">
+                                <i class="fa fa-chevron-left"></i> VOLVER</a>
 								<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
 									<i class="fa fa-minus"></i></button>
 								
@@ -37,7 +39,7 @@
 										<div class="form-group">
 
 											<label><strong>*MARCA DE VEHICULO</strong></label>
-											<select id="marca" name="marca" class="selectpicker show-tick" data-show-subtext="true" data-live-search="true"
+											<select id="marca" name="marca" class="selectpicker show-tick" data-show-subtext="true" data-live-search="true" data-size=4
 											 data-style="btn-primary" data-placeholder="Seleccione marca vehiculo..." data-width="100%">
 												<option value="">Seleccionar marca del vehiculo</option>
 												@foreach ($marcas as $item){
