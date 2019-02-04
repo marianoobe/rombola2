@@ -237,5 +237,13 @@ $(document).ready(function () {
   $(":input").inputmask();
 });
 
+$(document).ready(function () {
 
+  $('[tooltip-glyph="glyph-tooltip-demo"]').tooltip({
+
+    placement: 'top'
+
+  });
+
+});
 
