@@ -18,6 +18,8 @@
 							<h3 class="box-title">ACTUALIZAR AUTOS OKM</h3>
 
 							<div class="box-tools pull-right">
+								<a class="btn btn-xs btn-success" onclick="history.back(1);">
+                                <i class="fa fa-chevron-left"></i> VOLVER</a>
 								<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
 									<i class="fa fa-minus"></i></button>
 
