@@ -82,8 +82,14 @@ Route::get('print_venta/{id1}/{id2}', 'PdfController@pdf_venta')->name('print_ve
 Route::get('prueba','VentaController@prueba')->name('prueba');
 
 Route::resource('ventacontado','VentaContadoController');
+Route::put('store_cliente_contado','VentaContadoController@store_cliente_contado')->name('store_cliente_contado');
+Route::put('store_auto_adquirido_contado','VentaContadoController@store_auto_adquirido_contado')->name('store_auto_adquirido_contado');
+Route::put('store_forma_pago_contado','VentaContadoController@store_forma_pago_contado')->name('store_forma_pago_contado');
 
 Route::resource('venta','VentaController');
+Route::put('store_cliente','VentaController@store_cliente')->name('store_cliente');
+Route::put('store_auto_adquirido','VentaController@store_auto_adquirido')->name('store_auto_adquirido');
+Route::put('store_forma_pago','VentaController@store_forma_pago')->name('store_forma_pago');
 
 Route::resource('financiera', 'FinancieraController');
 

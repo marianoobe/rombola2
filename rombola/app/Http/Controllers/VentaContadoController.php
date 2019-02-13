@@ -20,7 +20,6 @@ use App\Estadousado;
 use App\Estado;
 
 
-
 class VentaContadoController extends Controller
 {
     /**
@@ -65,301 +64,229 @@ class VentaContadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store_cliente_contado(Request $request){
   
       $nombre = $request->get('nuevo_nombre');
       $apellido = $request->get('nuevo_apellido');
-
       $can = $request->get('cancer');
-
       if ($can == 'nuevo') {
-        
-      //insert Persona-Cliente ******************************************
-
+      // insert Persona-Cliente
       $share = new Persona([
-        'dni' => $request->get('nuevo_dni'),
-        'nombre' => $request->get('nuevo_nombre'),
-        'apellido'=> $request->get('nuevo_apellido'),
-        'nombre_apellido'=> $nombre." ".$apellido,
-        'email'=> $request->get('nuevo_email'),
-        'act_empresa'=> $request->get('nuevo_act_empresa'),
-        'domicilio_empleo'=> $request->get('nuevo_domicilio_empleo'),
-        'profesion'=> $request->get('nuevo_profesion')
-
+      'dni' => $request->get('nuevo_dni'),
+      'nombre' => $request->get('nuevo_nombre'),
+      'apellido'=> $request->get('nuevo_apellido'),
+      'nombre_apellido'=> $nombre." ".$apellido,
+      'email'=> $request->get('nuevo_email'),
+      'act_empresa'=> $request->get('nuevo_act_empresa'),
+      'domicilio_empleo'=> $request->get('nuevo_domicilio_empleo'),
+      'profesion'=> $request->get('nuevo_profesion')
       ]);
       $share->save();
-
-      $dni=$request->get('nuevo_dni');
       
+      
+      $dni = $request->get('nuevo_dni');
+  
       $pers = Persona::where("dni","=",$dni)->select("idpersona")->get();
-    
       foreach ($pers as $item) {}
-
+      $relacion= $request->get('check_dependencia');
+      if ($request->get('check_dependencia') == "on") {
+      $relacion = 0;
+      }
       $idpers=$item->idpersona;
       $cliente = new Cliente([
-        'cliente_persona' => $idpers,
-        'fecha_nacimiento' => $request->get('nuevo_fecha_nac'),
-        'domicilio'=> $request->get('nuevo_domicilio'),
-        'estado_civil'=> $request->get('nuevo_estado_civil'),
-        'relacion_dependencia'=> $request->get('relacion_dependencia'),
-        'antiguedad'=> $request->get('nuevo_antiguedad'),
-        'ingresos_mesuales'=> $request->get('nuevo_ingresos_mesuales'),
-        'nombre_padre'=> $request->get('nuevo_nombre_padre'),
-        'nombre_madre'=> $request->get('nuevo_nombre_madre'),
-        'estado_ficha'=> "Completa",
-        'visible'=> true,
-        'id_user'=> $request->get('id_user'),
-        'fecha'=> date("d-m-Y")
+      'cliente_persona' => $idpers,
+      'fecha_nacimiento' => $request->get('nuevo_fecha_nac'),
+      'domicilio'=> $request->get('nuevo_domicilio'),
+      'estado_civil'=> $request->get('nuevo_estado_civil'),
+      'relacion_dependencia'=> $request->get('check_dependencia'),
+      'antiguedad'=> $request->get('nuevo_antiguedad'),
+      'ingresos_mensuales'=> $request->get('nuevo_ingresos_mensuales'),
+      'nombre_padre'=> $request->get('nuevo_nombre_padre'),
+      'nombre_madre'=> $request->get('nuevo_nombre_madre'),
+      'estado_ficha'=> "Completa",
+      'visible'=> true,
+      'id_user'=> $request->get('id_user'),
+      'fecha'=> date("d-m-Y")
       ]);
       $cliente->save();
-
-      //--/insert Persona-Cliente ******************************************
-
+      // --/insert Persona-Cliente
       if($request->get('nuevo_cel_1') != null)
       {
       $tel = new Telefono([
-        'personas_telefono' => $idpers,
-        'num_tel' => $request->get('nuevo_cel_1'),
-        'tipo' => 'celular'
+      'personas_telefono' => $idpers,
+      'num_tel' => $request->get('nuevo_cel_1'),
+      'tipo' => 'celular'
       ]);
       $tel->save();
       }
-
-      if($request->get('nuevo_otro') != null)
+      if($request->get('telefono_laboral') != null)
       {
       $tel = new Telefono([
-        'personas_telefono' => $idpers,
-        'num_tel' => $request->get('nuevo_otro'),
-        'tipo' => 'fijo'
+      'personas_telefono' => $idpers,
+      'num_tel' => $request->get('telefono_laboral'),
+      'tipo' => 'tel_laboral'
       ]);
       $tel->save();
       }
-
-      $idcliente= Cliente::where('cliente_persona','=',$idpers)->select('idcliente')->get();
-
       $id_estado = Estado::where("nomb_estado","=","Administración")->select("id_estado")->get();
-
+      foreach ($id_estado as $item_id_estado) {}
       $fecha_oper=$request->get('fecha_oper');
       $operacion = new Operaciones([
-        'persona_operacion' => $idpers,
-        'estado' => $id_estado,
-        'fecha_oper'=> $fecha_oper,
-        'aviso'=> 0,
-        'visible' => 1,
+      'persona_operacion' => $idpers,
+      'estado' => $item_id_estado->id_estado,
+      'fecha_oper'=> $fecha_oper,
+      'aviso'=> 0,
+      'visible' => 1,
       ]);
       $pers = Persona::where("dni","=",$dni)->select("idpersona")->get();
       $operacion->save();
       }
       else
       {
-
-        $nya = $request->get('nya_cliente');
-        $idpersona = Persona::where("nombre_apellido","=",$nya)->select("idpersona","dni")->get();
-        
-        
-        foreach ($idpersona as $items) {}
-          $idpersona = $items->idpersona;
-          $dni=$items->dni;
-        
-        //$idcliente = Cliente::where("cliente_persona","=",$idpersona)->select('idcliente')->get();
-
-        $id_estado = Estado::where("nomb_estado","=","Administración")->select("id_estado")->get();
-        foreach ($id_estado as $item_estado) {}
-
-        $fecha_oper=$request->get('fecha_oper');
-        $operacion = new Operaciones([
-        'persona_operacion' => $idpersona,
-        'estado' => $item_estado->id_estado,
-        'fecha_oper'=> $fecha_oper,
-        'aviso'=> false,
-        'visible' => true,
-        ]);
-       $operacion->save();
-
+      $nya = $request->get('nya_cliente');
+      $idpersona = Persona::where("nombre_apellido","=",$nya)->select("idpersona","dni")->get();
+      foreach ($idpersona as $items) {
       }
-    
-      if($request->get('input_conyuge')=="si")
-      {
-
-     //insert Persona-Conyuge ******************************************
-
-       $nombre_conyuge = $request->get('conyuge_nombre');
-       $apellido_conyuge = $request->get('conyuge_apellido');
-
-       $can = $request->get('input_conyuge');
-       if ($can == 'si') {
-
-       $share = new Persona([
-          'dni' => $request->get('conyuge_dni'),
-          'nombre' => $request->get('conyuge_nombre'),
-          'apellido'=> $request->get('conyuge_apellido'),
-          'nombre_apellido'=> $nombre_conyuge." ".$apellido_conyuge,
-          'email'=> "",
-          'act_empresa'=> $request->get('conyuge_act_empresa'),
-          'domicilio_empleo'=> $request->get('conyuge_domicilio_empleo'),
-          'profesion'=> $request->get('conyuge_profesion')
-        ]);
-        $share->save();
-
-        $dni_conyuge=$request->get('conyuge_dni');
-        
-        $pers = Persona::where("dni","=",$dni_conyuge)->select("idpersona")->get();
-      
-        foreach ($pers as $item) {
-          //echo "$item->idpersona";
-        }
-        $idpers=$item->idpersona;
-        //--insert Persona-Conyuge  ******************************************
- 
-        $conyuge = new Conyuge([
-          'idconyuge_persona' => $idpers,
-          'fecha_nacimiento' => $request->get('conyuge_fecha_nac'),
-          'domicilio'=> $request->get('conyuge_domicilio'),
-          'estado_civil'=> $request->get('conyuge_estado_civil'),
-          'visible'=> 1,
-        ]);
-        $conyuge->save();
-
-        $idconyuge = Conyuge::where("idconyuge_persona","=",$idpers)->select("idconyuge")->get();
-
-        foreach ($idconyuge as $item1) {}
-        foreach ($idcliente as $item2) {}
-
-        DB::table('clientes')
-        ->where('idcliente','=',$item2->idcliente)
-        ->update(['idconyuge'=>$item1->idconyuge]);
-
-        if($request->get('conyuge_cel_1') != null)
-        {
-        $tel = new Telefono([
-          'personas_telefono' => $idpers,
-          'num_tel' => $request->get('conyuge_cel_1'),
-          'tipo' => '2'
-        ]);
-        $tel->save();
-        }
-
-        }
+      $idpersona = $items->idpersona;
+      $dni=$items->dni;
+      $id_estado = Estado::where("nomb_estado","=","Administración")->select("id_estado")->get();
+      foreach ($id_estado as $item_id_estado) {}
+      $fecha_oper=$request->get('fecha_oper');
+      $operacion = new Operaciones([
+      'persona_operacion' => $idpersona,
+      'estado' => $item_id_estado->id_estado,
+      'fecha_oper'=> $fecha_oper,
+      'aviso'=> false,
+      'visible' => true,
+      ]);
+      $operacion->save();
       }
-      //--/insert Persona-Garante
-      /*
-      $nombre_garante = $request->get('garante_nombre');
-      $apellido_garante = $request->get('garante_apellido');
-
-      $can = $request->get('check_garante');
+      // --insert Persona-Conyuge
+      $nombre_conyuge = $request->get('conyuge_nombre');
+      $apellido_conyuge = $request->get('conyuge_apellido');
+      $can = $request->get('input_conyuge');
       if ($can == 'si') {
-
-        $share = new Persona([
-            'dni' => $request->get('garante_dni'),
-            'nombre' => $request->get('garante_nombre'),
-            'apellido'=> $request->get('garante_apellido'),
-            'nombre_apellido'=> $nombre_garante." ".$apellido_garante,
-            'email'=> "",
-            'act_empresa'=> $request->get('garante_act_empresa')
-          ]);
-          $share->save();
+      $share = new Persona([
+      'dni' => $request->get('conyuge_dni'),
+      'nombre' => $request->get('conyuge_nombre'),
+      'apellido'=> $request->get('conyuge_apellido'),
+      'nombre_apellido'=> $nombre_conyuge." ".$apellido_conyuge,
+      'email'=> "",
+      'act_empresa'=> $request->get('conyuge_act_empresa'),
+      'domicilio_empleo'=> $request->get('conyuge_domicilio_empleo'),
+      'profesion'=> $request->get('conyuge_profesion')
+      ]);
+      $share->save();
+      $dni_conyuge=$request->get('conyuge_dni');
+      $pers = Persona::where("dni","=",$dni_conyuge)->select("idpersona")->get();
+      foreach ($pers as $item) {
+      // echo "$item->idpersona";
+      }
+      $idpers=$item->idpersona;
+      // insert Persona-Conyuge
+      $conyuge = new Conyuge([
+      'idconyuge_persona' => $idpers,
+      'fecha_nacimiento' => $request->get('conyuge_fecha_nac'),
+      'domicilio'=> $request->get('conyuge_domicilio'),
+      'estado_civil'=> $request->get('conyuge_estado_civil'),
+      'visible'=> 1,
+      ]);
+      $conyuge->save();
+      if($request->get('conyuge_cel_1') != null)
+      {
+      $tel = new Telefono([
+      'personas_telefono' => $idpers,
+      'num_tel' => $request->get('conyuge_cel_1'),
+      'tipo' => 'tel_laboral'
+      ]);
+      $tel->save();
+      }
+      if($request->get('conyuge_telefono_trabajo') != null)
+      {
+      $tel = new Telefono([
+      'personas_telefono' => $idpers,
+      'num_tel' => $request->get('conyuge_telefono_trabajo'),
+      'tipo' => 'tel_laboral'
+      ]);
+      $tel->save();
+      }
+     }
+      $wizards="Actualizado";
+     return response()->json($wizards);
   
-          $dni=$request->get('garante_dni');
-          
-          $pers = Persona::where("dni","=",$dni)->select("idpersona")->get();
-        
-          foreach ($pers as $item) {
-            //echo "$item->idpersona";
-          }
-          $idpers=$item->idpersona;
-          //insert Persona-Garante
-          $garante = new Garante([
-            'idpersona' => $idpers,
-            'fecha_nacimiento' => $request->get('garante_fecha_nac'),
-            'domicilio'=> $request->get('garante_domicilio'),
-            'estado_civil'=> $request->get('garante_estado_civil')
-          ]);
-          $garante->save();
+    }
 
-          if($request->get('garante_cel_1') != null)
-          {
-          $tel = new Telefono([
-            'personas_telefono' => $idpers,
-            'num_tel' => $request->get('garante_cel_1'),
-            'tipo' => '2'
-          ]);
-          $tel->save();
-          }
-
-          }
-
-          */
-
-          /*insert Auto 0 KM -------*/
-
-          //dd("salida".$request->get('estado_toggle'));
-          $idauto0km=null;
-          if ($request->get('estado_toggle')=="stock") {
+  public function store_auto_adquirido_contado(Request $request){
+   
+        // dd($request->get('estado_toggle'));
+        /*insert Auto 0 KM -------*/
+        $idauto0km = null;
+        if ($request->get('estado_toggle') == "stock") {
+            $idauto0km = $request->get('select_cero');
+        }
+        else {
+            if ($request->get('estado_toggle') == "lista") {
+                $idmarca = $request->get('marca');
+                $marca = Marca::where("nombre", "=", $idmarca)->select("id_marca")->get();
+                foreach($marca as $item) {
+                }
+                $idmarcas = $item->id_marca;
+                $automovil = new Automovile(['marca_id' => $idmarcas, 'modelo' => $request->input('modelo') , 'version' => $request->input('version') , 'color' => '', 'precio' => 0, 'ficha' => 'Incompleta', 'visible' => 1]);
+                $automovil->save();
+                $id0km = DB::table('automoviles')->select('id_auto')->orderBy('created_at', 'DESC')->take(1)->get();
+                foreach($id0km as $key) {
+                }
+                $marca = Estadocero::where("nombreEstado", "=", "En Camino")->select("id_estadoCero")->get();
+                foreach($marca as $marc) {
+                }
+                $auto_cero = DB::table('autoceros')->insertGetId(['vin' => null, 'auto_id' => $key->id_auto, 'estadoCero_id' => $marc->id_estadoCero]);
+                // dd($save);
+                $idauto0km = $auto_cero;
+            }
+        }
+        /*insert Auto Usado -------*/
+        $idusado = null;
+        if ($request->get('check_usado') == "si") {
+            $dominio = $request->get('check_select_usado');
             
-          $idauto0km = $request->get('select_cero');
-
-          } else {
-
-            if ($request->get('estado_toggle')=="lista") {
-      
-            $idmarca=$request->get('marca');
-                  
-
-            $marca = Marca::where("nombre","=",$idmarca)->select("id_marca")->get();
-            
-            foreach ($marca as $item) {}   
-                  
-            $idmarcas=$item->id_marca;
-
-            $automovil = new Automovile([
-              'marca_id' => $idmarcas, 
-              'modelo' => $request->input('modelo'),
-              'version'=> $request->input('version'),
-              'color'=> '',      
-              'precio'=> 0,  
-              'ficha' => 'Incompleta',
-              'visible'=> 1
-               ]);
-              
-              $automovil->save();
-            
-              $id0km = DB::table('automoviles')
-              ->select('id_auto')
-              ->orderBy('created_at','DESC')
-              ->take(1)
-              ->get();  
-
-            foreach ($id0km as $key) {}
-
-            $marca = Estadocero::where("nombreEstado","=","En Camino")->select("id_estadoCero")->get();
-            foreach ($marca as $marc) {}
-            
-            $auto_cero = DB::table('autoceros')
-            ->insertGetId([
-            'vin' => null,
-            'auto_id' => $key->id_auto, 
-            'estadoCero_id'=> $marc->id_estadoCero
-             ]);
-            // dd($save);
-
-            $idauto0km = $auto_cero;
-          }
+            $consulta = Autosusado::where("dominio", "=", $dominio)->select("id_autoUsado")->get();
+            foreach($consulta as $item) {
+            }
+            $idusado = $item->id_autoUsado;
+        }
+        else {
+            $idusado = null;
         }
 
-          //insert Auto Usado -------******************************************
-          $idusado=null;
-        if ($request->get('check_usado')=="si") {
-          $idusado = $request->get('check_select_usado');
-          $consulta = Autosusado::where("dominio","=",$idusado)->select("id_autoUsado")->get();
-          foreach ($consulta as $item) {}
-          $idusado = $item->id_autoUsado;
-          }
-          else{
-            $idusado = null;
-          }
+        $arreglo = array();
+        array_push($arreglo, $idusado);
+        array_push($arreglo, $idauto0km);
+        
+        /*   arreglo[0] idusado -----------------------------------------
+         arreglo[1] idauto0km  .----------------------------------*/
 
-                      
+        return response()->json($arreglo);
+        }
+
+  
+        public function store_forma_pago_contado(Request $request){
+        /* $arreglo[0] numero_cheque
+        $arreglo[1] fecha_cheque
+        $arreglo[2] banco
+        $arreglo[3] importe_cheque
+        */
+        /*insert Auto Entregado -------*/
+
+        if (is_int($request->get('dni_nya'))) {
+            $dni = $request->get('dni_nya');
+        } else {
+        $nya = $request->get('dni_nya');
+        $idpersona = Persona::where("nombre_apellido","=",$nya)->select("idpersona","dni")->get();
+        foreach ($idpersona as $items) {
+        }
+        $idpersona = $items->idpersona;
+        $dni=$items->dni;
+        }
 
            if($request->get('valor_entregado')=="si"){
 
@@ -476,25 +403,31 @@ class VentaContadoController extends Controller
           ]);
 
          
-          //insert Cheque -------****************************************** 
-          $cheque = $request->get('valor_cheque');
-          if ($cheque == 'si') {
+        // insert Cheque -------
+        $cheque = $request->get('valor_cheque');
+        
+        if ($cheque == 'si') {
+            $arreglo = $request->array_cheque;
+            $i = 0;
+            while ($i < count($arreglo)) {
+                $chequenuevo = DB::table('cheques')->insertGetId(['cheque_venta' => $venta, 'numero' => $arreglo[$i][0], 'fecha' => $arreglo[$i][1], 'banco' => $arreglo[$i][2], 'importe' => $arreglo[$i][3], 'estado' => "", ]);
+                $i++;
+            }
+        }
+        // insert Financiera -------
+        $financiera = $request->get('check_financ');
+        if ($financiera == 'si') {
+            $financiera_nuevo = DB::table('ventas')->insertGetId(['cant_cuotas' => $request->get('cant_cuotas') , 'monto_cuota' => $request->get('monto') , 'resto_financ' => $request->get('resto_financ') , ]);
+        }
+        /*   dd("HOLA");*/
+        $venta_operac = DB::table('operaciones')->join('ventas', 'operaciones.id_operacion', 'ventas.operacion_venta')->join('personas', 'operaciones.persona_operacion', 'personas.idpersona')->join('clientes', 'personas.idpersona', 'clientes.cliente_persona')->join('estados', 'operaciones.estado', 'estados.id_estado')->join('users', 'ventas.id_user', 'users.id')->join('automoviles', 'ventas.idventa_auto0km', 'automoviles.id_auto')->join('marcas', 'marcas.id_marca', 'automoviles.marca_id')->get();
+        $estado = Estado::All();
+        
+        //return redirect('/venta', compact('venta_operac', 'estado'))->with('success', 'Venta Guardada');
 
-            $chequenuevo = DB::table('cheques')
-            ->insertGetId([
-              'cheque_venta' => $venta,
-              'numero' => $request->get('numero_cheque'),
-              'fecha' => $request->get('fecha_cheque'),
-              'banco' => $request->get('banco'),
-              'importe' => $request->get('importe_cheque'),
-              'estado' => "",
-              ]);
-          }
-         //--insert Cheque -------****************************************** 
-
-
-      return redirect('/venta')->with('success', 'Venta Guardada');
-    }
+    return response()->json();
+    
+  }
     
     public function estado_cliente(Request $request){
       $estado_ficha= Cliente::select('estado_ficha')
@@ -562,4 +495,5 @@ class VentaContadoController extends Controller
     {
         //
     }
+
 }

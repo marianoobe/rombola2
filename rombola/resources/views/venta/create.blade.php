@@ -7,6 +7,7 @@
 <div class="container-fluid spark-screen">
     <form method="post" action="{{ route('venta.store') }}">
         {!! Html::script('js/venta.js') !!}
+
         <div class="row">
             <div class="col-md-14 col-md-offset-0">
                 <div class="box box-primary">
@@ -42,6 +43,39 @@
                                 <input type="text" maxlength="125" class="form-control" id="nom_vendedor" disabled="disabled"
                                     value="{{ Auth::user()->name }}">
                             </div>
+
+                            <div class="col-xs-12 col-lg-12">
+                                <hr>
+                            </div>
+
+                            <div id="alert_cliente" class="form-group text-danger" style="display:none">
+                                <label><strong>*campos incompletos</strong></label>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-4 text-center">
+                                <div class="form-group">
+                                    <i id="inf_circle" class="far fa-circle fa-2x" style="display:block;color:green"></i>
+                                    <i id="inf_circle_check" class="fas fa-check-circle fa-2x " style="display:none;color:green"></i>
+                                    <h5>Información del Cliente</h5>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-4 text-center">
+                                <div class="form-group">
+                                    <i id="adq_circle" class="far fa-circle fa-2x" style="display:block;color:green"></i>
+                                    <i id="adq_circle_check" class="fas fa-check-circle fa-2x " style="display:none;color:green"></i>
+                                    <h5>Vehículo que Adquiere</h5>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-4 text-center">
+                                <div class="form-group">
+                                    <i id="pago_circle" class="far fa-circle fa-2x" style="display:block;color:green"></i>
+                                    <i id="pago_circle_check" class="fas fa-check-circle fa-2x " style="display:none;color:green"></i>
+                                    <h5>Forma de Pago</h5>
+                                </div>
+                            </div>
+
                         </div>
                         <!-- /.row -->
                     </div>
@@ -52,7 +86,9 @@
             <!-- /.col -->
         </div>
 
-        <div class="row">
+
+        <input type="text" id="nya_client_pago" name="nya_client_pago" style="display:none">
+        <div class="row" id="box1" name="box1">
             <div class="col-md-14 col-md-offset-0">
                 <div class="box box-primary">
                     <div ALIGN="left" class="box-header with-border">
@@ -61,9 +97,10 @@
 
                     <div class="box-body">
                         <input type="text" id="id_user" name="id_user" style="display:none" value="{{ Auth::user()->id }}">
-                        <input type="text" id="cancer" name="cancer" style="display:none">
+                        <input type="text" id="cancer" name="cancer" style="display:none" value="not_select">
                         <input type="text" id="tipodni" name="tipodni" style="display:none">
                         <input type="text" id="nya_cliente" name="nya_cliente" style="display:none">
+
 
                         <div class="row margenBoot-25">
                             <div class="col-xs-14 col-lg-6">
@@ -254,7 +291,7 @@
                                             <label><strong>*Profesión</strong></label>
                                             <input type="text" class="form-control" id="conyuge_profesion" name="conyuge_profesion">
                                         </div>
-                                          <div class="form-group">
+                                        <div class="form-group">
                                             <label><strong>*Relación de dependencia</strong></label>
                                             <br>
                                             <input id="check_dependencia" onchange="validar_dependencia(this);" type="checkbox"
@@ -270,24 +307,25 @@
                                                 <input type="text" class="form-control" id="conyuge_domicilio_empleo"
                                                     name="conyuge_domicilio_empleo">
                                             </div>
-                                            
+
                                             <div class="form-group">
                                                 <label><strong>*Teléfono del Empleo</strong>(Celular o fijo)</label>
-                                                <input type="number" class="form-control" id="conyuge_telefono_trabajo" name="conyuge_telefono_trabajo">
+                                                <input type="number" class="form-control" id="conyuge_telefono_trabajo"
+                                                    name="conyuge_telefono_trabajo">
                                             </div>
-                                        
-                                            
+
+
                                             <div class="form-group">
                                                 <label><strong>*Antiguedad</strong></label>
                                                 <input type="number" class="form-control" id="conyuge_antiguedad" name="conyuge_antiguedad">
                                             </div>
-                                            
+
                                             <div class="form-group">
                                                 <label><strong>*Ingreso Mensual</strong></label>
                                                 <input type="number" class="form-control" id="conyuge_ingresos_mensuales"
                                                     name="conyuge_ingresos_mensuales">
                                             </div>
-                                            
+
                                             <div class="form-group">
                                                 <label><strong>*Nombre de Padre</strong></label>
                                                 <input type="text" class="form-control" id="conyuge_nombre_padre" name="conyuge_nombre_padre">
@@ -296,8 +334,8 @@
                                                 <label><strong>*Nombre de Madre</strong></label>
                                                 <input type="text" class="form-control" id="conyuge_nombre_madre" name="conyuge_nombre_madre">
                                             </div>
-                                        </div>                                  
-                                    </div> 
+                                        </div>
+                                    </div>
                                 </div>
                             </section>
                         </div>
@@ -367,12 +405,20 @@
                                 </div>
                             </section>
                         </div>
+
+                        <hr>
+
+                        <div class="box-tools pull-right">
+                            <a onclick="visible(1,2);" class="btn btn-lg btn-default">
+                                <i class="fa fa-chevron-right"></i> Siguiente</a>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" id="box2" name="box2" style="display:none">
             <div class="col-sm-14">
                 <div class="box box-primary">
                     <div class="box-header with-border">
@@ -428,7 +474,7 @@
                                                                         <th class="sorting" tabindex="0" aria-controls="example"
                                                                             rowspan="1" colspan="1" aria-label=" : activate to sort column ascending"
                                                                             style="width: 58px;" />
-                                                                            <th scope="col"></th>
+                                                                        <th scope="col"></th>
                                                                         <th scope="col">MARCA</th>
                                                                         <th scope="col">MODELO</th>
                                                                         <th scope="col">VERSION</th>
@@ -446,8 +492,8 @@
                                                                                 value='{{$item->dominio}}' style="display:none">
                                                                         </td>
                                                                         <td align="center" style="cursor: default;">
-                                                                            <img src={{url("img/marcas/$item->nombre.jpg")}} alt="..." class="img-circle"
-                                                                                style="width: 30px; height: 30px;" />
+                                                                            <img src={{url("img/marcas/$item->nombre.jpg")}}
+                                                                                alt="..." class="img-circle" style="width: 30px; height: 30px;" />
                                                                         </td>
                                                                         <td>{{$item->nombre}}</td>
                                                                         <td>{{$item->modelo}}</td>
@@ -481,222 +527,242 @@
                         </div>
 
                     </div>
+                    <div class="box-footer">
+                        <div class="box-tools pull-right">
+                            <a class="btn btn-lg btn-default" onclick="back_register_cliente();">
+                                <i class="fa fa-chevron-left"></i> Atrás</a>&nbsp&nbsp
+                            <a onclick="visible(2,2);" class="btn btn-lg btn-default">
+                                <i class="fa fa-chevron-right"></i> Siguiente</a>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.col -->
             </div>
+        </div>
 
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Forma de Pagos</h3>
+        <div class="row" id="box3" name="box3" style="display:none">
+            <div class="col-sm-14">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Forma de Pagos</h3>
 
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                </button>
-                            </div>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            </button>
                         </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="col-xs-12 col-lg-4">
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-4">
 
-                                    <div class="row margenBoot-25">
-                                        <div class="col-xs-12 col-lg-10">
-                                                <div class="form-group">
-                                                        <label><strong>Valor de Auto Vendido</strong></label>
-                                                        <input type="number" id="valor_auto_vendido" name="valor_auto_vendido"
-                                                            maxlength="30" required value="0">
-                                                    </div>
-        
-                                                    <div class="form-group">
-                                                        <label><strong>Valor de Auto Entregado</strong></label>
-                                                        <input type="number" id="valor_auto_entregado" name="valor_auto_entregado"
-                                                            maxlength="30" required value='0'>
-                                                    </div>
+                                <div class="row margenBoot-25">
+                                    <div class="col-xs-12 col-lg-10">
+                                        <div class="form-group">
+                                            <label><strong>Valor de Auto Vendido</strong></label>
+                                            <input type="number" id="valor_auto_vendido" name="valor_auto_vendido"
+                                                maxlength="30" required value="0">
                                         </div>
-                                    </div>
-                                    <div class="row margenBoot-25">
-                                        <div class="col-xs-12 col-lg-10">
-                                                <div class="form-group">
-                                                        <label><strong>Contado/Efectivo</strong></label>
-                                                        <input type="number" maxlength="30" id="inpefectivo" name="inpefectivo"
-                                                            required value='0'>
-                                                    </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <label><strong>Valor de Auto Entregado</strong></label>
+                                            <input type="number" id="valor_auto_entregado" name="valor_auto_entregado"
+                                                maxlength="30" required value='0'>
                                         </div>
-                                    </div>
-                                    <div class="row margenBoot-25">
-                                        <div class="col-xs-12 col-lg-10">
-                                            <div class="form-group">
-                                                <br>
-                                                <label><strong>Cheque </strong></label>
-                                                <input id="check_cheque" name="check_cheque" onchange="validar_check_cheque(this);"
-                                                    type="checkbox" data-style="slow" data-toggle="toggle" data-size="mini"
-                                                    data-on="Si" data-off="No" value="0">
-                                                <input id="valor_cheque" name="valor_cheque" type="text" style="display:none;">
-                                                <br>
-                                                <input type="number" style="display:none;" id="inpcheques" name="inpcheques"
-                                                    value="0">
-                                            </div>
-                                        </div> 
-                                    </div>
-                                    <br>
-                                    <div class="row margenBoot-25">
-                                        <div class="col-xs-12 col-lg-10">
-                                            <div class="form-group">
-                                                <label><strong>Financiación</strong></label>
-                                                <input id="check_conyuge" onchange="validar_check_financiera(this);"
-                                                    type="checkbox" data-style="slow" data-toggle="toggle" data-size="mini"
-                                                    data-on="Si" data-off="No">
-                                                <input type="text" style="display:none;" id="check_financ" name="check_financ"
-                                                    value="0">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="row margenBoot-25">
-                                        <div class="col-xs-12 col-lg-10">
-                                            <div class="form-group">
-                                                <label>Observaciones Financiación Externa:</label>
-                                                <textarea class="form-control" id="inp-observacionesFinanciacion" rows="4"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row margenBoot-25">
-                                        <div class="col-xs-12 col-lg-10">
-                                            <div class="form-group">
-                                                <label><strong>Total</strong></label>
-                                                <input type="text" maxlength="150" class="form-control" id="inp-total"
-                                                    placeholder="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="alerta-nosonigualesImportes" class="row margenBoot-25 hidden">
-                                        <div class="col-xs-12 col-lg-10"> </div>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-lg-8">
+                                <hr>
+                                <div class="row margenBoot-25">
+                                    <div class="col-xs-12 col-lg-10">
+                                        <div class="form-group">
+                                            <label><strong>Contado/Efectivo</strong></label>
+                                            <input type="number" maxlength="30" id="inpefectivo" name="inpefectivo"
+                                                required value='0'>
+                                        </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <label><strong>Saldo Neto</strong></label>
+                                            <input type="number" maxlength="30" id="saldo_neto" name="saldo_neto"
+                                                required value='0'>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row margenBoot-25">
+                                    <div class="col-xs-12 col-lg-10">
+                                        <div class="form-group">
+                                            <label><strong>Cheque </strong></label>
+                                            <input id="check_cheque" name="check_cheque" onchange="validar_check_cheque(this);"
+                                                type="checkbox" data-style="slow" data-toggle="toggle" data-size="mini"
+                                                data-on="Si" data-off="No" value="0">
+                                            <input id="valor_cheque" name="valor_cheque" type="text" style="display:none;">
+                                            <br>
+                                            <input type="number" style="display:none;" id="inpcheques" name="inpcheques"
+                                                value="0">
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row margenBoot-25">
+                                    <div class="col-xs-12 col-lg-10">
+                                        <div class="form-group">
+                                            <label><strong>Financiación</strong></label>
+                                            <input id="check_financiacion" onchange="validar_check_financiera(this);"
+                                                type="checkbox" data-style="slow" data-toggle="toggle" data-size="mini"
+                                                data-on="Si" data-off="No">
+                                            <input type="text" style="display:none;" id="check_financ" name="check_financ"
+                                                value="no">
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row margenBoot-25">
+                                    <div class="col-xs-12 col-lg-10">
+                                        <div class="form-group">
+                                            <label>Observaciones Financiación Externa:</label>
+                                            <textarea class="form-control" id="inp-observacionesFinanciacion" rows="4"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row margenBoot-25">
+                                    <div class="col-xs-12 col-lg-10">
+                                        <div class="form-group">
+                                            <label><strong>Total</strong></label>
+                                            <input type="text" maxlength="150" class="form-control" id="inp-total"
+                                                placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="alerta-nosonigualesImportes" class="row margenBoot-25 hidden">
+                                    <div class="col-xs-12 col-lg-10"> </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-8">
 
-                                    <div name="entradaAuto" class="row">
-                                        <div class="col-sm-12">
-                                            <div class="box-header with-border">
-                                                <h3 class="box-title" name="tituloAutoEntrega">¿Entrega Auto Usado?</h3>
-                                                <input id="check_entregado" onchange="validar_entregado(this);" type="checkbox"
-                                                    data-style="slow" data-toggle="toggle" data-size="mini" data-on="Si"
-                                                    data-off="No">
-                                                <input id="valor_entregado" name="valor_entregado" type="text" style="display:none;">
+                                <div name="entradaAuto" class="row">
+                                    <div class="col-sm-12">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title" name="tituloAutoEntrega">¿Entrega Auto Usado?</h3>
+                                            <input id="check_entregado" onchange="validar_entregado(this);" type="checkbox"
+                                                data-style="slow" data-toggle="toggle" data-size="mini" data-on="Si"
+                                                data-off="No">
+                                            <input id="valor_entregado" name="valor_entregado" type="text" style="display:none;">
 
-                                            </div>
-                                            <!-- /.box-header -->
-                                            <section id="section_usado_entregado" style="display:none">
-                                                <div class="box-body">
-                                                    <div class="row margenBoot-25">
-                                                        <div class="col-xs-12 col-lg-6">
-                                                            <div class="form-group">
-                                                                <label><strong>Nombre de Titular</strong></label>
-                                                                <input type="text" class="form-control" id="nomb_titular_entregado"
-                                                                    name="nomb_titular_entregado">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-xs-12 col-lg-3">
-                                                            <label><strong>Patente Mercosur</strong></label>
-                                                            <input id="check_patente" name="check_patente" onchange="validar_check_patente(this);"
-                                                                type="checkbox" data-style="slow" data-toggle="toggle"
-                                                                data-size="normal" data-on="Si" data-off="No">
-                                                        </div>
-                                                        <div class="col-xs-12 col-lg-3">
-                                                            <div class="form-group">
-                                                                <label><strong>Dominio</strong></label>
-                                                                <input type="text" style="text-transform: uppercase;"
-                                                                    maxlength="10" class="form-control" id="dominio_entregado"
-                                                                    name="dominio_entregado" name="dominio" placeholder="">
-                                                            </div>
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <section id="section_usado_entregado" style="display:none">
+                                            <div class="box-body">
+                                                <div class="row margenBoot-25">
+                                                    <div class="col-xs-12 col-lg-6">
+                                                        @php
+                                                        $fecha = date("d-m-Y");
+                                                        @endphp
+                                                        <input type="text" class="form-control" style="display:none" id="fecha_ingreso"
+                                                            name="fecha_ingreso" value="{{$fecha}}" />
+                                                        <div class="form-group">
+                                                            <label><strong>Nombre de Titular</strong></label>
+                                                            <input type="text" class="form-control" id="nomb_titular_entregado"
+                                                                name="nomb_titular_entregado">
                                                         </div>
                                                     </div>
 
-                                                    <div class="row margenBoot-25">
-                                                        <div class="col-xs-12 col-lg-4">
-                                                            <div class="form-group">
-                                                                <label><strong>*Marca</strong></label>
-                                                                <select id="marca_entregado" name="marca_entregado"
-                                                                    class="selectpicker show-tick" data-show-subtext="true"
-                                                                    data-live-search="true" data-style="btn-default"
-                                                                    data-width="100%">
-                                                                    <option value="">Seleccionar marca</option>
-                                                                    @foreach ($marcas as $item){
-                                                                    <option value="{{ $item->nombre }}">{{$item->nombre}}</option>
-                                                                    }
-                                                                    @endforeach
-                                                                </select>
-                                                                <input id="marca_selec" name="marca_selec" type="text"
-                                                                    style="display:none;">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xs-12 col-lg-3">
-                                                            <div class="form-group">
-                                                                <label><strong>Modelo</strong></label>
-                                                                <input type="text" maxlength="150" class="form-control"
-                                                                    id="modelo_entregado" name="modelo_entregado">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xs-12 col-lg-3">
-                                                            <div class="form-group">
-                                                                <label><strong>Versión</strong></label>
-                                                                <input type="text" maxlength="150" class="form-control"
-                                                                    id="version_entregado" name="version_entregado">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xs-12 col-lg-2">
-                                                            <div class="form-group">
-                                                                <label><strong>Año</strong></label>
-                                                                <input type="text" maxlength="65" class="form-control"
-                                                                    id="anio_entregado" name="anio_entregado">
-                                                            </div>
+                                                    <div class="col-xs-12 col-lg-3">
+                                                        <label><strong>Patente Mercosur</strong></label>
+                                                        <input id="check_patente" name="check_patente" onchange="validar_check_patente(this);"
+                                                            type="checkbox" data-style="slow" data-toggle="toggle"
+                                                            data-size="normal" data-on="Si" data-off="No">
+                                                    </div>
+                                                    <div class="col-xs-12 col-lg-3">
+                                                        <div class="form-group">
+                                                            <label><strong>Dominio</strong></label>
+                                                            <input type="text" style="text-transform: uppercase;"
+                                                                maxlength="10" class="form-control" id="dominio_entregado"
+                                                                name="dominio_entregado" placeholder="">
                                                         </div>
                                                     </div>
+                                                </div>
 
-                                                    <div class="row margenBoot-25">
-                                                        <div class="col-xs-12 col-lg-3">
-                                                            <div class="form-group">
-                                                                <label><strong>Color</strong></label>
-                                                                <input type="text" maxlength="65" class="form-control"
-                                                                    id="color_entregado" name="color_entregado">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xs-12 col-lg-5">
-                                                            <div class="form-group">
-                                                                <label><strong>N° Motor</strong></label>
-                                                                <input type="text" maxlength="255" class="form-control"
-                                                                    id="motor_num_entregado" name="motor_num_entregado">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xs-12 col-lg-4">
-                                                            <div class="form-group">
-                                                                <label><strong>N° Chasis</strong></label>
-                                                                <input type="text" maxlength="255" class="form-control"
-                                                                    id="chasis_num_entregado" name="chasis_num_entregado">
-                                                            </div>
+                                                <div class="row margenBoot-25">
+                                                    <div class="col-xs-12 col-lg-4">
+                                                        <div class="form-group">
+                                                            <label><strong>*Marca</strong></label>
+                                                            <select id="marca_entregado" name="marca_entregado" class="selectpicker show-tick"
+                                                                data-show-subtext="true" data-live-search="true"
+                                                                data-style="btn-default" data-width="100%">
+                                                                <option value="">Seleccionar marca</option>
+                                                                @foreach ($marcas as $item){
+                                                                <option value="{{ $item->nombre }}">{{$item->nombre}}</option>
+                                                                }
+                                                                @endforeach
+                                                            </select>
+                                                            <input id="marca_selec" name="marca_selec" type="text"
+                                                                style="display:none;">
                                                         </div>
                                                     </div>
+                                                    <div class="col-xs-12 col-lg-3">
+                                                        <div class="form-group">
+                                                            <label><strong>Modelo</strong></label>
+                                                            <input type="text" maxlength="150" class="form-control" id="modelo_entregado"
+                                                                name="modelo_entregado">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-lg-3">
+                                                        <div class="form-group">
+                                                            <label><strong>Versión</strong></label>
+                                                            <input type="text" maxlength="150" class="form-control" id="version_entregado"
+                                                                name="version_entregado">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-lg-2">
+                                                        <div class="form-group">
+                                                            <label><strong>Año</strong></label>
+                                                            <input type="text" maxlength="65" class="form-control" id="anio_entregado"
+                                                                name="anio_entregado">
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                                    <div class="row margenBoot-25">
-                                                        <div class="col-xs-12 col-lg-12">
-                                                            <!-- <div class="form-group">
+                                                <div class="row margenBoot-25">
+                                                    <div class="col-xs-12 col-lg-3">
+                                                        <div class="form-group">
+                                                            <label><strong>Color</strong></label>
+                                                            <input type="text" maxlength="65" class="form-control" id="color_entregado"
+                                                                name="color_entregado">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-lg-5">
+                                                        <div class="form-group">
+                                                            <label><strong>N° Motor</strong></label>
+                                                            <input type="text" maxlength="255" class="form-control" id="motor_num_entregado"
+                                                                name="motor_num_entregado">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-lg-4">
+                                                        <div class="form-group">
+                                                            <label><strong>N° Chasis</strong></label>
+                                                            <input type="text" maxlength="255" class="form-control" id="chasis_num_entregado"
+                                                                name="chasis_num_entregado">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row margenBoot-25">
+                                                    <div class="col-xs-12 col-lg-12">
+                                                        <!-- <div class="form-group">
                                                                                         <label><strong>Documentación Entregada</strong></label>
                                                                                         <textarea class="form-control" id="inp-observacion2" name="inp-observacion2[]"
                                                                                             rows="5" maxlength="21844">CÉDULA DE IDENTIFICACIÓN DEL VEHÍCULO, CÉDULA DE AUTORIZADO, VTV EN VIGENCIA, CONSTANCIA DE LIBRE DEUDA MUNICIPAL DE IMPUESTOS Y MULTAS, INFORME DE DOMINIO, F12 CONFECCIONADO POR POLICÍA O GENDARMERÍA NACIONAL CON FECHA ACTUAL, TÍTULO Y F08 DEBIDAMENTE FIRMADO.</textarea>
                                                                                         
                                                                                         </div> -->
-                                                        </div>
-
                                                     </div>
-                                                    <!-- /.row -->
+
                                                 </div>
-                                                <!-- ./box-body -->
-                                                <div class="box-footer" align="center">
-                                                    <!--
+                                                <!-- /.row -->
+                                            </div>
+                                            <!-- ./box-body -->
+                                            <div class="box-footer" align="center">
+                                                <!--
                                                                                     <button type="button" onclick="limpiarAutoEntrega(this);" name="btn-limpiarAutoEntrega"
                                                                                         class="btn btn-sm btn-warning"> <i class="fa fa-recycle"></i>
                                                                                         LIMPIAR DATOS </button>
@@ -708,60 +774,373 @@
                                                                                             class="fa fa-plus"></i> AGREGAR
                                                                                         VEHÍCULO </button>
                                                                                     -->
-                                                </div>
-                                                <!-- /.box-footer -->
-                                            </section>
-                                            <!-- /.box -->
-                                        </div>
-                                        <!-- /.col -->
+                                            </div>
+                                            <!-- /.box-footer -->
+                                        </section>
+                                        <!-- /.box -->
                                     </div>
+                                    <!-- /.col -->
+                                </div>
 
-                                    <br><br>
-                                    <div id="detalle_cheque" style="display:none;" class="panel panel-default">
-                                        <div class="panel-body">
-                                            <h3 style="margin:5px;"><small>Detalles de cheques:</small></h3>
-                                            <div class="div-cheques">
-                                                <div name="rows" class="row margenBoot-25">
-                                                    <div class="col-xs-12 col-lg-2">
-                                                        <input id="idCheques" name="idCheques" type="hidden" value="0">
-                                                        <div class="form-group">
-                                                            <label><strong>Banco</strong></label>
-                                                            <input id="banco" name="banco" type="text" maxlength="150"
+                                <br><br>
+                                <div id="detalle_cheque" style="display:none;" class="panel panel-default">
+                                    <div class="panel-body">
+                                        <h3 style="margin:5px;"><small>Detalles de cheques:</small></h3>
+                                        <div class="div-cheques">
+                                            <div name="rows" class="row margenBoot-25">
+                                                <div class="col-xs-12 col-lg-2">
+                                                    <input id="idCheques" name="idCheques" type="hidden" value="0">
+                                                    <div class="form-group">
+                                                        <label><strong>Banco</strong></label>
+                                                        <input id="banco0" name="banco0" type="text" maxlength="150"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Número</strong></label>
+                                                        <input id="numero_cheque0" name="numero_cheque0" type="int"
+                                                            maxlength="65" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Fecha</strong></label>
+                                                        <div class="input-group date" name="date-fechaPagCheque[]">
+                                                            <input id="fecha_cheque0" name="fecha_cheque0" type="date"
                                                                 class="form-control">
-                                                        </div>
+                                                            <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span>
+                                                            </span> </div>
                                                     </div>
-                                                    <div class="col-xs-12 col-lg-3">
-                                                        <div class="form-group">
-                                                            <label><strong>Número</strong></label>
-                                                            <input id="numero_cheque" name="numero_cheque" type="int"
-                                                                maxlength="65" class="form-control">
-                                                        </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Importe</strong></label>
+                                                        <input id="importe_cheque0" name="importe_cheque0" type="text"
+                                                            maxlength="65" class="form-control monto_cheque" onkeyup="sumar();">
                                                     </div>
-                                                    <div class="col-xs-12 col-lg-3">
-                                                        <div class="form-group">
-                                                            <label><strong>Fecha</strong></label>
-                                                            <div class="input-group date" name="date-fechaPagCheque[]">
-                                                                <input id="fecha_cheque" name="fecha_cheque" type="date"
-                                                                    class="form-control">
-                                                                <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span>
-                                                                </span> </div>
-                                                        </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-1" style="padding:0;">
+                                                    <div class="form-group">
+                                                        <button type="button" onclick="cheques();" name="btn-NuevoCheque"
+                                                            class="btn btn-primary" style="margin-top:25px;">
+                                                            <span class="fa fa-plus-circle fa-lg" aria-hidden="true"></span>
+                                                        </button>
                                                     </div>
-                                                    <div class="col-xs-12 col-lg-3">
-                                                        <div class="form-group">
-                                                            <label><strong>Importe</strong></label>
-                                                            <input id="importe_cheque" name="importe_cheque" type="text"
-                                                                maxlength="65" class="form-control">
-                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="div-cheques1" id="div-cheques1" style="display:none;">
+                                            <div name="rows" class="row margenBoot-25">
+                                                <div class="col-xs-12 col-lg-2">
+                                                    <input id="idCheques" name="idCheques" type="hidden" value="0">
+                                                    <div class="form-group">
+                                                        <label><strong>Banco</strong></label>
+                                                        <input id="banco1" name="banco1" type="text" maxlength="150"
+                                                            class="form-control">
                                                     </div>
-                                                    <div class="col-xs-12 col-lg-1" style="padding:0;">
-                                                        <div class="form-group">
-                                                            <!--<button type="button" onclick="cheques();" name="btn-NuevoCheque"
-                                                                                                class="btn btn-primary" style="margin-top:25px;">
-                                                                                                <span class="glyphicon glyphicon glyphicon-plus"
-                                                                                                    aria-hidden="true"></span>
-                                                                                            </button> -->
-                                                        </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Número</strong></label>
+                                                        <input id="numero_cheque1" name="numero_cheque1" type="int"
+                                                            maxlength="65" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Fecha</strong></label>
+                                                        <div class="input-group date" name="date-fechaPagCheque[]">
+                                                            <input id="fecha_cheque1" name="fecha_cheque1" type="date"
+                                                                class="form-control">
+                                                            <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span>
+                                                            </span> </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Importe</strong></label>
+                                                        <input id="importe_cheque1" name="importe_cheque1" type="text"
+                                                            maxlength="65" class="form-control monto_cheque" onkeyup="sumar();">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-1" style="padding:0;">
+                                                    <div class="form-group">
+                                                        <button type="button" onclick="cheques_minus(1);" name="btn-NuevoCheque"
+                                                            class="btn btn-danger" style="margin-top:25px;">
+                                                            <span class="fa fa-minus-circle fa-xs" aria-hidden="true"></span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="div-cheques2" id="div-cheques2" style="display:none;">
+                                            <div name="rows" class="row margenBoot-25">
+                                                <div class="col-xs-12 col-lg-2">
+                                                    <input id="idCheques" name="idCheques" type="hidden" value="0">
+                                                    <div class="form-group">
+                                                        <label><strong>Banco</strong></label>
+                                                        <input id="banco2" name="banco2" type="text" maxlength="150"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Número</strong></label>
+                                                        <input id="numero_cheque2" name="numero_cheque2" type="int"
+                                                            maxlength="65" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Fecha</strong></label>
+                                                        <div class="input-group date" name="date-fechaPagCheque[]">
+                                                            <input id="fecha_cheque2" name="fecha_cheque2" type="date"
+                                                                class="form-control">
+                                                            <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span>
+                                                            </span> </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Importe</strong></label>
+                                                        <input id="importe_cheque2" name="importe_cheque2" type="text"
+                                                            maxlength="65" class="form-control monto_cheque" onkeyup="sumar();">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-1" style="padding:0;">
+                                                    <div class="form-group">
+                                                        <button type="button" onclick="cheques_minus(2);" name="btn-NuevoCheque"
+                                                            class="btn btn-danger" style="margin-top:25px;">
+                                                            <span class="fa fa-minus-circle fa-xs" aria-hidden="true"></span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="div-cheques3" id="div-cheques3" style="display:none;">
+                                            <div name="rows" class="row margenBoot-25">
+                                                <div class="col-xs-12 col-lg-2">
+                                                    <input id="idCheques" name="idCheques" type="hidden" value="0">
+                                                    <div class="form-group">
+                                                        <label><strong>Banco</strong></label>
+                                                        <input id="banco3" name="banco3" type="text" maxlength="150"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Número</strong></label>
+                                                        <input id="numero_cheque3" name="numero_cheque3" type="int"
+                                                            maxlength="65" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Fecha</strong></label>
+                                                        <div class="input-group date" name="date-fechaPagCheque[]">
+                                                            <input id="fecha_cheque3" name="fecha_cheque3" type="date"
+                                                                class="form-control">
+                                                            <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span>
+                                                            </span> </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Importe</strong></label>
+                                                        <input id="importe_cheque3" name="importe_cheque3" type="text"
+                                                            maxlength="65" class="form-control monto_cheque" onkeyup="sumar();">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-1" style="padding:0;">
+                                                    <div class="form-group">
+                                                        <button type="button" onclick="cheques_minus(3);" name="btn-NuevoCheque"
+                                                            class="btn btn-danger" style="margin-top:25px;">
+                                                            <span class="fa fa-minus-circle fa-xs" aria-hidden="true"></span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="div-cheques4" id="div-cheques4" style="display:none;">
+                                            <div name="rows" class="row margenBoot-25">
+                                                <div class="col-xs-12 col-lg-2">
+                                                    <input id="idCheques" name="idCheques" type="hidden" value="0">
+                                                    <div class="form-group">
+                                                        <label><strong>Banco</strong></label>
+                                                        <input id="banco4" name="banco4" type="text" maxlength="150"
+                                                            class="form-control monto_cheque" onkeyup="sumar();">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Número</strong></label>
+                                                        <input id="numero_cheque4" name="numero_cheque4" type="int"
+                                                            maxlength="65" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Fecha</strong></label>
+                                                        <div class="input-group date" name="date-fechaPagCheque[]">
+                                                            <input id="fecha_cheque4" name="fecha_cheque4" type="date"
+                                                                class="form-control">
+                                                            <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span>
+                                                            </span> </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Importe</strong></label>
+                                                        <input id="importe_cheque4" name="importe_cheque4" type="text"
+                                                            maxlength="65" class="form-control monto_cheque" onkeyup="sumar();">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-1" style="padding:0;">
+                                                    <div class="form-group">
+                                                        <button type="button" onclick="cheques_minus(4);" name="btn-NuevoCheque"
+                                                            class="btn btn-danger" style="margin-top:25px;">
+                                                            <span class="fa fa-minus-circle fa-xs" aria-hidden="true"></span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="div-cheques5" id="div-cheques5" style="display:none;">
+                                            <div name="rows" class="row margenBoot-25">
+                                                <div class="col-xs-12 col-lg-2">
+                                                    <input id="idCheques" name="idCheques" type="hidden" value="0">
+                                                    <div class="form-group">
+                                                        <label><strong>Banco</strong></label>
+                                                        <input id="banco5" name="banco5" type="text" maxlength="150"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Número</strong></label>
+                                                        <input id="numero_cheque5" name="numero_cheque5" type="int"
+                                                            maxlength="65" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Fecha</strong></label>
+                                                        <div class="input-group date" name="date-fechaPagCheque[]">
+                                                            <input id="fecha_cheque5" name="fecha_cheque5" type="date"
+                                                                class="form-control">
+                                                            <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span>
+                                                            </span> </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Importe</strong></label>
+                                                        <input id="importe_cheque5" name="importe_cheque5" type="text"
+                                                            maxlength="65" class="form-control monto_cheque" onkeyup="sumar();">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-1" style="padding:0;">
+                                                    <div class="form-group">
+                                                        <button type="button" onclick="cheques_minus(5);" name="btn-NuevoCheque"
+                                                            class="btn btn-danger" style="margin-top:25px;">
+                                                            <span class="fa fa-minus-circle fa-xs" aria-hidden="true"></span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="div-cheques6" id="div-cheques6" style="display:none;">
+                                            <div name="rows" class="row margenBoot-25">
+                                                <div class="col-xs-12 col-lg-2">
+                                                    <input id="idCheques" name="idCheques" type="hidden" value="0">
+                                                    <div class="form-group">
+                                                        <label><strong>Banco</strong></label>
+                                                        <input id="banco6" name="banco6" type="text" maxlength="150"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Número</strong></label>
+                                                        <input id="numero_cheque6" name="numero_cheque6" type="int"
+                                                            maxlength="65" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Fecha</strong></label>
+                                                        <div class="input-group date" name="date-fechaPagCheque[]">
+                                                            <input id="fecha_cheque6" name="fecha_cheque6" type="date"
+                                                                class="form-control">
+                                                            <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span>
+                                                            </span> </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Importe</strong></label>
+                                                        <input id="importe_cheque6" name="importe_cheque6" type="text"
+                                                            maxlength="65" class="form-control monto_cheque" onkeyup="sumar();">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-1" style="padding:0;">
+                                                    <div class="form-group">
+                                                        <button type="button" onclick="cheques_minus(6);" name="btn-NuevoCheque"
+                                                            class="btn btn-danger" style="margin-top:25px;">
+                                                            <span class="fa fa-minus-circle fa-xs" aria-hidden="true"></span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="div-cheques7" id="div-cheques7" style="display:none;">
+                                            <div name="rows" class="row margenBoot-25">
+                                                <div class="col-xs-12 col-lg-2">
+                                                    <input id="idCheques" name="idCheques" type="hidden" value="0">
+                                                    <div class="form-group">
+                                                        <label><strong>Banco</strong></label>
+                                                        <input id="banco7" name="banco7" type="text" maxlength="150"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Número</strong></label>
+                                                        <input id="numero_cheque7" name="numero_cheque7" type="int"
+                                                            maxlength="65" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Fecha</strong></label>
+                                                        <div class="input-group date" name="date-fechaPagCheque[]">
+                                                            <input id="fecha_cheque7" name="fecha_cheque7" type="date"
+                                                                class="form-control">
+                                                            <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span>
+                                                            </span> </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label><strong>Importe</strong></label>
+                                                        <input id="importe_cheque7" name="importe_cheque7" type="text"
+                                                            maxlength="65" class="form-control monto_cheque" onkeyup="sumar();">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-1" style="padding:0;">
+                                                    <div class="form-group">
+                                                        <button type="button" onclick="cheques_minus(7);" name="btn-NuevoCheque"
+                                                            class="btn btn-danger" style="margin-top:25px;">
+                                                            <span class="fa fa-minus-circle fa-xs" aria-hidden="true"></span>
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -769,369 +1148,360 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- /.row -->
-                        </div>
-                        <!-- ./box-body -->
-                        <div class="box-footer">
-                            <div style="margin-top:25px;">
-                                <div class="col-sm-12 col-lg-12">
-                                    <div id="alerta" style="display:none;" class="alert alert-success" role="alert"><strong>Operacion
-                                            Guardada Correctamente!</strong></div>
-                                </div>
-                            </div>
-                            <div class="row margenBoot-25" style="margin-top:25px;">
-                                <div class="col-xs-12 col-lg-12" style="text-align:center;">
-                                    <button type="submit" id="btn-guardar" data-loading-text="GUARDANDO..." class="btn btn-success"
-                                        onclick="">GENERAR VENTA</button>
-                                </div>
-                            </div>
-                            <!-- /.row -->
-                        </div>
-                        <!-- /.box-footer -->
+                        <!-- /.row -->
                     </div>
-                    <!-- /.box -->
-                </div>
-                <!-- /.col -->
-            </div>
-
-            <!--Modal Financiera-->
-
-            <div class="modal fade" id="modal-financiera" tabindex="-1" role="dialog" aria-labelledby="modal-financiera"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">
-                                    <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;">×</font>
-                                    </font>
-                                </span></button>
-                            <h4 class="modal-title">
-                                <font style="vertical-align: inherit;">
-                                    <font style="vertical-align: inherit;">FINANCIERAS</font>
-
-                                </font>
-                            </h4>
+                    <!-- ./box-body -->
+                    <div class="box-footer">
+                        <div style="margin-top:25px;">
+                            <div class="col-sm-12 col-lg-12">
+                                <div id="alerta" style="display:none;" class="alert alert-success" role="alert"><strong>Operacion
+                                        Guardada Correctamente!</strong></div>
+                            </div>
                         </div>
-                        <div class="modal-body">
+                        <div class="row margenBoot-25" style="margin-top:25px;">
+                            <div class="col-xs-12 col-lg-12" style="text-align:center;">
+                                <a class="btn btn-lg btn-default" onclick="back_register_auto();">
+                                    <i class="fa fa-chevron-left"></i> Atrás</a>&nbsp&nbsp
+                                <a onclick="next_register_pago(2);" id="btn-guardar" data-loading-text="GUARDANDO..."
+                                    class="btn btn-lg btn-success" onclick="">GENERAR VENTA</a>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.box-footer -->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
 
-                            <div class="form-group">
-                                <label><strong>Cantidad de Cuotas</strong></label>
-                                <input type="number" class="form-control" id="cant_cuotas" name="cant_cuotas">
-                            </div>
-                            <div class="form-group">
-                                <label><strong>Monto de Cuota</strong></label>
-                                <input type="number" class="form-control" id="monto" name="monto">
-                            </div>
-                            <div class="form-group">
-                                <label><strong>Resto</strong></label>
-                                <input type="number" class="form-control" id="resto_financ" name="resto_financ">
-                            </div>
+        <!--Modal Financiera-->
 
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                <a onclick="verificar();" class="btn btn-primary">Continuar</a>
-                            </div>
+        <div class="modal fade" id="modal-financiera" tabindex="-1" role="dialog" aria-labelledby="modal-financiera"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">×</font>
+                                </font>
+                            </span></button>
+                        <h4 class="modal-title">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">FINANCIERAS</font>
 
+                            </font>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label><strong>Cantidad de Cuotas</strong></label>
+                            <input type="number" class="form-control" id="cant_cuotas" name="cant_cuotas">
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Monto de Cuota</strong></label>
+                            <input type="number" class="form-control" id="monto" name="monto">
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Saldo</strong></label>
+                            <input type="number" class="form-control" id="saldo_financ" name="saldo_financ">
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            <a onclick="verificar();" class="btn btn-primary">Continuar</a>
                         </div>
 
                     </div>
+
                 </div>
             </div>
+        </div>
 
-            <!--Modal 0KM-->
-            <div class="modal fade" id="modal-0km" tabindex="-1" role="dialog" aria-labelledby="modal-0km" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">
-                                    <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;">×</font>
-                                    </font>
-                                </span></button>
-                            <h4 class="modal-title">
+        <!--Modal 0KM-->
+        <div class="modal fade" id="modal-0km" tabindex="-1" role="dialog" aria-labelledby="modal-0km" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
                                 <font style="vertical-align: inherit;">
-                                    <font style="vertical-align: inherit;">Cargar 0 KM </font>
+                                    <font style="vertical-align: inherit;">×</font>
                                 </font>
-                            </h4>
-                        </div>
-                        <div class="modal-body">
+                            </span></button>
+                        <h4 class="modal-title">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">Cargar 0 KM </font>
+                            </font>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
 
-                            <ul class="nav nav-tabs">
-                                <li id="stock" class="active"><a data-toggle="tab" href="#home">STOCK/DEPOSITO</a></li>
-                                <li id="lista"><a data-toggle="tab" href="#menu1">LISTA DE AUTOS</a></li>
-                            </ul>
+                        <ul class="nav nav-tabs">
+                            <li id="stock" class="active"><a data-toggle="tab" href="#home">STOCK/DEPOSITO</a></li>
+                            <li id="lista"><a data-toggle="tab" href="#menu1">LISTA DE AUTOS</a></li>
+                        </ul>
 
-                            <div class="tab-content">
-                                <div id="home" class="tab-pane fade in active">
-                                    <br>
+                        <div class="tab-content">
+                            <div id="home" class="tab-pane fade in active">
+                                <br>
 
 
-                                    <div class="box-body">
+                                <div class="box-body">
 
-                                        <form method="GET" action="{{ route('autos.index') }}" class="navbar-form pull-right"
-                                            role="search">
+                                    <form method="GET" action="{{ route('autos.index') }}" class="navbar-form pull-right"
+                                        role="search">
 
-                                            <div class="input-group">
+                                        <div class="input-group">
 
-                                                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                            <input type="hidden" name="_token" value="{{csrf_token()}}">
 
-                                                <input type="text" class="form-control" name="name" placeholder="Busqueda">
-                                                <input type="hidden" id="dato" name="dato" value="nuevo">
-                                                <span class="input-group-btn">
-                                                    <button type="submit" class="btn btn-default">
-                                                        <span class="glyphicon glyphicon-search"></span>
-                                                    </button>
-                                                </span>
+                                            <input type="text" class="form-control" name="name" placeholder="Busqueda">
+                                            <input type="hidden" id="dato" name="dato" value="nuevo">
+                                            <span class="input-group-btn">
+                                                <button type="submit" class="btn btn-default">
+                                                    <span class="glyphicon glyphicon-search"></span>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
+                                                colspan="1" aria-label=" : activate to sort column ascending" style="width: 58px;" />
+                                            <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
+                                                colspan="1" aria-label=" : activate to sort column ascending" style="width: 58px;" />
+                                            <th scope="col">MARCA</th>
+                                            <th scope="col">MODELO</th>
+                                            <th scope="col">VERSION</th>
+                                            <th scope="col">COLOR</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($autos as $item)
+                                        <tr>
+                                            <p></p>
+                                            <td align="center" style="cursor: default;">
+                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1">
+                                                <input id="select_cero" name="select_cero" value='{{$item->id_autocero}}'
+                                                    style="display:none">
+                                            </td>
+                                            <td align="center" style="cursor: default;">
+                                                <img src={{url("img/marcas/$item->nombre.jpg")}} alt="..." class="img-circle"
+                                                    style="width: 30px; height: 30px;" />
+                                            </td>
+                                            <td>{{$item->nombre}}</td>
+                                            <td>{{$item->modelo}}</td>
+                                            <td>{{$item->version}}</td>
+                                            <td>{{$item->color}}</td>
+
+                                        </tr>
+                                        @endforeach()
+                                    </tbody>
+                                </table>
+
+                                {{ $autos->render() }}
+
+                                <input type="text" id="estado_toggle" name="estado_toggle" style="display:none">
+
+
+                            </div>
+                            <div id="menu1" class="tab-pane fade">
+                                <br>
+                                <div class="row margenBoot-25">
+                                    <div class="col-xs-12 col-lg-12">
+                                        <section id="modal_cargar0km" style="display:block">
+                                            <a href="url">Ver Listas</a>
+                                            <div class="form-group">
+                                                <br>
+                                                <select id="marca" name="marca" class="form-control form-control-sm">
+                                                    @foreach ($marcas as $item)
+                                                    <option value="{{$item->nombre}}">{{$item->nombre}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
-                                        </form>
+                                            <div class="form-group">
+                                                <label><strong>*Modelo</strong></label>
+                                                <input type="text" class="form-control" id="modelo" name="modelo">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><strong>*Versión</strong></label>
+                                                <input type="text" class="form-control" id="version" name="version">
+                                            </div>
+                                            <div class="form-group">
+                                                <label><strong>*Precio</strong></label>
+                                                <input type="text" class="form-control" id="precio" name="precio">
+                                            </div>
+                                            <div id="alert" class="form-group text-danger" style="display:none">
+                                                <label><strong>*campos incompletos</strong></label>
+                                            </div>
+                                        </section>
+                                    
+                                        <section id="auto_cargado" style="display:none">
+                                            <p>Auto Guardado</p>
+                                        </section>
                                     </div>
 
-
-
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
-                                                    colspan="1" aria-label=" : activate to sort column ascending" style="width: 58px;" />
-                                                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1"
-                                                    colspan="1" aria-label=" : activate to sort column ascending" style="width: 58px;" />
-                                                <th scope="col">MARCA</th>
-                                                <th scope="col">MODELO</th>
-                                                <th scope="col">VERSION</th>
-                                                <th scope="col">COLOR</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach($autos as $item)
-                                            <tr>
-                                                <p></p>
-                                                <td align="center" style="cursor: default;">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios"
-                                                        id="exampleRadios1">
-                                                    <input id="select_cero" name="select_cero" value='{{$item->id_autocero}}'
-                                                        style="display:none">
-                                                </td>
-                                                <td align="center" style="cursor: default;">
-                                                    <img src={{url("img/marcas/$item->nombre.jpg")}} alt="..." class="img-circle"
-                                                        style="width: 30px; height: 30px;" />
-                                                </td>
-                                                <td>{{$item->nombre}}</td>
-                                                <td>{{$item->modelo}}</td>
-                                                <td>{{$item->version}}</td>
-                                                <td>{{$item->color}}</td>
-
-                                            </tr>
-                                            @endforeach()
-                                        </tbody>
-                                    </table>
-
-                                    {{ $autos->render() }}
-
-                                    <input type="text" id="estado_toggle" name="estado_toggle" style="display:none">
-
-
-                                </div>
-                                <div id="menu1" class="tab-pane fade">
-                                    <br>
-                                    <div class="row margenBoot-25">
-                                        <div class="col-xs-12 col-lg-12">
-                                            <section id="modal_cargar0km" style="display:block">
-                                                <a href="url">Ver Listas</a>
-                                                <div class="form-group">
-                                                    <br>
-                                                    <select id="marca" name="marca" class="form-control form-control-sm">
-                                                        @foreach ($marcas as $item)
-                                                        <option value="{{$item->nombre}}">{{$item->nombre}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label><strong>*Modelo</strong></label>
-                                                    <input type="text" class="form-control" id="modelo" name="modelo">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label><strong>*Versión</strong></label>
-                                                    <input type="text" class="form-control" id="version" name="version">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label><strong>*Precio</strong></label>
-                                                    <input type="text" class="form-control" id="precio" name="precio">
-                                                </div>
-                                            </section>
-                                            <!--<button onclick="viñeta_0km_cargado();" class="btn btn-primary"> Guardar </button> -->
-                                            <section id="auto_cargado" style="display:none">
-                                                <p>Auto Guardado</p>
-                                            </section>
-                                        </div>
-
-                                    </div><!-- /.modal-dialog -->
-                                </div>
-                            </div>
-
-                            <div class="modal-footer">
-                                <button onclick="viñeta_0km();" class="btn btn-primary" data-dismiss="modal">Continuar</button>
+                                </div><!-- /.modal-dialog -->
                             </div>
                         </div>
 
+                        <div class="modal-footer">
+                            <button onclick="viñeta_0km();" class="btn btn-primary">Continuar</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Fin Modal 0KM-->
+
+        <!--Modal -->
+        <div class="modal fade" id="modal-clienteNuevo" tabindex="-1" role="dialog" aria-labelledby="modal-clienteNuevo"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">×</font>
+                                </font>
+                            </span></button>
+                        <h4 class="modal-title">
+
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row margenBoot-25">
+
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="form-group">
+                                    <label><strong>*DNI</strong></label>
+                                    <input type="number" class="form-control" id="dni" name="dni">
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>*Nombres</strong></label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre">
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>*Apellidos</strong></label>
+                                    <input type="text" class="form-control" id="apellido" name="apellido">
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>*Correo Electrónico</strong></label>
+                                    <input type="email" placeholder="email@gmail.com" class="form-control" id="email"
+                                        name="email">
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>*Celular</strong></label>
+                                    <input type="text" class="form-control" id="cel_1" name="cel_1">
+                                </div>
+                                <hr>
+                                <div class="form-group">
+                                    <label><strong>*Profesión</strong></label>
+                                    <input type="text" class="form-control" id="profesion" name="profesion">
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>*Relación de dependencia</strong></label>
+                                    <br>
+                                    <input id="check_depen" onchange="validar_dependencia(this);" type="checkbox"
+                                        data-style="slow" data-toggle="toggle" data-size="" data-on="Si" data-off="No">
+                                    <input id="check_dependencia" name="check_dependencia" type="number" style="display:none;"
+                                        value="0">
+                                    <br>
+                                </div>
+                                <hr>
+                                <div class="form-group">
+                                    <label><strong>*Ingresos Mensuales</strong></label>
+                                    <input type="text" class="form-control" id="ingresos" name="ingresos">
+                                </div>
+
+                                <div class="form-group">
+                                    <label><strong>*Nombre de Padre</strong></label>
+                                    <input type="text" class="form-control" id="nombre_padre" name="nombre_padre">
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>*Nombre de Madre</strong></label>
+                                    <input type="text" class="form-control" id="nombre_madre" name="nombre_madre">
+                                </div>
+
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="form-group">
+                                    <label><strong>Otro (opcional)</strong></label>
+                                    <input type="text" class="form-control" id="cel_2" name="cel_2">
+                                </div>
+
+                                <div class="form-group">
+                                    <label><strong>*Fecha de Nacimiento</strong></label>
+                                    <input type="date" class="form-control" id="fecha_nac" name="fecha_nac">
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label><strong>*Domicilio</strong></label>
+                                        <input type="text" class="form-control" id="domicilio" name="domicilio">
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>*Estado Civil</strong></label>
+                                        <select id="estado_civil" name="estado_civil" class="form-control form-control-sm">
+                                            <option>Soltero</option>
+                                            <option>Convive</option>
+                                            <option>Casado</option>
+                                            <option>Divorciado</option>
+                                            <option>Viudo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>*Actividad/Empresa</strong></label>
+                                    <input type="text" class="form-control" id="act_empresa" name="act_empresa">
+                                </div>
+                                <hr>
+                                <div class="form-group">
+                                    <label><strong>Teléfono Laboral</strong>(tel. fijo o celular)</label>
+                                    <input type="text" class="form-control" id="telefono_empleo" name="telefono_empleo">
+                                </div>
+
+                                <div class="form-group">
+                                    <label><strong>*Domicilio de Empleo</strong></label>
+                                    <input type="text" placeholder="Calle - N° - Departamento" class="form-control" id="domicilio_empleo"
+                                        name="domicilio_empleo">
+                                </div>
+                                <hr>
+                                <div class="form-group">
+                                    <label><strong>*Antiguedad</strong></label>
+                                    <input type="number" class="form-control" id="antiguedad" name="antiguedad">
+                                </div>
+                                <div class="input-group">
+                                    <label><strong>*Otros ingresos</strong></label>
+                                    <input type="number" class="form-control" id="otros_ingresos" name="otros_ingresos">
+                                </div>
+
+                            </div>
+
+                            <div class="col-xs-12 col-lg-12">
+
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            <a href="#" onclick="update_modal_financ();" class="btn btn-primary">Guardar</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- Fin Modal 0KM-->
-
-            <!--Modal -->
-            <div class="modal fade" id="modal-clienteNuevo" tabindex="-1" role="dialog" aria-labelledby="modal-clienteNuevo"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">
-                                    <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;">×</font>
-                                    </font>
-                                </span></button>
-                            <h4 class="modal-title">
-
-                            </h4>
-                        </div>
-                        <div class="modal-body">
-
-                            <div class="row margenBoot-25">
-
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="form-group">
-                                        <label><strong>*DNI</strong></label>
-                                        <input type="number" class="form-control" id="dni" name="dni">
-                                    </div>
-                                    <div class="form-group">
-                                        <label><strong>*Nombres</strong></label>
-                                        <input type="text" class="form-control" id="nombre" name="nombre">
-                                    </div>
-                                    <div class="form-group">
-                                        <label><strong>*Apellidos</strong></label>
-                                        <input type="text" class="form-control" id="apellido" name="apellido">
-                                    </div>
-                                    <div class="form-group">
-                                        <label><strong>*Correo Electrónico</strong></label>
-                                        <input type="email" placeholder="email@gmail.com" class="form-control" id="email"
-                                            name="email">
-                                    </div>
-                                    <div class="form-group">
-                                        <label><strong>*Celular</strong></label>
-                                        <input type="text" class="form-control" id="cel_1" name="cel_1">
-                                    </div>
-                                    <hr>
-                                    <div class="form-group">
-                                        <label><strong>*Profesión</strong></label>
-                                        <input type="text" class="form-control" id="profesion" name="profesion">
-                                    </div>
-                                    <div class="form-group">
-                                        <label><strong>*Relación de dependencia</strong></label>
-                                        <br>
-                                        <input id="check_depen" onchange="validar_dependencia(this);" type="checkbox"
-                                            data-style="slow" data-toggle="toggle" data-size="" data-on="Si" data-off="No">
-                                        <input id="check_dependencia" name="check_dependencia" type="number" style="display:none;"
-                                            value="0">
-                                        <br>
-                                    </div>
-                                    <hr>
-                                    <div class="form-group">
-                                        <label><strong>*Ingresos Mensuales</strong></label>
-                                        <input type="text" class="form-control" id="ingresos" name="ingresos">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label><strong>*Nombre de Padre</strong></label>
-                                        <input type="text" class="form-control" id="nombre_padre" name="nombre_padre">
-                                    </div>
-                                    <div class="form-group">
-                                        <label><strong>*Nombre de Madre</strong></label>
-                                        <input type="text" class="form-control" id="nombre_madre" name="nombre_madre">
-                                    </div>
-
-                                </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <div class="form-group">
-                                        <label><strong>Otro (opcional)</strong></label>
-                                        <input type="text" class="form-control" id="cel_2" name="cel_2">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label><strong>*Fecha de Nacimiento</strong></label>
-                                        <input type="date" class="form-control" id="fecha_nac" name="fecha_nac">
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <label><strong>*Domicilio</strong></label>
-                                            <input type="text" class="form-control" id="domicilio" name="domicilio">
-                                        </div>
-                                        <div class="form-group">
-                                            <label><strong>*Estado Civil</strong></label>
-                                            <select id="estado_civil" name="estado_civil" class="form-control form-control-sm">
-                                                <option>Soltero</option>
-                                                <option>Convive</option>
-                                                <option>Casado</option>
-                                                <option>Divorciado</option>
-                                                <option>Viudo</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label><strong>*Actividad/Empresa</strong></label>
-                                        <input type="text" class="form-control" id="act_empresa" name="act_empresa">
-                                    </div>
-                                    <hr>
-                                    <div class="form-group">
-                                        <label><strong>Teléfono Laboral</strong>(tel. fijo o celular)</label>
-                                        <input type="text" class="form-control" id="telefono_empleo" name="telefono_empleo">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label><strong>*Domicilio de Empleo</strong></label>
-                                        <input type="text" placeholder="Calle - N° - Departamento" class="form-control"
-                                            id="domicilio_empleo" name="domicilio_empleo">
-                                    </div>
-                                    <hr>
-                                    <div class="form-group">
-                                        <label><strong>*Antiguedad</strong></label>
-                                        <input type="number" class="form-control" id="antiguedad" name="antiguedad">
-                                    </div>
-                                    <div class="input-group">
-                                        <label><strong>*Otros ingresos</strong></label>
-                                        <input type="number" class="form-control" id="otros_ingresos" name="otros_ingresos">
-                                    </div>
-
-                                </div>
-
-                                <div class="col-xs-12 col-lg-12">
-
-                                </div><!-- /.modal-content -->
-                            </div><!-- /.modal-dialog -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                <a href="#" onclick="update_modal_financ();" class="btn btn-primary">Guardar</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
     </form>
 
 </div>
 
-<script>
-    function verificar() {
-
-        if ($('#cant_cuotas').val().length != 0 && $('#monto').val().length != 0 &&
-            $('#resto_financ').val().length != 0) {
-            $('#modal-financiera').modal('hide');
-
-        }
-    }
-</script>
 @endsection
