@@ -901,15 +901,17 @@ function show_venta(valor) {
 function visible(valor_box,tipo_operacion){
   var cancer = document.getElementById("cancer").value;
   var estado_toggle = document.getElementById("estado_toggle").value;
-
-  if (cancer == "not_select") { 
+  console.log(cancer+" sdfsdfd "+valor_box);
+  if (cancer == "not_select" || cancer == null) { 
     alert("Debe seleccionar el cliente para continuar");
+    exit();
   }
   else{
   if (valor_box == 1 ) {
-  $("#box1").css("display", "none");
   $("#cargando").css("display", "none");
+  $("#box1").css("display", "none");
   next_register_cliente(tipo_operacion);
+  
   }
 }
 
@@ -917,9 +919,11 @@ if (estado_toggle == "null" && valor_box != 1 ) {
   alert("Debe seleccionar un vehículo para continuar");
 }
 else{
-  if (estado_toggle != "null") {
-  $("#box2").css("display", "none");
+  if (valor_box != 1) {
+    console.log("Entramos putis");
     $("#cargando").css("display", "none");
+    $("#box2").css("display", "none");
+    $("#box3").css("display", "block");
     next_register_auto(tipo_operacion);
   }
 }
@@ -1137,13 +1141,12 @@ function next_register_auto(tipo_operacion){
       check_select_usado:check_select_usado,
     },
     success: function (data) {
-      
-      $("#box3").css("display", "block");
       idusado = data[0];
       idauto0km =data[1];
-
+      console.log("estoy");
       $("#adq_circle").css("display", "none");
       $("#adq_circle_check").css("display", "block");
+      //$("#box3").css("display", "block");
 
     }
   });

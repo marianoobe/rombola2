@@ -9,9 +9,9 @@
 	<div id="algo" class="alert alert-success" role="alert">{{session('success')}}</div>
 </div>
 <script>
-	$("#algo").fadeTo(2000, 500).slideUp(500, function(){
-			$("#algo").slideUp(500);
-			 });
+	$("#algo").fadeTo(2000, 500).slideUp(500, function () {
+		$("#algo").slideUp(500);
+	});
 </script>
 @endif
 @if(session()->has('danger'))
@@ -29,12 +29,14 @@
 
 					<div class="row">
 						<div class="col-sm-4 pull-left">
-							<button type="button" class="btn btn-primary btn-block" id="btn-nuevaFicha" data-toggle="modal" data-target="#modal-clienteNuevo"
-							 style="margin-bottom:10%;">NUEVO CLIENTE</button>
+							<button type="button" class="btn btn-primary btn-block" id="btn-nuevaFicha"
+								data-toggle="modal" data-target="#modal-clienteNuevo" style="margin-bottom:10%;">NUEVO
+								CLIENTE</button>
 
 						</div>
 						<div class="col-sm-4 pull-right">
-							<form method="GET" action="{{ route('clientes.index') }}" class="navbar-form pull-right" role="search">
+							<form method="GET" action="{{ route('clientes.index') }}" class="navbar-form pull-right"
+								role="search">
 								<div class="input-group">
 									<input type="hidden" name="_token" value="{{csrf_token()}}">
 									<input type="text" class="form-control" name="name" placeholder="Busqueda">
@@ -49,6 +51,7 @@
 
 						</div>
 					</div>
+					<div class="table-responsive">
 					<table class="table table-striped">
 						<thead>
 							<tr>
@@ -74,7 +77,8 @@
 								else{$clase="label-danger";}
 								@endphp
 
-								<td> <span id="estado_ficha" class={{$clase}}><strong>{{$item->estado_ficha}}</strong></span></td>
+								<td> <span id="estado_ficha"
+										class={{$clase}}><strong>{{$item->estado_ficha}}</strong></span></td>
 								<td style="cursor: default;">
 									@can('vendedor')
 									<a href="{{ route('clientes.edit',$item->dni)}}" class="btn btn-primary btn-sm">
@@ -83,54 +87,60 @@
 									@can('admin')
 									<form id="myform" action="{{ route('clientes.destroy',$item->dni)}}" method="post">
 										<input name="_method" type="hidden" value="DELETE" style="display:none">
-										<input type="hidden" name="_token" value="{{csrf_token()}}" style="display:none">
+										<input type="hidden" name="_token" value="{{csrf_token()}}"
+											style="display:none">
 										<a href="{{ route('clientes.edit',$item->dni)}}" class="btn btn-primary btn-sm">
 											<span class="glyphicon glyphicon-search"></span></a>
-										<a data-toggle="modal" data-target="#modal-confirm" class="btn btn-danger btn-sm">
+										<a data-toggle="modal" data-target="#modal-confirm"
+											class="btn btn-danger btn-sm">
 											<span class="glyphicon glyphicon-trash"></span></a>
 
 									</form>
 									@endcan
 								</td>
 							</tr>
-							
-					<!-- Modal Confirmacion -->
-					<div id="modal-confirm" class="modal fade bs-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="modal-confirm"
-					 style="display: none;">
-						<div class="modal-dialog modal-md">
-							<div class="modal-content">
-								<div class="modal-body">
-									<img id="cargando" style="display:none;" src="/img/cargando.gif"></img>
-									<h4>¿Está seguro de eliminar este cliente?</h4>
 
-								</div>
-								<div class="modal-footer">
-									<input name="_method" type="hidden" value="DELETE" style="display:none">
-									<input type="hidden" name="_token" value="{{csrf_token()}}" style="display:none">
+							<!-- Modal Confirmacion -->
+							<div id="modal-confirm" class="modal fade bs-example-modal-md" tabindex="-1" role="dialog"
+								aria-labelledby="modal-confirm" style="display: none;">
+								<div class="modal-dialog modal-md">
+									<div class="modal-content">
+										<div class="modal-body">
+											<img id="cargando" style="display:none;" src="/img/cargando.gif"></img>
+											<h4>¿Está seguro de eliminar este cliente?</h4>
 
-									<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-									<button type="button" onclick="delete_client( {{$item->idcliente}} );" class="btn btn-default">Aceptar</button>
+										</div>
+										<div class="modal-footer">
+											<input name="_method" type="hidden" value="DELETE" style="display:none">
+											<input type="hidden" name="_token" value="{{csrf_token()}}"
+												style="display:none">
+
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">Cancelar</button>
+											<button type="button" onclick="delete_client( {{$item->idcliente}} );"
+												class="btn btn-default">Aceptar</button>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-					<!-- Fin Modal Confirmacion -->
+							<!-- Fin Modal Confirmacion -->
 							@endforeach()
 						</tbody>
 					</table>
-
+				    </div>
 
 
 					{{$client_pers->render()}}
 
 
 					<!--Modal -->
-					<div class="modal fade" id="modal-clienteNuevo" tabindex="-1" role="dialog" aria-labelledby="modal-clienteNuevo"
-					 aria-hidden="true">
+					<div class="modal fade" id="modal-clienteNuevo" tabindex="-1" role="dialog"
+						aria-labelledby="modal-clienteNuevo" aria-hidden="true">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+											aria-hidden="true">
 											<font style="vertical-align: inherit;">
 												<font style="vertical-align: inherit;">×</font>
 											</font>
@@ -143,30 +153,37 @@
 									</h4>
 								</div>
 								<div class="modal-body">
-									<form method="POST" action="{{ route('clientes.store') }}" enctype="multipart/form-data">
+									<form method="POST" action="{{ route('clientes.store') }}"
+										enctype="multipart/form-data">
 										<input type="hidden" name="_token" value="{{csrf_token()}}">
-										<input type="number" id="id_user" name="id_user" style="display:none" value="{{ Auth::user()->id }}">
+										<input type="number" id="id_user" name="id_user" style="display:none"
+											value="{{ Auth::user()->id }}">
 										<div class="row margenBoot-25">
 											<div class="col-xs-12 col-lg-6">
 												<div class="form-group">
 													<label><strong>*DNI</strong></label>
-													<input type="text" class="form-control" id="dni" name="dni" required>
+													<input type="text" class="form-control" id="dni" name="dni"
+														required>
 												</div>
 												<div class="form-group">
 													<label><strong>*Nombres</strong></label>
-													<input type="text" class="form-control" id="nombre" name="nombre" required>
+													<input type="text" class="form-control" id="nombre" name="nombre"
+														required>
 												</div>
 												<div class="form-group">
 													<label><strong>*Apellidos</strong></label>
-													<input type="text" class="form-control" id="apellido" name="apellido" required>
+													<input type="text" class="form-control" id="apellido"
+														name="apellido" required>
 												</div>
 												<div class="form-group">
 													<label><strong>*Correo Electrónico</strong></label>
-													<input type="email" placeholder="email@gmail.com" class="form-control" id="email" name="email" required>
+													<input type="email" placeholder="email@gmail.com"
+														class="form-control" id="email" name="email" required>
 												</div>
 												<div class="form-group">
 													<label><strong>*Celular</strong></label>
-													<input type="text" class="form-control" id="cel_1" name="cel_1" required>
+													<input type="text" class="form-control" id="cel_1" name="cel_1"
+														required>
 												</div>
 
 												<div class="form-group">
@@ -177,21 +194,25 @@
 											<div class="col-xs-12 col-lg-6">
 												<div class="form-group">
 													<label><strong>*Actividad/Empresa</strong></label>
-													<input type="text" class="form-control" id="act_empresa" name="act_empresa" required>
+													<input type="text" class="form-control" id="act_empresa"
+														name="act_empresa" required>
 												</div>
 
 												<div class="form-group">
 													<label><strong>*Fecha de Nacimiento</strong></label>
-													<input type="date" class="form-control" id="fecha_nac" name="fecha_nac" required>
+													<input type="date" class="form-control" id="fecha_nac"
+														name="fecha_nac" required>
 												</div>
 												<div class="form-group">
 													<div class="form-group">
 														<label><strong>*Domicilio</strong></label>
-														<input type="text" class="form-control" id="domicilio" name="domicilio" required>
+														<input type="text" class="form-control" id="domicilio"
+															name="domicilio" required>
 													</div>
 													<div class="form-group">
 														<label><strong>*Estado Civil</strong></label>
-														<select id="estado_civil" name="estado_civil" class="form-control form-control-sm">
+														<select id="estado_civil" name="estado_civil"
+															class="form-control form-control-sm">
 															<option>Soltero</option>
 															<option>Convive</option>
 															<option>Casado</option>
@@ -204,8 +225,10 @@
 											</div><!-- /.modal-content -->
 										</div><!-- /.modal-dialog -->
 										<div class="modal-footer">
-											<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-											<button type="submit" onclick="realizaProceso($('#estado_civil').val())" class="btn btn-primary">Guardar</button>
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">Cerrar</button>
+											<button type="submit" onclick="realizaProceso($('#estado_civil').val())"
+												class="btn btn-primary">Guardar</button>
 										</div>
 								</div>
 

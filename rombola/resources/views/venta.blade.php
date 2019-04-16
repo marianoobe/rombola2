@@ -33,7 +33,7 @@
 						</form>
 
 					</div>
-					<div id="tabla_act" name="tabla_act">
+					<div id="tabla_act" name="tabla_act" class="table-responsive">
 						<table class="table table-striped">
 							<thead>
 								<tr>
