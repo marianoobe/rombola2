@@ -18,6 +18,7 @@ $estado=Estado::All();
 <br>
 {!! Html::script('js/venta.js') !!}
  
+<div class="table-responsive">
 <div class="col-sm-4 pull-right">
     <form method="GET" action="{{ route('venta.index') }}" class="navbar-form pull-right" role="search">
         <!--<div class="input-group">
@@ -91,6 +92,7 @@ $estado=Estado::All();
     </tbody>
 
 </table>
+</div>
 {{$venta_operac->render()}}
 
 

@@ -63,6 +63,8 @@
 						</div>
 					</div>
 
+				
+
 				</div>
 				<!-- /.box-body -->
 			</div>
@@ -134,8 +136,6 @@
 										</div>
 										<!-- /.box-body -->
 									</div>
-	
-	
 	
 								</div>
 							<div class="col-md-4">
