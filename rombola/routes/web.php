@@ -54,8 +54,10 @@ Route::resource('cero', 'AutoceroController');
 
 Route::get('autos/{auto}/updateusado','AutomovileController@updateusado')->name('updateusado');
 Route::get('autos/{auto}/editusado','AutomovileController@editusado')->name('editusado');
+
 Route::get('autos/usados','AutomovileController@usados')->name('usados');
 Route::get('autos/createusados','AutomovileController@createusados')->name('agregarusado');
+Route::get('autos/{auto}/galeria','AutomovileController@galeria')->name('galeria');
 
 Route::get('/file','FileController@index')->name('viewfile');
 Route::get('/file/upload/{id}','FileController@create')->name('formfile');

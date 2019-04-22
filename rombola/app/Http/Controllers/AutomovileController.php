@@ -204,7 +204,34 @@ use App\File;
       return view('autos/editusado', compact('autos'));
         
     }
+    public function galeria($id)
+    {
+      
+      $auto = Automovile::where("id_auto","=",$id)->select("id_auto")->get();
 
+      foreach ($auto as $item) {}
+   
+    $idcar=$item->id_auto;
+
+     $files = DB::table('files')
+                 
+     ->where('files.id_auto','=', $idcar)
+      ->get();
+          
+        
+       //$marcas=Marca::All();
+    
+      // dd($files);
+        
+       //$files = File::orderBy('created_at','DESC')->paginate(6); 
+      
+        return view('autos/galeria')->with('files',$files)
+                                    ->with('auto',$auto);                                     
+                                  
+                                                                    
+        
+      
+    }
         
   
 }

@@ -87,14 +87,14 @@
 											<a href="{{ route('editusado',$item->id_auto)}}" class="edit-modal btn btn-info btn-sm">
 												<span class="glyphicon glyphicon-edit" data-original-title="Editar auto" tooltip-glyph="glyph-tooltip-demo"></span></a>
 
-											<a data-toggle="modal" data-target="#modal-listaNuevo" class="btn btn-danger btn-sm">
-											 <span class="glyphicon glyphicon-picture" data-original-title="ver fotos del auto" tooltip-glyph="glyph-tooltip-demo"></span></a>
+											<a href="{{ route('galeria',$item->id_auto)}}" class="btn btn-danger btn-sm">
+											 <span class="glyphicon glyphicon-picture" data-original-title="Galeria de imagenes" tooltip-glyph="glyph-tooltip-demo"></span></a>
 											
 											
 									
-											<a href="{{ route('formfile',$item->id_auto)}}" class="btn btn-info btn-sm">
+										<!--	<a href="{{ route('formfile',$item->id_auto)}}" class="btn btn-info btn-sm">
 												<span class="glyphicon glyphicon-camera"></span> Camera
-											</a>
+											</a> !-->
 										</td>
 
 										</td>
@@ -105,7 +105,7 @@
 
 							<!-- Modal form to show a post -->
 
-							<!--Modal -->
+							<!--Modal 
 							<div class="modal fade" id="modal-listaNuevo" tabindex="-1" role="dialog" aria-labelledby="modal-listaNuevo"
 							 aria-hidden="true">
 								<div class="modal-dialog">
@@ -156,7 +156,7 @@
 
 										</div>
 										</form>
-									</div>
+									</div>-->
 								</div>
 							</div>
 
