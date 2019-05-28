@@ -8,7 +8,6 @@
 
     {!! Html::script('js/venta.js') !!}
     
-
     <div class="container-fluid spark-screen">
 
         <div class="row">

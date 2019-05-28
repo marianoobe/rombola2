@@ -2,6 +2,9 @@
 
 
 @section('seccion')
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
 <div class="container-fluid spark-screen">
 	<div class="row">
 		<div class="col-md-14 col-md-offset-0">
@@ -118,7 +121,7 @@
 										</div>
 										<div class="form-group">
 											<label for="inp-montoCuota"><strong>Valor del vehiculo</strong></label>
-											<input type="number" maxlength="65" class="form-control" onblur="darFormato(this);" name="precio" id="precio"
+											<input type="text" maxlength="65" class="form-control" name="precio" id="precio"
 											 placeholder="">
 										</div>
 
@@ -157,6 +160,12 @@
 						}
 					});
 				}
+
+				$(document).ready(function($){
+
+					$('#precio').mask("$"+"000.000.000.000.000");			  
+				  
+				  });
 			</script>
 
 
