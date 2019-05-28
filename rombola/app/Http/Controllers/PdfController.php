@@ -484,9 +484,12 @@ function convert_html_venta($idventa,$idcliente)
            }*/
     $output .= '
     <div align="right" id="cabecera">
-    <img src="C:\xampp\htdocs\rombolaagencia\rombola\public\img\logogrande.png" width="160" height="50" />
-    <div id="pepe"><p style="font-size:8px;">Dirección: Av. Rioja y B. De OHiggins Teléfono: 4220892</p>
-    <p style="font-size:8px;">info@ragroup.com.ar</p></div>
+    <img src="https://egresadosindustrial.org/wp-content/uploads/2019/04/logogrande.png" width="160" height="50" />
+    
+    <div id="pepe">
+    <p style="font-size:8px;">Dirección: Av. Rioja y B. De OHiggins Teléfono: 4220892</p>
+    <p style="font-size:8px;">info@ragroup.com.ar</p>
+    </div>
     <hr>
         <p ALIGN="center" style="font-size:10px;"><strong>SOLICITUD DE VENTA</strong></p>
     <p align="left" style="font-size:8px;">De mi consideración</p>

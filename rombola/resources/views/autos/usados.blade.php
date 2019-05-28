@@ -45,7 +45,7 @@
 							</form>
 						</div>
 
-						<div>
+						    <div class="table-responsive">
 
 							<table class="table table-striped">
 
@@ -102,7 +102,7 @@
 									@endforeach()
 								</tbody>
 							</table>
-
+						    </div>
 							<!-- Modal form to show a post -->
 
 							<!--Modal 

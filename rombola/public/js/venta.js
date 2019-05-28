@@ -554,6 +554,20 @@ function update_modal_financ() {
 
 }
 
+$(document).ready(function($){
+
+  $('#inpefectivo').mask("$"+"000.000.000.000.000");
+  $('#saldo_neto').mask("$"+"000.000.000.000.000");
+  $('#valor_auto_entregado').mask("$"+"000.000.000.000.000");
+
+  $('#precio').mask("$"+"000.000.000.000.000");
+  $('#valor_auto_vendido').mask("$"+"000.000.000.000.000");
+  $('#inpcheques').mask("$"+"000.000.000.000.000");
+  $('#inp-total').mask("$"+"000.000.000.000.000");
+
+
+});
+
 
 function realizaProceso(valorCaja1) {
   var parametros = {
@@ -660,6 +674,8 @@ function obtener_marca_buscada() {
 }
 
 var state=0;
+var estado_toggle = null;
+
 function viñeta_0km() {
   var marca = document.getElementById("marca").value;
   var modelo = document.getElementById("modelo").value;
@@ -676,9 +692,9 @@ function viñeta_0km() {
     document.getElementById("auto_cargado").style.display = "block";
     document.getElementById("valor_auto_vendido").value = precio;
     document.getElementById("estado_toggle").value = "lista";
+    estado_toggle = "lista";
     console.log(document.getElementById("estado_toggle").value);
     state=1;
-
   }
   else{
     document.getElementById("alert").style.display = "block";
@@ -697,6 +713,7 @@ function viñeta_0km() {
     $('#version').val('');
     $('#precio').val('');
     document.getElementById("estado_toggle").value = "stock";
+    estado_toggle = "lista";
     $('#modal-0km').modal('hide');
 
   }
@@ -900,7 +917,7 @@ function show_venta(valor) {
 
 function visible(valor_box,tipo_operacion){
   var cancer = document.getElementById("cancer").value;
-  var estado_toggle = document.getElementById("estado_toggle").value;
+  //var estado_toggle = document.getElementById("estado_toggle").value;
   console.log(cancer+" sdfsdfd "+valor_box);
   if (cancer == "not_select" || cancer == null) { 
     alert("Debe seleccionar el cliente para continuar");
@@ -915,12 +932,36 @@ function visible(valor_box,tipo_operacion){
   }
 }
 
-if (estado_toggle == "null" && valor_box != 1 ) {
-  alert("Debe seleccionar un vehículo para continuar");
+var check_usado = document.getElementById("check_usado").value;
+console.log("valor box: "+valor_box);
+console.log("check_usado: "+check_usado);
+console.log("estado_toggle: "+estado_toggle);
+
+
+
+if (estado_toggle == null && valor_box == 2 ) {
+
+  if(check_usado == "no" && valor_box == 2){
+    alert("Debe seleccionar un vehículo para continuar");
+  }else{
+    if(check_usado == "si"){
+      if (valor_box !=1 ) {
+        console.log(estado_toggle);
+        $("#cargando").css("display", "none");
+        $("#box2").css("display", "none");
+        $("#box3").css("display", "block");
+        next_register_auto(tipo_operacion);
+      }
+    }else{
+      alert("Debe seleccionar un vehículo para continuar");
+    }
+    
+  }
+  
 }
 else{
-  if (valor_box != 1) {
-    console.log("Entramos putis");
+  if (valor_box !=1 ) {
+    console.log(estado_toggle);
     $("#cargando").css("display", "none");
     $("#box2").css("display", "none");
     $("#box3").css("display", "block");
@@ -1188,7 +1229,7 @@ function next_register_pago(tipo_operacion){
   var saldo_neto = document.getElementById("saldo_neto").value;
 
   var id_user = document.getElementById("id_user").value;
-
+  console.log("usuario: "+id_user);
   var valor_cheque = document.getElementById("valor_cheque").value;
   
   if (valor_cheque == "si") {
@@ -1240,7 +1281,7 @@ function next_register_pago(tipo_operacion){
   }
   else{
     $url = '/store_forma_pago_contado';
-  }
+  } 
   
 
   $.ajaxSetup({
@@ -1325,3 +1366,5 @@ function sumar() {
   document.getElementById("inpcheques").value = total;
 
 }
+
+

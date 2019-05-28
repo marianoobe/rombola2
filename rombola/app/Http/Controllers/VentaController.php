@@ -305,6 +305,10 @@ class VentaController extends Controller{
 		*/
 		/*insert Auto Entregado -------*/
 
+		
+        $idusado = $request->get('idusado');
+		$idauto0km = $request->get('idauto0km');
+		
 		if (is_int($request->get('dni_nya'))) {
 			$dni = $request->get('dni_nya');
 		} else {

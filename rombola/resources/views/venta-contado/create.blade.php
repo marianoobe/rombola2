@@ -4,9 +4,11 @@
 <meta name="csrf-token" content="<?= csrf_token() ?>">
 </meta>
 
-    {!! Html::script('js/venta.js') !!}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 
-    <input type="number" id="id_user" name="id_user" style="display:none" value="{{ Auth::user()->name }}">
+    {!! Html::script('js/venta.js') !!}
+    
+
     <div class="container-fluid spark-screen">
 
         <div class="row">
@@ -493,14 +495,14 @@
                                     <div class="col-xs-12 col-lg-10">
                                         <div class="form-group">
                                             <label><strong>Valor de Auto Vendido</strong></label>
-                                            <input type="number" id="valor_auto_vendido" name="valor_auto_vendido"
+                                            <input type="text" id="valor_auto_vendido" name="valor_auto_vendido"
                                                 maxlength="30" required value="0">
                                         </div>
                                         <br>
                                         <div class="form-group">
                                             <label><strong>Valor de Auto Entregado</strong></label>
-                                            <input type="number" id="valor_auto_entregado" name="valor_auto_entregado"
-                                                maxlength="30" required value='0'>
+                                            <input type="text" id="valor_auto_entregado" name="valor_auto_entregado"
+                                                maxlength="30" required >
                                         </div>
                                     </div>
                                 </div>
@@ -509,14 +511,14 @@
                                     <div class="col-xs-12 col-lg-10">
                                         <div class="form-group">
                                             <label><strong>Contado/Efectivo</strong></label>
-                                            <input type="number" maxlength="30" id="inpefectivo" name="inpefectivo"
-                                                required value='0'>
+                                            <input type="text" id="inpefectivo" name="inpefectivo"
+                                                required >
                                         </div>
                                         <br>
                                         <div class="form-group">
                                             <label><strong>Saldo Neto</strong></label>
-                                            <input type="number" maxlength="30" id="saldo_neto" name="saldo_neto"
-                                                required value='0'>
+                                            <input type="text" id="saldo_neto" name="saldo_neto"
+                                                required >
                                         </div>
                                     </div>
                                 </div>
@@ -530,7 +532,7 @@
                                                 data-on="Si" data-off="No" value="0">
                                             <input id="valor_cheque" name="valor_cheque" type="text" style="display:none;">
                                             <br>
-                                            <input type="number" style="display:none;" id="inpcheques" name="inpcheques"
+                                            <input type="text" style="display:none;" id="inpcheques" name="inpcheques"
                                                 value="0">
                                         </div>
                                     </div>
@@ -584,7 +586,7 @@
                                                         <div class="form-group">
                                                             <label><strong>Nombre de Titular</strong></label>
                                                             <input type="text" class="form-control" id="nomb_titular_entregado"
-                                                                name="nomb_titular_entregado" value="0">
+                                                                name="nomb_titular_entregado">
                                                         </div>
                                                     </div>
 
@@ -598,7 +600,7 @@
                                                         <div class="form-group">
                                                             <label><strong>Dominio</strong></label>
                                                             <input type="text" style="text-transform: uppercase;"
-                                                                maxlength="10" class="form-control" id="dominio_entregado" value="0"
+                                                                maxlength="10" class="form-control" id="dominio_entregado"
                                                                 name="dominio_entregado" placeholder="">
                                                         </div>
                                                     </div>
@@ -625,21 +627,21 @@
                                                         <div class="form-group">
                                                             <label><strong>Modelo</strong></label>
                                                             <input type="text" maxlength="150" class="form-control" id="modelo_entregado"
-                                                                name="modelo_entregado" value="0">
+                                                                name="modelo_entregado">
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-12 col-lg-3">
                                                         <div class="form-group">
                                                             <label><strong>Versión</strong></label>
                                                             <input type="text" maxlength="150" class="form-control" id="version_entregado"
-                                                                name="version_entregado" value="0">
+                                                                name="version_entregado">
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-12 col-lg-2">
                                                         <div class="form-group">
                                                             <label><strong>Año</strong></label>
                                                             <input type="text" maxlength="65" class="form-control" id="anio_entregado"
-                                                                name="anio_entregado" value="0">
+                                                                name="anio_entregado">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -649,21 +651,21 @@
                                                         <div class="form-group">
                                                             <label><strong>Color</strong></label>
                                                             <input type="text" maxlength="65" class="form-control" id="color_entregado"
-                                                                name="color_entregado" value="0">
+                                                                name="color_entregado">
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-12 col-lg-5">
                                                         <div class="form-group">
                                                             <label><strong>N° Motor</strong></label>
                                                             <input type="text" maxlength="255" class="form-control" id="motor_num_entregado"
-                                                                name="motor_num_entregado" value="0">
+                                                                name="motor_num_entregado">
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-12 col-lg-4">
                                                         <div class="form-group">
                                                             <label><strong>N° Chasis</strong></label>
                                                             <input type="text" maxlength="255" class="form-control" id="chasis_num_entregado"
-                                                                name="chasis_num_entregado" value="0">
+                                                                name="chasis_num_entregado" >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1124,7 +1126,6 @@
                     <div id="home" class="tab-pane fade in active">
                         <br>
 
-
                         <div class="box-body">
 
                             <form method="GET" action="{{ route('autos.index') }}" class="navbar-form pull-right" role="search">
@@ -1217,7 +1218,7 @@
                                     </div>
                                     <div id="alert" class="form-group text-danger" style="display:none">
                                             <label><strong>*campos incompletos</strong></label>
-                                        </div>
+                                    </div>
                                 </section>
                                
                                 <section id="auto_cargado" style="display:none">

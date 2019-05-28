@@ -81,8 +81,8 @@ $estado=Estado::All();
                 <a onclick="valor_idventa({{$item->idventa}});" data-toggle="modal" data-target="#modal-estado" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Cambiar Estado">
                     <span class="glyphicon glyphicon-retweet"></span></a>
 
-                <a href="{{ route('venta.destroy',"")}}" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Eliminar venta">
-                    <span class="glyphicon glyphicon-trash"></span></a>
+					<!--<a href="{{ route('venta.destroy',"")}}" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Eliminar venta">
+                    <span class="glyphicon glyphicon-trash"></span></a>-->
                 @endcan
             </td>
         </tr>

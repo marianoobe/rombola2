@@ -297,11 +297,7 @@
 							});
 						});
 
-						$(function ($) {
-							$("#inp-dominio").mask("99/99/9999");
-							$("#cel_1").mask("(999) 999-9999");
-							$("#ff_elem1178").mask("999-99-9999");
-						});
+						
 					</script>
 
 					@endsection

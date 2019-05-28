@@ -257,7 +257,7 @@ class VentaContadoController extends Controller
         else {
             $idusado = null;
         }
-
+        
         $arreglo = array();
         array_push($arreglo, $idusado);
         array_push($arreglo, $idauto0km);
@@ -276,6 +276,8 @@ class VentaContadoController extends Controller
         $arreglo[3] importe_cheque
         */
         /*insert Auto Entregado -------*/
+        $idusado = $request->get('idusado');
+        $idauto0km = $request->get('idauto0km');
 
         if (is_int($request->get('dni_nya'))) {
             $dni = $request->get('dni_nya');

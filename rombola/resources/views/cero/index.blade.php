@@ -47,8 +47,7 @@
 							</form>
 						</div>
 
-						<div>
-
+						<div class="table-responsive">
 							<table class="table table-striped">
 
 								<thead>
@@ -90,7 +89,7 @@
 									@endforeach()
 								</tbody>
 							</table>
-
+						</div>
 
 
 							@endsection

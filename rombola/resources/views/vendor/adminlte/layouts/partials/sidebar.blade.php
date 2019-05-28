@@ -54,7 +54,7 @@ id="empresa-logo" src="/img/logo.png" class="img-circle" width="50" height="50">
                     <li><a href="{{url('autos/usados')}}">{{ trans('adminlte_lang::message.used') }}</a></li>
                    <!-- <li><a href="{{url('autos/createusados')}}">{{ trans('adminlte_lang::message.agregate used') }}</a></li>!-->
                     <!--<li><a href="{{url('cero/create')}}">{{ trans('adminlte_lang::message.new-car') }}</a></li>!-->
-                    <li><a href="{{url('cero')}}">{{ trans('adminlte_lang::message.0km') }}</a></li>
+                    <li><a href="{{url('cero')}}">0 KM</a></li>
                     <!-- <li><a href="{{url('autos/create')}}">{{ trans('adminlte_lang::message.new-car') }}</a></li> !-->
 
 

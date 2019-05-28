@@ -233,9 +233,9 @@ function Search() {
 
 }
 
-$(document).ready(function () {
-  $(":input").inputmask();
-});
+//$(document).ready(function () {
+  //$(":input").inputmask();
+//});
 
 $(document).ready(function () {
 

@@ -12,14 +12,18 @@
 					<h3 class="box-title">Ventas</h3>
 				</div>
 				<div class="box-body">
+						<div class="table-responsive">
 					<div class="col-sm-4 pull-left">
 						<!--<a role="button" href="{{ route('venta.create') }}" class="btn btn-xl btn-success">NUEVA VENTA</a>
 						-->
-						<a role="button" onclick="$('#modal-menu').modal('show');" class="btn btn-xl btn-success">NUEVA VENTA</a>
+						<a role="button" onclick="$('#modal-menu').modal('show');" class="btn btn-xl btn-success">NUEVA
+							VENTA</a>
 
 					</div>
+					
 					<div class="col-sm-4 pull-right">
-						<form method="GET" action="{{ route('venta.index') }}" class="navbar-form pull-right" role="search">
+						<form method="GET" action="{{ route('venta.index') }}" class="navbar-form pull-right"
+							role="search">
 							<div class="input-group">
 								<input type="hidden" name="_token" value="{{csrf_token()}}">
 								<input type="text" class="form-control" name="name" placeholder="Busqueda">
@@ -33,7 +37,8 @@
 						</form>
 
 					</div>
-					<div id="tabla_act" name="tabla_act" class="table-responsive">
+					<div id="tabla_act" name="tabla_act">
+
 						<table class="table table-striped">
 							<thead>
 								<tr>
@@ -51,8 +56,8 @@
 							<tbody id="myTable">
 								@foreach($venta_operac as $item)
 
-								@php	
-												
+								@php
+
 								if($item->nomb_estado == "Administración"){$clase="label-success"; }
 								if($item->nomb_estado == "Crédito"){$clase="label-info";}
 								if($item->nomb_estado == "Gestoría"){$clase="label-secondary";}
@@ -68,25 +73,30 @@
 									<td>{{$item->tipo}}</td>
 									<td>{{$item->nombre}}</td>
 									<td>{{$item->modelo}}</td>
-                        							
-									<td><span id="estado_label" name="estado_label" class={{$clase}}>{{$item->nomb_estado}}</span></td>
+
+									<td><span id="estado_label" name="estado_label"
+											class={{$clase}}>{{$item->nomb_estado}}</span></td>
 
 									<td style="cursor: default;">
 										@can('vendedor')
-										<a onclick="show_venta({{$item->idventa}});" data-toggle="modal" data-target="#modal-showventa" class="btn btn-primary btn-xs">
+										<a onclick="show_venta({{$item->idventa}});" data-toggle="modal"
+											data-target="#modal-showventa" class="btn btn-primary btn-xs">
 											<span class="glyphicon glyphicon-search"></span></a>
 										@endcan
 										@can('admin')
-										<a onclick="show_venta({{$item->idventa}});" data-toggle="modal" data-target="#modal-showventa" class="btn btn-primary btn-xs">
+										<a onclick="show_venta({{$item->idventa}});" data-toggle="modal"
+											data-target="#modal-showventa" class="btn btn-primary btn-xs">
 											<span class="glyphicon glyphicon-search"></span></a>
 
-										<a href="{{ route('print_venta', ['id1' => $item->idventa,'id2' => $item->idcliente])}}" target="_blank" class="btn btn-primary btn-xs">
+										<a href="{{ route('print_venta', ['id1' => $item->idventa,'id2' => $item->idcliente])}}"
+											target="_blank" class="btn btn-primary btn-xs">
 											<span class="glyphicon glyphicon-print"></span></a>
 
-										<a onclick="valor_idventa({{$item->idventa}});" data-toggle="modal" data-target="#modal-estado" class="btn btn-warning btn-xs">
+										<a onclick="valor_idventa({{$item->idventa}});" data-toggle="modal"
+											data-target="#modal-estado" class="btn btn-warning btn-xs">
 											<span class="glyphicon glyphicon-refresh"></span></a>
-										<a href="{{ route('venta.destroy',"")}}" class="btn btn-danger btn-xs">
-											<span class="glyphicon glyphicon-trash"></span></a>
+										<!--<a href="{{ route('venta.destroy',"")}}" class="btn btn-danger btn-xs">
+											<span class="glyphicon glyphicon-trash"></span></a> -->
 										@endcan
 									</td>
 
@@ -96,7 +106,9 @@
 							</tbody>
 
 						</table>
+
 					</div>
+				</div>
 				</div>
 			</div>
 		</div>
@@ -104,21 +116,22 @@
 </div>
 
 <!-- Modal Cambio de estado -->
-<div id="modal-estado" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
- style="display: none;">
+<div id="modal-estado" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+	aria-labelledby="mySmallModalLabel" style="display: none;">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+						aria-hidden="true">×</span></button>
 				<h4 class="modal-title">Cambio de Estado</h4>
 			</div>
 			<div class="modal-body">
 				<label>Estado de la Negociación:</label>
 				<select id="select_estado" class="form-control" id="sel-estadonegociacion">
-						@foreach ($estado as $item){
-							<option value="{{ $item->id_estado }}">{{$item->nomb_estado}}</option>
-							}
-							@endforeach
+					@foreach ($estado as $item){
+					<option value="{{ $item->id_estado }}">{{$item->nomb_estado}}</option>
+					}
+					@endforeach
 				</select>
 			</div>
 			<div class="modal-footer">
@@ -132,7 +145,8 @@
 
 <!-- Modal Acceso de estado -->
 <!--Modal -->
-<div class="modal fade" id="modal-menu" tabindex="-1" role="dialog" aria-labelledby="modal-clienteNuevo" aria-hidden="true">
+<div class="modal fade" id="modal-menu" tabindex="-1" role="dialog" aria-labelledby="modal-clienteNuevo"
+	aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -150,7 +164,8 @@
 					</div>
 					<div class="col-xs-12 col-lg-6">
 						<div class="col-6">
-							<a id="boton" href="{{ route('venta.create') }}" class="btn btn-success btn-block" disable="disable">
+							<a id="boton" href="{{ route('venta.create') }}" class="btn btn-success btn-block"
+								disable="disable">
 								<span class="fa fa-university"> FINANCIACION</span></a>
 						</div>
 					</div><!-- /.modal-content -->
@@ -166,7 +181,8 @@
 <!-- Fin Modal Acceso de estado -->
 
 <!-- Modal Ver Venta-->
-<div class="modal" id="modal-showventa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="modal-showventa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -175,7 +191,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-					
+
 				<div class="panel panel-default">
 					<div class="panel-heading">Cliente</div>
 					<div class="panel-body">
@@ -256,11 +272,11 @@
 							<label id="show_efectivo"></label>
 						</div>
 						<div id="section_usado_entregado" class="panel-body" style="display:none">
-						<div class="form-group">
-							<label><strong>Valor Auto Entregado: $</strong></label>
-							<label id="show_valor_entregado"></label>
-						</div>
-						<ul>
+							<div class="form-group">
+								<label><strong>Valor Auto Entregado: $</strong></label>
+								<label id="show_valor_entregado"></label>
+							</div>
+							<ul>
 								<li>
 									<div class="form-group">
 										<label><strong>Nombre de titular: </strong></label>
@@ -309,40 +325,40 @@
 										<label id="show_color_entregado"></label>
 									</div>
 								</li>
-							</div>
+						</div>
 						</ul>
 						<div id="section_cheque" class="panel-body" style="display:none">
-						<div class="form-group">
-							<label><strong>Total en cheques: $</strong></label>
-							<label id="show_total_cheque"></label>
-						</div>
-						<ul>
-							<li>
-								<div class="form-group">
-									<label><strong>Banco: </strong></label>
-									<label id="show_banco"></label>
-								</div>
-							</li>
-							<li>
-								<div class="form-group">
-									<label><strong>Número: </strong></label>
-									<label id="show_numero"></label>
-								</div>
-							</li>
-							<li>
-								<div class="form-group">
-									<label><strong>Fecha: </strong></label>
-									<label id="show_fecha"></label>
-								</div>
-							</li>
-							<li>
 							<div class="form-group">
-								<label><strong>Importe: </strong></label>
-								<label id="show_importe"></label>
+								<label><strong>Total en cheques: $</strong></label>
+								<label id="show_total_cheque"></label>
 							</div>
-							</li>
+							<ul>
+								<li>
+									<div class="form-group">
+										<label><strong>Banco: </strong></label>
+										<label id="show_banco"></label>
+									</div>
+								</li>
+								<li>
+									<div class="form-group">
+										<label><strong>Número: </strong></label>
+										<label id="show_numero"></label>
+									</div>
+								</li>
+								<li>
+									<div class="form-group">
+										<label><strong>Fecha: </strong></label>
+										<label id="show_fecha"></label>
+									</div>
+								</li>
+								<li>
+									<div class="form-group">
+										<label><strong>Importe: </strong></label>
+										<label id="show_importe"></label>
+									</div>
+								</li>
 						</div>
-					</ul>
+						</ul>
 						<div class="form-group">
 							<label><strong>Total : $</strong></label>
 							<label id="show_total"></label>
