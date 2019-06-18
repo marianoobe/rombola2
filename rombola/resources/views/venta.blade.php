@@ -95,9 +95,11 @@
 										<a onclick="valor_idventa({{$item->idventa}});" data-toggle="modal"
 											data-target="#modal-estado" class="btn btn-warning btn-xs">
 											<span class="glyphicon glyphicon-refresh"></span></a>
-										<!--<a href="{{ route('venta.destroy',"")}}" class="btn btn-danger btn-xs">
-											<span class="glyphicon glyphicon-trash"></span></a> -->
-										@endcan
+										
+											<a href="{{ route('venta.edit',$item->idventa)}}" class="btn btn-primary btn-sm">
+												<span class="glyphicon glyphicon-search"></span></a>
+							
+											@endcan
 									</td>
 
 								</tr>

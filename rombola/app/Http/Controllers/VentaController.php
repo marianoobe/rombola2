@@ -471,7 +471,7 @@ class VentaController extends Controller{
 		array_push($arreglo, $resultado_autousado);
 		array_push($arreglo, $resultado_entregado);
 		return response()->json($arreglo);
-	}
+	} 
 	/**
 	 * Show the form for editing the specified resource.
 	 *
@@ -479,9 +479,9 @@ class VentaController extends Controller{
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit($id)
-
 	{
-		//
+		return view('venta.edit');
+
 	}
 	/**
 	 * Update the specified resource in storage.
@@ -505,5 +505,14 @@ class VentaController extends Controller{
 
 	{
 		//
+	}
+
+	public function createbeta(){
+		$tipo_finan = TipoFinanciera::pluck('nombretipo');
+		$nombapell = Persona::pluck('nombre_apellido');
+		$autos = Automovile::select("*")->join('marcas', 'marcas.id_marca', 'automoviles.marca_id')->join('autoceros', 'autoceros.auto_id', 'automoviles.id_auto')->paginate(5);
+		$auto_usado = Automovile::select("*")->join('marcas', 'marcas.id_marca', 'automoviles.marca_id')->join('autosusados', 'autosusados.auto_id', 'automoviles.id_auto')->paginate(5);
+		$marcas = Marca::All();
+		return view('ventabeta', compact('tipo_finan', 'nombapell', 'autos', 'marcas', 'auto_usado'));
 	}
 }

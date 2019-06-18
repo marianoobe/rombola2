@@ -113,5 +113,7 @@ Route::get('/prueba1', function() {
     return View::make('adminlte::home-table');
 });
 
+Route::get('ventabeta','VentaController@createbeta')->name('ventabeta');
+
 
 ?>

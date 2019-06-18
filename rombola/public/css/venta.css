@@ -1,0 +1,14 @@
+#div1_nuevos {
+    overflow: scroll;
+    height: 500px;
+    
+}
+
+#div2_usados {
+    overflow: scroll;
+    height: 300px;
+}
+
+input,textarea,select {
+    border-radius: 3px;
+  }

@@ -228,7 +228,32 @@ function enable_nuevo() {
   }
 }
 
-function enable_nuevo_financ() {
+function enable_nuevo_financ(valor) {
+  if (valor.checked == true) {
+    document.getElementById("nuevo").style.display = "block";
+    document.getElementById("cancer").value = "nuevo";
+
+    document.getElementById("nuevo_dni").required = true;
+    document.getElementById("nuevo_nombre").required = true;
+    document.getElementById("nuevo_apellido").required = true;
+    document.getElementById("nuevo_fecha_nac").required = true;
+    document.getElementById("nuevo_estado_civil").required = true;
+    document.getElementById("nuevo_email").required = true;
+    document.getElementById("nuevo_cel_1").required = true;
+    document.getElementById("nuevo_domicilio").required = true;
+    document.getElementById("nuevo_act_empresa").required = true;
+
+    document.getElementById("nuevo_profesion").required = true;
+    document.getElementById("telefono_laboral").required = true;
+    document.getElementById("nuevo_domicilio_empleo").required = true;
+    document.getElementById("nuevo_antiguedad").required = true;
+    document.getElementById("nuevo_ingresos_mesuales").required = true;
+    document.getElementById("nuevo_nombre_padre").required = true;
+    document.getElementById("nuevo_nombre_madre").required = true;
+    document.getElementById("nuevo_otros_ingresos").required = true;
+
+  }
+
   if (document.getElementById("nuevo").style.display == "none" && document.getElementById("buscar").style.display == "none") {
     document.getElementById("nuevo").style.display = "block";
     document.getElementById("cancer").value = "nuevo";
@@ -388,7 +413,6 @@ function obtener_cliente_buscado() {
           $("#alert_incompleta").css("display", "none");
         }
         $("#alert_completa").css("display", "block");
-        $('#salida').text("Ficha ".concat(salida));
       } else {
         if (document.getElementById('alert_completa').style.display == "block") {
           $("#alert_completa").css("display", "none");
@@ -676,6 +700,33 @@ function obtener_marca_buscada() {
 var state=0;
 var estado_toggle = null;
 
+$(document).ready(function(){
+  $('.check_usado').change(function(){
+
+    document.getElementById("car-delete").style.display = "block";
+    var modelo = document.getElementById("check_select_modelo").value;
+    var version = document.getElementById("check_select_version").value;
+    document.getElementById("buscar_usados").style.display = "none";
+    document.getElementById("car-text").innerText = modelo + " " + version;
+    $('#btn-0km').prop("disabled",true);
+    $('#btn-usado').prop("disabled",true);
+
+  });
+
+  $('.check').change(function(){
+    $('#modal-0km').modal('hide');
+    document.getElementById("car-delete").style.display = "block";
+    var version = document.getElementById("select_version").value;
+    var modelo = document.getElementById("select_modelo").value;
+    console.log(modelo +" "+ version);
+    document.getElementById("car-text").innerText = modelo + " " + version;
+    $('#btn-0km').prop("disabled",true);
+    $('#btn-usado').prop("disabled",true);
+  
+  });
+
+});
+
 function viñeta_0km() {
   var marca = document.getElementById("marca").value;
   var modelo = document.getElementById("modelo").value;
@@ -695,6 +746,15 @@ function viñeta_0km() {
     estado_toggle = "lista";
     console.log(document.getElementById("estado_toggle").value);
     state=1;
+
+    document.getElementById("car-delete").style.display = "block";
+    var version = document.getElementById("version").value;
+    var modelo = document.getElementById("modelo").value;
+    console.log(modelo +" "+ version);
+    document.getElementById("car-text").innerText = modelo + " " + version;
+    $('#btn-0km').prop("disabled",true);
+    $('#btn-usado').prop("disabled",true);
+
   }
   else{
     document.getElementById("alert").style.display = "block";
@@ -716,7 +776,24 @@ function viñeta_0km() {
     estado_toggle = "lista";
     $('#modal-0km').modal('hide');
 
+    document.getElementById("car-delete").style.display = "block";
+    var version = document.getElementById("select_version").value;
+    var modelo = document.getElementById("select_modelo").value;
+    $('#btn-0km').prop("disabled",true);
+    $('#btn-usado').prop("disabled",true);
+    document.getElementById("car-text").innerText = modelo + " " + version;
+
   }
+
+
+}
+
+function delete_car(){
+  document.getElementById("car-delete").style.display = "none";
+  $('#btn-0km').prop("disabled",false);
+  $('#btn-usado').prop("disabled",false);
+  $('.check_usado').prop("checked",false);
+  $('.check').prop("checked",false);
 
 }
 
